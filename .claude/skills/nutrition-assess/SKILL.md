@@ -12,7 +12,7 @@ disable-model-invocation: true
 ## 输入
 
 - 用户参数 `$ARGUMENTS`：健康档案文件路径
-- 如果留空，读取 `data/` 目录下最新的 `健康档案_*.md` 文件
+- 如果留空，读取 `data/records/` 目录下最新的 `健康档案_*.md` 文件
 
 ## 处理步骤
 
@@ -29,8 +29,8 @@ disable-model-invocation: true
 ### 步骤 2: 读取参考资料
 
 读取项目知识库文件：
-- `data/disease-diet-rules.md` — 疾病-饮食规则
-- `data/nutrient-reference.md` — 营养素参考摄入量
+- `data/knowledge/disease-diet-rules.md` — 疾病-饮食规则
+- `data/knowledge/nutrient-reference.md` — 营养素参考摄入量
 
 ### 步骤 3: 计算基础能量需求
 
@@ -141,14 +141,14 @@ disable-model-invocation: true
 
 ### 步骤 7: 保存报告
 
-保存到 `data/` 目录下：
+保存到 `data/reports/` 目录下：
 - 文件名格式: `营养评估_YYYY-MM-DD.md`
 
 ## 输出
 
 1. 向用户展示完整的营养评估报告
 2. 告知报告已保存
-3. 提示用户可使用 `/meal-plan` 基于此报告生成配餐方案
+3. 提示用户可使用 `/meal-plan` 基于 `data/reports/` 中的报告生成配餐方案
 
 ## 注意事项
 

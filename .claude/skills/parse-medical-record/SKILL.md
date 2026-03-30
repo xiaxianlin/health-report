@@ -118,14 +118,14 @@ disable-model-invocation: true
 
 ### 步骤 4: 保存档案
 
-将生成的健康档案保存到 `data/` 目录下：
+将生成的健康档案保存到 `data/records/` 目录下：
 - 文件名格式: `健康档案_YYYY-MM-DD.md`（使用当天日期）
 
 ## 输出
 
 1. 向用户展示提取的结构化健康档案
 2. 告知用户档案已保存
-3. 提示用户可使用 `/nutrition-assess` 基于此档案生成营养评估
+3. 提示用户可使用 `/nutrition-assess` 基于 `data/records/` 中的档案生成营养评估
 
 ## 注意事项
 

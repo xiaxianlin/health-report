@@ -14,13 +14,13 @@ disable-model-invocation: true
 - 用户参数 `$ARGUMENTS`：格式为 `<天数> [评估文件路径]`
   - 天数: 1（一日配餐）或 7（一周配餐）
   - 评估文件路径: 可选，留空则使用最新的评估报告
-- 示例: `/meal-plan 7` 或 `/meal-plan 1 data/营养评估_2026-03-30.md`
+- 示例: `/meal-plan 7` 或 `/meal-plan 1 data/reports/营养评估_2026-03-30.md`
 
 ## 处理步骤
 
 ### 步骤 1: 读取营养评估报告
 
-读取指定的营养评估报告（或 `data/` 下最新的 `营养评估_*.md`），提取：
+读取指定的营养评估报告（或 `data/reports/` 下最新的 `营养评估_*.md`），提取：
 - 每日营养目标（总能量、宏量营养素、微量营养素）
 - 三餐能量分配
 - 推荐食物清单
@@ -31,9 +31,9 @@ disable-model-invocation: true
 ### 步骤 2: 读取参考资料
 
 读取项目知识库文件：
-- `data/food-nutrition-guide.md` — 食物营养成分
-- `data/meal-templates.md` — 配餐模板
-- `data/disease-diet-rules.md` — 疾病饮食规则（参考禁忌食物细节）
+- `data/knowledge/food-nutrition-guide.md` — 食物营养成分
+- `data/knowledge/meal-templates.md` — 配餐模板
+- `data/knowledge/disease-diet-rules.md` — 疾病饮食规则（参考禁忌食物细节）
 
 ### 步骤 3: 询问用户偏好（如首次）
 
@@ -44,7 +44,7 @@ disable-model-invocation: true
 4. **预算**: 日常水平 / 较宽裕？
 5. **特别要求**: 如宗教饮食、素食等
 
-将偏好保存到 `data/用户偏好.md`，后续使用不再询问。
+将偏好保存到 `data/records/用户偏好.md`，后续使用不再询问。
 
 ### 步骤 4: 生成配餐方案
 
@@ -184,7 +184,7 @@ disable-model-invocation: true
 
 ### 步骤 7: 保存方案
 
-保存到 `data/` 目录下：
+保存到 `data/reports/` 目录下：
 - 一日: `配餐方案_1日_YYYY-MM-DD.md`
 - 一周: `配餐方案_7日_YYYY-MM-DD.md`
 
