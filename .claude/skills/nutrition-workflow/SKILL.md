@@ -77,15 +77,15 @@ disable-model-invocation: true
 - [基于疾病和指标总结的营养风险点]
 ```
 
-保存到 `data/records/健康档案_YYYY-MM-DD.md`
+保存到 `records/健康档案_YYYY-MM-DD.md`
 
 **向用户展示健康档案，确认信息是否准确。** 用户确认后继续。
 
 ### Phase 3: 营养评估
 
 读取知识库：
-- `data/knowledge/disease-diet-rules.md`
-- `data/knowledge/nutrient-reference.md`
+- `knowledge/disease-diet-rules.md`
+- `knowledge/nutrient-reference.md`
 
 计算营养目标：
 
@@ -104,15 +104,15 @@ disable-model-invocation: true
 - 推荐/禁忌食物清单
 - 三餐能量分配
 
-保存到 `data/reports/营养评估_YYYY-MM-DD.md`
+保存到 `reports/营养评估_YYYY-MM-DD.md`
 
 **向用户展示营养评估报告摘要，确认方向是否正确。** 用户确认后继续。
 
 ### Phase 4: 配餐生成
 
 读取知识库：
-- `data/knowledge/food-nutrition-guide.md`
-- `data/knowledge/meal-templates.md`
+- `knowledge/food-nutrition-guide.md`
+- `knowledge/meal-templates.md`
 
 询问用户需要生成几天的方案（1天/7天）。
 
@@ -122,7 +122,7 @@ disable-model-invocation: true
 - 考虑用户偏好
 - 一周方案菜品不重复
 
-保存到 `data/reports/配餐方案_X日_YYYY-MM-DD.md`
+保存到 `reports/配餐方案_X日_YYYY-MM-DD.md`
 
 ### Phase 5: 方案展示与调整
 
@@ -136,11 +136,11 @@ disable-model-invocation: true
 ## Resume 功能
 
 如果用户输入 `resume`：
-1. 检查 `data/records/` 和 `data/reports/` 目录下已有的文件
+1. 检查 `records/` 和 `reports/` 目录下已有的文件
 2. 读取每个文件的头部信息（姓名、日期），确认是否属于同一患者
 3. 找到流程中断的位置：
-   - `data/records/` 有健康档案但 `data/reports/` 无营养评估 → 展示档案摘要让用户确认，从 Phase 3 继续
-   - `data/reports/` 有营养评估但无配餐方案 → 展示评估摘要让用户确认，从 Phase 4 继续
+   - `records/` 有健康档案但 `reports/` 无营养评估 → 展示档案摘要让用户确认，从 Phase 3 继续
+   - `reports/` 有营养评估但无配餐方案 → 展示评估摘要让用户确认，从 Phase 4 继续
    - 都有 → 展示三份文件摘要，询问用户需要调整什么
 4. 如果发现不同患者的文件，询问用户是继续上次的患者还是开始新流程
 5. 告知用户从哪里继续
