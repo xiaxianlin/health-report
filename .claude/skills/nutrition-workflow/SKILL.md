@@ -89,6 +89,7 @@ disable-model-invocation: true
 2. 使用 WebSearch 检索权威来源的营养治疗指南和方案
 3. 使用 webReader 读取有价值的页面内容
 4. 整理保存到 `knowledge/references/参考_营养评估_[关键词]_YYYY-MM-DD.md`
+5. **验证保存**: 读取已保存文件的头部，确认文件存在且内容正确
 
 **优先检索：** 中华医学会/中国营养学会指南、三甲医院营养科方案、丁香医生等权威平台
 
@@ -131,6 +132,7 @@ disable-model-invocation: true
 2. 使用 WebSearch 检索菜谱平台和营养科普的配餐方案
 3. 使用 webReader 读取有价值的菜谱详情
 4. 整理保存到 `knowledge/references/参考_配餐_[关键词]_YYYY-MM-DD.md`
+5. **验证保存**: 读取已保存文件的头部，确认文件存在且内容正确
 
 **优先检索：** 下厨房/豆果美食（菜品做法）、丁香医生/好大夫（营养科普）、医院营养科食谱
 
