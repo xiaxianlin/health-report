@@ -12,7 +12,8 @@
       "Bash(git push:*)",
       "Bash(for f:*)",
       "Bash(do sed:*)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(ls /Users/bytedance/projects/营养方案/knowledge/gout*)"
     ]
   }
 }
