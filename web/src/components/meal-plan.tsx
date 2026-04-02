@@ -1,6 +1,5 @@
 'use client'
 
-import { useState } from 'react'
 import type { MealPlan, DayPlan, Meal, WeeklySummaryRow } from '@/lib/types'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -84,68 +83,27 @@ function MealTypeBadge({ type }: { type: Meal['type'] }) {
   )
 }
 
-/* ---------- Single Meal Card ---------- */
-function MealCard({ meal }: { meal: Meal }) {
-  return (
-    <Card className="flex flex-col">
-      <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
-          <MealTypeBadge type={meal.type} />
-          <span className="text-xs text-muted-foreground">{meal.energy}</span>
-        </div>
-      </CardHeader>
-      <CardContent className="flex-1 pt-0">
-        {meal.items.length > 0 ? (
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="text-xs">食物</TableHead>
-                <TableHead className="text-xs">用量</TableHead>
-                <TableHead className="text-xs hidden sm:table-cell">做法</TableHead>
-                <TableHead className="text-xs hidden md:table-cell">备注</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {meal.items.map((item, i) => (
-                <TableRow key={`${item.food}-${i}`}>
-                  <TableCell className="text-xs font-medium">{item.food}</TableCell>
-                  <TableCell className="text-xs">{item.amount}</TableCell>
-                  <TableCell className="text-xs hidden sm:table-cell">{item.method}</TableCell>
-                  <TableCell className="text-xs hidden md:table-cell text-muted-foreground">
-                    {item.note}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        ) : (
-          <p className="text-sm text-muted-foreground py-4 text-center">暂无安排</p>
-        )}
-      </CardContent>
-    </Card>
-  )
-}
-
 /* ---------- Day Plan Panel ---------- */
 function DayPlanPanel({ dayPlan }: { dayPlan: DayPlan }) {
-  const mainMeals = dayPlan.meals.filter((m) => m.type !== '加餐')
-  const snacks = dayPlan.meals.filter((m) => m.type === '加餐')
-
   return (
     <div className="flex flex-col gap-4">
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {mainMeals.map((meal) => (
-          <MealCard key={meal.type} meal={meal} />
-        ))}
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="text-xs">食物</TableHead>
+              <TableHead className="text-xs w-24">用量</TableHead>
+              <TableHead className="text-xs">做法</TableHead>
+              <TableHead className="text-xs">备注</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {dayPlan.meals.map((meal) => (
+              <MealGroup key={meal.type} meal={meal} />
+            ))}
+          </TableBody>
+        </Table>
       </div>
-
-      {snacks.length > 0 && (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
-          {snacks.map((meal) => (
-            <MealCard key={meal.type} meal={meal} />
-          ))}
-        </div>
-      )}
 
       {dayPlan.dailyTotal && (
         <div className="rounded-lg border bg-muted/40 px-4 py-3 text-center">
@@ -154,6 +112,44 @@ function DayPlanPanel({ dayPlan }: { dayPlan: DayPlan }) {
         </div>
       )}
     </div>
+  )
+}
+
+/* ---------- Meal Group Rows ---------- */
+function MealGroup({ meal }: { meal: Meal }) {
+  const color = MEAL_COLORS[meal.type] ?? '#8884d8'
+
+  return (
+    <>
+      {/* Meal type header row */}
+      <TableRow className="bg-muted/50 hover:bg-muted/50">
+        <TableCell colSpan={4} className="py-2">
+          <div className="flex items-center gap-2">
+            <span
+              className="inline-block size-2.5 rounded-full"
+              style={{ backgroundColor: color }}
+            />
+            <span className="text-sm font-semibold">{meal.type}</span>
+            <span className="text-xs text-muted-foreground ml-auto">{meal.energy}</span>
+          </div>
+        </TableCell>
+      </TableRow>
+      {/* Food item rows */}
+      {meal.items.length > 0 ? (
+        meal.items.map((item, i) => (
+          <TableRow key={`${item.food}-${i}`}>
+            <TableCell className="text-xs font-medium">{item.food}</TableCell>
+            <TableCell className="text-xs">{item.amount}</TableCell>
+            <TableCell className="text-xs">{item.method}</TableCell>
+            <TableCell className="text-xs text-muted-foreground">{item.note}</TableCell>
+          </TableRow>
+        ))
+      ) : (
+        <TableRow>
+          <TableCell colSpan={4} className="text-xs text-muted-foreground text-center">暂无安排</TableCell>
+        </TableRow>
+      )}
+    </>
   )
 }
 
