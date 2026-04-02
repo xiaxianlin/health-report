@@ -12,7 +12,7 @@ disable-model-invocation: true
 ## 流程概览
 
 ```
-病历输入 → 健康档案 → 检索参考 → 营养评估 → 检索菜谱 → 配餐方案
+病历输入 → 健康档案 → 检索参考 → 营养评估 → 检索菜谱 → 配餐方案 → 数据转换
 ```
 
 ## 输入
@@ -77,7 +77,7 @@ disable-model-invocation: true
 - [基于疾病和指标总结的营养风险点]
 ```
 
-保存到 `records/健康档案_YYYY-MM-DD.md`
+保存到 `results/<姓名>/健康档案.md`
 
 **向用户展示健康档案，确认信息是否准确。** 用户确认后继续。
 
@@ -120,7 +120,7 @@ disable-model-invocation: true
 - 三餐能量分配
 - 参考来源
 
-保存到 `reports/营养评估_YYYY-MM-DD.md`
+保存到 `results/<姓名>/营养评估.md`
 
 **向用户展示营养评估报告摘要，确认方向是否正确。** 用户确认后继续。
 
@@ -160,7 +160,7 @@ disable-model-invocation: true
 - **7天**: 每天3餐+营养汇总+采购清单
 - **30天**: 按4周规划，先展示第1周完整方案+后3周概览，用户要求时展开
 
-保存到 `reports/配餐方案_X日_YYYY-MM-DD.md`
+保存到 `results/<姓名>/配餐方案_第1周.md`
 
 ### Phase 7: 方案展示与调整
 
@@ -171,14 +171,20 @@ disable-model-invocation: true
    - 修改某天/某周的方案
    - 重新生成整个方案
 
+### Phase 8: 数据转换
+
+执行 `/data-transform <姓名>` 将所有方案文件转换为结构化数据（data.json）：
+- 读取 `results/<姓名>/` 下的健康档案、营养评估、配餐方案
+- 生成 `results/<姓名>/data.json` 结构化数据文件
+
 ## Resume 功能
 
 如果用户输入 `resume`：
-1. 检查 `records/` 和 `reports/` 和 `knowledge/references/` 目录下已有的文件
-2. 读取每个文件的头部信息（姓名、日期），确认是否属于同一患者
+1. 检查 `results/` 目录下已有的用户目录和 `knowledge/references/` 目录下的文件
+2. 读取每个 `results/<用户名>/` 目录下的文件头部信息（姓名、日期），确认是否属于同一患者
 3. 找到流程中断的位置：
-   - `records/` 有健康档案但无营养评估 → 展示档案摘要，从 Phase 3 继续
-   - `reports/` 有营养评估但无配餐方案 → 展示评估摘要，从 Phase 5 继续
+   - `results/<用户名>/` 有健康档案但无营养评估 → 展示档案摘要，从 Phase 3 继续
+   - `results/<用户名>/` 有营养评估但无配餐方案 → 展示评估摘要，从 Phase 5 继续
    - 都有 → 展示所有文件摘要，询问用户需要调整什么
 4. 如果发现不同患者的文件，询问用户是继续上次的患者还是开始新流程
 5. 告知用户从哪里继续
