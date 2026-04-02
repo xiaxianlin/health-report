@@ -1,0 +1,465 @@
+{
+  "name": "陈女士",
+  "gender": "女",
+  "age": 28,
+  "height": 163,
+  "weight": 52,
+  "bmi": 19.6,
+  "bmiCategory": "正常",
+  "bloodPressure": "110/70",
+  "date": "2026-03-31",
+  "allergies": ["无已知食物过敏"],
+  "diagnoses": [
+    "轻度缺铁性贫血 — Hb 112 g/L（接近下限），铁蛋白 13 μg/L（低于下限），红细胞 4.0（正常偏低）",
+    "总体健康状况良好 — 肝肾功能正常，血糖血脂正常，维生素D及叶酸正常"
+  ],
+  "medications": [
+    { "name": "无", "dose": "—", "purpose": "—", "note": "目前无用药" }
+  ],
+  "labGroups": [
+    {
+      "title": "贫血相关",
+      "results": [
+        { "indicator": "血红蛋白", "value": "112", "unit": "g/L", "reference": "110-150", "status": "low" },
+        { "indicator": "铁蛋白", "value": "13", "unit": "μg/L", "reference": "15-150", "status": "very_low" },
+        { "indicator": "红细胞", "value": "4.0", "unit": "×10¹²/L", "reference": "3.5-5.0", "status": "low" }
+      ]
+    },
+    {
+      "title": "血糖与血脂",
+      "results": [
+        { "indicator": "空腹血糖", "value": "4.6", "unit": "mmol/L", "reference": "3.9-6.1", "status": "normal" },
+        { "indicator": "总胆固醇", "value": "4.5", "unit": "mmol/L", "reference": "<5.2", "status": "normal" },
+        { "indicator": "甘油三酯", "value": "0.9", "unit": "mmol/L", "reference": "<1.7", "status": "normal" },
+        { "indicator": "HDL-C", "value": "1.55", "unit": "mmol/L", "reference": ">1.0", "status": "normal" },
+        { "indicator": "LDL-C", "value": "2.6", "unit": "mmol/L", "reference": "<3.4", "status": "normal" }
+      ]
+    },
+    {
+      "title": "其他",
+      "results": [
+        { "indicator": "ALT", "value": "15", "unit": "U/L", "reference": "0-40", "status": "normal" },
+        { "indicator": "白蛋白", "value": "43", "unit": "g/L", "reference": "35-55", "status": "normal" },
+        { "indicator": "肌酐", "value": "58", "unit": "μmol/L", "reference": "44-97", "status": "normal" },
+        { "indicator": "BUN", "value": "4.2", "unit": "mmol/L", "reference": "2.9-8.2", "status": "normal" },
+        { "indicator": "尿酸", "value": "245", "unit": "μmol/L", "reference": "155-357", "status": "normal" },
+        { "indicator": "维生素D", "value": "28", "unit": "ng/mL", "reference": ">20", "status": "normal" },
+        { "indicator": "叶酸", "value": "6.8", "unit": "ng/mL", "reference": ">3.0", "status": "normal" }
+      ]
+    }
+  ],
+  "lifestyles": [
+    "职业: 市场策划",
+    "运动: 每周瑜伽2次",
+    "饮食: 正常饮食，偶尔节食减肥（需纠正）",
+    "饮酒: 社交偶尔饮酒",
+    "月经: 经量偏多（贫血主因）",
+    "活动水平: 轻度活动"
+  ],
+  "nutritionNotes": [
+    "补铁为核心: 铁 target 20mg/天（育龄女性RNI），重点血红素铁来源",
+    "维C搭配促吸收: 每餐富铁食物搭配维生素C",
+    "避免铁吸收抑制因素: 餐中不饮茶/咖啡（抑制铁吸收达60%）",
+    "维持体重: BMI 19.6偏低侧，不可节食，需保证足够能量摄入",
+    "纠正节食习惯: 偶尔节食是铁摄入不足的重要原因，需营养教育",
+    "月经期加强补铁: 经期前后适当增加红肉摄入频率"
+  ],
+  "nutritionAssessment": {
+    "bmr": 1238,
+    "tdee": 1702,
+    "targetEnergy": 1700,
+    "activityLevel": "轻度活动",
+    "macros": [
+      { "name": "总能量", "target": 1700, "unit": "kcal", "percent": 100, "range": "1650-1750", "source": "维持体重，不增减" },
+      { "name": "蛋白质", "target": 68, "unit": "g", "percent": 16, "range": "60-75g", "source": "1.3g/kg（轻度贫血需适当增加）" },
+      { "name": "碳水化合物", "target": 234, "unit": "g", "percent": 55, "range": "210-260g", "source": "正常比例，以低GI为主" },
+      { "name": "脂肪", "target": 47, "unit": "g", "percent": 25, "range": "40-55g", "source": "正常比例" },
+      { "name": "膳食纤维", "target": 25, "unit": "g", "percent": 0, "range": "25-30g", "source": "膳食指南标准" }
+    ],
+    "microTargets": [
+      { "name": "铁", "target": "20 mg/天", "reason": "缺铁性贫血核心干预" },
+      { "name": "维生素C", "target": "100-200 mg/天", "reason": "RNI 100mg，贫血者适当增加以促铁吸收" },
+      { "name": "叶酸", "target": "400 μg DFE/天", "reason": "当前6.8ng/mL正常，但维持足够摄入有利红细胞生成" },
+      { "name": "维生素B12", "target": "2.4 μg/天", "reason": "与叶酸协同参与红细胞生成" },
+      { "name": "钙", "target": "800 mg/天", "reason": "RNI标准，注意与铁餐分开摄入" },
+      { "name": "钙补充时机", "target": "与富铁餐间隔2小时", "reason": "钙竞争性抑制铁吸收" }
+    ],
+    "mealDistribution": [
+      { "meal": "早餐", "energy": 510, "percent": 30, "protein": 20, "carbs": 70, "fat": 14 },
+      { "meal": "午餐", "energy": 680, "percent": 40, "protein": 27, "carbs": 94, "fat": 19 },
+      { "meal": "晚餐", "energy": 510, "percent": 30, "protein": 20, "carbs": 70, "fat": 14 }
+    ],
+    "principles": [
+      "血红素铁为主: 红肉（牛肉、瘦猪肉、羊肉）每周4-5次，每次75-100g",
+      "肝脏/血制品: 动物肝脏（猪肝、鸡肝）1-2次/周，每次50g；鸭血/猪血1-2次/周",
+      "非血红素铁辅助: 深色蔬菜（菠菜、木耳）、豆制品、红枣、黑芝麻",
+      "维C搭配: 每餐含铁食物同时摄入维生素C（柑橘、猕猴桃、草莓、番茄、甜椒）",
+      "避免抑制因素: 餐前餐后1小时内不饮茶和咖啡（抑制铁吸收达60%）",
+      "经期及经后3天内适当增加红肉摄入至每天100g",
+      "经期每天保证一份肝脏或血制品",
+      "绝不节食: BMI 19.6偏低侧，节食会加剧铁和整体营养摄入不足",
+      "保证三餐规律: 不可省略任何一餐",
+      "牛奶/酸奶/钙片: 放在两餐之间或睡前饮用，不与富铁主餐同食",
+      "早餐可安排奶制品（因午餐和晚餐才是主要补铁餐）"
+    ],
+    "recommendedFoods": [
+      {
+        "category": "高铁食物（血红素铁，高优先级）",
+        "items": [
+          { "name": "鸭血", "铁含量": "~30.5mg/100g", "建议频率": "1-2次/周" },
+          { "name": "猪肝", "铁含量": "~22.6mg/100g", "建议频率": "1次/周" },
+          { "name": "牛肉(瘦)", "铁含量": "2.8mg/100g", "建议频率": "3-4次/周" },
+          { "name": "猪肉(瘦)", "铁含量": "3.0mg/100g", "建议频率": "2次/周" },
+          { "name": "羊肉", "铁含量": "~3.9mg/100g", "建议频率": "1-2次/周" },
+          { "name": "鸡蛋", "铁含量": "2.0mg/100g", "建议频率": "每天1个" }
+        ]
+      },
+      {
+        "category": "高铁食物（非血红素铁，辅助）",
+        "items": [
+          { "name": "木耳(干)", "铁含量": "~97.4mg/100g" },
+          { "name": "菠菜", "铁含量": "~2.9mg/100g" },
+          { "name": "豆腐干", "铁含量": "3.6mg/100g" },
+          { "name": "黑芝麻", "铁含量": "~22.7mg/100g" },
+          { "name": "红枣(干)", "铁含量": "~2.3mg/100g" }
+        ]
+      },
+      {
+        "category": "维生素C搭配食物（每餐必备）",
+        "items": [
+          { "name": "猕猴桃", "维C": "62mg/100g" },
+          { "name": "草莓", "维C": "47mg/100g" },
+          { "name": "橙子", "维C": "33mg/100g" },
+          { "name": "西兰花", "维C": "56mg/100g" },
+          { "name": "番茄", "维C": "19mg/100g" },
+          { "name": "甜椒", "维C": "~130mg/100g" }
+        ]
+      },
+      {
+        "category": "主食类",
+        "items": [
+          { "name": "糙米、燕麦、全麦面包、荞麦面、红薯、玉米、藜麦" }
+        ]
+      }
+    ],
+    "forbiddenFoods": [
+      { "food": "餐中饮茶", "reason": "茶多酚抑制铁吸收达60%", "severity": "完全禁止" },
+      { "food": "餐中饮咖啡", "reason": "多酚类抑制铁吸收", "severity": "完全禁止" },
+      { "food": "节食/断食", "reason": "BMI 19.6偏低，节食加剧铁缺乏", "severity": "完全禁止" },
+      { "food": "省略正餐", "reason": "导致铁和营养摄入不足", "severity": "完全禁止" },
+      { "food": "牛奶与富铁餐同食", "reason": "钙竞争性抑制铁吸收", "severity": "严格限制" },
+      { "food": "钙片与富铁餐同服", "reason": "钙抑制铁吸收", "severity": "严格限制" }
+    ],
+    "drugInteractions": [
+      { "drug": "无", "note": "陈女士目前无用药，无需考虑药物-营养交互" }
+    ],
+    "keyNotes": [
+      "绝不节食是铁律 — 陈女士BMI 19.6已偏正常下限，任何形式的节食减肥都会加重铁缺乏",
+      "茶/咖啡管理是补铁关键 — 餐中饮茶可抑制60%铁吸收",
+      "维C是补铁最佳搭档 — 每餐搭配维C食物，可将非血红素铁吸收率提高2-6倍",
+      "牛奶放早餐，铁放午晚餐 — 钙与铁竞争吸收通道",
+      "月经期加强补铁 — 经量偏多是铁丢失主因，经期及经后一周应增加红肉和血制品摄入",
+      "4-8周后复查 — 建议执行膳食方案4-8周后复查铁蛋白和血红蛋白"
+    ],
+    "references": [
+      "中国居民膳食营养素参考摄入量（2023版）— 铁 RNI 20mg/天（育龄女性）",
+      "中国居民膳食指南（2022）— 膳食宝塔、食物多样化",
+      "《缺铁性贫血营养防治专家共识》",
+      "WHO《育龄女性铁缺乏和贫血营养干预指南》"
+    ]
+  },
+  "mealPlans": [
+    {
+      "weekNumber": 1,
+      "targetEnergy": 1700,
+      "targetProtein": 68,
+      "targetCarbs": 234,
+      "targetFat": 47,
+      "days": [
+        {
+          "day": "周一",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "燕麦牛奶粥", "amount": "燕麦片45g + 牛奶250ml", "method": "微波/煮3分钟", "note": "牛奶放早餐，不干扰午晚餐铁吸收" },
+                { "food": "水煮蛋", "amount": "1个", "method": "煮7分钟", "note": "蛋黄含铁约1mg" },
+                { "food": "猕猴桃", "amount": "1个(约100g)", "method": "生食", "note": "维C 62mg，促铁吸收" },
+                { "food": "坚果", "amount": "核桃3个(约10g)", "method": "—", "note": "" }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~680kcal",
+              "items": [
+                { "food": "糙米饭", "amount": "糙米50g(生，约125g熟)", "method": "电饭煲蒸", "note": "" },
+                { "food": "青椒炒牛肉", "amount": "牛肉(瘦)80g + 青椒100g", "method": "少油快炒(油8g)", "note": "牛肉heme铁~2.2mg，青椒维C~130mg/100g，最佳铁+维C组合" },
+                { "food": "蒜蓉菠菜", "amount": "菠菜150g", "method": "少油炒(油5g)", "note": "非heme铁，维C同餐促进吸收" },
+                { "food": "番茄蛋花汤", "amount": "番茄100g + 鸡蛋半个", "method": "煮", "note": "维C+蛋白质" }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "荞麦面", "amount": "干面50g(约130g熟)", "method": "煮", "note": "" },
+                { "food": "木耳炒猪肉片", "amount": "猪肉(瘦)60g + 木耳(泡发)50g", "method": "少油炒(油6g)", "note": "木耳非heme铁丰富" },
+                { "food": "凉拌西兰花", "amount": "西兰花100g", "method": "焯水凉拌", "note": "维C 56mg/100g" },
+                { "food": "橙子", "amount": "1个(约200g)", "method": "餐后生食", "note": "维C 33mg/100g，促铁吸收" }
+              ]
+            }
+          ],
+          "dailyTotal": "能量~1700kcal | 蛋白质68g | 脂肪47g | 碳水234g | 铁~19mg | 维C~220mg"
+        },
+        {
+          "day": "周二",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "全麦面包", "amount": "2片(约70g)", "method": "—", "note": "" },
+                { "food": "牛奶", "amount": "250ml", "method": "—", "note": "早餐饮奶不影响午晚餐铁吸收" },
+                { "food": "水煮蛋", "amount": "1个", "method": "煮", "note": "" },
+                { "food": "草莓", "amount": "150g", "method": "生食", "note": "维C 47mg/100g" },
+                { "food": "黑芝麻酱", "amount": "5g", "method": "涂面包", "note": "铁含量高(~22.7mg/100g)" }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~680kcal",
+              "items": [
+                { "food": "糙米饭", "amount": "糙米50g(生)", "method": "蒸", "note": "" },
+                { "food": "爆炒猪肝", "amount": "猪肝50g + 洋葱50g + 青椒50g", "method": "少油快炒(油8g)", "note": "猪肝铁~11.3mg(50g)，维C蔬菜搭配" },
+                { "food": "炒西兰花", "amount": "西兰花150g", "method": "少油炒(油5g)", "note": "维C丰富" },
+                { "food": "紫菜蛋花汤", "amount": "紫菜2g + 鸡蛋半个", "method": "煮", "note": "" }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "红薯", "amount": "200g", "method": "蒸/微波", "note": "替代精白米" },
+                { "food": "番茄炖牛肉", "amount": "牛肉(瘦)60g + 番茄150g", "method": "炖，少油(油6g)", "note": "番茄酸性有助铁溶出和吸收" },
+                { "food": "凉拌黄瓜", "amount": "黄瓜100g", "method": "凉拌", "note": "" },
+                { "food": "猕猴桃", "amount": "1个(约100g)", "method": "餐后生食", "note": "维C 62mg" }
+              ]
+            }
+          ],
+          "dailyTotal": "能量~1700kcal | 蛋白质70g | 脂肪48g | 碳水230g | 铁~22mg | 维C~240mg"
+        },
+        {
+          "day": "周三",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "玉米", "amount": "1根(约200g)", "method": "蒸/煮", "note": "" },
+                { "food": "酸奶", "amount": "200ml", "method": "—", "note": "早餐奶制品不影响午晚餐" },
+                { "food": "水煮蛋", "amount": "1个", "method": "煮", "note": "" },
+                { "food": "苹果", "amount": "1个(约200g)", "method": "生食", "note": "" }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~680kcal",
+              "items": [
+                { "food": "藜麦饭", "amount": "藜麦+白米共50g(生)", "method": "蒸", "note": "" },
+                { "food": "鸭血豆腐煲", "amount": "鸭血100g + 北豆腐80g + 白菜100g", "method": "炖，少油(油6g)", "note": "鸭血铁~30mg/100g，吸收率极高" },
+                { "food": "蒜蓉甜椒", "amount": "甜椒100g", "method": "少油炒(油5g)", "note": "维C~130mg/100g，强力促铁吸收" },
+                { "food": "柚子", "amount": "2瓣(约100g)", "method": "餐后生食", "note": "维C 23mg/100g" }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "荞麦面", "amount": "干面50g", "method": "煮", "note": "" },
+                { "food": "鸡胸肉炒木耳", "amount": "鸡胸肉60g + 木耳(泡发)50g + 胡萝卜50g", "method": "少油炒(油6g)", "note": "木耳非heme铁" },
+                { "food": "凉拌番茄", "amount": "番茄150g", "method": "凉拌", "note": "维C佐餐" },
+                { "food": "橙子", "amount": "1个(约200g)", "method": "餐后生食", "note": "维C促铁" }
+              ]
+            }
+          ],
+          "dailyTotal": "能量~1700kcal | 蛋白质72g | 脂肪46g | 碳水232g | 铁~24mg | 维C~230mg"
+        },
+        {
+          "day": "周四",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "红豆杂粮粥", "amount": "红豆+小米共50g", "method": "煮", "note": "" },
+                { "food": "牛奶", "amount": "250ml", "method": "—", "note": "" },
+                { "food": "水煮蛋", "amount": "1个", "method": "煮", "note": "" },
+                { "food": "蓝莓", "amount": "100g", "method": "生食", "note": "" }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~680kcal",
+              "items": [
+                { "food": "糙米饭", "amount": "糙米50g(生)", "method": "蒸", "note": "" },
+                { "food": "芹菜炒牛肉丝", "amount": "牛肉(瘦)80g + 芹菜100g", "method": "少油快炒(油8g)", "note": "heme铁+纤维" },
+                { "food": "木耳炒西兰花", "amount": "木耳(泡发)50g + 西兰花100g", "method": "少油炒(油5g)", "note": "双重补铁+维C" },
+                { "food": "番茄蛋汤", "amount": "番茄100g + 鸡蛋半个", "method": "煮", "note": "" }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "蒸南瓜", "amount": "南瓜200g", "method": "蒸", "note": "" },
+                { "food": "猪肉炒洋葱", "amount": "猪肉(瘦)60g + 洋葱80g + 甜椒50g", "method": "少油炒(油6g)", "note": "甜椒维C~130mg/100g" },
+                { "food": "凉拌菠菜", "amount": "菠菜100g", "method": "焯水凉拌", "note": "" },
+                { "food": "猕猴桃", "amount": "1个(约100g)", "method": "餐后生食", "note": "维C 62mg" }
+              ]
+            }
+          ],
+          "dailyTotal": "能量~1700kcal | 蛋白质68g | 脂肪48g | 碳水230g | 铁~18mg | 维C~210mg"
+        },
+        {
+          "day": "周五",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "燕麦粥", "amount": "燕麦40g + 牛奶200ml", "method": "煮", "note": "" },
+                { "food": "全麦面包", "amount": "1片", "method": "—", "note": "" },
+                { "food": "水煮蛋", "amount": "1个", "method": "煮", "note": "" },
+                { "food": "小番茄", "amount": "150g", "method": "生食", "note": "维C 19mg/100g" }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~680kcal",
+              "items": [
+                { "food": "糙米饭", "amount": "糙米50g(生)", "method": "蒸", "note": "" },
+                { "food": "鸡肝炒甜椒", "amount": "鸡肝50g + 甜椒100g", "method": "少油快炒(油8g)", "note": "鸡肝铁~12mg/100g" },
+                { "food": "炒木耳菜", "amount": "木耳菜150g", "method": "少油炒(油5g)", "note": "深色蔬菜" },
+                { "food": "草莓", "amount": "100g", "method": "餐后生食", "note": "维C 47mg/100g" }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "藜麦饭", "amount": "藜麦+小米共50g(生)", "method": "蒸", "note": "" },
+                { "food": "清蒸鲈鱼", "amount": "鲈鱼80g", "method": "清蒸，姜丝", "note": "鱼肉铁含量低但优质蛋白" },
+                { "food": "豆腐干炒菠菜", "amount": "豆腐干50g + 菠菜150g", "method": "少油炒(油6g)", "note": "豆腐干铁3.6mg/100g+菠菜铁" },
+                { "food": "橙子", "amount": "1个(约200g)", "method": "餐后生食", "note": "维C促铁" }
+              ]
+            }
+          ],
+          "dailyTotal": "能量~1700kcal | 蛋白质69g | 脂肪46g | 碳水236g | 铁~21mg | 维C~200mg"
+        },
+        {
+          "day": "周六",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "全麦吐司", "amount": "2片", "method": "烤", "note": "" },
+                { "food": "牛奶", "amount": "250ml", "method": "—", "note": "" },
+                { "food": "水煮蛋", "amount": "1个", "method": "煮", "note": "" },
+                { "food": "猕猴桃", "amount": "1个(约100g)", "method": "生食", "note": "维C 62mg" }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~680kcal",
+              "items": [
+                { "food": "杂粮饭", "amount": "糙米+黑米共50g(生)", "method": "蒸", "note": "" },
+                { "food": "鸭血粉丝汤", "amount": "鸭血100g + 粉丝30g + 小白菜150g", "method": "煮，少油(油6g)", "note": "鸭血铁~30mg/100g" },
+                { "food": "甜椒炒蛋", "amount": "甜椒100g + 鸡蛋1个", "method": "少油炒(油6g)", "note": "维C~130mg/100g" },
+                { "food": "柚子", "amount": "2瓣(约100g)", "method": "餐后", "note": "" }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "山药粥", "amount": "山药100g + 小米30g", "method": "煮", "note": "" },
+                { "food": "羊肉炖萝卜", "amount": "羊肉60g + 白萝卜100g", "method": "炖，少油(油6g)", "note": "羊肉铁~3.9mg/100g" },
+                { "food": "凉拌木耳", "amount": "木耳(泡发)80g", "method": "凉拌", "note": "非heme铁补充" },
+                { "food": "苹果", "amount": "1个(约200g)", "method": "生食", "note": "" }
+              ]
+            }
+          ],
+          "dailyTotal": "能量~1700kcal | 蛋白质71g | 脂肪49g | 碳水228g | 铁~23mg | 维C~215mg"
+        },
+        {
+          "day": "周日",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "燕麦酸奶碗", "amount": "燕麦40g + 酸奶200ml + 蓝莓50g", "method": "拌", "note": "" },
+                { "food": "全麦面包", "amount": "1片", "method": "—", "note": "" },
+                { "food": "水煮蛋", "amount": "1个", "method": "煮", "note": "" }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~680kcal",
+              "items": [
+                { "food": "糙米饭", "amount": "糙米50g(生)", "method": "蒸", "note": "" },
+                { "food": "番茄炖牛腩", "amount": "牛腩(瘦)80g + 番茄150g + 土豆50g", "method": "炖，少油(油8g)", "note": "heme铁+番茄维C+酸性助铁溶出" },
+                { "food": "蒜蓉西兰花", "amount": "西兰花150g", "method": "少油炒(油5g)", "note": "维C 56mg/100g" },
+                { "food": "草莓", "amount": "100g", "method": "餐后", "note": "维C 47mg/100g" }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~510kcal",
+              "items": [
+                { "food": "荞麦面", "amount": "干面50g", "method": "煮", "note": "" },
+                { "food": "猪肉炒青椒", "amount": "猪肉(瘦)60g + 青椒100g", "method": "少油快炒(油6g)", "note": "青椒维C~130mg/100g" },
+                { "food": "凉拌菠菜", "amount": "菠菜100g", "method": "焯水凉拌", "note": "" },
+                { "food": "橙子", "amount": "1个(约200g)", "method": "餐后生食", "note": "维C促铁" }
+              ]
+            }
+          ],
+          "dailyTotal": "能量~1690kcal | 蛋白质70g | 脂肪46g | 碳水234g | 铁~19mg | 维C~240mg"
+        }
+      ],
+      "weeklySummary": [
+        { "day": "周一", "energy": 1700, "protein": 68, "fat": 47, "carbs": 234, "extra": { "铁": 19, "维C": 220 } },
+        { "day": "周二", "energy": 1700, "protein": 70, "fat": 48, "carbs": 230, "extra": { "铁": 22, "维C": 240 } },
+        { "day": "周三", "energy": 1700, "protein": 72, "fat": 46, "carbs": 232, "extra": { "铁": 24, "维C": 230 } },
+        { "day": "周四", "energy": 1700, "protein": 68, "fat": 48, "carbs": 230, "extra": { "铁": 18, "维C": 210 } },
+        { "day": "周五", "energy": 1700, "protein": 69, "fat": 46, "carbs": 236, "extra": { "铁": 21, "维C": 200 } },
+        { "day": "周六", "energy": 1700, "protein": 71, "fat": 49, "carbs": 228, "extra": { "铁": 23, "维C": 215 } },
+        { "day": "周日", "energy": 1690, "protein": 70, "fat": 46, "carbs": 234, "extra": { "铁": 19, "维C": 240 } }
+      ],
+      "weeklyAnalysis": [
+        "全周日均能量约1700kcal，与目标一致",
+        "全周日均蛋白质约70g，达标",
+        "全周日均铁摄入约21mg，超过育龄女性RNI 20mg",
+        "全周日均维C约222mg，远超100mg最低要求",
+        "血红素铁来源丰富：牛肉4次、猪肉2次、羊肉1次、猪肝1次、鸡肝1次、鸭血2次"
+      ],
+      "shoppingList": [
+        { "category": "蛋白质类（每周必买补铁食材）", "items": ["牛肉(瘦): 400g", "猪肉(瘦): 180g", "羊肉: 60g", "猪肝: 50g", "鸡肝: 50g", "鸭血: 200g", "鸡胸肉: 60g", "鲈鱼: 80g", "鸡蛋: 10个"] },
+        { "category": "豆制品", "items": ["北豆腐: 80g", "豆腐干: 50g"] },
+        { "category": "蔬菜类（一周量）", "items": ["菠菜: 500g", "西兰花: 400g", "番茄: 500g", "青椒/甜椒: 400g", "芹菜: 100g", "洋葱: 130g", "黄瓜: 100g", "木耳(干): 30g", "白菜/小白菜: 250g", "木耳菜: 150g", "白萝卜: 100g", "胡萝卜: 50g"] },
+        { "category": "水果类（维C搭配）", "items": ["猕猴桃: 4个", "橙子: 4个", "草莓: 250g", "柚子: 1个", "苹果: 2个", "蓝莓: 150g", "小番茄: 150g"] },
+        { "category": "主食类（耐储存）", "items": ["糙米: 300g", "荞麦面(干): 150g", "燕麦片: 170g", "藜麦: 150g", "全麦面包: 1袋", "小米: 100g", "红豆: 50g", "黑米: 50g", "红薯: 200g", "南瓜: 200g", "玉米: 1根", "山药: 100g"] },
+        { "category": "乳制品", "items": ["牛奶: 1.5L", "酸奶: 400ml"] },
+        { "category": "其他", "items": ["黑芝麻酱: 1小瓶", "坚果(核桃): 50g", "粉丝: 30g", "紫菜: 5g"] },
+        { "category": "调味品（检查库存）", "items": ["橄榄油/茶籽油", "醋、低钠酱油", "姜、香葱"] }
+      ],
+      "references": [
+        "中国居民膳食营养素参考摄入量（2023版）— 铁 RNI 20mg/天",
+        "中国居民膳食指南（2022）— 膳食宝塔、食物多样化",
+        "《缺铁性贫血营养防治专家共识》"
+      ]
+    }
+  ]
+}
