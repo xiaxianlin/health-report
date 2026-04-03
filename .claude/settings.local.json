@@ -84,7 +84,9 @@
       "Bash(curl -s \"https://web.dreamtimefly.workers.dev/\")",
       "Bash(curl -sI \"https://web.dreamtimefly.workers.dev/\")",
       "Bash(curl:*)",
-      "Bash(git ls-tree:*)"
+      "Bash(git ls-tree:*)",
+      "Bash(git config:*)",
+      "Bash(pnpm install:*)"
     ]
   }
 }
