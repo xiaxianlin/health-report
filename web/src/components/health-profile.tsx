@@ -61,9 +61,13 @@ export function HealthProfile({ patient }: HealthProfileProps) {
       {/* 基本信息 */}
       <Card>
         <CardHeader>
-          <CardTitle>基本信息</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>基本信息</CardTitle>
+            <span className="text-xs text-muted-foreground">{patient.date}</span>
+          </div>
         </CardHeader>
         <CardContent>
+          <p className="text-lg font-bold mb-4">{patient.name}</p>
           <div className="grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3 md:grid-cols-4">
             <InfoField label="性别" value={patient.gender} />
             <InfoField label="年龄" value={`${patient.age} 岁`} />

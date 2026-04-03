@@ -125,9 +125,19 @@ export interface MealPlan {
 
 // ===== 运动处方 =====
 
+export interface ExerciseEvaluation {
+  item: string
+  // 格式A（多数患者）
+  status?: string
+  safety?: string
+  // 格式B（陈女士）
+  result?: string
+  riskLevel?: string
+}
+
 export interface ExerciseSafety {
-  evaluations: { item: string; status: string; safety: string }[]
-  contraindications: string[]
+  evaluations: ExerciseEvaluation[]
+  contraindications: string[] | { item: string; status: string }[]
   conclusion: string
 }
 
@@ -145,7 +155,8 @@ export interface ExerciseSubPrescription {
   intensity: string
   frequency: string
   duration: string
-  notes: string
+  notes?: string
+  [key: string]: unknown
 }
 
 export interface ExerciseWeekDay {
@@ -157,16 +168,19 @@ export interface ExerciseWeekDay {
 
 export interface ExercisePhase {
   name: string
-  weeks: string
+  weeks?: string
   days: ExerciseWeekDay[]
-  weeklyTotal: string
+  weeklyTotal?: string
+  weeklySummary?: Record<string, string>
+  principles?: string[]
 }
 
 export interface ExerciseNutritionSynergy {
-  timing: { period: string; time: string; note: string }[]
-  strategies: { scenario: string; strategy: string }[]
-  drugInteractions: { drug: string; note: string }[]
+  timing: ({ period: string; time: string; note: string } | { timepoint: string; strategy: string; purpose: string })[]
+  strategies: { scenario: string; strategy: string }[] | string[]
+  drugInteractions?: { drug: string; note: string }[]
   energyBalance: string
+  [key: string]: unknown
 }
 
 export interface ExerciseProgressPhase {
@@ -196,6 +210,10 @@ export interface ExercisePrescription {
 // ===== 用户（顶层） =====
 
 export interface PatientData {
+  // 标识与访问
+  id: string
+  viewCode: string
+
   // 基本信息
   name: string
   gender: string
@@ -221,4 +239,18 @@ export interface PatientData {
 
   // 运动处方（可选）
   exercisePrescription: ExercisePrescription | null
+}
+
+export interface PatientBasicInfo {
+  id: string
+  name: string
+  gender: string
+  age: number
+  bmi: number
+  bmiCategory: string
+  date: string
+  diagnoses: string[]
+  hasNutritionAssessment: boolean
+  hasMealPlans: boolean
+  hasExercisePrescription: boolean
 }

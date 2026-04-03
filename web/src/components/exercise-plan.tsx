@@ -1,6 +1,6 @@
 'use client'
 
-import type { ExercisePrescription, ExercisePhase } from '@/lib/types'
+import type { ExercisePrescription, ExercisePhase, ExerciseEvaluation } from '@/lib/types'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import {
@@ -60,11 +60,11 @@ function SafetyCard({ prescription }: { prescription: ExercisePrescription }) {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {safety.evaluations.map((e, i) => (
+            {safety.evaluations.map((e: ExerciseEvaluation, i: number) => (
               <TableRow key={i}>
                 <TableCell className="font-medium">{e.item}</TableCell>
-                <TableCell>{e.status}</TableCell>
-                <TableCell>{e.safety}</TableCell>
+                <TableCell>{e.status ?? e.result}</TableCell>
+                <TableCell>{e.safety ?? e.riskLevel}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -74,8 +74,8 @@ function SafetyCard({ prescription }: { prescription: ExercisePrescription }) {
           <div>
             <p className="text-sm font-semibold mb-2">相对禁忌/需注意</p>
             <ul className="flex flex-col gap-1 pl-5 list-disc">
-              {safety.contraindications.map((c, i) => (
-                <li key={i} className="text-sm">{c}</li>
+              {safety.contraindications.map((c: string | { item: string; status: string }, i: number) => (
+                <li key={i} className="text-sm">{typeof c === 'string' ? c : `${c.item}：${c.status}`}</li>
               ))}
             </ul>
           </div>
@@ -133,40 +133,38 @@ function ExerciseDetailCard({ prescription }: { prescription: ExercisePrescripti
     { label: '柔韧/传统运动', data: prescription.flexibility, color: 'bg-green-500' },
   ]
 
+  const fields: { key: string; label: string; value: string }[][] = subs.map(({ data }) => [
+    { key: 'exercises', label: '推荐项目', value: data.exercises },
+    { key: 'intensity', label: '强度', value: data.intensity },
+    { key: 'frequency', label: '频率', value: data.frequency },
+    { key: 'duration', label: '时长', value: data.duration },
+    ...(data.notes ? [{ key: 'notes', label: '说明', value: data.notes }] : []),
+  ])
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>运动明细</CardTitle>
       </CardHeader>
-      <CardContent className="flex flex-col gap-4">
-        {subs.map(({ label, data, color }) => (
-          <div key={label}>
-            <div className="flex items-center gap-2 mb-2">
-              <span className={`inline-block size-2.5 rounded-full ${color}`} />
-              <span className="text-sm font-semibold">{label}</span>
+      <CardContent>
+        <div className="flex flex-wrap gap-4">
+          {subs.map(({ label, color }, i) => (
+            <div key={label} className="min-w-[260px] flex-1 rounded-lg border bg-card">
+              <div className="flex items-center gap-2 border-b px-4 py-2.5">
+                <span className={`inline-block size-2.5 rounded-full ${color}`} />
+                <span className="text-sm font-semibold">{label}</span>
+              </div>
+              <div className="flex flex-col gap-2 px-4 py-3">
+                {fields[i].map(({ key, label: lbl, value }) => (
+                  <div key={key}>
+                    <span className="text-xs text-muted-foreground">{lbl}</span>
+                    <p className="text-sm leading-relaxed">{value}</p>
+                  </div>
+                ))}
+              </div>
             </div>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">推荐项目</TableHead>
-                  <TableHead className="text-xs">强度</TableHead>
-                  <TableHead className="text-xs">频率</TableHead>
-                  <TableHead className="text-xs">时长</TableHead>
-                  <TableHead className="text-xs">说明</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                <TableRow>
-                  <TableCell className="text-xs font-medium">{data.exercises}</TableCell>
-                  <TableCell className="text-xs">{data.intensity}</TableCell>
-                  <TableCell className="text-xs">{data.frequency}</TableCell>
-                  <TableCell className="text-xs">{data.duration}</TableCell>
-                  <TableCell className="text-xs text-muted-foreground">{data.notes}</TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </div>
-        ))}
+          ))}
+        </div>
       </CardContent>
     </Card>
   )
@@ -186,7 +184,7 @@ function WeeklyPlanCard({ phases }: { phases: ExercisePhase[] }) {
           <TabsList className="mb-4 w-full flex-wrap">
             {phases.map((phase) => (
               <TabsTrigger key={phase.name} value={phase.name}>
-                {phase.name}（{phase.weeks}）
+                {phase.name}{phase.weeks ? `（${phase.weeks}）` : ''}
               </TabsTrigger>
             ))}
           </TabsList>
@@ -220,6 +218,25 @@ function WeeklyPlanCard({ phases }: { phases: ExercisePhase[] }) {
                 {phase.weeklyTotal && (
                   <div className="rounded-lg border bg-muted/40 px-4 py-2 text-center">
                     <span className="text-sm font-medium">周均运动量：{phase.weeklyTotal}</span>
+                  </div>
+                )}
+                {phase.weeklySummary && (
+                  <div className="rounded-lg border bg-muted/40 px-4 py-2">
+                    <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm">
+                      {Object.entries(phase.weeklySummary).map(([k, v]) => (
+                        <span key={k}><span className="font-medium">{k}：</span>{v}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {phase.principles && phase.principles.length > 0 && (
+                  <div>
+                    <p className="text-sm font-semibold mb-1">原则</p>
+                    <ul className="flex flex-col gap-1 pl-5 list-disc">
+                      {phase.principles.map((p, i) => (
+                        <li key={i} className="text-sm">{p}</li>
+                      ))}
+                    </ul>
                   </div>
                 )}
               </div>
@@ -271,13 +288,18 @@ function NutritionSynergyCard({ prescription }: { prescription: ExercisePrescrip
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {nutritionSynergy.timing.map((t, i) => (
-                  <TableRow key={i}>
-                    <TableCell className="text-xs font-medium">{t.period}</TableCell>
-                    <TableCell className="text-xs">{t.time}</TableCell>
-                    <TableCell className="text-xs text-muted-foreground">{t.note}</TableCell>
-                  </TableRow>
-                ))}
+                {nutritionSynergy.timing.map((t, i) => {
+                  const period = 'period' in t ? t.period : ('timepoint' in t ? t.timepoint : '')
+                  const time = 'time' in t ? t.time : ('strategy' in t ? t.strategy : '')
+                  const note = 'note' in t ? t.note : ('purpose' in t ? t.purpose : '')
+                  return (
+                    <TableRow key={i}>
+                      <TableCell className="text-xs font-medium">{period}</TableCell>
+                      <TableCell className="text-xs">{time}</TableCell>
+                      <TableCell className="text-xs text-muted-foreground">{note}</TableCell>
+                    </TableRow>
+                  )
+                })}
               </TableBody>
             </Table>
           </div>
@@ -286,26 +308,34 @@ function NutritionSynergyCard({ prescription }: { prescription: ExercisePrescrip
         {nutritionSynergy.strategies.length > 0 && (
           <div>
             <p className="text-sm font-semibold mb-2">运动前后营养策略</p>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="text-xs">场景</TableHead>
-                  <TableHead className="text-xs">策略</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
+            {typeof nutritionSynergy.strategies[0] === 'string' ? (
+              <ul className="flex flex-col gap-1.5 pl-5 list-disc">
                 {nutritionSynergy.strategies.map((s, i) => (
-                  <TableRow key={i}>
-                    <TableCell className="text-xs font-medium">{s.scenario}</TableCell>
-                    <TableCell className="text-xs text-muted-foreground">{s.strategy}</TableCell>
-                  </TableRow>
+                  <li key={i} className="text-sm leading-relaxed pl-1">{s as string}</li>
                 ))}
-              </TableBody>
-            </Table>
+              </ul>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="text-xs">场景</TableHead>
+                    <TableHead className="text-xs">策略</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {(nutritionSynergy.strategies as { scenario: string; strategy: string }[]).map((s, i) => (
+                    <TableRow key={i}>
+                      <TableCell className="text-xs font-medium">{s.scenario}</TableCell>
+                      <TableCell className="text-xs text-muted-foreground">{s.strategy}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </div>
         )}
 
-        {nutritionSynergy.drugInteractions.length > 0 && (
+        {nutritionSynergy.drugInteractions && nutritionSynergy.drugInteractions.length > 0 && (
           <div>
             <p className="text-sm font-semibold mb-2">药物-运动交互</p>
             {nutritionSynergy.drugInteractions.map((d, i) => (

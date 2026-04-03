@@ -172,12 +172,27 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
 ## 参考来源 → 编号列表: references: string[]
 ```
 
+### 步骤 3.5: 生成标识与查看码
+
+为每个用户生成：
+
+- `id`: 使用 Bash 工具执行 `python3 -c "import uuid; print(uuid.uuid4())"` 生成 UUID v4
+- `viewCode`: 使用 Bash 工具执行 `python3 -c "import random, string; print(''.join(random.choices(string.ascii_lowercase + string.digits, k=18)))"` 生成 18 位随机字符串（小写字母+数字）
+
+**如果 `web/data/` 下已存在该用户的 JSON 文件（且包含 `id` 和 `viewCode`），则复用已有值，不要重新生成。**
+
+向用户报告生成的查看码。
+
 ### 步骤 4: 组装输出 JSON
 
 输出 JSON 严格遵循以下 TypeScript 结构（与 `web/src/lib/types.ts` 保持一致）:
 
 ```typescript
 {
+  // 标识与访问
+  id: string,          // UUID v4
+  viewCode: string,    // 18位随机字符串查看码
+
   // 基本信息
   name: string,
   gender: string,
@@ -272,9 +287,12 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
 
 ### 步骤 5: 保存和验证
 
-1. 将 JSON 写入 `web/data/<用户名>.json`
-2. 使用 Read 工具读取文件头部，确认存在且 JSON 合法
-3. 对所有转换后的 data.json 做基本校验：
+1. 将 JSON 写入 `web/data/<id>.json`（使用步骤 3.5 生成的 UUID 作为文件名）
+2. 如果之前存在 `<用户名>.json` 旧文件，删除旧文件
+3. 使用 Read 工具读取文件头部，确认存在且 JSON 合法
+4. 对所有转换后的 JSON 做基本校验：
+   - id 非空且为合法 UUID 格式
+   - viewCode 为 18 位随机字符串
    - name 非空
    - labGroups 至少有 1 组
    - nutritionAssessment 的 macros 至少有 3 项（如有评估文件）
@@ -283,8 +301,8 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
 
 ## 输出
 
-1. 每个用户目录下生成 `data.json`
-2. 向用户报告转换结果：每个用户的 name、labGroups 数、macros 数、mealPlans 数
+1. 每个用户目录下生成 JSON 文件（文件名为 UUID）
+2. 向用户报告转换结果：每个用户的 name、查看码、labGroups 数、macros 数、mealPlans 数
 
 ## 注意事项
 
