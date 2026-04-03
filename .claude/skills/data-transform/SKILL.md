@@ -27,6 +27,62 @@ disable-model-invocation: true
 - `健康档案.md`（必须存在）
 - `营养评估.md`（可选）
 - `配餐方案_第N周.md`（可选，可多份）
+- `运动处方.md`（可选）
+
+### 步骤 2.5: 解析运动处方（如存在）
+
+如果 `运动处方.md` 存在，解析为 `exercisePrescription` 对象：
+
+```
+头部 blockquote → date: string（"生成日期: YYYY-MM-DD"）
+
+section(安全性评估):
+  ### 1.1 运动前医学评估 → 表格(3列): evaluations: [{item, status, safety}]
+  ### 1.2 运动禁忌症筛查 → 列表: contraindications: string[]
+  ### 1.3 安全性总评 → blockquote: conclusion: string
+
+section(运动处方):
+  ### 2.1 处方总则 → 表格(2列，key-value):
+    运动类型 → prescription.type
+    运动强度 → prescription.intensity
+    运动频率 → prescription.frequency
+    运动时长 → prescription.duration
+    目标心率 → prescription.targetHR（提取为字符串）
+    最大心率 → prescription.maxHR（从说明中提取数字）
+  ### 2.2 有氧运动处方 → 表格(2列，key-value): aerobic: {exercises, intensity, frequency, duration, notes}
+    推荐项目 → exercises, 强度 → intensity, 频率 → frequency, 时长 → duration, 注意/每周总量 → notes
+  ### 2.3 抗阻训练处方 → 同上格式: resistance: {...}
+  ### 2.4 柔韧性 → 同上格式: flexibility: {...}
+
+section(一周运动计划) → 按 ### 子标题分阶段:
+  phases: [{
+    name: string（子标题中提取，如"适应期"）,
+    weeks: string（如"第1-4周"）,
+    days: [{day, content, duration, intensity}],  // 表格4列
+    weeklyTotal: string（表格下方的总结行）
+  }]
+
+section(单次运动流程) → 代码块中的编号步骤:
+  sessionFlow: string[]（每个步骤一行，合并子步骤）
+
+section(运动与营养协同):
+  ### 5.1 运动时间与进餐安排 → 表格(3列): timing: [{period, time, note}]
+  ### 5.2 运动前后营养策略 → 表格(2列): strategies: [{scenario, strategy}]
+  ### 5.3 运动与降糖药物协同 → 表格(2列): drugInteractions: [{drug, note}]
+  ### 5.4 运动与减重目标协同 → 列表合并为: energyBalance: string
+
+section(注意事项) → 按 ### 子标题分组:
+  precautions: [{category: string, items: string[]}]
+  每个子标题下的表格提取注意事项列的内容
+
+section(循序渐进计划):
+  ### 各阶段目标与评估节点 → 表格: progression: [{phase, time, exerciseGoal, healthGoal, assessment}]
+  ### 停止运动并就医的情况 → 列表: stopConditions: string[]
+
+section(参考来源) → 编号列表: references: string[]（去除链接，只保留标题和来源描述）
+```
+
+如 `运动处方.md` 不存在，`exercisePrescription` 设为 `null`。
 
 ### 步骤 3: 解析为结构化数据
 
@@ -172,7 +228,45 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
     weeklyAnalysis: string[],
     shoppingList: { category: string, items: string[] }[],
     references: string[]
-  }[]
+  }[],
+
+  // 运动处方（可选，无文件时为 null）
+  exercisePrescription: {
+    date: string,
+    safety: {
+      evaluations: { item: string, status: string, safety: string }[],
+      contraindications: string[],
+      conclusion: string
+    },
+    prescription: {
+      type: string,
+      intensity: string,
+      frequency: string,
+      duration: string,
+      targetHR: string,
+      maxHR: number
+    },
+    aerobic: { exercises: string, intensity: string, frequency: string, duration: string, notes: string },
+    resistance: { exercises: string, intensity: string, frequency: string, duration: string, notes: string },
+    flexibility: { exercises: string, intensity: string, frequency: string, duration: string, notes: string },
+    phases: {
+      name: string,
+      weeks: string,
+      days: { day: string, content: string, duration: string, intensity: string }[],
+      weeklyTotal: string
+    }[],
+    sessionFlow: string[],
+    nutritionSynergy: {
+      timing: { period: string, time: string, note: string }[],
+      strategies: { scenario: string, strategy: string }[],
+      drugInteractions: { drug: string, note: string }[],
+      energyBalance: string
+    },
+    precautions: { category: string, items: string[] }[],
+    stopConditions: string[],
+    progression: { phase: string, time: string, exerciseGoal: string, healthGoal: string, assessment: string }[],
+    references: string[]
+  } | null
 }
 ```
 
@@ -185,6 +279,7 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
    - labGroups 至少有 1 组
    - nutritionAssessment 的 macros 至少有 3 项（如有评估文件）
    - mealPlans 的每个 plan 的 days 至少有 1 天（如有配餐文件）
+   - exercisePrescription 的 phases 至少有 1 个阶段（如有运动处方文件）
 
 ## 输出
 

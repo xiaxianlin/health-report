@@ -123,6 +123,76 @@ export interface MealPlan {
   references: string[]
 }
 
+// ===== 运动处方 =====
+
+export interface ExerciseSafety {
+  evaluations: { item: string; status: string; safety: string }[]
+  contraindications: string[]
+  conclusion: string
+}
+
+export interface ExercisePrescriptionParams {
+  type: string
+  intensity: string
+  frequency: string
+  duration: string
+  targetHR: string
+  maxHR: number
+}
+
+export interface ExerciseSubPrescription {
+  exercises: string
+  intensity: string
+  frequency: string
+  duration: string
+  notes: string
+}
+
+export interface ExerciseWeekDay {
+  day: string
+  content: string
+  duration: string
+  intensity: string
+}
+
+export interface ExercisePhase {
+  name: string
+  weeks: string
+  days: ExerciseWeekDay[]
+  weeklyTotal: string
+}
+
+export interface ExerciseNutritionSynergy {
+  timing: { period: string; time: string; note: string }[]
+  strategies: { scenario: string; strategy: string }[]
+  drugInteractions: { drug: string; note: string }[]
+  energyBalance: string
+}
+
+export interface ExerciseProgressPhase {
+  phase: string
+  time: string
+  exerciseGoal: string
+  healthGoal: string
+  assessment: string
+}
+
+export interface ExercisePrescription {
+  date: string
+  safety: ExerciseSafety
+  prescription: ExercisePrescriptionParams
+  aerobic: ExerciseSubPrescription
+  resistance: ExerciseSubPrescription
+  flexibility: ExerciseSubPrescription
+  phases: ExercisePhase[]
+  sessionFlow: string[]
+  nutritionSynergy: ExerciseNutritionSynergy
+  precautions: { category: string; items: string[] }[]
+  stopConditions: string[]
+  progression: ExerciseProgressPhase[]
+  references: string[]
+}
+
 // ===== 用户（顶层） =====
 
 export interface PatientData {
@@ -148,4 +218,7 @@ export interface PatientData {
 
   // 配餐方案（可多周）
   mealPlans: MealPlan[]
+
+  // 运动处方（可选）
+  exercisePrescription: ExercisePrescription | null
 }

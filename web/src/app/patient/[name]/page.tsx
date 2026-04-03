@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { HealthProfile } from '@/components/health-profile'
 import { NutritionAssess } from '@/components/nutrition-assess'
 import { MealPlanView } from '@/components/meal-plan'
+import { ExercisePlanView } from '@/components/exercise-plan'
 
 export const dynamic = 'force-dynamic'
 
@@ -39,13 +40,16 @@ export default async function PatientPage({
 
       <main className="mx-auto max-w-6xl px-4 py-6">
         <Tabs defaultValue={patient.nutritionAssessment ? 'assessment' : 'profile'} className="w-full">
-          <TabsList className="grid w-full grid-cols-3 h-10">
+          <TabsList className="grid w-full grid-cols-4 h-10">
             <TabsTrigger value="profile">健康档案</TabsTrigger>
             <TabsTrigger value="assessment" disabled={!patient.nutritionAssessment}>
               营养评估
             </TabsTrigger>
             <TabsTrigger value="mealplan" disabled={patient.mealPlans.length === 0}>
               配餐方案{patient.mealPlans.length > 1 ? ` (${patient.mealPlans.length}周)` : ''}
+            </TabsTrigger>
+            <TabsTrigger value="exercise" disabled={!patient.exercisePrescription}>
+              运动建议
             </TabsTrigger>
           </TabsList>
 
@@ -63,6 +67,12 @@ export default async function PatientPage({
             {patient.mealPlans.map((plan) => (
               <MealPlanView key={plan.weekNumber} plan={plan} patientName={patient.name} />
             ))}
+          </TabsContent>
+
+          <TabsContent value="exercise" className="mt-6">
+            {patient.exercisePrescription && (
+              <ExercisePlanView prescription={patient.exercisePrescription} patientName={patient.name} />
+            )}
           </TabsContent>
         </Tabs>
       </main>

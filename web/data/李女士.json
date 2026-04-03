@@ -8,7 +8,9 @@
   "bmiCategory": "正常",
   "bloodPressure": "152/88",
   "date": "2026-03-31",
-  "allergies": ["无已知食物过敏"],
+  "allergies": [
+    "无已知食物过敏"
+  ],
   "diagnoses": [
     "慢性肾脏病 CKD G4期（eGFR 32 mL/min）",
     "高血压2级（血压 152/88 mmHg）",
@@ -21,55 +23,223 @@
     "糖尿病前期（空腹血糖 5.8, HbA1c 5.9）"
   ],
   "medications": [
-    {"name": "缬沙坦", "dose": "160mg qd", "purpose": "降压+护肾", "note": "ARB类药物可能升高血钾，需监测钾摄入"},
-    {"name": "氨氯地平", "dose": "5mg qd", "purpose": "降压", "note": "无显著营养交互"},
-    {"name": "碳酸氢钠片", "dose": "0.5g tid", "purpose": "纠正代谢性酸中毒", "note": "注意钠负荷，需计入每日钠总量"},
-    {"name": "骨化三醇", "dose": "0.25μg qd", "purpose": "活性维生素D，促进钙吸收", "note": "需监测血钙，避免高钙饮食叠加"},
-    {"name": "司维拉姆", "dose": "0.8g tid", "purpose": "磷结合剂，降低血磷", "note": "随餐服用效果最佳；注意可能降低脂溶性维生素吸收"},
-    {"name": "琥珀酸亚铁", "dose": "0.1g tid", "purpose": "补铁", "note": "餐后服用；避免与茶、咖啡同服；与维C同服促进吸收"}
+    {
+      "name": "缬沙坦",
+      "dose": "160mg qd",
+      "purpose": "降压+护肾",
+      "note": "ARB类药物可能升高血钾，需监测钾摄入"
+    },
+    {
+      "name": "氨氯地平",
+      "dose": "5mg qd",
+      "purpose": "降压",
+      "note": "无显著营养交互"
+    },
+    {
+      "name": "碳酸氢钠片",
+      "dose": "0.5g tid",
+      "purpose": "纠正代谢性酸中毒",
+      "note": "注意钠负荷，需计入每日钠总量"
+    },
+    {
+      "name": "骨化三醇",
+      "dose": "0.25μg qd",
+      "purpose": "活性维生素D，促进钙吸收",
+      "note": "需监测血钙，避免高钙饮食叠加"
+    },
+    {
+      "name": "司维拉姆",
+      "dose": "0.8g tid",
+      "purpose": "磷结合剂，降低血磷",
+      "note": "随餐服用效果最佳；注意可能降低脂溶性维生素吸收"
+    },
+    {
+      "name": "琥珀酸亚铁",
+      "dose": "0.1g tid",
+      "purpose": "补铁",
+      "note": "餐后服用；避免与茶、咖啡同服；与维C同服促进吸收"
+    }
   ],
   "labGroups": [
     {
       "title": "肾功能（核心异常）",
       "results": [
-        {"indicator": "eGFR", "value": "32", "unit": "mL/min", "reference": ">90", "status": "very_low"},
-        {"indicator": "肌酐", "value": "156", "unit": "μmol/L", "reference": "44-97", "status": "very_high"},
-        {"indicator": "BUN", "value": "12.5", "unit": "mmol/L", "reference": "2.9-8.2", "status": "high"},
-        {"indicator": "尿酸", "value": "388", "unit": "μmol/L", "reference": "155-357", "status": "high"},
-        {"indicator": "血钾", "value": "5.2", "unit": "mmol/L", "reference": "3.5-5.0", "status": "high"},
-        {"indicator": "血磷", "value": "1.65", "unit": "mmol/L", "reference": "0.8-1.45", "status": "high"},
-        {"indicator": "血钙", "value": "2.05", "unit": "mmol/L", "reference": "2.1-2.6", "status": "low"}
+        {
+          "indicator": "eGFR",
+          "value": "32",
+          "unit": "mL/min",
+          "reference": ">90",
+          "status": "very_low"
+        },
+        {
+          "indicator": "肌酐",
+          "value": "156",
+          "unit": "μmol/L",
+          "reference": "44-97",
+          "status": "very_high"
+        },
+        {
+          "indicator": "BUN",
+          "value": "12.5",
+          "unit": "mmol/L",
+          "reference": "2.9-8.2",
+          "status": "high"
+        },
+        {
+          "indicator": "尿酸",
+          "value": "388",
+          "unit": "μmol/L",
+          "reference": "155-357",
+          "status": "high"
+        },
+        {
+          "indicator": "血钾",
+          "value": "5.2",
+          "unit": "mmol/L",
+          "reference": "3.5-5.0",
+          "status": "high"
+        },
+        {
+          "indicator": "血磷",
+          "value": "1.65",
+          "unit": "mmol/L",
+          "reference": "0.8-1.45",
+          "status": "high"
+        },
+        {
+          "indicator": "血钙",
+          "value": "2.05",
+          "unit": "mmol/L",
+          "reference": "2.1-2.6",
+          "status": "low"
+        }
       ]
     },
     {
       "title": "贫血与营养指标",
       "results": [
-        {"indicator": "血红蛋白", "value": "98", "unit": "g/L", "reference": "110-150", "status": "very_low"},
-        {"indicator": "红细胞", "value": "3.4", "unit": "×10¹²/L", "reference": "3.5-5.0", "status": "low"},
-        {"indicator": "白蛋白", "value": "33", "unit": "g/L", "reference": "35-55", "status": "low"},
-        {"indicator": "铁蛋白", "value": "12", "unit": "μg/L", "reference": "15-150", "status": "very_low"},
-        {"indicator": "维生素D", "value": "15", "unit": "ng/mL", "reference": ">20", "status": "low"}
+        {
+          "indicator": "血红蛋白",
+          "value": "98",
+          "unit": "g/L",
+          "reference": "110-150",
+          "status": "very_low"
+        },
+        {
+          "indicator": "红细胞",
+          "value": "3.4",
+          "unit": "×10¹²/L",
+          "reference": "3.5-5.0",
+          "status": "low"
+        },
+        {
+          "indicator": "白蛋白",
+          "value": "33",
+          "unit": "g/L",
+          "reference": "35-55",
+          "status": "low"
+        },
+        {
+          "indicator": "铁蛋白",
+          "value": "12",
+          "unit": "μg/L",
+          "reference": "15-150",
+          "status": "very_low"
+        },
+        {
+          "indicator": "维生素D",
+          "value": "15",
+          "unit": "ng/mL",
+          "reference": ">20",
+          "status": "low"
+        }
       ]
     },
     {
       "title": "血糖与血脂",
       "results": [
-        {"indicator": "空腹血糖", "value": "5.8", "unit": "mmol/L", "reference": "3.9-6.1", "status": "normal"},
-        {"indicator": "HbA1c", "value": "5.9", "unit": "%", "reference": "4.0-6.0", "status": "normal"},
-        {"indicator": "总胆固醇", "value": "5.4", "unit": "mmol/L", "reference": "<5.2", "status": "high"},
-        {"indicator": "甘油三酯", "value": "1.5", "unit": "mmol/L", "reference": "<1.7", "status": "normal"},
-        {"indicator": "HDL-C", "value": "1.28", "unit": "mmol/L", "reference": ">1.0", "status": "normal"},
-        {"indicator": "LDL-C", "value": "3.3", "unit": "mmol/L", "reference": "<3.4", "status": "normal"}
+        {
+          "indicator": "空腹血糖",
+          "value": "5.8",
+          "unit": "mmol/L",
+          "reference": "3.9-6.1",
+          "status": "normal"
+        },
+        {
+          "indicator": "HbA1c",
+          "value": "5.9",
+          "unit": "%",
+          "reference": "4.0-6.0",
+          "status": "normal"
+        },
+        {
+          "indicator": "总胆固醇",
+          "value": "5.4",
+          "unit": "mmol/L",
+          "reference": "<5.2",
+          "status": "high"
+        },
+        {
+          "indicator": "甘油三酯",
+          "value": "1.5",
+          "unit": "mmol/L",
+          "reference": "<1.7",
+          "status": "normal"
+        },
+        {
+          "indicator": "HDL-C",
+          "value": "1.28",
+          "unit": "mmol/L",
+          "reference": ">1.0",
+          "status": "normal"
+        },
+        {
+          "indicator": "LDL-C",
+          "value": "3.3",
+          "unit": "mmol/L",
+          "reference": "<3.4",
+          "status": "normal"
+        }
       ]
     },
     {
       "title": "其他",
       "results": [
-        {"indicator": "ALT", "value": "18", "unit": "U/L", "reference": "0-40", "status": "normal"},
-        {"indicator": "AST", "value": "22", "unit": "U/L", "reference": "0-40", "status": "normal"},
-        {"indicator": "白细胞", "value": "5.6", "unit": "×10⁹/L", "reference": "4.0-10.0", "status": "normal"},
-        {"indicator": "血小板", "value": "185", "unit": "×10⁹/L", "reference": "100-300", "status": "normal"},
-        {"indicator": "CRP", "value": "3.2", "unit": "mg/L", "reference": "<10", "status": "normal"}
+        {
+          "indicator": "ALT",
+          "value": "18",
+          "unit": "U/L",
+          "reference": "0-40",
+          "status": "normal"
+        },
+        {
+          "indicator": "AST",
+          "value": "22",
+          "unit": "U/L",
+          "reference": "0-40",
+          "status": "normal"
+        },
+        {
+          "indicator": "白细胞",
+          "value": "5.6",
+          "unit": "×10⁹/L",
+          "reference": "4.0-10.0",
+          "status": "normal"
+        },
+        {
+          "indicator": "血小板",
+          "value": "185",
+          "unit": "×10⁹/L",
+          "reference": "100-300",
+          "status": "normal"
+        },
+        {
+          "indicator": "CRP",
+          "value": "3.2",
+          "unit": "mg/L",
+          "reference": "<10",
+          "status": "normal"
+        }
       ]
     }
   ],
@@ -97,23 +267,99 @@
     "targetEnergy": 1500,
     "activityLevel": "轻度活动",
     "macros": [
-      {"name": "总能量", "target": 1500, "unit": "kcal", "percent": 100, "range": "1375-1925", "source": "TDEE 1426 + 防PEW调整"},
-      {"name": "蛋白质", "target": 33, "unit": "g", "percent": 9, "range": "33g上限", "source": "CKD G4: 0.6g/kg × 55kg，≥50%优质蛋白"},
-      {"name": "碳水化合物", "target": 244, "unit": "g", "percent": 65, "range": "—", "source": "以低GI为主"},
-      {"name": "脂肪", "target": 42, "unit": "g", "percent": 25, "range": "—", "source": "以不饱和脂肪为主，饱和脂肪<7%"},
-      {"name": "膳食纤维", "target": 22, "unit": "g", "percent": 0, "range": "20-25g", "source": "控制血糖，改善肠道磷结合"}
+      {
+        "name": "总能量",
+        "target": 1500,
+        "unit": "kcal",
+        "percent": 100,
+        "range": "1375-1925",
+        "source": "TDEE 1426 + 防PEW调整"
+      },
+      {
+        "name": "蛋白质",
+        "target": 33,
+        "unit": "g",
+        "percent": 9,
+        "range": "33g上限",
+        "source": "CKD G4: 0.6g/kg × 55kg，≥50%优质蛋白"
+      },
+      {
+        "name": "碳水化合物",
+        "target": 244,
+        "unit": "g",
+        "percent": 65,
+        "range": "—",
+        "source": "以低GI为主"
+      },
+      {
+        "name": "脂肪",
+        "target": 42,
+        "unit": "g",
+        "percent": 25,
+        "range": "—",
+        "source": "以不饱和脂肪为主，饱和脂肪<7%"
+      },
+      {
+        "name": "膳食纤维",
+        "target": 22,
+        "unit": "g",
+        "percent": 0,
+        "range": "20-25g",
+        "source": "控制血糖，改善肠道磷结合"
+      }
     ],
     "microTargets": [
-      {"name": "铁", "target": "12 mg（膳食）+ 药物补充", "reason": "铁蛋白12，严重缺铁，已用琥珀酸亚铁"},
-      {"name": "维生素C", "target": "100 mg/天", "reason": "促进铁吸收，但不宜过量（避免草酸）"},
-      {"name": "维生素D", "target": "药物补充（骨化三醇）", "reason": "维生素D 15 ng/mL，已用活性维生素D"},
-      {"name": "叶酸", "target": "400 μg/天", "reason": "CKD贫血辅助，促红细胞生成"},
-      {"name": "水分", "target": "1500-2000 ml/天", "reason": "CKD G4期不宜过多，根据尿量调整"}
+      {
+        "name": "铁",
+        "target": "12 mg（膳食）+ 药物补充",
+        "reason": "铁蛋白12，严重缺铁，已用琥珀酸亚铁"
+      },
+      {
+        "name": "维生素C",
+        "target": "100 mg/天",
+        "reason": "促进铁吸收，但不宜过量（避免草酸）"
+      },
+      {
+        "name": "维生素D",
+        "target": "药物补充（骨化三醇）",
+        "reason": "维生素D 15 ng/mL，已用活性维生素D"
+      },
+      {
+        "name": "叶酸",
+        "target": "400 μg/天",
+        "reason": "CKD贫血辅助，促红细胞生成"
+      },
+      {
+        "name": "水分",
+        "target": "1500-2000 ml/天",
+        "reason": "CKD G4期不宜过多，根据尿量调整"
+      }
     ],
     "mealDistribution": [
-      {"meal": "早餐", "energy": 450, "percent": 30, "protein": 10, "carbs": 73, "fat": 13},
-      {"meal": "午餐", "energy": 600, "percent": 40, "protein": 13, "carbs": 98, "fat": 17},
-      {"meal": "晚餐", "energy": 450, "percent": 30, "protein": 10, "carbs": 73, "fat": 12}
+      {
+        "meal": "早餐",
+        "energy": 450,
+        "percent": 30,
+        "protein": 10,
+        "carbs": 73,
+        "fat": 13
+      },
+      {
+        "meal": "午餐",
+        "energy": 600,
+        "percent": 40,
+        "protein": 13,
+        "carbs": 98,
+        "fat": 17
+      },
+      {
+        "meal": "晚餐",
+        "energy": 450,
+        "percent": 30,
+        "protein": 10,
+        "carbs": 73,
+        "fat": 12
+      }
     ],
     "principles": [
       "低蛋白+高热量：蛋白质全部分配给高生物价蛋白（蛋清>鱼肉>鸡胸肉），用植物油和淀粉类主食填满热量缺口",
@@ -129,38 +375,216 @@
       "琥珀酸亚铁餐后服：餐后30分钟服用，搭配维C促进铁吸收"
     ],
     "recommendedFoods": [
-      {"category": "优质蛋白食物", "items": [{"name": "鸡蛋清"}, {"name": "鲈鱼"}, {"name": "鸡胸肉"}, {"name": "猪瘦肉"}]},
-      {"category": "低磷主食", "items": [{"name": "白米饭"}, {"name": "面条（精制）"}, {"name": "粉丝/粉条"}, {"name": "藕粉"}, {"name": "山药"}, {"name": "南瓜"}]},
-      {"category": "低钾蔬菜（焯水后）", "items": [{"name": "黄瓜"}, {"name": "白菜"}, {"name": "芹菜"}, {"name": "茄子"}, {"name": "洋葱"}, {"name": "胡萝卜"}, {"name": "芦笋"}]},
-      {"category": "低钾低磷水果", "items": [{"name": "苹果"}, {"name": "梨"}, {"name": "蓝莓"}, {"name": "草莓"}]},
-      {"category": "油脂类", "items": [{"name": "橄榄油"}, {"name": "茶籽油"}, {"name": "芝麻油（调味用）"}]}
+      {
+        "category": "优质蛋白食物",
+        "items": [
+          {
+            "name": "鸡蛋清"
+          },
+          {
+            "name": "鲈鱼"
+          },
+          {
+            "name": "鸡胸肉"
+          },
+          {
+            "name": "猪瘦肉"
+          }
+        ]
+      },
+      {
+        "category": "低磷主食",
+        "items": [
+          {
+            "name": "白米饭"
+          },
+          {
+            "name": "面条（精制）"
+          },
+          {
+            "name": "粉丝/粉条"
+          },
+          {
+            "name": "藕粉"
+          },
+          {
+            "name": "山药"
+          },
+          {
+            "name": "南瓜"
+          }
+        ]
+      },
+      {
+        "category": "低钾蔬菜（焯水后）",
+        "items": [
+          {
+            "name": "黄瓜"
+          },
+          {
+            "name": "白菜"
+          },
+          {
+            "name": "芹菜"
+          },
+          {
+            "name": "茄子"
+          },
+          {
+            "name": "洋葱"
+          },
+          {
+            "name": "胡萝卜"
+          },
+          {
+            "name": "芦笋"
+          }
+        ]
+      },
+      {
+        "category": "低钾低磷水果",
+        "items": [
+          {
+            "name": "苹果"
+          },
+          {
+            "name": "梨"
+          },
+          {
+            "name": "蓝莓"
+          },
+          {
+            "name": "草莓"
+          }
+        ]
+      },
+      {
+        "category": "油脂类",
+        "items": [
+          {
+            "name": "橄榄油"
+          },
+          {
+            "name": "茶籽油"
+          },
+          {
+            "name": "芝麻油（调味用）"
+          }
+        ]
+      }
     ],
     "forbiddenFoods": [
-      {"food": "坚果类（核桃、花生、瓜子、杏仁等）", "reason": "磷极高（>500mg/100g），钾也高", "severity": "完全禁止"},
-      {"food": "全谷物（糙米、燕麦、全麦、荞麦）", "reason": "磷偏高，与CKD限磷冲突", "severity": "完全禁止"},
-      {"food": "豆类/豆制品大量（黄豆、黑豆、大量豆腐）", "reason": "磷偏高，少量豆腐可接受", "severity": "完全禁止"},
-      {"food": "香蕉", "reason": "钾256mg/100g，高钾血症禁止", "severity": "完全禁止"},
-      {"food": "加工肉类（火腿、香肠、培根）", "reason": "高磷（含磷酸盐添加剂）+高钠", "severity": "完全禁止"},
-      {"food": "可乐/碳酸饮料", "reason": "含磷酸添加剂", "severity": "完全禁止"},
-      {"food": "动物内脏", "reason": "磷300-500mg/100g", "severity": "完全禁止"},
-      {"food": "浓肉汤/骨头汤", "reason": "大量磷和嘌呤溶出", "severity": "完全禁止"},
-      {"food": "腌制食品", "reason": "高钠，加重高血压", "severity": "完全禁止"},
-      {"food": "橙子/橘子/柚子大量", "reason": "钾>150mg/100g，少量可接受", "severity": "严格限制"},
-      {"food": "土豆/红薯大量", "reason": "钾>300mg/100g，焯水少量可", "severity": "严格限制"},
-      {"food": "番茄大量", "reason": "钾偏高，少量做调味可", "severity": "严格限制"},
-      {"food": "菠菜生食", "reason": "高钾+高草酸，影响钙吸收", "severity": "严格限制"},
-      {"food": "奶制品大量（>200ml/天）", "reason": "磷偏高（牛奶100mg/100ml）", "severity": "严格限制"},
-      {"food": "牛奶", "reason": "含磷约100mg/100ml", "severity": "适量控制"},
-      {"food": "豆腐(北)", "reason": "含磷约120mg/100g", "severity": "适量控制"},
-      {"food": "红肉", "reason": "磷和蛋白高", "severity": "适量控制"}
+      {
+        "food": "坚果类（核桃、花生、瓜子、杏仁等）",
+        "reason": "磷极高（>500mg/100g），钾也高",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "全谷物（糙米、燕麦、全麦、荞麦）",
+        "reason": "磷偏高，与CKD限磷冲突",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "豆类/豆制品大量（黄豆、黑豆、大量豆腐）",
+        "reason": "磷偏高，少量豆腐可接受",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "香蕉",
+        "reason": "钾256mg/100g，高钾血症禁止",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "加工肉类（火腿、香肠、培根）",
+        "reason": "高磷（含磷酸盐添加剂）+高钠",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "可乐/碳酸饮料",
+        "reason": "含磷酸添加剂",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "动物内脏",
+        "reason": "磷300-500mg/100g",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "浓肉汤/骨头汤",
+        "reason": "大量磷和嘌呤溶出",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "腌制食品",
+        "reason": "高钠，加重高血压",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "橙子/橘子/柚子大量",
+        "reason": "钾>150mg/100g，少量可接受",
+        "severity": "严格限制"
+      },
+      {
+        "food": "土豆/红薯大量",
+        "reason": "钾>300mg/100g，焯水少量可",
+        "severity": "严格限制"
+      },
+      {
+        "food": "番茄大量",
+        "reason": "钾偏高，少量做调味可",
+        "severity": "严格限制"
+      },
+      {
+        "food": "菠菜生食",
+        "reason": "高钾+高草酸，影响钙吸收",
+        "severity": "严格限制"
+      },
+      {
+        "food": "奶制品大量（>200ml/天）",
+        "reason": "磷偏高（牛奶100mg/100ml）",
+        "severity": "严格限制"
+      },
+      {
+        "food": "牛奶",
+        "reason": "含磷约100mg/100ml",
+        "severity": "适量控制"
+      },
+      {
+        "food": "豆腐(北)",
+        "reason": "含磷约120mg/100g",
+        "severity": "适量控制"
+      },
+      {
+        "food": "红肉",
+        "reason": "磷和蛋白高",
+        "severity": "适量控制"
+      }
     ],
     "drugInteractions": [
-      {"drug": "缬沙坦 160mg qd", "note": "ARB类药物可升高血钾。当前血钾5.2已偏高，必须严格限钾饮食。避免使用低钠盐（含氯化钾）。定期监测血钾"},
-      {"drug": "氨氯地平 5mg qd", "note": "无显著营养交互。钙通道阻滞剂，不影响主要营养素吸收"},
-      {"drug": "碳酸氢钠片 0.5g tid", "note": "提供额外钠负荷（每片含钠约137mg，三片=411mg钠），需计入每日钠总量中"},
-      {"drug": "骨化三醇 0.25μg qd", "note": "活性维生素D，促进肠道钙磷吸收。但也促进磷吸收，需与司维拉姆配合使用。避免额外补充大剂量钙剂"},
-      {"drug": "司维拉姆 0.8g tid", "note": "磷结合剂，必须随餐服用才能发挥降磷效果。可能减少脂溶性维生素吸收。注意便秘副作用"},
-      {"drug": "琥珀酸亚铁 0.1g tid", "note": "餐后服用以减少胃肠刺激。避免与茶、咖啡同服。可搭配维C促进吸收。建议与司维拉姆间隔服用"}
+      {
+        "drug": "缬沙坦 160mg qd",
+        "note": "ARB类药物可升高血钾。当前血钾5.2已偏高，必须严格限钾饮食。避免使用低钠盐（含氯化钾）。定期监测血钾"
+      },
+      {
+        "drug": "氨氯地平 5mg qd",
+        "note": "无显著营养交互。钙通道阻滞剂，不影响主要营养素吸收"
+      },
+      {
+        "drug": "碳酸氢钠片 0.5g tid",
+        "note": "提供额外钠负荷（每片含钠约137mg，三片=411mg钠），需计入每日钠总量中"
+      },
+      {
+        "drug": "骨化三醇 0.25μg qd",
+        "note": "活性维生素D，促进肠道钙磷吸收。但也促进磷吸收，需与司维拉姆配合使用。避免额外补充大剂量钙剂"
+      },
+      {
+        "drug": "司维拉姆 0.8g tid",
+        "note": "磷结合剂，必须随餐服用才能发挥降磷效果。可能减少脂溶性维生素吸收。注意便秘副作用"
+      },
+      {
+        "drug": "琥珀酸亚铁 0.1g tid",
+        "note": "餐后服用以减少胃肠刺激。避免与茶、咖啡同服。可搭配维C促进吸收。建议与司维拉姆间隔服用"
+      }
     ],
     "keyNotes": [
       "蛋白质精确控制是生命线 — 每天严格33g，不可随意增加肉类摄入",
@@ -189,189 +613,822 @@
         {
           "day": "周一",
           "meals": [
-            {"type": "早餐", "energy": "~450 kcal", "items": [
-              {"food": "白米粥", "amount": "大米40g（约200g熟粥）", "method": "煮", "note": "低磷低钾主食"},
-              {"food": "煮鸡蛋", "amount": "1个（全蛋）", "method": "煮7分钟", "note": "优质蛋白6.7g"},
-              {"food": "蛋清", "amount": "1个", "method": "水煮或蒸", "note": "纯优质蛋白3.5g，几乎无磷"},
-              {"food": "苹果", "amount": "100g（约半个）", "method": "生食", "note": "低钾，补维C助铁吸收"},
-              {"food": "橄榄油拌黄瓜", "amount": "黄瓜100g + 橄榄油5g", "method": "黄瓜切片，橄榄油+醋凉拌", "note": "低钾蔬菜，热量补充"}
-            ]},
-            {"type": "午餐", "energy": "~600 kcal", "items": [
-              {"food": "白米饭", "amount": "大米70g（生，约175g熟）", "method": "蒸", "note": "低磷主食基底"},
-              {"food": "清蒸鲈鱼", "amount": "鲈鱼肉60g", "method": "清蒸，姜丝去腥", "note": "优质蛋白~11g"},
-              {"food": "炒白菜", "amount": "白菜200g（焯水后）", "method": "焯水2分钟后少油炒（油8g）", "note": "焯水后低钾"},
-              {"food": "胡萝卜丝", "amount": "胡萝卜50g（焯水后）", "method": "焯水后与白菜同炒", "note": "补β胡萝卜素"},
-              {"food": "藕粉", "amount": "藕粉20g + 白糖5g", "method": "热水冲泡", "note": "低磷低钾碳水补充热量"}
-            ]},
-            {"type": "晚餐", "energy": "~450 kcal", "items": [
-              {"food": "面条（精制）", "amount": "干面60g（约150g熟）", "method": "煮，弃面汤", "note": "低磷低钾，弃汤很重要"},
-              {"food": "蛋清炒芹菜", "amount": "蛋清2个 + 芹菜150g（焯水）", "method": "芹菜焯水后与蛋清少油炒（油8g）", "note": "蛋清补蛋白7g"},
-              {"food": "茄子", "amount": "茄子150g（焯水后）", "method": "焯水后少油红烧（油8g）", "note": "低钾低磷蔬菜"},
-              {"food": "苹果", "amount": "100g", "method": "生食", "note": "餐后配铁剂服用"}
-            ]}
+            {
+              "type": "早餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "白米粥",
+                  "amount": "大米40g（约200g熟粥）",
+                  "method": "煮",
+                  "note": "低磷低钾主食"
+                },
+                {
+                  "food": "煮鸡蛋",
+                  "amount": "1个（全蛋）",
+                  "method": "煮7分钟",
+                  "note": "优质蛋白6.7g"
+                },
+                {
+                  "food": "蛋清",
+                  "amount": "1个",
+                  "method": "水煮或蒸",
+                  "note": "纯优质蛋白3.5g，几乎无磷"
+                },
+                {
+                  "food": "苹果",
+                  "amount": "100g（约半个）",
+                  "method": "生食",
+                  "note": "低钾，补维C助铁吸收"
+                },
+                {
+                  "food": "橄榄油拌黄瓜",
+                  "amount": "黄瓜100g + 橄榄油5g",
+                  "method": "黄瓜切片，橄榄油+醋凉拌",
+                  "note": "低钾蔬菜，热量补充"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~600 kcal",
+              "items": [
+                {
+                  "food": "白米饭",
+                  "amount": "大米70g（生，约175g熟）",
+                  "method": "蒸",
+                  "note": "低磷主食基底"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼肉60g",
+                  "method": "清蒸，姜丝去腥",
+                  "note": "优质蛋白~11g"
+                },
+                {
+                  "food": "炒白菜",
+                  "amount": "白菜200g（焯水后）",
+                  "method": "焯水2分钟后少油炒（油8g）",
+                  "note": "焯水后低钾"
+                },
+                {
+                  "food": "胡萝卜丝",
+                  "amount": "胡萝卜50g（焯水后）",
+                  "method": "焯水后与白菜同炒",
+                  "note": "补β胡萝卜素"
+                },
+                {
+                  "food": "藕粉",
+                  "amount": "藕粉20g + 白糖5g",
+                  "method": "热水冲泡",
+                  "note": "低磷低钾碳水补充热量"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "面条（精制）",
+                  "amount": "干面60g（约150g熟）",
+                  "method": "煮，弃面汤",
+                  "note": "低磷低钾，弃汤很重要"
+                },
+                {
+                  "food": "蛋清炒芹菜",
+                  "amount": "蛋清2个 + 芹菜150g（焯水）",
+                  "method": "芹菜焯水后与蛋清少油炒（油8g）",
+                  "note": "蛋清补蛋白7g"
+                },
+                {
+                  "food": "茄子",
+                  "amount": "茄子150g（焯水后）",
+                  "method": "焯水后少油红烧（油8g）",
+                  "note": "低钾低磷蔬菜"
+                },
+                {
+                  "food": "苹果",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": "餐后配铁剂服用"
+                }
+              ]
+            }
           ],
           "dailyTotal": "能量~1500kcal | 蛋白质~33g | 磷~450mg | 钾~1100mg | 优质蛋白比例~85%"
         },
         {
           "day": "周二",
           "meals": [
-            {"type": "早餐", "energy": "~450 kcal", "items": [
-              {"food": "小米粥", "amount": "小米30g（约180g熟粥）", "method": "煮", "note": "低磷，需弃汤"},
-              {"food": "煮鸡蛋", "amount": "1个", "method": "煮", "note": "优质蛋白"},
-              {"food": "蛋清", "amount": "1个", "method": "水煮", "note": "额外蛋白"},
-              {"food": "梨", "amount": "100g", "method": "生食", "note": "低钾"},
-              {"food": "糖拌黄瓜", "amount": "黄瓜100g + 白糖3g", "method": "切片拌", "note": "补充热量"}
-            ]},
-            {"type": "午餐", "energy": "~600 kcal", "items": [
-              {"food": "白米饭", "amount": "大米70g（生）", "method": "蒸", "note": ""},
-              {"food": "鸡胸肉炒洋葱", "amount": "鸡胸肉50g（焯水）+ 洋葱100g（焯水）", "method": "肉切片焯水1分钟，同炒（油8g）", "note": "优质蛋白~10g"},
-              {"food": "炒白菜", "amount": "白菜150g（焯水后）", "method": "少油炒（油6g）", "note": ""},
-              {"food": "藕粉", "amount": "藕粉20g + 白糖5g", "method": "冲泡", "note": "碳水补热量"}
-            ]},
-            {"type": "晚餐", "energy": "~450 kcal", "items": [
-              {"food": "粉丝", "amount": "干粉丝50g", "method": "煮软，弃汤", "note": "极低磷极低钾主食"},
-              {"food": "蒸蛋清", "amount": "蛋清2个", "method": "蒸5分钟，淋少许酱油", "note": "优质蛋白7g"},
-              {"food": "炒黄瓜片", "amount": "黄瓜150g", "method": "少油炒（油6g）", "note": ""},
-              {"food": "烧茄子", "amount": "茄子100g（焯水后）", "method": "少油红烧（油6g）", "note": ""},
-              {"food": "苹果", "amount": "100g", "method": "生食", "note": ""}
-            ]}
+            {
+              "type": "早餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "小米粥",
+                  "amount": "小米30g（约180g熟粥）",
+                  "method": "煮",
+                  "note": "低磷，需弃汤"
+                },
+                {
+                  "food": "煮鸡蛋",
+                  "amount": "1个",
+                  "method": "煮",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "蛋清",
+                  "amount": "1个",
+                  "method": "水煮",
+                  "note": "额外蛋白"
+                },
+                {
+                  "food": "梨",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": "低钾"
+                },
+                {
+                  "food": "糖拌黄瓜",
+                  "amount": "黄瓜100g + 白糖3g",
+                  "method": "切片拌",
+                  "note": "补充热量"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~600 kcal",
+              "items": [
+                {
+                  "food": "白米饭",
+                  "amount": "大米70g（生）",
+                  "method": "蒸",
+                  "note": ""
+                },
+                {
+                  "food": "鸡胸肉炒洋葱",
+                  "amount": "鸡胸肉50g（焯水）+ 洋葱100g（焯水）",
+                  "method": "肉切片焯水1分钟，同炒（油8g）",
+                  "note": "优质蛋白~10g"
+                },
+                {
+                  "food": "炒白菜",
+                  "amount": "白菜150g（焯水后）",
+                  "method": "少油炒（油6g）",
+                  "note": ""
+                },
+                {
+                  "food": "藕粉",
+                  "amount": "藕粉20g + 白糖5g",
+                  "method": "冲泡",
+                  "note": "碳水补热量"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "粉丝",
+                  "amount": "干粉丝50g",
+                  "method": "煮软，弃汤",
+                  "note": "极低磷极低钾主食"
+                },
+                {
+                  "food": "蒸蛋清",
+                  "amount": "蛋清2个",
+                  "method": "蒸5分钟，淋少许酱油",
+                  "note": "优质蛋白7g"
+                },
+                {
+                  "food": "炒黄瓜片",
+                  "amount": "黄瓜150g",
+                  "method": "少油炒（油6g）",
+                  "note": ""
+                },
+                {
+                  "food": "烧茄子",
+                  "amount": "茄子100g（焯水后）",
+                  "method": "少油红烧（油6g）",
+                  "note": ""
+                },
+                {
+                  "food": "苹果",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": ""
+                }
+              ]
+            }
           ],
           "dailyTotal": "能量~1500kcal | 蛋白质~33g | 磷~430mg | 钾~1050mg | 优质蛋白比例~85%"
         },
         {
           "day": "周三",
           "meals": [
-            {"type": "早餐", "energy": "~450 kcal", "items": [
-              {"food": "白米粥 + 藕粉", "amount": "大米25g + 藕粉15g", "method": "混合煮", "note": "双重低磷碳水"},
-              {"food": "煮鸡蛋", "amount": "1个", "method": "煮", "note": ""},
-              {"food": "蛋清", "amount": "1个", "method": "水煮", "note": ""},
-              {"food": "草莓", "amount": "100g", "method": "生食", "note": "高维C助铁吸收"}
-            ]},
-            {"type": "午餐", "energy": "~600 kcal", "items": [
-              {"food": "白米饭", "amount": "大米70g（生）", "method": "蒸", "note": ""},
-              {"food": "清蒸鲈鱼", "amount": "鲈鱼肉60g", "method": "清蒸，姜葱", "note": "本周第2次鱼"},
-              {"food": "炒白菜胡萝卜", "amount": "白菜150g + 胡萝卜50g（均焯水后）", "method": "少油炒（油8g）", "note": ""},
-              {"food": "芦笋", "amount": "芦笋100g（焯水后）", "method": "焯水后白灼", "note": "焯水后低钾"}
-            ]},
-            {"type": "晚餐", "energy": "~450 kcal", "items": [
-              {"food": "面条", "amount": "干面50g", "method": "煮，弃面汤", "note": ""},
-              {"food": "蛋清蒸肉饼", "amount": "蛋清1个 + 猪瘦肉30g", "method": "猪肉末焯水去血沫，与蛋清拌匀蒸10分钟", "note": "少量红肉补铁，蛋白~8g"},
-              {"food": "炒芹菜", "amount": "芹菜200g（焯水后）", "method": "少油炒（油8g）", "note": ""},
-              {"food": "梨", "amount": "100g", "method": "生食", "note": ""}
-            ]}
+            {
+              "type": "早餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "白米粥 + 藕粉",
+                  "amount": "大米25g + 藕粉15g",
+                  "method": "混合煮",
+                  "note": "双重低磷碳水"
+                },
+                {
+                  "food": "煮鸡蛋",
+                  "amount": "1个",
+                  "method": "煮",
+                  "note": ""
+                },
+                {
+                  "food": "蛋清",
+                  "amount": "1个",
+                  "method": "水煮",
+                  "note": ""
+                },
+                {
+                  "food": "草莓",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": "高维C助铁吸收"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~600 kcal",
+              "items": [
+                {
+                  "food": "白米饭",
+                  "amount": "大米70g（生）",
+                  "method": "蒸",
+                  "note": ""
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼肉60g",
+                  "method": "清蒸，姜葱",
+                  "note": "本周第2次鱼"
+                },
+                {
+                  "food": "炒白菜胡萝卜",
+                  "amount": "白菜150g + 胡萝卜50g（均焯水后）",
+                  "method": "少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "芦笋",
+                  "amount": "芦笋100g（焯水后）",
+                  "method": "焯水后白灼",
+                  "note": "焯水后低钾"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "面条",
+                  "amount": "干面50g",
+                  "method": "煮，弃面汤",
+                  "note": ""
+                },
+                {
+                  "food": "蛋清蒸肉饼",
+                  "amount": "蛋清1个 + 猪瘦肉30g",
+                  "method": "猪肉末焯水去血沫，与蛋清拌匀蒸10分钟",
+                  "note": "少量红肉补铁，蛋白~8g"
+                },
+                {
+                  "food": "炒芹菜",
+                  "amount": "芹菜200g（焯水后）",
+                  "method": "少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "梨",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": ""
+                }
+              ]
+            }
           ],
           "dailyTotal": "能量~1500kcal | 蛋白质~33g | 磷~480mg | 钾~1100mg | 优质蛋白比例~82%"
         },
         {
           "day": "周四",
           "meals": [
-            {"type": "早餐", "energy": "~450 kcal", "items": [
-              {"food": "白米粥", "amount": "大米40g", "method": "煮", "note": ""},
-              {"food": "煮鸡蛋", "amount": "1个", "method": "煮", "note": ""},
-              {"food": "蛋清", "amount": "1个", "method": "水煮", "note": ""},
-              {"food": "蓝莓", "amount": "80g", "method": "生食", "note": "极低钾，抗氧化"},
-              {"food": "橄榄油拌黄瓜", "amount": "黄瓜100g + 橄榄油5g", "method": "凉拌", "note": ""}
-            ]},
-            {"type": "午餐", "energy": "~600 kcal", "items": [
-              {"food": "白米饭", "amount": "大米70g（生）", "method": "蒸", "note": ""},
-              {"food": "鸡胸肉蒸蛋清", "amount": "鸡胸肉40g（焯水）+ 蛋清1个", "method": "鸡胸肉切碎与蛋清拌匀蒸8分钟", "note": "优质蛋白~11g"},
-              {"food": "炒白菜洋葱", "amount": "白菜150g + 洋葱50g（焯水后）", "method": "少油炒（油8g）", "note": ""},
-              {"food": "藕粉", "amount": "藕粉20g + 白糖5g", "method": "冲泡", "note": ""}
-            ]},
-            {"type": "晚餐", "energy": "~450 kcal", "items": [
-              {"food": "粉丝", "amount": "干粉丝50g", "method": "煮，弃汤", "note": ""},
-              {"food": "炒蛋清白菜", "amount": "蛋清2个 + 白菜100g（焯水后）", "method": "少油炒（油8g）", "note": ""},
-              {"food": "烧茄子", "amount": "茄子150g（焯水后）", "method": "少油烧（油6g）", "note": ""},
-              {"food": "苹果", "amount": "100g", "method": "生食", "note": ""}
-            ]}
+            {
+              "type": "早餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "白米粥",
+                  "amount": "大米40g",
+                  "method": "煮",
+                  "note": ""
+                },
+                {
+                  "food": "煮鸡蛋",
+                  "amount": "1个",
+                  "method": "煮",
+                  "note": ""
+                },
+                {
+                  "food": "蛋清",
+                  "amount": "1个",
+                  "method": "水煮",
+                  "note": ""
+                },
+                {
+                  "food": "蓝莓",
+                  "amount": "80g",
+                  "method": "生食",
+                  "note": "极低钾，抗氧化"
+                },
+                {
+                  "food": "橄榄油拌黄瓜",
+                  "amount": "黄瓜100g + 橄榄油5g",
+                  "method": "凉拌",
+                  "note": ""
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~600 kcal",
+              "items": [
+                {
+                  "food": "白米饭",
+                  "amount": "大米70g（生）",
+                  "method": "蒸",
+                  "note": ""
+                },
+                {
+                  "food": "鸡胸肉蒸蛋清",
+                  "amount": "鸡胸肉40g（焯水）+ 蛋清1个",
+                  "method": "鸡胸肉切碎与蛋清拌匀蒸8分钟",
+                  "note": "优质蛋白~11g"
+                },
+                {
+                  "food": "炒白菜洋葱",
+                  "amount": "白菜150g + 洋葱50g（焯水后）",
+                  "method": "少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "藕粉",
+                  "amount": "藕粉20g + 白糖5g",
+                  "method": "冲泡",
+                  "note": ""
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "粉丝",
+                  "amount": "干粉丝50g",
+                  "method": "煮，弃汤",
+                  "note": ""
+                },
+                {
+                  "food": "炒蛋清白菜",
+                  "amount": "蛋清2个 + 白菜100g（焯水后）",
+                  "method": "少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "烧茄子",
+                  "amount": "茄子150g（焯水后）",
+                  "method": "少油烧（油6g）",
+                  "note": ""
+                },
+                {
+                  "food": "苹果",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": ""
+                }
+              ]
+            }
           ],
           "dailyTotal": "能量~1500kcal | 蛋白质~33g | 磷~420mg | 钾~1000mg | 优质蛋白比例~88%"
         },
         {
           "day": "周五",
           "meals": [
-            {"type": "早餐", "energy": "~450 kcal", "items": [
-              {"food": "山药粥", "amount": "山药80g（去皮）+ 大米20g", "method": "煮", "note": "山药去皮切块降低钾，低GI低磷"},
-              {"food": "煮鸡蛋", "amount": "1个", "method": "煮", "note": ""},
-              {"food": "蛋清", "amount": "1个", "method": "水煮", "note": ""},
-              {"food": "梨", "amount": "100g", "method": "生食", "note": ""}
-            ]},
-            {"type": "午餐", "energy": "~600 kcal", "items": [
-              {"food": "白米饭", "amount": "大米70g（生）", "method": "蒸", "note": ""},
-              {"food": "清蒸鲈鱼", "amount": "鲈鱼肉50g", "method": "清蒸", "note": "本周第3次鱼"},
-              {"food": "炒白菜", "amount": "白菜200g（焯水后）", "method": "少油炒（油8g）", "note": ""},
-              {"food": "炒胡萝卜丝", "amount": "胡萝卜50g（焯水后）", "method": "少油炒（油6g）", "note": ""},
-              {"food": "藕粉", "amount": "藕粉20g + 白糖5g", "method": "冲泡", "note": ""}
-            ]},
-            {"type": "晚餐", "energy": "~450 kcal", "items": [
-              {"food": "面条", "amount": "干面50g", "method": "煮，弃面汤", "note": ""},
-              {"food": "猪瘦肉炒芹菜", "amount": "猪瘦肉30g（焯水）+ 芹菜150g（焯水后）", "method": "肉切丝焯水1分钟，与芹菜少油炒（油8g）", "note": "本周第2次红肉，补铁"},
-              {"food": "炒黄瓜", "amount": "黄瓜100g", "method": "少油炒（油6g）", "note": ""},
-              {"food": "苹果", "amount": "100g", "method": "生食", "note": ""}
-            ]}
+            {
+              "type": "早餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "山药粥",
+                  "amount": "山药80g（去皮）+ 大米20g",
+                  "method": "煮",
+                  "note": "山药去皮切块降低钾，低GI低磷"
+                },
+                {
+                  "food": "煮鸡蛋",
+                  "amount": "1个",
+                  "method": "煮",
+                  "note": ""
+                },
+                {
+                  "food": "蛋清",
+                  "amount": "1个",
+                  "method": "水煮",
+                  "note": ""
+                },
+                {
+                  "food": "梨",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": ""
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~600 kcal",
+              "items": [
+                {
+                  "food": "白米饭",
+                  "amount": "大米70g（生）",
+                  "method": "蒸",
+                  "note": ""
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼肉50g",
+                  "method": "清蒸",
+                  "note": "本周第3次鱼"
+                },
+                {
+                  "food": "炒白菜",
+                  "amount": "白菜200g（焯水后）",
+                  "method": "少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "炒胡萝卜丝",
+                  "amount": "胡萝卜50g（焯水后）",
+                  "method": "少油炒（油6g）",
+                  "note": ""
+                },
+                {
+                  "food": "藕粉",
+                  "amount": "藕粉20g + 白糖5g",
+                  "method": "冲泡",
+                  "note": ""
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "面条",
+                  "amount": "干面50g",
+                  "method": "煮，弃面汤",
+                  "note": ""
+                },
+                {
+                  "food": "猪瘦肉炒芹菜",
+                  "amount": "猪瘦肉30g（焯水）+ 芹菜150g（焯水后）",
+                  "method": "肉切丝焯水1分钟，与芹菜少油炒（油8g）",
+                  "note": "本周第2次红肉，补铁"
+                },
+                {
+                  "food": "炒黄瓜",
+                  "amount": "黄瓜100g",
+                  "method": "少油炒（油6g）",
+                  "note": ""
+                },
+                {
+                  "food": "苹果",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": ""
+                }
+              ]
+            }
           ],
           "dailyTotal": "能量~1500kcal | 蛋白质~33g | 磷~470mg | 钾~1150mg | 优质蛋白比例~82%"
         },
         {
           "day": "周六",
           "meals": [
-            {"type": "早餐", "energy": "~450 kcal", "items": [
-              {"food": "白米粥", "amount": "大米40g", "method": "煮", "note": ""},
-              {"food": "煮鸡蛋", "amount": "1个", "method": "煮", "note": ""},
-              {"food": "蛋清", "amount": "1个", "method": "水煮", "note": ""},
-              {"food": "草莓", "amount": "100g", "method": "生食", "note": "高维C"},
-              {"food": "芝麻油拌黄瓜", "amount": "黄瓜100g + 芝麻油3g", "method": "凉拌", "note": "香味增进食欲"}
-            ]},
-            {"type": "午餐", "energy": "~600 kcal", "items": [
-              {"food": "白米饭", "amount": "大米70g（生）", "method": "蒸", "note": ""},
-              {"food": "鸡胸肉炒白菜", "amount": "鸡胸肉50g（焯水）+ 白菜150g（焯水后）", "method": "鸡胸肉切片焯水，与白菜少油炒（油8g）", "note": ""},
-              {"food": "芦笋", "amount": "芦笋100g（焯水后）", "method": "白灼", "note": ""},
-              {"food": "藕粉", "amount": "藕粉25g + 白糖5g", "method": "冲泡", "note": "周末稍增量"}
-            ]},
-            {"type": "晚餐", "energy": "~450 kcal", "items": [
-              {"food": "粉丝", "amount": "干粉丝50g", "method": "煮，弃汤", "note": ""},
-              {"food": "蒸蛋清", "amount": "蛋清2个", "method": "蒸，淋少许生抽", "note": "优质蛋白7g"},
-              {"food": "炒茄子洋葱", "amount": "茄子100g + 洋葱50g（均焯水后）", "method": "少油炒（油8g）", "note": ""},
-              {"food": "炒芹菜", "amount": "芹菜100g（焯水后）", "method": "少油炒（油6g）", "note": ""},
-              {"food": "梨", "amount": "100g", "method": "生食", "note": ""}
-            ]}
+            {
+              "type": "早餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "白米粥",
+                  "amount": "大米40g",
+                  "method": "煮",
+                  "note": ""
+                },
+                {
+                  "food": "煮鸡蛋",
+                  "amount": "1个",
+                  "method": "煮",
+                  "note": ""
+                },
+                {
+                  "food": "蛋清",
+                  "amount": "1个",
+                  "method": "水煮",
+                  "note": ""
+                },
+                {
+                  "food": "草莓",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": "高维C"
+                },
+                {
+                  "food": "芝麻油拌黄瓜",
+                  "amount": "黄瓜100g + 芝麻油3g",
+                  "method": "凉拌",
+                  "note": "香味增进食欲"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~600 kcal",
+              "items": [
+                {
+                  "food": "白米饭",
+                  "amount": "大米70g（生）",
+                  "method": "蒸",
+                  "note": ""
+                },
+                {
+                  "food": "鸡胸肉炒白菜",
+                  "amount": "鸡胸肉50g（焯水）+ 白菜150g（焯水后）",
+                  "method": "鸡胸肉切片焯水，与白菜少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "芦笋",
+                  "amount": "芦笋100g（焯水后）",
+                  "method": "白灼",
+                  "note": ""
+                },
+                {
+                  "food": "藕粉",
+                  "amount": "藕粉25g + 白糖5g",
+                  "method": "冲泡",
+                  "note": "周末稍增量"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "粉丝",
+                  "amount": "干粉丝50g",
+                  "method": "煮，弃汤",
+                  "note": ""
+                },
+                {
+                  "food": "蒸蛋清",
+                  "amount": "蛋清2个",
+                  "method": "蒸，淋少许生抽",
+                  "note": "优质蛋白7g"
+                },
+                {
+                  "food": "炒茄子洋葱",
+                  "amount": "茄子100g + 洋葱50g（均焯水后）",
+                  "method": "少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "炒芹菜",
+                  "amount": "芹菜100g（焯水后）",
+                  "method": "少油炒（油6g）",
+                  "note": ""
+                },
+                {
+                  "food": "梨",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": ""
+                }
+              ]
+            }
           ],
           "dailyTotal": "能量~1510kcal | 蛋白质~33g | 磷~440mg | 钾~1080mg | 优质蛋白比例~85%"
         },
         {
           "day": "周日",
           "meals": [
-            {"type": "早餐", "energy": "~450 kcal", "items": [
-              {"food": "白米粥", "amount": "大米35g + 藕粉15g", "method": "混合煮", "note": ""},
-              {"food": "煮鸡蛋", "amount": "1个", "method": "煮", "note": ""},
-              {"food": "蛋清", "amount": "1个", "method": "水煮", "note": ""},
-              {"food": "蓝莓", "amount": "80g", "method": "生食", "note": ""}
-            ]},
-            {"type": "午餐", "energy": "~600 kcal", "items": [
-              {"food": "白米饭", "amount": "大米70g（生）", "method": "蒸", "note": ""},
-              {"food": "清蒸鲈鱼", "amount": "鲈鱼肉60g", "method": "清蒸，姜葱", "note": "本周第4次鱼"},
-              {"food": "炒白菜", "amount": "白菜200g（焯水后）", "method": "少油炒（油8g）", "note": ""},
-              {"food": "胡萝卜丝", "amount": "胡萝卜50g（焯水后）", "method": "与白菜同炒", "note": ""},
-              {"food": "藕粉", "amount": "藕粉20g + 白糖5g", "method": "冲泡", "note": ""}
-            ]},
-            {"type": "晚餐", "energy": "~450 kcal", "items": [
-              {"food": "面条", "amount": "干面50g", "method": "煮，弃面汤", "note": ""},
-              {"food": "蛋清炒黄瓜", "amount": "蛋清2个 + 黄瓜150g", "method": "少油炒（油8g）", "note": ""},
-              {"food": "炒芹菜茄子", "amount": "芹菜100g + 茄子100g（均焯水后）", "method": "少油炒（油6g）", "note": ""},
-              {"food": "苹果", "amount": "100g", "method": "生食", "note": ""}
-            ]}
+            {
+              "type": "早餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "白米粥",
+                  "amount": "大米35g + 藕粉15g",
+                  "method": "混合煮",
+                  "note": ""
+                },
+                {
+                  "food": "煮鸡蛋",
+                  "amount": "1个",
+                  "method": "煮",
+                  "note": ""
+                },
+                {
+                  "food": "蛋清",
+                  "amount": "1个",
+                  "method": "水煮",
+                  "note": ""
+                },
+                {
+                  "food": "蓝莓",
+                  "amount": "80g",
+                  "method": "生食",
+                  "note": ""
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "~600 kcal",
+              "items": [
+                {
+                  "food": "白米饭",
+                  "amount": "大米70g（生）",
+                  "method": "蒸",
+                  "note": ""
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼肉60g",
+                  "method": "清蒸，姜葱",
+                  "note": "本周第4次鱼"
+                },
+                {
+                  "food": "炒白菜",
+                  "amount": "白菜200g（焯水后）",
+                  "method": "少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "胡萝卜丝",
+                  "amount": "胡萝卜50g（焯水后）",
+                  "method": "与白菜同炒",
+                  "note": ""
+                },
+                {
+                  "food": "藕粉",
+                  "amount": "藕粉20g + 白糖5g",
+                  "method": "冲泡",
+                  "note": ""
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "~450 kcal",
+              "items": [
+                {
+                  "food": "面条",
+                  "amount": "干面50g",
+                  "method": "煮，弃面汤",
+                  "note": ""
+                },
+                {
+                  "food": "蛋清炒黄瓜",
+                  "amount": "蛋清2个 + 黄瓜150g",
+                  "method": "少油炒（油8g）",
+                  "note": ""
+                },
+                {
+                  "food": "炒芹菜茄子",
+                  "amount": "芹菜100g + 茄子100g（均焯水后）",
+                  "method": "少油炒（油6g）",
+                  "note": ""
+                },
+                {
+                  "food": "苹果",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": ""
+                }
+              ]
+            }
           ],
           "dailyTotal": "能量~1500kcal | 蛋白质~33g | 磷~430mg | 钾~1050mg | 优质蛋白比例~85%"
         }
       ],
       "weeklySummary": [
-        {"day": "周一", "energy": 1500, "protein": 33, "fat": 42, "carbs": 244, "extra": {"优质蛋白": 28, "磷": 450, "钾": 1100, "钠": 1500}},
-        {"day": "周二", "energy": 1500, "protein": 33, "fat": 42, "carbs": 244, "extra": {"优质蛋白": 28, "磷": 430, "钾": 1050, "钠": 1500}},
-        {"day": "周三", "energy": 1500, "protein": 33, "fat": 42, "carbs": 244, "extra": {"优质蛋白": 27, "磷": 480, "钾": 1100, "钠": 1500}},
-        {"day": "周四", "energy": 1500, "protein": 33, "fat": 42, "carbs": 244, "extra": {"优质蛋白": 29, "磷": 420, "钾": 1000, "钠": 1500}},
-        {"day": "周五", "energy": 1500, "protein": 33, "fat": 42, "carbs": 244, "extra": {"优质蛋白": 27, "磷": 470, "钾": 1150, "钠": 1500}},
-        {"day": "周六", "energy": 1510, "protein": 33, "fat": 42, "carbs": 244, "extra": {"优质蛋白": 28, "磷": 440, "钾": 1080, "钠": 1500}},
-        {"day": "周日", "energy": 1500, "protein": 33, "fat": 42, "carbs": 244, "extra": {"优质蛋白": 28, "磷": 430, "钾": 1050, "钠": 1500}}
+        {
+          "day": "周一",
+          "energy": 1500,
+          "protein": 33,
+          "fat": 42,
+          "carbs": 244,
+          "extra": {
+            "优质蛋白": 28,
+            "磷": 450,
+            "钾": 1100,
+            "钠": 1500
+          }
+        },
+        {
+          "day": "周二",
+          "energy": 1500,
+          "protein": 33,
+          "fat": 42,
+          "carbs": 244,
+          "extra": {
+            "优质蛋白": 28,
+            "磷": 430,
+            "钾": 1050,
+            "钠": 1500
+          }
+        },
+        {
+          "day": "周三",
+          "energy": 1500,
+          "protein": 33,
+          "fat": 42,
+          "carbs": 244,
+          "extra": {
+            "优质蛋白": 27,
+            "磷": 480,
+            "钾": 1100,
+            "钠": 1500
+          }
+        },
+        {
+          "day": "周四",
+          "energy": 1500,
+          "protein": 33,
+          "fat": 42,
+          "carbs": 244,
+          "extra": {
+            "优质蛋白": 29,
+            "磷": 420,
+            "钾": 1000,
+            "钠": 1500
+          }
+        },
+        {
+          "day": "周五",
+          "energy": 1500,
+          "protein": 33,
+          "fat": 42,
+          "carbs": 244,
+          "extra": {
+            "优质蛋白": 27,
+            "磷": 470,
+            "钾": 1150,
+            "钠": 1500
+          }
+        },
+        {
+          "day": "周六",
+          "energy": 1510,
+          "protein": 33,
+          "fat": 42,
+          "carbs": 244,
+          "extra": {
+            "优质蛋白": 28,
+            "磷": 440,
+            "钾": 1080,
+            "钠": 1500
+          }
+        },
+        {
+          "day": "周日",
+          "energy": 1500,
+          "protein": 33,
+          "fat": 42,
+          "carbs": 244,
+          "extra": {
+            "优质蛋白": 28,
+            "磷": 430,
+            "钾": 1050,
+            "钠": 1500
+          }
+        }
       ],
       "weeklyAnalysis": [
         "全周日均能量约1501kcal，与目标1500kcal一致",
@@ -381,11 +1438,60 @@
         "全周日均磷摄入约446mg，与司维拉姆配合可有效控制血磷"
       ],
       "shoppingList": [
-        {"category": "蛋白质类（每周必买）", "items": ["鸡蛋: 14个", "额外蛋清: 盒装蛋清液 500ml", "鲈鱼: 1条（约500g），分4次用", "鸡胸肉: 200g", "猪瘦肉: 100g"]},
-        {"category": "蔬菜类（一周量）", "items": ["白菜: 1500g", "芹菜: 1000g", "黄瓜: 1000g", "茄子: 700g", "洋葱: 400g", "胡萝卜: 300g", "芦笋: 200g"]},
-        {"category": "水果类", "items": ["苹果: 5个（约1000g）", "梨: 3个（约600g）", "蓝莓: 200g", "草莓: 200g"]},
-        {"category": "主食类（耐储存）", "items": ["大米（精白）: 700g", "面条（精制）: 250g（干）", "粉丝/粉条: 250g（干）", "藕粉: 250g", "小米: 50g", "山药: 200g", "白糖: 50g"]},
-        {"category": "油脂与调味品", "items": ["橄榄油/茶籽油: 250ml/周", "芝麻油: 少量", "盐（普通碘盐）: <35g/周", "白醋: 适量", "生抽（低钠）: 少量", "姜葱: 适量"]}
+        {
+          "category": "蛋白质类（每周必买）",
+          "items": [
+            "鸡蛋: 14个",
+            "额外蛋清: 盒装蛋清液 500ml",
+            "鲈鱼: 1条（约500g），分4次用",
+            "鸡胸肉: 200g",
+            "猪瘦肉: 100g"
+          ]
+        },
+        {
+          "category": "蔬菜类（一周量）",
+          "items": [
+            "白菜: 1500g",
+            "芹菜: 1000g",
+            "黄瓜: 1000g",
+            "茄子: 700g",
+            "洋葱: 400g",
+            "胡萝卜: 300g",
+            "芦笋: 200g"
+          ]
+        },
+        {
+          "category": "水果类",
+          "items": [
+            "苹果: 5个（约1000g）",
+            "梨: 3个（约600g）",
+            "蓝莓: 200g",
+            "草莓: 200g"
+          ]
+        },
+        {
+          "category": "主食类（耐储存）",
+          "items": [
+            "大米（精白）: 700g",
+            "面条（精制）: 250g（干）",
+            "粉丝/粉条: 250g（干）",
+            "藕粉: 250g",
+            "小米: 50g",
+            "山药: 200g",
+            "白糖: 50g"
+          ]
+        },
+        {
+          "category": "油脂与调味品",
+          "items": [
+            "橄榄油/茶籽油: 250ml/周",
+            "芝麻油: 少量",
+            "盐（普通碘盐）: <35g/周",
+            "白醋: 适量",
+            "生抽（低钠）: 少量",
+            "姜葱: 适量"
+          ]
+        }
       ],
       "references": [
         "《中国慢性肾脏病营养治疗临床实践指南（2021版）》",
@@ -395,5 +1501,415 @@
         "中国食物成分表 标准版 第6版"
       ]
     }
-  ]
+  ],
+  "exercisePrescription": {
+    "date": "2026-04-02",
+    "safety": {
+      "evaluations": [
+        {
+          "item": "CKD G4期（eGFR 32）",
+          "status": "严重肾功能受损",
+          "safety": "高风险"
+        },
+        {
+          "item": "高血压2级（152/88 mmHg）",
+          "status": "血压控制不佳",
+          "safety": "高风险"
+        },
+        {
+          "item": "高钾血症（血钾5.2 mmol/L）",
+          "status": "轻度高钾",
+          "safety": "高风险"
+        },
+        {
+          "item": "中度贫血（Hb 98 g/L）",
+          "status": "携氧能力下降",
+          "safety": "中高风险"
+        },
+        {
+          "item": "低白蛋白血症（33 g/L）",
+          "status": "营养不良风险",
+          "safety": "中风险"
+        },
+        {
+          "item": "高磷血症（血磷1.65 mmol/L）",
+          "status": "钙磷代谢紊乱",
+          "safety": "中风险"
+        },
+        {
+          "item": "糖尿病前期（FBG 5.8, HbA1c 5.9）",
+          "status": "血糖偏高",
+          "safety": "低风险"
+        },
+        {
+          "item": "维生素D缺乏（15 ng/mL）",
+          "status": "骨密度风险",
+          "safety": "低风险"
+        },
+        {
+          "item": "年龄68岁",
+          "status": "老年人",
+          "safety": "中风险"
+        }
+      ],
+      "contraindications": [
+        "高强度有氧（快跑、HIIT、竞技运动）— 血钾急性升高风险、肾脏血流急剧减少",
+        "高冲击运动（跳绳、篮球、排球）— 肾性骨营养不良，骨折风险",
+        "等长收缩运动（平板支撑、靠墙静蹲>30秒）— 血压骤升风险",
+        "大重量力量训练（>3kg哑铃/器械）— 屏气致血压骤升、横纹肌溶解风险",
+        "高温运动（热瑜伽、桑拿后运动）— 脱水加重肾损伤、电解质紊乱",
+        "长时间耐力运动（>45分钟连续有氧）— 蛋白质消耗增加、血钾持续升高",
+        "登山/高原运动 — 缺氧加重贫血症状"
+      ],
+      "conclusion": "需在肾内科医生明确许可后方可开始运动计划，运动全程需严格限制强度和类型，建议初期在有陪伴条件下进行。"
+    },
+    "prescription": {
+      "type": "散步、室内踏步、固定自行车、太极拳",
+      "intensity": "低至中等强度，Borg 11-13分",
+      "frequency": "每周 5-7 天",
+      "duration": "每次 20-30 分钟",
+      "targetHR": "75-95 bpm",
+      "maxHR": 152
+    },
+    "aerobic": {
+      "exercises": "散步（平地）、室内踏步、固定自行车（无阻力/低阻力）、太极拳",
+      "intensity": "低至中等强度，Borg主观疲劳量表 11-13分，目标心率 75-95 bpm",
+      "frequency": "每周 5-7 天",
+      "duration": "每次 20-30 分钟，累计每周 150-180 分钟",
+      "notes": "初期从15分钟开始，逐步增至30分钟；避免单次超过45分钟"
+    },
+    "resistance": {
+      "exercises": "自身体重轻度抗阻（坐姿起立、扶墙俯卧撑、弹力带轻度阻力）、坐姿哑铃（0.5-1kg）",
+      "intensity": "Borg 11-13分，感觉很轻松到稍费力",
+      "frequency": "每周 2-3 次，非连续日",
+      "duration": "每次 15-20 分钟，每个动作 2 组 × 10-12 次",
+      "notes": "呼吸节奏均匀（发力时呼气，放松时吸气）；禁止屏气；禁止等长收缩"
+    },
+    "flexibility": {
+      "exercises": "坐姿拉伸、站立拉伸（扶支撑物）、太极拳/八段锦、坐姿瑜伽",
+      "intensity": "轻柔拉伸，无痛范围",
+      "frequency": "每天或至少每周 5 次",
+      "duration": "每次 10-15 分钟",
+      "notes": "维生素D缺乏+低血钙有骨折风险，拉伸需温和"
+    },
+    "phases": [
+      {
+        "name": "适应期",
+        "weeks": "第1-4周",
+        "days": [
+          {
+            "day": "周一",
+            "content": "散步（平地）+ 柔韧拉伸",
+            "duration": "25 min",
+            "intensity": "Borg 11"
+          },
+          {
+            "day": "周二",
+            "content": "固定自行车（低阻力）+ 坐姿轻度抗阻",
+            "duration": "30 min",
+            "intensity": "Borg 11-12"
+          },
+          {
+            "day": "周三",
+            "content": "太极拳/八段锦",
+            "duration": "20 min",
+            "intensity": "Borg 11"
+          },
+          {
+            "day": "周四",
+            "content": "散步（平地）+ 柔韧拉伸",
+            "duration": "25 min",
+            "intensity": "Borg 11"
+          },
+          {
+            "day": "周五",
+            "content": "室内踏步 + 坐姿轻度抗阻",
+            "duration": "30 min",
+            "intensity": "Borg 11-12"
+          },
+          {
+            "day": "周六",
+            "content": "散步（平地）+ 太极拳",
+            "duration": "35 min",
+            "intensity": "Borg 11-12"
+          },
+          {
+            "day": "周日",
+            "content": "主动恢复：轻柔拉伸 + 深呼吸练习",
+            "duration": "15 min",
+            "intensity": "Borg 9-10"
+          }
+        ],
+        "weeklyTotal": "有氧约 100-120 分钟，抗阻 2 次，柔韧性/平衡每天"
+      },
+      {
+        "name": "进阶期",
+        "weeks": "第5-12周",
+        "days": [
+          {
+            "day": "周一",
+            "content": "散步（平地，稍加快步速）+ 拉伸",
+            "duration": "35 min",
+            "intensity": "Borg 12"
+          },
+          {
+            "day": "周二",
+            "content": "固定自行车（低阻力）+ 坐姿轻度抗阻",
+            "duration": "35 min",
+            "intensity": "Borg 12-13"
+          },
+          {
+            "day": "周三",
+            "content": "太极拳/八段锦",
+            "duration": "25-30 min",
+            "intensity": "Borg 11-12"
+          },
+          {
+            "day": "周四",
+            "content": "散步 + 拉伸",
+            "duration": "35 min",
+            "intensity": "Borg 12"
+          },
+          {
+            "day": "周五",
+            "content": "室内踏步/散步 + 坐姿轻度抗阻",
+            "duration": "35 min",
+            "intensity": "Borg 12-13"
+          },
+          {
+            "day": "周六",
+            "content": "户外散步（公园，平路）+ 太极拳",
+            "duration": "45 min",
+            "intensity": "Borg 12-13"
+          },
+          {
+            "day": "周日",
+            "content": "主动恢复：拉伸 + 深呼吸 + 轻柔散步",
+            "duration": "15-20 min",
+            "intensity": "Borg 9-10"
+          }
+        ],
+        "weeklyTotal": "有氧约 145-165 分钟，抗阻 2 次，柔韧性/平衡每天"
+      },
+      {
+        "name": "维持期",
+        "weeks": "第13周起",
+        "days": [
+          {
+            "day": "周一",
+            "content": "散步/固定自行车 + 拉伸",
+            "duration": "35-40 min",
+            "intensity": "Borg 12-13"
+          },
+          {
+            "day": "周二",
+            "content": "散步/踏步 + 坐姿轻度抗阻",
+            "duration": "35-40 min",
+            "intensity": "Borg 12-13"
+          },
+          {
+            "day": "周三",
+            "content": "太极拳/八段锦",
+            "duration": "25-30 min",
+            "intensity": "Borg 11-12"
+          },
+          {
+            "day": "周四",
+            "content": "散步 + 拉伸",
+            "duration": "35 min",
+            "intensity": "Borg 12"
+          },
+          {
+            "day": "周五",
+            "content": "室内踏步/散步 + 坐姿轻度抗阻",
+            "duration": "35-40 min",
+            "intensity": "Borg 12-13"
+          },
+          {
+            "day": "周六",
+            "content": "户外散步（公园，平路）+ 太极拳",
+            "duration": "40-45 min",
+            "intensity": "Borg 12-13"
+          },
+          {
+            "day": "周日",
+            "content": "主动恢复：拉伸 + 深呼吸",
+            "duration": "15-20 min",
+            "intensity": "Borg 9-10"
+          }
+        ],
+        "weeklyTotal": "有氧 150-200 分钟，抗阻 2-3 次，柔韧性/平衡每天"
+      }
+    ],
+    "sessionFlow": [
+      "1. 运动前准备（5-10分钟）：测量血压（如条件允许）、确认当日感觉良好（无头晕、胸闷、心悸、明显乏力）、穿舒适运动鞋和宽松衣物、携带手机（紧急联系用）、饮水100-150ml（小口慢饮）、告知家人运动计划",
+      "2. 热身阶段（5-8分钟）：原地慢步2分钟、颈部缓慢旋转（左右各5次）、肩部环绕（前后各10次）、手腕脚踝环绕各10次、站立小腿拉伸（扶墙，每侧15秒）、大腿前侧拉伸（扶椅背，每侧15秒）",
+      "3. 主体运动（20-30分钟）：散步（平地）或固定自行车或太极拳，速度以能正常说话的节奏，每10分钟评估一次主观感受，运动中小口饮水（总量不超过200ml），如有任何不适立即停止",
+      "4. 整理活动（5-8分钟）：慢步2-3分钟（逐渐降低心率）、站立拉伸（全身主要肌群，每个动作保持15-20秒）、深呼吸3-5次（鼻吸口呼）",
+      "5. 运动后（5分钟）：休息坐下，饮水100-150ml，记录运动内容、时长、主观感受，如条件允许再次测量血压"
+    ],
+    "nutritionSynergy": {
+      "timing": [
+        {
+          "period": "运动前1-2小时",
+          "time": "可少量进食",
+          "note": "如半碗白粥或1片白面包，预防低血糖；避免空腹运动以防贫血相关的头晕"
+        },
+        {
+          "period": "运动前30分钟",
+          "time": "饮水100-150ml",
+          "note": "保证水合状态，但不过量（CKD需控水）"
+        },
+        {
+          "period": "运动中",
+          "time": "小口饮水，总量100-200ml",
+          "note": "防止脱水加重肾损伤"
+        },
+        {
+          "period": "运动后30分钟内",
+          "time": "不需额外加餐",
+          "note": "按正常饮食时间进餐，CKD低蛋白饮食下不宜额外补充蛋白"
+        },
+        {
+          "period": "运动后",
+          "time": "补铁药（琥珀酸亚铁）可在运动后餐后服用",
+          "note": "运动后血液循环加速，配合维C促进铁吸收"
+        }
+      ],
+      "strategies": [
+        {
+          "scenario": "禁止运动补剂",
+          "strategy": "蛋白粉、肌酸、电解质饮料、运动能量棒等全部禁止。CKD低蛋白饮食需严格33g/天"
+        },
+        {
+          "scenario": "禁止运动饮料",
+          "strategy": "市售运动饮料含钾、磷、糖均较高，不适合CKD G4期+高钾+高磷患者"
+        },
+        {
+          "scenario": "热量保障",
+          "strategy": "运动消耗约100-150 kcal/次（低强度30分钟），需在每日1500 kcal总量中预留"
+        },
+        {
+          "scenario": "避免运动后暴饮暴食",
+          "strategy": "运动后可能食欲增加，但仍需遵守33g蛋白质限制，可用藕粉冲泡或白糖水补充热量"
+        }
+      ],
+      "drugInteractions": [
+        {
+          "drug": "缬沙坦（ARB）",
+          "note": "可升高血钾，运动中血钾升高的叠加效应需警惕"
+        },
+        {
+          "drug": "碳酸氢钠片",
+          "note": "提供额外钠负荷，需注意水钠平衡"
+        }
+      ],
+      "energyBalance": "运动消耗约100-150 kcal/次（低强度30分钟），需在每日1500 kcal总量中预留，主要通过增加碳水（如藕粉、粉丝）补足，而非增加蛋白质"
+    },
+    "precautions": [
+      {
+        "category": "CKD G4期专属注意事项",
+        "items": [
+          "血钾监测: 运动开始前和开始后的第1个月，建议每周检测一次血钾；稳定后每月检测一次。如血钾>5.5 mmol/L，暂停运动计划并就医",
+          "避免脱水: CKD患者脱水可导致肾功能急剧恶化。运动中需少量多次饮水，避免大量出汗（高温天气避免户外运动）",
+          "避免横纹肌溶解: CKD患者严禁高强度运动，横纹肌溶解释放肌红蛋白可堵塞肾小管，造成急性肾损伤",
+          "肾功能监测: 每3个月复查eGFR、肌酐，如eGFR下降>5 mL/min或肌酐持续上升，需调整运动计划",
+          "蛋白尿观察: 如运动后尿液泡沫明显增多，需告知肾内科医生"
+        ]
+      },
+      {
+        "category": "高血压专属注意事项",
+        "items": [
+          "运动前血压检查: 如运动前血压>160/100 mmHg，当日暂停运动",
+          "避免等长收缩: 屏气用力可致收缩压瞬间升高至200 mmHg以上，极其危险",
+          "避免突然用力: 运动开始和结束要缓慢过渡，避免突然加速或减速",
+          "寒冷天气注意: 低温可致血管收缩、血压升高，冬季户外运动需保暖"
+        ]
+      },
+      {
+        "category": "贫血专属注意事项",
+        "items": [
+          "疲劳感监测: 如日常活动中频繁感到明显乏力、气短，应暂停运动增加休息",
+          "血红蛋白目标: Hb<90 g/L时仅做室内轻柔活动（坐姿拉伸），暂缓有氧运动计划",
+          "起立缓慢: 运动后或久坐后起立需缓慢，防止体位性低血压（贫血+降压药的叠加效应）"
+        ]
+      },
+      {
+        "category": "老年人专属注意事项",
+        "items": [
+          "防跌倒: 所有站立运动需靠近墙壁或坚固家具；户外散步需平坦路面；穿防滑鞋",
+          "平衡训练: 太极拳和八段锦是最佳选择，兼具平衡训练和柔韧性训练",
+          "骨密度保护: 维生素D缺乏+低血钙增加骨折风险，避免扭转和冲击动作",
+          "陪伴运动: 建议与家人或朋友一起运动，或携带手机保持通讯"
+        ]
+      },
+      {
+        "category": "环境与装备注意事项",
+        "items": [
+          "温度: 避免在>30度或<5度的环境中户外运动",
+          "时间: 建议上午9-10点或下午4-5点运动，避免清晨（血压晨峰）和晚间（影响睡眠）",
+          "鞋履: 穿有缓冲的平底运动鞋，避免穿拖鞋或皮鞋运动",
+          "地面: 选择平坦、不湿滑的路面或场地"
+        ]
+      }
+    ],
+    "stopConditions": [
+      "胸闷、胸痛或压迫感",
+      "心悸、心跳不规律",
+      "头晕、眼前发黑",
+      "恶心、呕吐",
+      "异常气短（无法正常说话）",
+      "肌肉无力、发麻",
+      "大量出汗或面色苍白",
+      "头痛加重",
+      "任何关节或骨骼疼痛",
+      "血钾>5.5 mmol/L",
+      "Hb<90 g/L",
+      "血压>160/100 mmHg",
+      "eGFR下降>5 mL/min（3个月内）",
+      "运动后蛋白尿明显增加"
+    ],
+    "progression": [
+      {
+        "phase": "阶段0: 运动前医学评估",
+        "time": "开始前",
+        "exerciseGoal": "完成全面医学评估",
+        "healthGoal": "确认运动安全性",
+        "assessment": "肾内科评估、心血管评估、血压评估、血钾评估、贫血评估、6分钟步行试验"
+      },
+      {
+        "phase": "适应期",
+        "time": "第1-4周",
+        "exerciseGoal": "有氧15-20分钟/次每周4-5天，抗阻15分钟/次每周2次",
+        "healthGoal": "建立运动习惯，连续2周运动后无不适",
+        "assessment": "运动后血压无异常升高，血钾稳定<5.5 mmol/L，Hb无下降趋势"
+      },
+      {
+        "phase": "进阶期",
+        "time": "第5-12周",
+        "exerciseGoal": "有氧25-30分钟/次每周5-6天，抗阻15-20分钟/次每周2-3次",
+        "healthGoal": "3个月复查eGFR稳定或改善，血压较基线下降或稳定",
+        "assessment": "血钾持续<5.5 mmol/L，Hb较基线改善或稳定，白蛋白稳定或改善"
+      },
+      {
+        "phase": "维持期",
+        "time": "第13周起",
+        "exerciseGoal": "有氧25-35分钟/次每周5-7天，抗阻15-20分钟/次每周2-3次",
+        "healthGoal": "长期坚持运动习惯，每月复查血钾血磷血红蛋白白蛋白",
+        "assessment": "每3个月复查eGFR血压全面评估，每6个月评估运动计划"
+      }
+    ],
+    "references": [
+      "Wilkinson TJ, et al. Clinical practice guideline exercise and lifestyle in chronic kidney disease. BMJ SEM. 2022",
+      "American Journal of Kidney Diseases. Exercise and Kidney Health: Core Curriculum 2026",
+      "国家卫生健康委《高血压营养和运动指导原则（2024年版）》",
+      "中华肾脏病杂志《中国慢性肾脏病患者高血压管理指南（2023年版）》",
+      "KDIGO CKD Clinical Practice Guideline (2024 Update)",
+      "National Kidney Foundation. Exercise and Chronic Kidney Disease",
+      "Kidney Care UK. Let's Get Active! Exercise for Kidney Patients",
+      "Healthline. How to Exercise Safely with Hyperkalemia",
+      "ESSA Position Statement on Exercise and Chronic Kidney Disease",
+      "JAHA. Hyperkalemia and Risks of Adverse Cardiovascular Outcomes in CKD. 2024"
+    ]
+  }
 }
