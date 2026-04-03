@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import type { PatientData } from '@/lib/types'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -11,8 +11,6 @@ import { MealPlanView } from '@/components/meal-plan'
 import { ExercisePlanView } from '@/components/exercise-plan'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
-const VIEW_CODE_KEY = 'patient_view_code_'
-
 interface PatientDetailGuardProps {
   patientId: string
 }
@@ -22,19 +20,8 @@ export function PatientDetailGuard({ patientId }: PatientDetailGuardProps) {
   const [code, setCode] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
-  const [initialCheckDone, setInitialCheckDone] = useState(false)
 
-  // Try to auto-verify with stored view code on mount
-  useEffect(() => {
-    const storedCode = localStorage.getItem(VIEW_CODE_KEY + patientId)
-    if (storedCode) {
-      setCode(storedCode)
-      verifyPatient(storedCode, false)
-    }
-    setInitialCheckDone(true)
-  }, [patientId])
-
-  async function verifyPatient(verifyCode: string, showError: boolean = true) {
+  async function verifyPatient(verifyCode: string) {
     setError('')
     setLoading(true)
 
@@ -48,17 +35,11 @@ export function PatientDetailGuard({ patientId }: PatientDetailGuardProps) {
       if (res.ok) {
         const data: PatientData = await res.json()
         setPatient(data)
-        localStorage.setItem(VIEW_CODE_KEY + patientId, verifyCode)
       } else {
-        if (showError) {
-          setError('查看码不正确')
-        }
-        localStorage.removeItem(VIEW_CODE_KEY + patientId)
+        setError('查看码不正确')
       }
     } catch {
-      if (showError) {
-        setError('网络错误，请重试')
-      }
+      setError('网络错误，请重试')
     } finally {
       setLoading(false)
     }
@@ -66,7 +47,7 @@ export function PatientDetailGuard({ patientId }: PatientDetailGuardProps) {
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    verifyPatient(code, true)
+    verifyPatient(code)
   }
 
   // Already verified — render full detail
@@ -78,7 +59,6 @@ export function PatientDetailGuard({ patientId }: PatientDetailGuardProps) {
             variant="ghost"
             size="sm"
             onClick={() => {
-              localStorage.removeItem(VIEW_CODE_KEY + patientId)
               setPatient(null)
               setCode('')
             }}
@@ -123,19 +103,6 @@ export function PatientDetailGuard({ patientId }: PatientDetailGuardProps) {
           )}
         </TabsContent>
         </Tabs>
-      </div>
-    )
-  }
-
-  // Show loading while checking stored view code
-  if (loading && !initialCheckDone) {
-    return (
-      <div className="flex items-center justify-center py-20">
-        <Card className="w-full max-w-sm">
-          <CardContent className="pt-6">
-            <p className="text-center text-muted-foreground">正在验证...</p>
-          </CardContent>
-        </Card>
       </div>
     )
   }
