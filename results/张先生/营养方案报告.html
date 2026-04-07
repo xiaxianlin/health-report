@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>营养方案报告 - 张先生</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 10mm 12mm;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 9pt;
+      line-height: 1.4;
+      color: #222;
+    }
+
+    /* 紧凑头部 */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #1a5fb4;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+    }
+    .header-left h1 {
+      font-size: 16pt;
+      color: #1a5fb4;
+      margin: 0;
+    }
+    .header-left .subtitle {
+      font-size: 8pt;
+      color: #666;
+    }
+    .header-right {
+      text-align: right;
+      font-size: 8pt;
+    }
+    .header-right .label { color: #666; }
+    .header-right .value { color: #1a5fb4; font-weight: bold; }
+
+    /* 紧凑分区 */
+    .section {
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #1a5fb4;
+      border-left: 3px solid #1a5fb4;
+      padding-left: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* 紧凑信息网格 */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px 12px;
+      font-size: 8pt;
+      margin-bottom: 8px;
+    }
+    .info-item {
+      display: flex;
+    }
+    .info-label {
+      color: #666;
+      min-width: 40px;
+    }
+    .info-value {
+      font-weight: 600;
+    }
+
+    /* 紧凑表格 */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 8pt;
+      margin-bottom: 6px;
+    }
+    th, td {
+      border: 0.5px solid #ccc;
+      padding: 3px 5px;
+      text-align: left;
+    }
+    th {
+      background: #e8f0fe;
+      font-weight: 600;
+      font-size: 7.5pt;
+    }
+    tr:nth-child(even) {
+      background: #fafafa;
+    }
+    td:first-child {
+      font-weight: 500;
+    }
+
+    /* 状态标签 */
+    .status {
+      display: inline-block;
+      padding: 1px 4px;
+      border-radius: 2px;
+      font-size: 7pt;
+      font-weight: bold;
+    }
+    .status-high { background: #fee2e2; color: #c53030; }
+    .status-low { background: #dbeafe; color: #1e40af; }
+    .status-normal { background: #d1fae5; color: #047857; }
+
+    /* 紧凑列表 */
+    .compact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .compact-list li {
+      padding: 2px 0;
+      padding-left: 12px;
+      position: relative;
+      font-size: 8pt;
+    }
+    .compact-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #1a5fb4;
+    }
+
+    /* 紧凑卡片 */
+    .card {
+      border: 0.5px solid #ddd;
+      border-radius: 4px;
+      padding: 6px;
+      margin-bottom: 6px;
+    }
+    .card-header {
+      font-weight: bold;
+      font-size: 9pt;
+      color: #1a5fb4;
+      margin-bottom: 4px;
+      border-bottom: 1px dashed #ddd;
+      padding-bottom: 2px;
+    }
+
+    /* 紧凑数值展示 */
+    .metrics-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .metric {
+      flex: 1;
+      background: linear-gradient(135deg, #1a5fb4 0%, #3b82f6 100%);
+      color: white;
+      padding: 6px;
+      border-radius: 4px;
+      text-align: center;
+    }
+    .metric-value {
+      font-size: 14pt;
+      font-weight: bold;
+    }
+    .metric-unit {
+      font-size: 7pt;
+      opacity: 0.9;
+    }
+    .metric-label {
+      font-size: 7pt;
+      margin-top: 2px;
+      opacity: 0.9;
+    }
+
+    /* 紧凑警告 */
+    .warning-inline {
+      background: #fff7ed;
+      border-left: 2px solid #f97316;
+      padding: 4px 6px;
+      margin: 4px 0;
+      font-size: 8pt;
+    }
+
+    /* 两列布局 */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    /* 紧凑餐次 */
+    .meal-card {
+      border: 0.5px solid #ddd;
+      padding: 4px 6px;
+      margin-bottom: 4px;
+      border-radius: 3px;
+    }
+    .meal-title {
+      font-weight: bold;
+      font-size: 8pt;
+      color: #b45309;
+      margin-bottom: 2px;
+    }
+    .meal-item {
+      font-size: 7.5pt;
+      padding: 1px 0;
+    }
+
+    /* 分页控制 */
+    .page-break {
+      page-break-before: always;
+    }
+    .avoid-break {
+      page-break-inside: avoid;
+    }
+
+    /* 页脚 */
+    .footer {
+      margin-top: 12px;
+      padding-top: 6px;
+      border-top: 1px solid #ddd;
+      font-size: 7pt;
+      color: #999;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <!-- 紧凑头部 -->
+  <div class="header">
+    <div class="header-left">
+      <h1>营养方案报告</h1>
+      <div class="subtitle">Personalized Nutrition Plan</div>
+    </div>
+    <div class="header-right">
+      <div><span class="label">患者：</span><span class="value">张先生</span></div>
+      <div><span class="label">日期：</span><span class="value">2026/4/7</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">一、健康档案</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">姓名：</span><span class="info-value">张先生</span></div>
+      <div class="info-item"><span class="info-label">性别：</span><span class="info-value">男</span></div>
+      <div class="info-item"><span class="info-label">年龄：</span><span class="info-value">52岁</span></div>
+      <div class="info-item"><span class="info-label">身高：</span><span class="info-value">172cm</span></div>
+      <div class="info-item"><span class="info-label">体重：</span><span class="info-value">82kg</span></div>
+      <div class="info-item"><span class="info-label">BMI：</span><span class="info-value">-</span></div>
+      <div class="info-item"><span class="info-label">血压：</span><span class="info-value">-</span></div>
+    </div>
+    
+  </div>
+
+  <div class="section avoid-break">
+    <div class="section-title">二、营养评估</div>
+    <div class="metrics-row">
+      
+      <div class="metric"><div class="metric-value">1968</div><div class="metric-unit">kcal</div><div class="metric-label">总消耗</div></div>
+      
+    </div>
+    <div style="font-size:8pt;">
+
+> 生成日期: 2026-03-30
+> 基于: 健康档案_2026-03-30.md（张先生）
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">BMR</strong>
+
+（Mifflin-St Jeor 公式）
+
+<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
+BMR = 10 × 82 + 6.25 × 172 - 5 × 52 + 5
+    = 820 + 1075 - 260 + 5
+    = 1640 kcal/天
+<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
+
+<strong style="color:#1a5fb4;">活动水平</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>当前活动水平: <strong>久坐</strong>（IT工程师，基本无规律运动）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>活动系数: <strong>1.2</strong></li>
+
+<strong style="color:#1a5fb4;">TDEE</strong>
+
+<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
+TDEE = 1640 × 1.2 = 1968 kcal/天
+<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
+
+<strong style="color:#1a5fb4;">目标能量</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>2型糖尿病 + 超重</strong>: 目标减重，每日减少 <strong>500 kcal</strong></li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>调整后目标能量</strong>: 1968 - 500 = <strong>1468 kcal → 取整 1500 kcal/天</strong></li>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">宏量营养素</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>营养素 </span><span style="color:#1a5fb4;font-weight:500;"> 目标值 </span></div> 占比 | 范围 | 来源 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>--------</span><span style="color:#1a5fb4;font-weight:500;">--------</span></div>------|------|------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>总能量</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>1500 kcal</strong> </span></div> 100% | 1400-1600 | 糖尿病减重: -500kcal |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>蛋白质</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>68 g</strong> </span></div> 18% | 60-75g (15-20%) | 糖尿病+肝病: 0.83g/kg |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>碳水化合物</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>169 g</strong> </span></div> 45% | 140-188g (40-50%) | 糖尿病: 低比例，低GI |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>脂肪</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>45 g</strong> </span></div> 27% | 40-50g (25-30%) | 高脂血症+脂肪肝: 低脂 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>膳食纤维</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>≥ 25 g</strong> </span></div> — | 25-35g | 糖尿病+高脂血症均要求 |
+
+<strong>脂肪细分:</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>脂肪类型 </span><span style="color:#1a5fb4;font-weight:500;"> 目标 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>---------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>饱和脂肪 </span><span style="color:#1a5fb4;font-weight:500;"> < 总能量7% → <12g </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>反式脂肪 </span><span style="color:#1a5fb4;font-weight:500;"> <strong>完全避免</strong> </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>胆固醇 </span><span style="color:#1a5fb4;font-weight:500;"> < 200 mg/天 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>Omega-3 </span><span style="color:#1a5fb4;font-weight:500;"> 每周至少2次深海鱼 </span></div>
+
+<strong style="color:#1a5fb4;">微量营养素重点</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>营养素 </span><span style="color:#1a5fb4;font-weight:500;"> 目标 </span></div> 原因 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>--------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>钠 </span><span style="color:#1a5fb4;font-weight:500;"> < 2000 mg（盐<5g） </span></div> 糖尿病+血压偏高 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>钾 </span><span style="color:#1a5fb4;font-weight:500;"> 3500 mg </span></div> 血压管理 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>钙 </span><span style="color:#1a5fb4;font-weight:500;"> 1000 mg </span></div> 一般需求 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>维生素B12 </span><span style="color:#1a5fb4;font-weight:500;"> 关注/补充 </span></div> 二甲双胍影响吸收 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>维生素C </span><span style="color:#1a5fb4;font-weight:500;"> 100 mg </span></div> 一般需求 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>铁 </span><span style="color:#1a5fb4;font-weight:500;"> 12 mg </span></div> 一般需求 |
+
+<strong style="color:#1a5fb4;">三餐能量分配</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>餐次 </span><span style="color:#1a5fb4;font-weight:500;"> 能量 </span></div> 占比 | 碳水 | 蛋白质 | 脂肪 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>------|------|--------|------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>早餐</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 450 kcal </span></div> 30% | 50g | 20g | 14g |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>午餐</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 600 kcal </span></div> 40% | 68g | 28g | 18g |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>晚餐</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 450 kcal </span></div> 30% | 50g | 20g | 14g |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>合计 </span><span style="color:#1a5fb4;font-weight:500;"> <strong>1500 kcal</strong> </span></div> 100% | <strong>168g</strong> | <strong>68g</strong> | <strong>46g</strong> |
+
+<strong>加餐（可选，如上午/下午感觉饥饿）:</strong>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>坚果10g（约60 kcal）或 低GI水果100g（约50 kcal）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>从正餐中扣除相应热量</li>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">来自糖尿病</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>以<strong>低GI食物</strong>为主（GI<55），碳水占总能量40-50%</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>避免精制糖、含糖饮料</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>主食以粗粮/全谷物替代精白米面</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>每餐碳水均匀分配，避免血糖波动</li>
+
+<strong style="color:#1a5fb4;">来自高脂血症</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>饱和脂肪 <7% 总能量</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>每周至少2次<strong>深海鱼</strong>（Omega-3）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>增加<strong>可溶性纤维</strong>（燕麦、大麦、豆类）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>完全避免反式脂肪</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>胆固醇 <200 mg/天</li>
+
+<strong style="color:#1a5fb4;">来自脂肪肝/肝功能异常</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>严格戒酒</strong></li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>低脂饮食，减少肝脏负担</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>适量优质蛋白，促进肝细胞修复</li>
+
+<strong style="color:#1a5fb4;">来自超重（减重目标）</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>每日 1500 kcal，制造500kcal缺口</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>目标: 3-6个月减重5-8kg</li>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">主食类（低GI）</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>燕麦、糙米、荞麦面、藜麦、全麦面包、红薯、山药</li>
+
+<strong style="color:#1a5fb4;">蛋白质类</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>鱼类（三文鱼、鲈鱼、鲭鱼 — 每周至少2次深海鱼）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>鸡胸肉（去皮）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>豆腐/豆制品</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>鸡蛋（每天1个）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>低脂牛奶/酸奶</li>
+
+<strong style="color:#1a5fb4;">蔬菜类</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>绿叶蔬菜（菠菜、西兰花、芹菜）— 每天至少300g</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>番茄、黄瓜、茄子、芦笋</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>洋葱、胡萝卜</li>
+
+<strong style="color:#1a5fb4;">水果类（低GI）</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>苹果、梨、柚子、蓝莓、草莓、猕猴桃 — 每天200g</li>
+
+<strong style="color:#1a5fb4;">脂肪来源</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>橄榄油、茶籽油（烹饪用油，每天25-30g）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>核桃、杏仁（每天10g）</li>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>食物 </span><span style="color:#1a5fb4;font-weight:500;"> 原因 </span></div> 严重程度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>---------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>含糖饮料、果汁 </span><span style="color:#1a5fb4;font-weight:500;"> 糖尿病 </span></div> <strong>完全禁止</strong> |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>白米饭、白面条、白面包 </span><span style="color:#1a5fb4;font-weight:500;"> 糖尿病（高GI） </span></div> <strong>严格限制</strong>（每日<1两） |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>糕点、饼干、糖果 </span><span style="color:#1a5fb4;font-weight:500;"> 高脂血症+糖尿病 </span></div> <strong>完全禁止</strong> |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>油炸食品 </span><span style="color:#1a5fb4;font-weight:500;"> 高脂血症+脂肪肝 </span></div> <strong>完全禁止</strong> |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>动物内脏 </span><span style="color:#1a5fb4;font-weight:500;"> 高脂血症（高胆固醇） </span></div> <strong>完全禁止</strong> |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>黄油、猪油 </span><span style="color:#1a5fb4;font-weight:500;"> 高脂血症（高饱和脂肪） </span></div> <strong>完全禁止</strong> |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>酒精 </span><span style="color:#1a5fb4;font-weight:500;"> 糖尿病+脂肪肝 </span></div> <strong>完全禁止</strong> |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>西柚/葡萄柚 </span><span style="color:#1a5fb4;font-weight:500;"> 他汀类药物交互 </span></div> <strong>完全禁止</strong> |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>加工肉类（火腿、培根） </span><span style="color:#1a5fb4;font-weight:500;"> 高钠+高脂 </span></div> <strong>严格限制</strong> |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>高GI水果（西瓜、菠萝） </span><span style="color:#1a5fb4;font-weight:500;"> 糖尿病 </span></div> <strong>限制</strong>（少量） |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>腌制食品 </span><span style="color:#1a5fb4;font-weight:500;"> 高钠 </span></div> <strong>限制</strong> |
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>药物 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>二甲双胍</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 长期服用可能影响维生素B12吸收，建议每年监测B12水平，多摄入富含B12的食物（鱼类、蛋类）或考虑补充剂 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>阿托伐他汀</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>严禁食用西柚/葡萄柚</strong>（影响药物代谢，增加副作用风险）。需定时服药（晚间） </span></div>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+本营养评估基于以下指南和公式综合生成：
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>Mifflin-St Jeor 基础代谢公式</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>中国2型糖尿病膳食指南</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>中国成人血脂异常防治指南</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>中国超重/肥胖医学营养治疗指南</li>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+1. <strong>戒酒是第一优先级</strong> — 同时有利于血糖、血脂、脂肪肝三个方向
+2. <strong>主食替换是关键动作</strong> — 白米饭→糙米/杂粮饭，白面→荞麦面/全麦面
+3. <strong>烹饪方式改变</strong> — 从外卖重油重盐改为蒸/煮/炖/凉拌
+4. <strong>定时定量三餐</strong> — 每天固定时间进餐，每餐碳水份量稳定，避免血糖剧烈波动
+5. <strong>二甲双胍与进餐</strong> — 随餐服用，减少胃肠道不适
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+> <strong>免责声明</strong>: 本营养评估仅供参考，具体治疗方案请遵医嘱。张先生为新发现2型糖尿病患者，建议在医生和注册营养师指导下进行饮食管理。
+</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">三、配餐方案</div>
+<div class="avoid-break"><strong>周一</strong></div><div class="avoid-break"><strong>周二</strong></div><div class="avoid-break"><strong>周三</strong></div><div style="font-size:8pt;color:#666;text-align:center;margin-top:4px;">... 共 7 天方案，详见完整文档 ...</div></div>
+  <div class="section avoid-break">
+    <div class="section-title">四、运动处方</div>
+    <div style="font-size:8pt;">
+
+> <strong>患者</strong>: 张先生 | <strong>性别</strong>: 男 | <strong>年龄</strong>: 52岁
+> <strong>生成日期</strong>: 2026-04-02
+> <strong>基于</strong>: 健康档案（2026-03-30）+ 营养评估（2026-03-30）
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">1.1 运动前医学评估</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>评估项目 </span><span style="color:#1a5fb4;font-weight:500;"> 当前状态 </span></div> 运动安全性 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>---------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>-----------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>空腹血糖 </span><span style="color:#1a5fb4;font-weight:500;"> 7.8 mmol/L </span></div> 可运动（<16.7 mmol/L 无绝对禁忌） |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>血压 </span><span style="color:#1a5fb4;font-weight:500;"> 138/86 mmHg（正常高值） </span></div> 可运动（<160/100 mmHg 无禁忌） |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>ALT </span><span style="color:#1a5fb4;font-weight:500;"> 52 U/L（轻度升高，<2倍正常上限40×2=80） </span></div> 可运动，但需限制为中低强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>心血管症状 </span><span style="color:#1a5fb4;font-weight:500;"> 无胸闷、胸痛等 </span></div> 安全 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>糖尿病急性并发症 </span><span style="color:#1a5fb4;font-weight:500;"> 无酮症酸中毒等 </span></div> 安全 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>视网膜病变 </span><span style="color:#1a5fb4;font-weight:500;"> 未提及 </span></div> 建议运动前做眼底检查 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>关节/骨骼问题 </span><span style="color:#1a5fb4;font-weight:500;"> 未提及 </span></div> 安全 |
+
+<strong style="color:#1a5fb4;">1.2 运动禁忌症筛查</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>绝对禁忌</strong>: 无（血糖 < 16.7 mmol/L，无急性并发症）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>相对禁忌/需注意</strong>:</li>
+  - ALT轻度升高（52 U/L），需<strong>避免高强度运动</strong>，以防进一步加重肝脏负担
+  - 服用二甲双胍，需警惕运动中低血糖（虽然二甲双胍单药低血糖风险较低）
+  - 服用阿托伐他汀，需注意肌肉酸痛/乏力，警惕横纹肌溶解
+  - 新发现的2型糖尿病，运动前建议做<strong>眼底检查</strong>排除增殖期视网膜病变
+
+<strong style="color:#1a5fb4;">1.3 安全性总评</strong>
+
+> <strong>结论: 可以运动，但需从中低强度起步，循序渐进。</strong>
+>
+> 张先生目前无明显运动绝对禁忌，但合并2型糖尿病、高脂血症、脂肪肝伴ALT轻度升高、超重等多种代谢问题，运动处方需兼顾降糖、降脂、护肝、减重多重目标，以<strong>中低强度有氧运动</strong>为核心，逐步增加运动量。
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">2.1 处方总则</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>项目 </span><span style="color:#1a5fb4;font-weight:500;"> 处方内容 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动类型</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 有氧运动为主 + 轻度抗阻训练为辅 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动强度</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 中低强度（40%-60% 最大心率），RPE 11-13（有点累到稍累） </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动频率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每周 5-7 天（有氧），每周 2-3 天（抗阻） </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动时长</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每次 30-45 分钟，逐步增至 45-60 分钟 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>目标心率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 68-102 次/分钟（最大心率 = 220 - 52 = 168 bpm；40%-60%） </span></div>
+
+<strong>说明</strong>:
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>最大心率</strong>: 220 - 52 = 168 bpm</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>靶心率范围</strong>: 168 x 40% ~ 168 x 60% = <strong>67 ~ 101 bpm</strong></li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>鉴于ALT轻度升高，初期控制在 <strong>40%-50% 最大心率（67-84 bpm）</strong>，2-4周后视情况逐步提升</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>建议配备心率手环/手表监测运动心率</li>
+
+<strong style="color:#1a5fb4;">2.2 有氧运动处方</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>参数 </span><span style="color:#1a5fb4;font-weight:500;"> 内容 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>推荐项目</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走（首选）、慢跑（后期）、游泳、骑自行车、椭圆机 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>强度</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走: 4.5-6.0 km/h；心率达到靶心率范围 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>频率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每周至少 5 天 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>时长</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每次 30 分钟起，逐步增至 40-50 分钟 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>每周总量</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 目标 ≥150 分钟/周（ADA推荐），逐步增至 200-300 分钟/周 </span></div>
+
+<strong style="color:#1a5fb4;">2.3 抗阻训练处方</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>参数 </span><span style="color:#1a5fb4;font-weight:500;"> 内容 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>推荐项目</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 弹力带训练、自重训练（靠墙俯卧撑、椅子深蹲、平板支撑）、轻哑铃（1-3 kg） </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>强度</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 低至中等负荷，每组 10-15 次，RPE 12-13 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>频率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每周 2-3 次（非连续日） </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>时长</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每次 15-20 分钟 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>注意</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 肝功能异常期间避免大重量训练，以轻度抗阻为主 </span></div>
+
+<strong style="color:#1a5fb4;">2.4 柔韧性 & 传统运动</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>参数 </span><span style="color:#1a5fb4;font-weight:500;"> 内容 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>推荐项目</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 八段锦、太极拳、拉伸运动 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>频率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每日可做（作为热身或放松环节） </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>时长</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每次 10-15 分钟 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>依据</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 《中国2型糖尿病运动治疗指南（2024版）》正式推荐太极拳和八段锦 </span></div>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">第一阶段（第1-4周）：适应期</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>星期 </span><span style="color:#1a5fb4;font-weight:500;"> 运动内容 </span></div> 时长 | 强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>------|------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周一</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 八段锦（热身/放松） </span></div> 30 min | 低强度（RPE 11） |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周二</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 弹力带上肢训练 </span></div> 30 min + 15 min | 低-中强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周三</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 拉伸 </span></div> 30 min | 低强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周四</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 弹力带下肢训练（椅子深蹲） </span></div> 30 min + 15 min | 低-中强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周五</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 八段锦 </span></div> 30 min | 低强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周六</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 骑自行车或游泳（交替） </span></div> 30-40 min | 低-中强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周日</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 休息日（可做15 min拉伸或散步） </span></div> 15 min | 极低强度 |
+
+<strong>第一周日均有氧运动量</strong>: 约 150-180 分钟
+
+<strong style="color:#1a5fb4;">第二阶段（第5-12周）：进阶期</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>星期 </span><span style="color:#1a5fb4;font-weight:500;"> 运动内容 </span></div> 时长 | 强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>------|------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周一</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走（加速）+ 八段锦 </span></div> 40 min | 中低强度（RPE 12） |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周二</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走/慢跑交替 + 自重抗阻 </span></div> 40 min + 20 min | 中低强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周三</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 骑自行车或游泳 </span></div> 40 min | 中低强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周四</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 弹力带全身训练 </span></div> 40 min + 20 min | 中低强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周五</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 太极拳 </span></div> 40 min | 中低强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周六</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 慢跑（走跑交替）或游泳 </span></div> 40-50 min | 中低-中等强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周日</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 休息日（散步 + 拉伸） </span></div> 20 min | 极低强度 |
+
+<strong>第二阶段周均有氧运动量</strong>: 约 200-250 分钟
+
+<strong style="color:#1a5fb4;">第三阶段（第13-24周）：巩固期</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>星期 </span><span style="color:#1a5fb4;font-weight:500;"> 运动内容 </span></div> 时长 | 强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>------|------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周一</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走/慢跑 + 八段锦 </span></div> 45 min | 中等强度（RPE 13） |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周二</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 慢跑 + 抗阻训练（哑铃/弹力带） </span></div> 40 min + 20 min | 中等强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周三</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 游泳或骑自行车 </span></div> 45 min | 中等强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周四</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走/慢跑 + 抗阻训练 </span></div> 40 min + 20 min | 中等强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周五</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 太极拳 </span></div> 45 min | 中低-中等强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周六</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 户外徒步/游泳/骑行（选择一项） </span></div> 50-60 min | 中等强度 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周日</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 休息日（散步 + 拉伸） </span></div> 20-30 min | 极低强度 |
+
+<strong>第三阶段周均有氧运动量</strong>: 约 250-300 分钟
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
+┌─────────────────────────────────────────────┐
+│           单次运动标准流程                     │
+├─────────────────────────────────────────────┤
+│                                             │
+│  1. 运动前准备（5 分钟）                      │
+│     - 测量血糖（确认 5.6-16.7 mmol/L）       │
+│     - 检查足部（穿合适的运动鞋袜）             │
+│     - 准备含糖零食/葡萄糖片                   │
+│     - 佩戴心率监测设备                       │
+│                                             │
+│  2. 热身阶段（5-10 分钟）                     │
+│     - 慢速步行 3-5 分钟                      │
+│     - 动态拉伸（关节活动度练习）              │
+│     - 八段锦预备式 2-3 分钟                   │
+│                                             │
+│  3. 主体运动（20-40 分钟）                    │
+│     - 有氧运动（快走/骑行/游泳等）            │
+│     - 维持靶心率: 67-101 bpm                │
+│     - 每 10 分钟感知一次身体状态              │
+│                                             │
+│  4. 整理放松（5-10 分钟）                     │
+│     - 减速慢走 3-5 分钟                      │
+│     - 静态拉伸（下肢、腰背为主）              │
+│     - 深呼吸放松                            │
+│                                             │
+│  5. 运动后监测（5 分钟）                      │
+│     - 测量运动后血糖                         │
+│     - 记录运动日志（时间、强度、感受）         │
+│     - 如延迟用餐，适量补充碳水                │
+│                                             │
+└─────────────────────────────────────────────┘
+<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">5.1 运动时间与进餐安排</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>运动时段 </span><span style="color:#1a5fb4;font-weight:500;"> 推荐时间 </span></div> 饮食配合 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>---------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>---------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>最佳时段</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 餐后 60-90 分钟开始 </span></div> 血糖处于上升期，运动可降低餐后血糖峰值 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>早餐后</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 早餐后 1 小时（约 8:00-9:00） </span></div> 已摄入 50g 碳水，能量充足 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>午餐后</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 午餐后 1 小时（约 13:30-14:30） </span></div> 避免最热时段（夏季注意防暑） |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>晚餐后</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 晚餐后 1 小时（约 19:30-20:30） </span></div> 需在睡前 2 小时完成，避免影响睡眠 |
+
+<strong style="color:#1a5fb4;">5.2 运动前后营养策略</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>场景 </span><span style="color:#1a5fb4;font-weight:500;"> 策略 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动前血糖 5.6-13.9 mmol/L</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 可正常运动，无需额外补充 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动前血糖 < 5.6 mmol/L</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 运动前补充 15-30g 碳水（如1片全麦面包 + 1个小苹果） </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动前血糖 > 13.9 mmol/L</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 检测尿酮体，如有酮体则暂停运动 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动后 30 分钟内</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 适量补充蛋白质（如1杯低脂牛奶/1个鸡蛋），促进恢复 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>长时间运动（>45 min）后</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 运动后补充少量碳水 + 蛋白质（如200ml低脂酸奶 + 10g坚果） </span></div>
+
+<strong style="color:#1a5fb4;">5.3 运动与降糖药物协同</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>药物 </span><span style="color:#1a5fb4;font-weight:500;"> 协同注意 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>二甲双胍缓释片（500mg bid）</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 单独使用低血糖风险较低，但仍建议运动前监测血糖；避免在药物达峰时间运动；晨练结合餐前二甲双胍为较优策略 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>阿托伐他汀钙片（20mg qn）</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 注意运动中是否出现异常肌肉酸痛、乏力，如出现需及时就医排查横纹肌溶解 </span></div>
+
+<strong style="color:#1a5fb4;">5.4 运动与减重目标协同</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>营养评估设定每日 1500 kcal（减少 500 kcal 缺口）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>运动额外消耗: 每次快走 30 分钟约消耗 150-200 kcal</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>每周运动消耗: 约 750-1500 kcal</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>综合效果</strong>: 每日总热量缺口约 600-700 kcal，预计每周减重 0.5-0.7 kg</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>3 个月目标</strong>: 减重 5-8 kg（BMI 从 27.7 降至约 24-25）</li>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">6.1 糖尿病相关注意</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>编号 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D1 </span><span style="color:#1a5fb4;font-weight:500;"> 运动前后<strong>必须监测血糖</strong>，尤其是初期 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D2 </span><span style="color:#1a5fb4;font-weight:500;"> 随身携带<strong>含糖食品</strong>（葡萄糖片、糖块、饼干），预防低血糖 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D3 </span><span style="color:#1a5fb4;font-weight:500;"> 随身携带<strong>急救卡</strong>（注明姓名、疾病、用药、紧急联系人） </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D4 </span><span style="color:#1a5fb4;font-weight:500;"> 运动时间选择<strong>餐后 1-2 小时</strong>，避免空腹运动 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D5 </span><span style="color:#1a5fb4;font-weight:500;"> 穿着合适的<strong>运动鞋和棉袜</strong>，运动后检查足部有无损伤 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D6 </span><span style="color:#1a5fb4;font-weight:500;"> 如出现头晕、心慌、出冷汗、手抖等低血糖症状，<strong>立即停止运动</strong>，补充 15-20g 葡萄糖 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D7 </span><span style="color:#1a5fb4;font-weight:500;"> 胰岛素/药物作用峰值时间（服药后 1-2 小时）<strong>避免高强度运动</strong> </span></div>
+
+<strong style="color:#1a5fb4;">6.2 肝功能相关注意</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>编号 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>L1 </span><span style="color:#1a5fb4;font-weight:500;"> ALT 52 U/L 为轻度升高，<strong>严格避免高强度运动</strong>（高强度运动本身可致ALT升高） </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>L2 </span><span style="color:#1a5fb4;font-weight:500;"> 每 4-6 周复查肝功能，ALT 正常或下降后方可逐步增加运动强度 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>L3 </span><span style="color:#1a5fb4;font-weight:500;"> 运动<strong>不宜过度疲劳</strong>，感觉明显疲倦时应停止 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>L4 </span><span style="color:#1a5fb4;font-weight:500;"> <strong>严格戒酒</strong>（酒精 + 运动 + 脂肪肝 = 三重肝脏负担） </span></div>
+
+<strong style="color:#1a5fb4;">6.3 高脂血症相关注意</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>编号 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>H1 </span><span style="color:#1a5fb4;font-weight:500;"> 他汀类药物使用者需关注<strong>肌肉酸痛</strong>，如出现全身性肌肉疼痛/无力需立即就医 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>H2 </span><span style="color:#1a5fb4;font-weight:500;"> 运动是改善 HDL-C（目前偏低: 0.92 mmol/L）的有效手段，坚持有氧运动 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>H3 </span><span style="color:#1a5fb4;font-weight:500;"> 避免突然的高强度运动，防止心血管意外 </span></div>
+
+<strong style="color:#1a5fb4;">6.4 超重/关节保护</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>编号 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>W1 </span><span style="color:#1a5fb4;font-weight:500;"> 体重 82 kg，BMI 27.7，注意<strong>保护膝关节</strong> </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>W2 </span><span style="color:#1a5fb4;font-weight:500;"> 初期以快走、游泳、骑行为主，<strong>避免跑跳类高冲击运动</strong> </span></div>
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>W3 </span><span style="color:#1a5fb4;font-weight:500;"> 运动鞋选择有良好缓冲的款式，减少关节压力 </span></div>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+<strong style="color:#1a5fb4;">总体路线图（24 周）</strong>
+
+<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
+第1-4周        第5-12周       第13-24周
+(适应期)       (进阶期)       (巩固期)
+  |              |              |
+  v              v              v
+快走为主      快走+慢跑      慢跑为主
+30min/次      40min/次       45-50min/次
+3-4次/周      5-6次/周       5-7次/周
+低强度        中低强度        中等强度
+RPE 11        RPE 12         RPE 13
+心率 67-84    心率 75-95     心率 84-101
+弹力带入门    弹力带进阶      哑铃/弹力带
+15min/次      20min/次       20-25min/次
+150min/周     200min/周      250-300min/周
+<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
+
+<strong style="color:#1a5fb4;">各阶段目标与评估节点</strong>
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>阶段 </span><span style="color:#1a5fb4;font-weight:500;"> 时间 </span></div> 运动目标 | 健康目标 | 评估 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>---------|---------|------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>适应期</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 第1-4周 </span></div> 建立运动习惯，快走30min/次，每周5天 | 适应运动节奏，无不适 | 第4周末评估: 运动耐受性、血糖变化 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>进阶期</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 第5-12周 </span></div> 快走+慢跑交替，延长至40min，加入抗阻 | 体重下降2-3kg，血糖改善 | 第8周复查: 空腹血糖、HbA1c、ALT、血脂 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>巩固期</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 第13-24周 </span></div> 稳定运动习惯，达到250-300min/周 | 体重共降5-8kg，血糖血脂达标 | 第12/24周复查: 全面指标 |
+
+<strong style="color:#1a5fb4;">停止运动并就医的情况</strong>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>血糖 > 16.7 mmol/L 或 < 3.9 mmol/L</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>出现胸痛、胸闷、心悸、气短</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>异常肌肉疼痛（全身性、持续不缓解）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>关节疼痛无法缓解</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>ALT 升高超过正常上限 2 倍（> 80 U/L）</li>
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>视力突然变化（需排查视网膜病变）</li>
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+建议张先生每次运动后记录以下信息，便于医生/运动治疗师评估调整:
+
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>日期 </span><span style="color:#1a5fb4;font-weight:500;"> 运动类型 </span></div> 时长 | 心率 | 运动前血糖 | 运动后血糖 | 主观感受(RPE) | 备注 |
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>------|------|-----------|-----------|-------------|------|
+<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>/ / </span><span style="color:#1a5fb4;font-weight:500;"> </span></div> min | bpm | mmol/L | mmol/L | 6-20 | |
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+1. <strong>《中国2型糖尿病运动治疗指南（2024版）》</strong> — 中华医学会糖尿病学分会. 推荐有氧运动每周 >= 150 分钟 + 抗阻训练每周 2 次；创新性融入太极拳和八段锦等中国特色运动形式。[查看详情](https://www.chinagp.net/CN/news/folder.do?folderId=8)
+
+2. <strong>《中国T2DM成人患者身体活动与运动治疗临床指南》</strong> — 提出34条推荐意见，涵盖运动前评估、通用运动处方及特殊人群运动策略。[查看详情](https://www.cardio-km.com/index/article/detail?id=15917)
+
+3. <strong>2026年ADA糖尿病医学诊疗标准</strong> — 美国糖尿病协会最新诊疗标准。[查看详情](https://www.idiabetes.com.cn/index/article/detail?id=16005)
+
+4. <strong>《临床运动处方实践专家共识（2025）》</strong> — 国家体育总局. 初始运动强度50%-70%预计最大心率，进阶至65%-80%。[查看详情](https://www.sport.gov.cn/n20001280/n20001265/n20066978/c29136918/content.html)
+
+5. <strong>《中国超重和肥胖人群运动处方指南（2025）》</strong> — 中国体育科学学会/中国营养学会. 有氧运动改善血脂（TC、TG）等代谢指标。[查看原文](https://tykx.xml-journal.net/cn/article/pdf/preview/10.16469/J.css.2025KX085.pdf)
+
+6. <strong>《体重管理指导原则（2024年版）》</strong> — 国家卫生健康委员会. 最佳强度为最大脂肪氧化强度运动，时间从30分钟逐渐增至60-120分钟。[查看详情](https://www.nhc.gov.cn/ylyjs/zcwj/202412/75cb79c171c94def9e768193e65484f7/files/1736390749000_59785.pdf)
+
+7. <strong>运动干预对代谢功能障碍相关脂肪性肝病患者的影响</strong> — 肝酶异常者优先有氧运动，血脂异常者有氧和阻力运动均可考虑。[查看详情](https://pdf.hanspub.org/acm_8105809.pdf)
+
+8. <strong>北京市卫生健康委员会 — 糖友运动"八项注意"</strong> — 随身携带急救卡及糖块、饼干，热身5-10分钟。[查看详情](https://wjw.beijing.gov.cn/bmfw_20143/jkzs/jbzs/201912/t20191217_1250576.html)
+
+9. <strong>晨练与餐前二甲双胍: 优化2型糖尿病患者的血糖管理</strong> — 晨练结合餐前二甲双胍服用可优化全天血糖水平。[查看详情](https://m.cmt.com.cn/detail/1467368.html)
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+> <strong>本运动处方仅供参考，不能替代专业医疗建议。</strong>
+>
+> 1. 张先生为新发现的2型糖尿病患者，运动前应完成全面的心血管风险评估（包括运动负荷试验），并由医生确认运动安全性。
+> 2. 建议在<strong>内分泌科医生</strong>和<strong>运动医学/康复科专业人员的指导下</strong>开始运动计划。
+> 3. 本处方中的运动强度、频率、时长为基于当前检查结果的一般性建议，实际运动方案需根据运动后血糖、肝功能、血脂等指标的动态变化进行个体化调整。
+> 4. 如运动过程中出现任何不适（胸痛、头晕、异常肌肉疼痛、关节疼痛等），应<strong>立即停止运动</strong>并及时就医。
+> 5. 运动处方需与营养方案、药物治疗方案<strong>协同调整</strong>，不可擅自更改。
+> 6. 本文档不构成任何医患关系，对因使用本文档信息而导致的任何直接或间接损失不承担责任。
+
+<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
+
+> 生成工具: Claude Code | 运动医学顾问模块
+> 生成日期: 2026-04-02
+</div>
+  </div>
+
+  <div class="footer">
+    本报告由 AI 辅助生成，仅供参考，不构成医疗建议。如有疑问请咨询专业医生。
+  </div>
+</body>
+</html>

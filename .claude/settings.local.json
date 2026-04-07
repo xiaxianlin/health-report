@@ -86,7 +86,8 @@
       "Bash(curl:*)",
       "Bash(git ls-tree:*)",
       "Bash(git config:*)",
-      "Bash(pnpm install:*)"
+      "Bash(pnpm install:*)",
+      "Bash(npx playwright:*)"
     ]
   }
 }

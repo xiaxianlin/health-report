@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * PDF 报告导出脚本
- * 将 Markdown 营养方案转换为 PDF 报告
+ * PDF 报告导出脚本 - 紧凑版
+ * 将 Markdown 营养方案转换为高密度 PDF 报告
  */
 
 const fs = require('fs').promises;
@@ -18,11 +18,46 @@ async function parseMarkdown(filePath) {
   }
 }
 
-// 生成 HTML 报告
-function generateHTML(patientName, data) {
+// 提取关键数据
+function extractHealthProfile(content) {
+  const data = {
+    name: '', gender: '', age: '', height: '', weight: '', bmi: '',
+    bloodPressure: '', diagnoses: [], medications: [], labResults: []
+  };
+
+  // 提取基本信息
+  const nameMatch = content.match(/姓名[:：]\s*(.+)/);
+  if (nameMatch) data.name = nameMatch[1].trim();
+
+  const genderMatch = content.match(/性别[:：]\s*(.+)/);
+  if (genderMatch) data.gender = genderMatch[1].trim();
+
+  const ageMatch = content.match(/年龄[:：]\s*(\d+)/);
+  if (ageMatch) data.age = ageMatch[1];
+
+  const heightMatch = content.match(/身高[:：]\s*(\d+)/);
+  if (heightMatch) data.height = heightMatch[1];
+
+  const weightMatch = content.match(/体重[:：]\s*(\d+)/);
+  if (weightMatch) data.weight = weightMatch[1];
+
+  const bmiMatch = content.match(/BMI[:：]\s*([\d.]+)/);
+  if (bmiMatch) data.bmi = bmiMatch[1];
+
+  // 提取诊断
+  const diagnosesSection = content.match(/## 诊断[\s\S]*?(?=##|$)/);
+  if (diagnosesSection) {
+    data.diagnoses = diagnosesSection[0].match(/^-\s*(.+)/gm)?.map(s => s.replace(/^-\s*/, '')) || [];
+  }
+
+  return data;
+}
+
+// 紧凑 HTML 生成
+function generateCompactHTML(patientName, data) {
   const today = new Date().toLocaleDateString('zh-CN');
 
-  return `<!DOCTYPE html>
+  let html = `<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -30,320 +65,370 @@ function generateHTML(patientName, data) {
   <style>
     @page {
       size: A4;
-      margin: 15mm 20mm;
+      margin: 10mm 12mm;
     }
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
-      font-size: 11pt;
-      line-height: 1.6;
-      color: #333;
-      margin: 0;
-      padding: 0;
+      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 9pt;
+      line-height: 1.4;
+      color: #222;
     }
-    .cover {
-      page-break-after: always;
-      text-align: center;
-      padding-top: 120px;
-      min-height: 100vh;
-    }
-    .cover h1 {
-      font-size: 32pt;
-      color: #1a5fb4;
-      margin-bottom: 60px;
-      font-weight: 600;
-    }
-    .cover .subtitle {
-      font-size: 16pt;
-      color: #666;
-      margin-bottom: 80px;
-    }
-    .cover .info-box {
-      display: inline-block;
-      text-align: left;
-      background: #f8f9fa;
-      padding: 40px 60px;
-      border-radius: 8px;
-      border-left: 4px solid #1a5fb4;
-    }
-    .cover .info-box p {
-      font-size: 14pt;
-      color: #444;
-      margin: 12px 0;
-      line-height: 1.8;
-    }
-    .cover .info-box .label {
-      color: #666;
-      display: inline-block;
-      width: 100px;
-    }
-    .cover .info-box .value {
-      color: #1a5fb4;
-      font-weight: 600;
-    }
-    h2 {
-      color: #1a5fb4;
+
+    /* 紧凑头部 */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       border-bottom: 2px solid #1a5fb4;
-      padding-bottom: 10px;
-      margin-top: 40px;
-      font-size: 18pt;
-      page-break-after: avoid;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
     }
-    h3 {
-      color: #4a5568;
-      margin-top: 25px;
-      font-size: 14pt;
-      page-break-after: avoid;
+    .header-left h1 {
+      font-size: 16pt;
+      color: #1a5fb4;
+      margin: 0;
     }
+    .header-left .subtitle {
+      font-size: 8pt;
+      color: #666;
+    }
+    .header-right {
+      text-align: right;
+      font-size: 8pt;
+    }
+    .header-right .label { color: #666; }
+    .header-right .value { color: #1a5fb4; font-weight: bold; }
+
+    /* 紧凑分区 */
+    .section {
+      margin-bottom: 10px;
+    }
+    .section-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #1a5fb4;
+      border-left: 3px solid #1a5fb4;
+      padding-left: 6px;
+      margin-bottom: 6px;
+    }
+
+    /* 紧凑信息网格 */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px 12px;
+      font-size: 8pt;
+      margin-bottom: 8px;
+    }
+    .info-item {
+      display: flex;
+    }
+    .info-label {
+      color: #666;
+      min-width: 40px;
+    }
+    .info-value {
+      font-weight: 600;
+    }
+
+    /* 紧凑表格 */
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 15px 0;
-      font-size: 10pt;
+      font-size: 8pt;
+      margin-bottom: 6px;
     }
     th, td {
-      border: 1px solid #e2e8f0;
-      padding: 8px 12px;
+      border: 0.5px solid #ccc;
+      padding: 3px 5px;
       text-align: left;
     }
     th {
-      background: #edf2f7;
+      background: #e8f0fe;
       font-weight: 600;
-      color: #2d3748;
+      font-size: 7.5pt;
     }
     tr:nth-child(even) {
-      background: #f7fafc;
+      background: #fafafa;
     }
-    .highlight-box {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      padding: 20px;
-      border-radius: 8px;
-      margin: 20px 0;
+    td:first-child {
+      font-weight: 500;
     }
-    .highlight-box h4 {
-      margin: 0 0 10px 0;
-      font-size: 14pt;
-    }
-    .energy-display {
-      display: flex;
-      justify-content: space-around;
-      text-align: center;
-      margin: 20px 0;
-    }
-    .energy-item {
-      background: #f0f7ff;
-      padding: 15px 25px;
-      border-radius: 8px;
-      border: 2px solid #1a5fb4;
-    }
-    .energy-item .number {
-      font-size: 24pt;
+
+    /* 状态标签 */
+    .status {
+      display: inline-block;
+      padding: 1px 4px;
+      border-radius: 2px;
+      font-size: 7pt;
       font-weight: bold;
+    }
+    .status-high { background: #fee2e2; color: #c53030; }
+    .status-low { background: #dbeafe; color: #1e40af; }
+    .status-normal { background: #d1fae5; color: #047857; }
+
+    /* 紧凑列表 */
+    .compact-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .compact-list li {
+      padding: 2px 0;
+      padding-left: 12px;
+      position: relative;
+      font-size: 8pt;
+    }
+    .compact-list li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
       color: #1a5fb4;
     }
-    .energy-item .unit {
-      font-size: 10pt;
-      color: #666;
+
+    /* 紧凑卡片 */
+    .card {
+      border: 0.5px solid #ddd;
+      border-radius: 4px;
+      padding: 6px;
+      margin-bottom: 6px;
     }
-    .energy-item .label {
-      font-size: 11pt;
-      color: #444;
-      margin-top: 5px;
+    .card-header {
+      font-weight: bold;
+      font-size: 9pt;
+      color: #1a5fb4;
+      margin-bottom: 4px;
+      border-bottom: 1px dashed #ddd;
+      padding-bottom: 2px;
     }
-    .warning {
-      background: #fff5f5;
-      border-left: 4px solid #e53e3e;
-      padding: 12px 15px;
-      margin: 15px 0;
-      color: #c53030;
+
+    /* 紧凑数值展示 */
+    .metrics-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 6px;
     }
-    .tip {
-      background: #f0fff4;
-      border-left: 4px solid #38a169;
-      padding: 12px 15px;
-      margin: 15px 0;
-      color: #276749;
+    .metric {
+      flex: 1;
+      background: linear-gradient(135deg, #1a5fb4 0%, #3b82f6 100%);
+      color: white;
+      padding: 6px;
+      border-radius: 4px;
+      text-align: center;
     }
-    .meal-section {
-      background: #fffaf0;
-      border: 1px solid #fbd38d;
-      border-radius: 8px;
-      padding: 15px;
-      margin: 15px 0;
+    .metric-value {
+      font-size: 14pt;
+      font-weight: bold;
     }
-    .meal-section h4 {
-      color: #c05621;
-      margin: 0 0 10px 0;
-      font-size: 12pt;
+    .metric-unit {
+      font-size: 7pt;
+      opacity: 0.9;
+    }
+    .metric-label {
+      font-size: 7pt;
+      margin-top: 2px;
+      opacity: 0.9;
+    }
+
+    /* 紧凑警告 */
+    .warning-inline {
+      background: #fff7ed;
+      border-left: 2px solid #f97316;
+      padding: 4px 6px;
+      margin: 4px 0;
+      font-size: 8pt;
+    }
+
+    /* 两列布局 */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    /* 紧凑餐次 */
+    .meal-card {
+      border: 0.5px solid #ddd;
+      padding: 4px 6px;
+      margin-bottom: 4px;
+      border-radius: 3px;
+    }
+    .meal-title {
+      font-weight: bold;
+      font-size: 8pt;
+      color: #b45309;
+      margin-bottom: 2px;
     }
     .meal-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 5px 0;
-      border-bottom: 1px dashed #fbd38d;
+      font-size: 7.5pt;
+      padding: 1px 0;
     }
-    .meal-item:last-child {
-      border-bottom: none;
-    }
+
+    /* 分页控制 */
     .page-break {
       page-break-before: always;
     }
-    .section {
+    .avoid-break {
       page-break-inside: avoid;
     }
-    .disclaimer {
-      margin-top: 50px;
-      padding: 20px;
-      background: #f7fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 8px;
-      font-size: 9pt;
-      color: #718096;
-      page-break-inside: avoid;
+
+    /* 页脚 */
+    .footer {
+      margin-top: 12px;
+      padding-top: 6px;
+      border-top: 1px solid #ddd;
+      font-size: 7pt;
+      color: #999;
+      text-align: center;
     }
-    .disclaimer h3 {
-      color: #e53e3e;
-      margin-top: 0;
-    }
-    ul, ol {
-      padding-left: 20px;
-    }
-    li {
-      margin: 8px 0;
-    }
-    .status-high { color: #e53e3e; font-weight: bold; }
-    .status-low { color: #3182ce; font-weight: bold; }
-    .status-normal { color: #38a169; }
   </style>
 </head>
 <body>
-  <!-- 封面 -->
-  <div class="cover">
-    <h1>个性化营养方案报告</h1>
-    <div class="subtitle">Personalized Nutrition Plan Report</div>
-    <div class="info-box">
-      <p><span class="label">患者姓名：</span><span class="value">${patientName}</span></p>
-      <p><span class="label">报告日期：</span><span class="value">${today}</span></p>
-      <p><span class="label">生成机构：</span><span class="value">AI 营养咨询系统</span></p>
+  <!-- 紧凑头部 -->
+  <div class="header">
+    <div class="header-left">
+      <h1>营养方案报告</h1>
+      <div class="subtitle">Personalized Nutrition Plan</div>
+    </div>
+    <div class="header-right">
+      <div><span class="label">患者：</span><span class="value">${patientName}</span></div>
+      <div><span class="label">日期：</span><span class="value">${today}</span></div>
     </div>
   </div>
+`;
 
-  <!-- 健康档案 -->
-  ${data.healthProfile ? renderHealthProfile(data.healthProfile) : ''}
+  // 健康档案
+  if (data.healthProfile) {
+    const health = extractHealthProfile(data.healthProfile);
+    html += `
+  <div class="section">
+    <div class="section-title">一、健康档案</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">姓名：</span><span class="info-value">${health.name || patientName}</span></div>
+      <div class="info-item"><span class="info-label">性别：</span><span class="info-value">${health.gender || '-'}</span></div>
+      <div class="info-item"><span class="info-label">年龄：</span><span class="info-value">${health.age || '-'}岁</span></div>
+      <div class="info-item"><span class="info-label">身高：</span><span class="info-value">${health.height || '-'}cm</span></div>
+      <div class="info-item"><span class="info-label">体重：</span><span class="info-value">${health.weight || '-'}kg</span></div>
+      <div class="info-item"><span class="info-label">BMI：</span><span class="info-value">${health.bmi || '-'}</span></div>
+      <div class="info-item"><span class="info-label">血压：</span><span class="info-value">${health.bloodPressure || '-'}</span></div>
+    </div>
+    ${health.diagnoses.length ? `
+    <div class="avoid-break">
+      <strong>诊断：</strong>
+      <ul class="compact-list">
+        ${health.diagnoses.map(d => `<li>${d}</li>`).join('')}
+      </ul>
+    </div>` : ''}
+  </div>
+`;
+  }
 
-  <!-- 营养评估 -->
-  ${data.nutritionAssessment ? renderNutritionAssessment(data.nutritionAssessment) : ''}
+  // 营养评估
+  if (data.nutritionAssessment) {
+    html += renderCompactNutrition(data.nutritionAssessment);
+  }
 
-  <!-- 配餐方案 -->
-  ${data.mealPlans ? renderMealPlans(data.mealPlans) : ''}
+  // 配餐方案
+  if (data.mealPlans) {
+    html += renderCompactMealPlans(data.mealPlans);
+  }
 
-  <!-- 运动处方 -->
-  ${data.exercisePrescription ? renderExercisePrescription(data.exercisePrescription) : ''}
+  // 运动处方
+  if (data.exercisePrescription) {
+    html += renderCompactExercise(data.exercisePrescription);
+  }
 
-  <!-- 免责声明 -->
-  <div class="disclaimer page-break">
-    <h3>⚠️ 免责声明</h3>
-    <p>本报告由 AI 辅助生成，仅提供营养参考信息，不构成医疗诊断或治疗建议。患有疾病者请务必遵医嘱，如有疑问请咨询注册营养师或主治医生。</p>
-    <p>本报告中的营养建议基于患者提供的信息和一般营养学原理，个体差异可能需要调整。在实施任何饮食或运动方案前，请咨询专业医疗人员。</p>
-    <p>报告生成日期：${today}</p>
+  // 页脚
+  html += `
+  <div class="footer">
+    本报告由 AI 辅助生成，仅供参考，不构成医疗建议。如有疑问请咨询专业医生。
   </div>
 </body>
 </html>`;
-}
-
-// 渲染健康档案
-function renderHealthProfile(content) {
-  return `
-  <div class="page-break">
-    <h2>一、健康档案</h2>
-    <div class="section">
-      ${markdownToHTML(content)}
-    </div>
-  </div>`;
-}
-
-// 渲染营养评估
-function renderNutritionAssessment(content) {
-  return `
-  <div class="page-break">
-    <h2>二、营养评估</h2>
-    <div class="section">
-      ${markdownToHTML(content)}
-    </div>
-  </div>`;
-}
-
-// 渲染配餐方案
-function renderMealPlans(content) {
-  return `
-  <div class="page-break">
-    <h2>三、配餐方案</h2>
-    <div class="section">
-      ${markdownToHTML(content)}
-    </div>
-  </div>`;
-}
-
-// 渲染运动处方
-function renderExercisePrescription(content) {
-  return `
-  <div class="page-break">
-    <h2>四、运动处方</h2>
-    <div class="section">
-      ${markdownToHTML(content)}
-    </div>
-  </div>`;
-}
-
-// Markdown 转 HTML（简化版）
-function markdownToHTML(markdown) {
-  let html = markdown
-    // 标题
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    // 粗体
-    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-    // 斜体
-    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-    // 代码块
-    .replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>')
-    // 行内代码
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    // 引用块
-    .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-    // 表格处理（简化）
-    .replace(/\|([^\n]+)\|/g, (match) => {
-      const cells = match.split('|').filter(c => c.trim()).map(c => `<td>${c.trim()}</td>`).join('');
-      return `<tr>${cells}</tr>`;
-    })
-    // 无序列表
-    .replace(/^\- (.*$)/gim, '<li>$1</li>')
-    // 有序列表
-    .replace(/^\d+\. (.*$)/gim, '<li>$1</li>')
-    // 段落
-    .replace(/\n\n/g, '</p><p>')
-    // 换行
-    .replace(/\n/g, '<br>');
-
-  // 包装段落
-  html = '<p>' + html + '</p>';
-
-  // 修复表格
-  html = html.replace(/<tr>(.*?)<\/tr>/gs, (match, content) => {
-    if (content.includes('<td>---</td>')) return '';
-    return `<table>${match}</table>`;
-  });
-
-  // 修复列表
-  html = html.replace(/(<li>.*<\/li>)+/gs, (match) => {
-    return `<ul>${match}</ul>`;
-  });
 
   return html;
+}
+
+// 紧凑营养评估
+function renderCompactNutrition(content) {
+  // 提取关键数值
+  const bmr = content.match(/BMR.*?([\d,]+)\s*kcal/i)?.[1]?.replace(',', '') || '';
+  const tdee = content.match(/TDEE.*?([\d,]+)\s*kcal/i)?.[1]?.replace(',', '') || '';
+  const target = content.match(/目标能量[:：]\s*([\d,]+)/i)?.[1]?.replace(',', '') || '';
+
+  return `
+  <div class="section avoid-break">
+    <div class="section-title">二、营养评估</div>
+    <div class="metrics-row">
+      ${bmr ? `<div class="metric"><div class="metric-value">${bmr}</div><div class="metric-unit">kcal</div><div class="metric-label">基础代谢</div></div>` : ''}
+      ${tdee ? `<div class="metric"><div class="metric-value">${tdee}</div><div class="metric-unit">kcal</div><div class="metric-label">总消耗</div></div>` : ''}
+      ${target ? `<div class="metric"><div class="metric-value">${target}</div><div class="metric-unit">kcal</div><div class="metric-label">目标摄入</div></div>` : ''}
+    </div>
+    ${renderMarkdownCompact(content)}
+  </div>
+`;
+}
+
+// 紧凑配餐方案
+function renderCompactMealPlans(content) {
+  const days = content.match(/##\s*周[一二三四五六日][\s\S]*?(?=##|$)/g) || [];
+
+  let html = `
+  <div class="section">
+    <div class="section-title">三、配餐方案</div>
+`;
+
+  days.slice(0, 3).forEach(day => {
+    const dayName = day.match(/##\s*(周[一二三四五六日])/)?.[1] || '';
+    const meals = day.match(/###\s*(早餐|午餐|晚餐)[\s\S]*?(?=###|$)/g) || [];
+
+    html += `<div class="avoid-break"><strong>${dayName}</strong>`;
+    meals.forEach(meal => {
+      const mealName = meal.match(/###\s*(早餐|午餐|晚餐)/)?.[1] || '';
+      const items = meal.match(/-\s*(.+)/g) || [];
+
+      html += `
+        <div class="meal-card">
+          <div class="meal-title">${mealName}</div>
+          ${items.map(i => `<div class="meal-item">${i.replace(/^-\s*/, '')}</div>`).join('')}
+        </div>`;
+    });
+    html += `</div>`;
+  });
+
+  if (days.length > 3) {
+    html += `<div style="font-size:8pt;color:#666;text-align:center;margin-top:4px;">... 共 ${days.length} 天方案，详见完整文档 ...</div>`;
+  }
+
+  html += `</div>`;
+  return html;
+}
+
+// 紧凑运动处方
+function renderCompactExercise(content) {
+  return `
+  <div class="section avoid-break">
+    <div class="section-title">四、运动处方</div>
+    ${renderMarkdownCompact(content)}
+  </div>
+`;
+}
+
+// 紧凑 Markdown 渲染
+function renderMarkdownCompact(md) {
+  let html = md
+    .replace(/^###\s*(.+)$/gm, '<strong style="color:#1a5fb4;">$1</strong>')
+    .replace(/^##\s*(.+)$/gm, '')
+    .replace(/^#\s*(.+)$/gm, '')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/`(.+?)`/g, '<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">$1</code>')
+    .replace(/^\|\s*([^|]+)\|([^|]+)\|/gm, '<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>$1</span><span style="color:#1a5fb4;font-weight:500;">$2</span></div>')
+    .replace(/^-\s*(.+)$/gm, '<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>$1</li>')
+    .replace(/\n{3,}/g, '\n\n');
+
+  return `<div style="font-size:8pt;">${html}</div>`;
 }
 
 // 主函数
@@ -351,133 +436,86 @@ async function exportPDF(patientName) {
   const resultsDir = path.join(process.cwd(), 'results');
   const patientDir = path.join(resultsDir, patientName);
 
-  // 检查目录是否存在
   try {
     await fs.access(patientDir);
   } catch {
-    console.error(`❌ 错误：找不到患者目录 "${patientName}"`);
-    console.log(`请确保 results/${patientName}/ 目录存在`);
+    console.error(`❌ 找不到患者目录: ${patientName}`);
     process.exit(1);
   }
 
-  console.log(`📄 正在导出 "${patientName}" 的 PDF 报告...\n`);
+  console.log(`📄 导出 "${patientName}" 的 PDF 报告...`);
 
-  // 读取所有 Markdown 文件
   const data = {};
-  const files = {
-    healthProfile: '健康档案.md',
-    nutritionAssessment: '营养评估.md',
-    mealPlans: '配餐方案.md',
-    exercisePrescription: '运动处方.md'
-  };
+  const files = [
+    ['healthProfile', '健康档案.md'],
+    ['nutritionAssessment', '营养评估.md'],
+    ['mealPlans', '配餐方案_第1周.md'],
+    ['mealPlans', '配餐方案.md'],
+    ['exercisePrescription', '运动处方.md']
+  ];
 
-  for (const [key, filename] of Object.entries(files)) {
+  for (const [key, filename] of files) {
     const content = await parseMarkdown(path.join(patientDir, filename));
-    if (content) {
+    if (content && !data[key]) {
       data[key] = content;
-      console.log(`  ✅ 读取 ${filename}`);
-    } else {
-      console.log(`  ⚠️  跳过 ${filename}（不存在）`);
     }
   }
 
-  if (Object.keys(data).length === 0) {
-    console.error('\n❌ 错误：未找到任何 Markdown 文件');
-    process.exit(1);
-  }
+  const html = generateCompactHTML(patientName, data);
 
-  // 生成 HTML
-  console.log('\n🎨 生成 HTML...');
-  const html = generateHTML(patientName, data);
-
-  // 保存 HTML（调试用）
+  // 保存 HTML
   const htmlPath = path.join(patientDir, '营养方案报告.html');
   await fs.writeFile(htmlPath, html, 'utf-8');
-  console.log(`  💾 已保存 HTML: ${htmlPath}`);
 
-  // 使用 Playwright 生成 PDF
-  console.log('\n📑 生成 PDF...');
-  let browser;
-  try {
-    browser = await chromium.launch({ headless: true });
-    const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: 'networkidle' });
+  // 生成 PDF
+  const browser = await chromium.launch({ headless: true });
+  const page = await browser.newPage();
+  await page.setContent(html, { waitUntil: 'networkidle' });
 
-    const pdfPath = path.join(patientDir, '营养方案报告.pdf');
-    await page.pdf({
-      path: pdfPath,
-      format: 'A4',
-      printBackground: true,
-      margin: { top: '15mm', right: '20mm', bottom: '15mm', left: '20mm' }
-    });
+  const pdfPath = path.join(patientDir, '营养方案报告.pdf');
+  await page.pdf({
+    path: pdfPath,
+    format: 'A4',
+    printBackground: true,
+    margin: { top: '10mm', right: '12mm', bottom: '10mm', left: '12mm' }
+  });
 
-    // 获取文件大小
-    const stats = await fs.stat(pdfPath);
-    const sizeKB = Math.round(stats.size / 1024);
+  await browser.close();
 
-    console.log(`\n✅ 导出成功！`);
-    console.log(`📄 ${pdfPath} (${sizeKB} KB)`);
-    console.log(`\n包含内容：`);
-    if (data.healthProfile) console.log('   • 健康档案');
-    if (data.nutritionAssessment) console.log('   • 营养评估');
-    if (data.mealPlans) console.log('   • 配餐方案');
-    if (data.exercisePrescription) console.log('   • 运动处方');
+  const stats = await fs.stat(pdfPath);
+  const sizeKB = Math.round(stats.size / 1024);
 
-  } catch (error) {
-    console.error('\n❌ PDF 生成失败:', error.message);
-    console.log('\n💡 提示：HTML 文件已保存，可手动用浏览器打印为 PDF');
-    console.log(`   ${htmlPath}`);
-    process.exit(1);
-  } finally {
-    if (browser) await browser.close();
-  }
+  console.log(`✅ 导出成功: ${pdfPath} (${sizeKB} KB)`);
+  return pdfPath;
 }
 
-// 导出所有患者
+// 批量导出
 async function exportAll() {
   const resultsDir = path.join(process.cwd(), 'results');
+  const entries = await fs.readdir(resultsDir, { withFileTypes: true });
+  const patients = entries.filter(e => e.isDirectory()).map(e => e.name);
 
-  try {
-    const entries = await fs.readdir(resultsDir, { withFileTypes: true });
-    const patients = entries.filter(e => e.isDirectory()).map(e => e.name);
+  console.log(`发现 ${patients.length} 个患者\n`);
 
-    if (patients.length === 0) {
-      console.error('❌ 错误：results/ 目录下没有患者文件夹');
-      process.exit(1);
+  for (const patient of patients) {
+    try {
+      await exportPDF(patient);
+    } catch (err) {
+      console.error(`❌ "${patient}" 失败: ${err.message}`);
     }
-
-    console.log(`发现 ${patients.length} 个患者:\n`);
-
-    for (const patient of patients) {
-      console.log(`\n${'='.repeat(50)}`);
-      console.log(`处理: ${patient}`);
-      console.log('='.repeat(50));
-      try {
-        await exportPDF(patient);
-      } catch (error) {
-        console.error(`\n❌ 导出 "${patient}" 失败:`, error.message);
-      }
-    }
-
-  } catch (error) {
-    console.error('❌ 错误：无法读取 results/ 目录');
-    console.error(error.message);
-    process.exit(1);
   }
 }
 
-// 命令行参数处理
-const args = process.argv.slice(2);
-const patientName = args[0];
-
+// 命令行
+const patientName = process.argv[2];
 if (patientName) {
-  exportPDF(patientName).catch(error => {
-    console.error('❌ 导出失败:', error.message);
+  exportPDF(patientName).catch(err => {
+    console.error('❌ 失败:', err.message);
     process.exit(1);
   });
 } else {
-  exportAll().catch(error => {
-    console.error('❌ 批量导出失败:', error.message);
+  exportAll().catch(err => {
+    console.error('❌ 批量失败:', err.message);
     process.exit(1);
   });
 }
