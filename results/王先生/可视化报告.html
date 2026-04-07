@@ -1,0 +1,2051 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>营养方案报告 - 王先生</title>
+  <style>
+    /* Reset & Base */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #f5f5f5;
+      color: #0a0a0a;
+      line-height: 1.5;
+    }
+
+    /* Design Tokens */
+    :root {
+      --background: #ffffff;
+      --foreground: #0a0a0a;
+      --card: #ffffff;
+      --card-foreground: #0a0a0a;
+      --primary: #171717;
+      --primary-foreground: #fafafa;
+      --secondary: #f5f5f5;
+      --secondary-foreground: #171717;
+      --muted: #f5f5f5;
+      --muted-foreground: #737373;
+      --border: #e5e5e5;
+      --ring: #171717;
+      --radius: 0.75rem;
+
+      /* Health Colors */
+      --health-normal: #dcfce7;
+      --health-normal-foreground: #14532d;
+      --health-warning: #fef9c3;
+      --health-warning-foreground: #713f12;
+      --health-danger: #fee2e2;
+      --health-danger-foreground: #991b1b;
+      --health-info: #dbeafe;
+      --health-info-foreground: #1e3a8a;
+    }
+
+    .min-h-screen { min-height: 100vh; }
+    .bg-background { background: #f5f5f5; }
+    .border-b { border-bottom: 1px solid var(--border); }
+
+    /* Header */
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-content {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+    h1 { font-size: 1.5rem; font-weight: 700; }
+    .text-muted-foreground { color: var(--muted-foreground); }
+
+    /* Main */
+    main {
+      max-width: 72rem;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+    }
+
+    /* Tabs */
+    .tabs-list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.5rem;
+      padding: 0.25rem;
+      background: var(--muted);
+      border-radius: var(--radius);
+      margin-bottom: 1.5rem;
+    }
+    .tab {
+      padding: 0.75rem 1rem;
+      text-align: center;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: calc(var(--radius) - 0.25rem);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: none;
+      background: transparent;
+    }
+    .tab:hover { background: var(--secondary); }
+    .tab.active {
+      background: var(--background);
+      color: var(--foreground);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .tab:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Tab Content */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* Card */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .card-header { margin-bottom: 1rem; }
+    .card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--card-foreground);
+    }
+    .card-content { color: var(--card-foreground); }
+
+    /* Badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .badge-default {
+      background: var(--primary);
+      color: var(--primary-foreground);
+    }
+    .badge-secondary {
+      background: var(--secondary);
+      color: var(--secondary-foreground);
+    }
+    .badge-destructive {
+      background: var(--health-danger);
+      color: var(--health-danger-foreground);
+    }
+    .badge-warning {
+      background: var(--health-warning);
+      color: var(--health-warning-foreground);
+    }
+    .badge-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+    }
+
+    /* Table */
+    .table-container { overflow-x: auto; }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.875rem;
+    }
+    .table th {
+      text-align: left;
+      padding: 0.75rem;
+      font-weight: 500;
+      color: var(--muted-foreground);
+      border-bottom: 1px solid var(--border);
+    }
+    .table td {
+      padding: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .table tr:hover { background: var(--muted); }
+
+    /* Status */
+    .status-normal { background: var(--health-normal); }
+    .status-normal td { color: var(--health-normal-foreground); }
+    .status-high { background: var(--health-warning); }
+    .status-high td { color: var(--health-warning-foreground); }
+    .status-very-high { background: var(--health-danger); }
+    .status-very-high td { color: var(--health-danger-foreground); }
+
+    /* Grid */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .tabs-list { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* Stats */
+    .stat-card {
+      text-align: center;
+      padding: 1.5rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .stat-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--foreground);
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--muted-foreground);
+      margin-top: 0.25rem;
+    }
+
+    /* Progress */
+    .progress-bar {
+      height: 2rem;
+      background: var(--muted);
+      border-radius: calc(var(--radius) / 2);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: calc(var(--radius) / 2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* Alert */
+    .alert {
+      padding: 1rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+    .alert-info {
+      background: var(--health-info);
+      border-color: var(--health-info-foreground);
+      color: var(--health-info-foreground);
+    }
+
+    /* Utility */
+    .flex { display: flex; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 0.75rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-2 { margin-top: 0.5rem; }
+    .mt-4 { margin-top: 1rem; }
+    .ml-2 { margin-left: 0.5rem; }
+    .ml-8 { margin-left: 2rem; }
+    .ml-auto { margin-left: auto; }
+    .mr-auto { margin-right: auto; }
+    .p-2 { padding: 0.5rem; }
+    .p-3 { padding: 0.75rem; }
+    .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .pb-2 { padding-bottom: 0.5rem; }
+    .border { border: 1px solid var(--border); }
+    .border-b { border-bottom: 1px solid var(--border); }
+    .rounded { border-radius: var(--radius); }
+    .hidden { display: none; }
+    .text-center { text-align: center; }
+    .text-right { text-align: right; }
+    .text-xs { font-size: 0.75rem; }
+    .text-sm { font-size: 0.875rem; }
+    .text-lg { font-size: 1.125rem; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .font-normal { font-weight: 400; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .bg-muted { background: var(--muted); }
+    .w-12 { width: 3rem; }
+    .w-32 { width: 8rem; }
+    .w-48 { width: 12rem; }
+    .h-48 { height: 12rem; }
+    .w-2\.5 { width: 0.625rem; }
+    .h-2\.5 { height: 0.625rem; }
+    .w-3 { width: 0.75rem; }
+    .h-3 { height: 0.75rem; }
+    .rounded-full { border-radius: 9999px; }
+    .flex-1 { flex: 1; }
+    .h-full { height: 100%; }
+    .list-disc { list-style-type: disc; }
+    .pl-5 { padding-left: 1.25rem; }
+    .day-section { page-break-inside: avoid; }
+
+    /* Intensity */
+    .intensity-low { background: #dcfce7; color: #14532d; }
+    .intensity-light { background: #ecfccb; color: #365314; }
+    .intensity-moderate { background: #fef9c3; color: #713f12; }
+    .intensity-medium { background: #fed7aa; color: #7c2d12; }
+    .intensity-high { background: #fee2e2; color: #991b1b; }
+
+    /* Print */
+    @media print {
+      .tabs-list { display: none; }
+      .tab-content { display: block !important; }
+      .card { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-background">
+  <header>
+    <div class="header-content">
+      <h1>营养方案报告</h1>
+      <p class="text-muted-foreground">王先生 · 2026-03-31</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="tabs-list">
+      <button class="tab active" data-tab="profile" onclick="switchTab('profile')">健康档案</button>
+      <button class="tab " data-tab="assessment" onclick="switchTab('assessment')" >营养评估</button>
+      <button class="tab " data-tab="mealplan" onclick="switchTab('mealplan')" >配餐方案</button>
+      <button class="tab " data-tab="exercise" onclick="switchTab('exercise')" >运动建议</button>
+    </div>
+
+    <div id="profile" class="tab-content active">
+      
+    <!-- 基本信息 -->
+    <div class="card">
+      <div class="card-header">
+        <div class="flex justify-between items-center">
+          <h2 class="card-title">基本信息</h2>
+          <span class="text-xs text-muted-foreground">2026-03-31</span>
+        </div>
+      </div>
+      <div class="card-content">
+        <p class="text-lg font-bold mb-4">王先生</p>
+        <div class="grid-4">
+          <div><span class="text-xs text-muted-foreground">性别</span><p class="text-sm font-medium">男</p></div>
+          <div><span class="text-xs text-muted-foreground">年龄</span><p class="text-sm font-medium">38 岁</p></div>
+          <div><span class="text-xs text-muted-foreground">身高</span><p class="text-sm font-medium">178 cm</p></div>
+          <div><span class="text-xs text-muted-foreground">体重</span><p class="text-sm font-medium">85 kg</p></div>
+          <div>
+            <span class="text-xs text-muted-foreground">BMI</span>
+            <div class="flex items-center gap-2">
+              <span class="text-sm font-medium">26.8</span>
+              <span class="badge badge-secondary">超重</span>
+            </div>
+          </div>
+          <div><span class="text-xs text-muted-foreground">血压</span><p class="text-sm font-medium">128/82 mmHg</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 诊断 -->
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">诊断</h2></div>
+      <div class="card-content">
+        <div class="flex flex-wrap gap-2">
+          <span class="badge badge-default">痛风 — 右脚第一跖趾关节反复发作，近一年发作3次</span><span class="badge badge-secondary">高尿酸血症 — 尿酸 528 μmol/L（显著超标）</span><span class="badge badge-secondary">高甘油三酯血症 — TG 2.2 mmol/L</span><span class="badge badge-secondary">超重 — BMI 26.8</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 检验结果 -->
+    
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">尿酸与肾功能</h2></div>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>指标</th><th>结果</th><th>单位</th><th>参考范围</th><th>状态</th></tr></thead>
+            <tbody>
+              
+                <tr class="status-very-high">
+                  <td class="font-medium">尿酸</td>
+                  <td>528</td>
+                  <td>μmol/L</td>
+                  <td>208-428</td>
+                  <td><span class="badge badge-destructive">超标</span></td>
+                </tr>
+              
+                <tr class="status-normal">
+                  <td class="font-medium">肌酐</td>
+                  <td>92</td>
+                  <td>μmol/L</td>
+                  <td>53-106</td>
+                  <td><span class="badge badge-secondary">正常</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">血脂指标</h2></div>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>指标</th><th>结果</th><th>单位</th><th>参考范围</th><th>状态</th></tr></thead>
+            <tbody>
+              
+                <tr class="status-high">
+                  <td class="font-medium">甘油三酯</td>
+                  <td>2.2</td>
+                  <td>mmol/L</td>
+                  <td><1.7</td>
+                  <td><span class="badge badge-warning">偏高</span></td>
+                </tr>
+              
+                <tr class="status-high">
+                  <td class="font-medium">总胆固醇</td>
+                  <td>5.6</td>
+                  <td>mmol/L</td>
+                  <td><5.2</td>
+                  <td><span class="badge badge-warning">偏高</span></td>
+                </tr>
+              
+                <tr class="status-high">
+                  <td class="font-medium">LDL-C</td>
+                  <td>3.5</td>
+                  <td>mmol/L</td>
+                  <td><3.4</td>
+                  <td><span class="badge badge-warning">偏高</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">血糖指标</h2></div>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>指标</th><th>结果</th><th>单位</th><th>参考范围</th><th>状态</th></tr></thead>
+            <tbody>
+              
+                <tr class="status-normal">
+                  <td class="font-medium">空腹血糖</td>
+                  <td>5.4</td>
+                  <td>mmol/L</td>
+                  <td>3.9-6.1</td>
+                  <td><span class="badge badge-secondary">正常</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+
+    <!-- 用药信息 -->
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">用药信息</h2></div>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>药品</th><th>剂量</th><th>用途</th><th>备注</th></tr></thead>
+            <tbody>
+              
+                <tr><td class="font-medium">非布司他</td><td>40mg qd</td><td>降尿酸</td><td>无直接营养交互，但需监测肝功能</td></tr>
+              
+                <tr><td class="font-medium">秋水仙碱</td><td>0.5mg（发作时）</td><td>痛风急性发作</td><td>注意腹泻等胃肠道反应，影响进食</td></tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    </div>
+    <div id="assessment" class="tab-content">
+      
+    <!-- 能量计算 -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">能量计算 <span class="ml-2 text-sm font-normal text-muted-foreground">活动水平: 轻度活动</span></h2>
+      </div>
+      <div class="card-content">
+        <div class="grid-3">
+          <div class="stat-card">
+            <div class="stat-value">1778</div>
+            <div class="stat-label">基础代谢率 (BMR) kcal</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">2444</div>
+            <div class="stat-label">总能量消耗 (TDEE) kcal</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-value">1900</div>
+            <div class="stat-label">目标摄入能量 kcal</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 宏量营养素 -->
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">宏量营养素目标</h2></div>
+      <div class="card-content">
+        <div class="flex items-center justify-center mb-6">
+          <svg viewBox="0 0 200 200" class="h-48 w-48"><path d="M 100 100 L 180 100 A 80 80 0 0 1 147.02282018339787 164.72135954999578 Z" fill="#0072B2" /><path d="M 100 100 L 147.02282018339787 164.72135954999578 A 80 80 0 1 1 80.10480902681164 22.5133471097095 Z" fill="#E69F00" /><path d="M 100 100 L 80.10480902681164 22.5133471097095 A 80 80 0 0 1 177.4866528902905 80.10480902681158 Z" fill="#009E73" /></svg>
+          <div class="ml-8 space-y-2">
+            
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full" style="background: #0072B2"></span>
+                <span class="text-sm">蛋白质 15%</span>
+              </div>
+            
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full" style="background: #E69F00"></span>
+                <span class="text-sm">碳水化合物 56%</span>
+              </div>
+            
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full" style="background: #009E73"></span>
+                <span class="text-sm">脂肪 25%</span>
+              </div>
+            
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full" style="background: #CC79A7"></span>
+                <span class="text-sm">膳食纤维 0%</span>
+              </div>
+            
+          </div>
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>营养素</th><th>目标量</th><th>占比</th><th>推荐范围</th><th>来源</th></tr></thead>
+            <tbody>
+              
+                <tr>
+                  <td class="font-medium">总能量</td>
+                  <td>1900 kcal</td>
+                  <td>100%</td>
+                  <td>1800-2000</td>
+                  <td class="text-muted-foreground">超重减重: -500kcal</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">蛋白质</td>
+                  <td>72 g</td>
+                  <td>15%</td>
+                  <td>65-80g</td>
+                  <td class="text-muted-foreground">痛风: 0.85g/kg，以蛋奶为主</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">碳水化合物</td>
+                  <td>266 g</td>
+                  <td>56%</td>
+                  <td>240-290g</td>
+                  <td class="text-muted-foreground">高TG: 减少精制碳水/果糖</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">脂肪</td>
+                  <td>53 g</td>
+                  <td>25%</td>
+                  <td>45-60g</td>
+                  <td class="text-muted-foreground">高TG: 控制脂肪，减重</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">膳食纤维</td>
+                  <td>25 g</td>
+                  <td>0%</td>
+                  <td>25-35g</td>
+                  <td class="text-muted-foreground">痛风+高TG: 蔬菜≥500g/天</td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 餐次能量分配 -->
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">餐次能量分配</h2></div>
+      <div class="card-content">
+        <div class="space-y-3 mb-4">
+          
+              <div class="flex items-center gap-3">
+                <span class="w-12 text-sm font-medium text-right">早餐</span>
+                <div class="progress-bar flex-1">
+                  <div class="progress-fill" style="width: 30%; background: #E69F00">
+                    570 kcal · 30%
+                  </div>
+                </div>
+              </div>
+            
+              <div class="flex items-center gap-3">
+                <span class="w-12 text-sm font-medium text-right">午餐</span>
+                <div class="progress-bar flex-1">
+                  <div class="progress-fill" style="width: 40%; background: #0072B2">
+                    760 kcal · 40%
+                  </div>
+                </div>
+              </div>
+            
+              <div class="flex items-center gap-3">
+                <span class="w-12 text-sm font-medium text-right">晚餐</span>
+                <div class="progress-bar flex-1">
+                  <div class="progress-fill" style="width: 30%; background: #56B4E9">
+                    570 kcal · 30%
+                  </div>
+                </div>
+              </div>
+            
+        </div>
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>餐次</th><th>能量 (kcal)</th><th>占比</th><th>蛋白质 (g)</th><th>碳水 (g)</th><th>脂肪 (g)</th></tr></thead>
+            <tbody>
+              
+                <tr><td class="font-medium">早餐</td><td>570</td><td>30%</td><td>22</td><td>76</td><td>16</td></tr>
+              
+                <tr><td class="font-medium">午餐</td><td>760</td><td>40%</td><td>29</td><td>106</td><td>21</td></tr>
+              
+                <tr><td class="font-medium">晚餐</td><td>570</td><td>30%</td><td>22</td><td>76</td><td>16</td></tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- 推荐/禁忌食物 -->
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">推荐食物</h2></div>
+        <div class="card-content">
+          
+            <div class="mb-4">
+              <p class="text-sm font-semibold mb-2">安全蛋白质（低嘌呤）</p>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-secondary">鸡蛋（每天1-2个，嘌呤极低）</span><span class="badge badge-secondary">低脂牛奶/酸奶（≥300ml/天，促进尿酸排泄）</span><span class="badge badge-secondary">豆腐/豆浆（加工后安全，嘌呤 ~29-55mg/100g）</span><span class="badge badge-secondary">低嘌呤鱼类: 鲈鱼、桂鱼（≤75g/次，每周2-3次）</span><span class="badge badge-secondary">鸡胸肉（少量，≤50g/次，煮沸去汤后嘌呤降低）</span>
+              </div>
+            </div>
+          
+            <div class="mb-4">
+              <p class="text-sm font-semibold mb-2">主食类（低嘌呤）</p>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-secondary">精白米/白面（低嘌呤但高GI，需搭配粗粮）</span><span class="badge badge-secondary">燕麦、红薯、山药、玉米</span><span class="badge badge-secondary">荞麦面、全麦面包</span>
+              </div>
+            </div>
+          
+            <div class="mb-4">
+              <p class="text-sm font-semibold mb-2">蔬菜类（低嘌呤，≥500g/天）</p>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-secondary">所有蔬菜基本安全 — 包括菠菜、蘑菇（植物嘌呤不增加痛风风险）</span><span class="badge badge-secondary">黄瓜、冬瓜（利水消肿，促进尿酸排泄）</span><span class="badge badge-secondary">芹菜、西兰花、白菜、番茄</span>
+              </div>
+            </div>
+          
+            <div class="mb-4">
+              <p class="text-sm font-semibold mb-2">水果类（低嘌呤，但注意果糖）</p>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-secondary">樱桃（尤其推荐，有研究显示可降低痛风发作风险）</span><span class="badge badge-secondary">苹果、梨、柚子、蓝莓</span><span class="badge badge-secondary">避免: 荔枝、龙眼等高糖水果（果糖高）</span>
+              </div>
+            </div>
+          
+            <div class="mb-4">
+              <p class="text-sm font-semibold mb-2">其他推荐</p>
+              <div class="flex flex-wrap gap-1.5">
+                <span class="badge badge-secondary">咖啡（适量，黑咖啡有助降尿酸）</span><span class="badge badge-secondary">低脂奶制品（脱脂牛奶、酸奶）</span><span class="badge badge-secondary">坚果（每天一小把，10-15g）</span>
+              </div>
+            </div>
+          
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">禁忌 / 限制食物</h2></div>
+        <div class="card-content">
+          <div class="table-container">
+            <table class="table">
+              <thead><tr><th>食物</th><th>原因</th><th>严重程度</th></tr></thead>
+              <tbody>
+                
+                  <tr>
+                    <td class="font-medium">啤酒</td>
+                    <td class="text-muted-foreground">高嘌呤+酒精双重打击</td>
+                    <td><span class="badge badge-destructive">完全禁止</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">动物内脏（肝、肾、脑）</td>
+                    <td class="text-muted-foreground">嘌呤极高（200-1000mg/100g）</td>
+                    <td><span class="badge badge-destructive">完全禁止</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">浓肉汤/火锅汤</td>
+                    <td class="text-muted-foreground">嘌呤溶于汤中，浓度极高</td>
+                    <td><span class="badge badge-destructive">完全禁止</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">沙丁鱼、凤尾鱼</td>
+                    <td class="text-muted-foreground">嘌呤极高</td>
+                    <td><span class="badge badge-destructive">完全禁止</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">虾类</td>
+                    <td class="text-muted-foreground">过敏 + 中高嘌呤</td>
+                    <td><span class="badge badge-destructive">完全禁止</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">含糖饮料/果汁</td>
+                    <td class="text-muted-foreground">果糖促进尿酸生成</td>
+                    <td><span class="badge badge-destructive">完全禁止</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">蜂蜜</td>
+                    <td class="text-muted-foreground">高果糖</td>
+                    <td><span class="badge badge-destructive">完全禁止</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">红肉（牛羊猪肉）</td>
+                    <td class="text-muted-foreground">中高嘌呤</td>
+                    <td><span class="badge badge-warning">严格限制</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">贝类（扇贝、生蚝）</td>
+                    <td class="text-muted-foreground">中高嘌呤 + 过敏风险</td>
+                    <td><span class="badge badge-warning">严格限制</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">白酒/烈酒</td>
+                    <td class="text-muted-foreground">酒精抑制尿酸排泄</td>
+                    <td><span class="badge badge-warning">严格限制</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">高糖水果（荔枝、龙眼）</td>
+                    <td class="text-muted-foreground">高果糖</td>
+                    <td><span class="badge badge-secondary">适量控制</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">精制碳水（白米白面）</td>
+                    <td class="text-muted-foreground">高TG需要控制</td>
+                    <td><span class="badge badge-secondary">适量控制</span></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 药物交互 -->
+    
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">药物-营养交互</h2></div>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>药物</th><th>注意事项</th></tr></thead>
+            <tbody>
+              
+                <tr><td class="font-medium">非布司他</td><td>无直接营养交互，但需定期监测肝功能。可能引起转氨酶升高</td></tr>
+              
+                <tr><td class="font-medium">秋水仙碱</td><td>常见腹泻等胃肠道反应，发作期间保证水分摄入，选择易消化食物。避免与葡萄柚同服</td></tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+  
+    </div>
+    <div id="mealplan" class="tab-content">
+      
+    <!-- 每日食谱 -->
+    <div class="card">
+      <div class="card-header">
+        <h2 class="card-title">第1周食谱</h2>
+        <p class="text-sm text-muted-foreground">每日目标: 1900 kcal | 蛋白质 72g | 碳水 266g | 脂肪 53g</p>
+      </div>
+      <div class="card-content">
+        
+          <div class="day-section mb-6">
+            <h3 class="font-semibold text-lg mb-3 pb-2 border-b">周一</h3>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #E69F00"></span>
+                  <span class="text-sm font-semibold">早餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~570 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">燕麦牛奶粥</td>
+                          <td class="text-xs">燕麦片50g + 低脂牛奶250ml</td>
+                          <td class="text-xs">微波3分钟</td>
+                          <td class="text-xs text-muted-foreground">低嘌呤，牛奶促排尿酸</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">水煮蛋</td>
+                          <td class="text-xs">2个</td>
+                          <td class="text-xs">煮7分钟</td>
+                          <td class="text-xs text-muted-foreground">嘌呤极低(~1mg/100g)</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">樱桃</td>
+                          <td class="text-xs">10颗(约100g)</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground">有助降尿酸</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">柠檬水</td>
+                          <td class="text-xs">柠檬2片+水300ml</td>
+                          <td class="text-xs">温水泡</td>
+                          <td class="text-xs text-muted-foreground">碱化尿液</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #0072B2"></span>
+                  <span class="text-sm font-semibold">午餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~760 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">糙米饭</td>
+                          <td class="text-xs">糙米60g(生，约150g熟)</td>
+                          <td class="text-xs">电饭煲蒸</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">清蒸鸡胸肉</td>
+                          <td class="text-xs">鸡胸肉60g</td>
+                          <td class="text-xs">清蒸，姜丝去腥</td>
+                          <td class="text-xs text-muted-foreground">嘌呤中等，焯水后更安全</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">西兰花甜椒炒木耳</td>
+                          <td class="text-xs">西兰花150g + 甜椒50g + 木耳(泡发)30g</td>
+                          <td class="text-xs">少油快炒(油8g)</td>
+                          <td class="text-xs text-muted-foreground">高纤维、高维C</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">冬瓜汤</td>
+                          <td class="text-xs">冬瓜200g + 香菜少许</td>
+                          <td class="text-xs">煮，不加味精</td>
+                          <td class="text-xs text-muted-foreground">冬瓜利水排酸</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #56B4E9"></span>
+                  <span class="text-sm font-semibold">晚餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~570 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">小米粥</td>
+                          <td class="text-xs">小米40g</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground">低嘌呤主食</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">芹菜炒百合</td>
+                          <td class="text-xs">芹菜150g + 鲜百合50g</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground">芹菜含钾促排酸</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">凉拌黄瓜</td>
+                          <td class="text-xs">黄瓜150g</td>
+                          <td class="text-xs">凉拌，醋+少许盐</td>
+                          <td class="text-xs text-muted-foreground">清爽低热量</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">豆腐(北)</td>
+                          <td class="text-xs">100g</td>
+                          <td class="text-xs">凉拌或煮汤</td>
+                          <td class="text-xs text-muted-foreground">低嘌呤优质蛋白</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+            <div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">能量~1880kcal | 蛋白质74g | 脂肪50g | 碳水270g | 膳食纤维28g</div>
+          </div>
+        
+          <div class="day-section mb-6">
+            <h3 class="font-semibold text-lg mb-3 pb-2 border-b">周二</h3>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #E69F00"></span>
+                  <span class="text-sm font-semibold">早餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~475 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">全麦面包</td>
+                          <td class="text-xs">2片(约70g)</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground">低嘌呤</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">低脂牛奶</td>
+                          <td class="text-xs">300ml</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground">达到每日奶制品最低量</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">小番茄</td>
+                          <td class="text-xs">150g</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground">高维C</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">坚果</td>
+                          <td class="text-xs">核桃3个(约15g)</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground">优质脂肪</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #0072B2"></span>
+                  <span class="text-sm font-semibold">午餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~760 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">荞麦面</td>
+                          <td class="text-xs">干面60g(约160g熟)</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground">低GI主食</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">北豆腐蒸蛋</td>
+                          <td class="text-xs">豆腐100g + 鸡蛋1个</td>
+                          <td class="text-xs">蒸8分钟</td>
+                          <td class="text-xs text-muted-foreground">豆腐+蛋，低嘌呤蛋白组合</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">蒜蓉菠菜</td>
+                          <td class="text-xs">菠菜200g</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground">植物嘌呤安全</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">凉拌莴笋丝</td>
+                          <td class="text-xs">莴笋150g</td>
+                          <td class="text-xs">凉拌</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #56B4E9"></span>
+                  <span class="text-sm font-semibold">晚餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~655 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">红薯</td>
+                          <td class="text-xs">200g</td>
+                          <td class="text-xs">蒸/微波</td>
+                          <td class="text-xs text-muted-foreground">替代精米</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">清蒸桂鱼</td>
+                          <td class="text-xs">桂鱼80g</td>
+                          <td class="text-xs">清蒸，姜丝</td>
+                          <td class="text-xs text-muted-foreground">低嘌呤鱼类(≤2次/周)</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">白灼菜心</td>
+                          <td class="text-xs">菜心200g</td>
+                          <td class="text-xs">白灼，少许酱油</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">苏打水</td>
+                          <td class="text-xs">300ml</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground">碱化尿液</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+            <div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">能量~1890kcal | 蛋白质72g | 脂肪52g | 碳水264g | 膳食纤维26g</div>
+          </div>
+        
+          <div class="day-section mb-6">
+            <h3 class="font-semibold text-lg mb-3 pb-2 border-b">周三</h3>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #E69F00"></span>
+                  <span class="text-sm font-semibold">早餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~475 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">玉米</td>
+                          <td class="text-xs">1根(约200g)</td>
+                          <td class="text-xs">蒸/煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">低脂酸奶</td>
+                          <td class="text-xs">200ml</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground">益生菌+低嘌呤蛋白</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">水煮蛋</td>
+                          <td class="text-xs">1个</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">苹果</td>
+                          <td class="text-xs">1个(约200g)</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #0072B2"></span>
+                  <span class="text-sm font-semibold">午餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~760 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">藜麦饭</td>
+                          <td class="text-xs">藜麦+白米共60g(生)</td>
+                          <td class="text-xs">蒸</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">洋葱炒鸡蛋</td>
+                          <td class="text-xs">洋葱100g + 鸡蛋1个</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">水煮娃娃菜</td>
+                          <td class="text-xs">娃娃菜200g</td>
+                          <td class="text-xs">煮，蘸酱油</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">凉拌木耳</td>
+                          <td class="text-xs">木耳(泡发)80g + 黄瓜50g</td>
+                          <td class="text-xs">凉拌</td>
+                          <td class="text-xs text-muted-foreground">高纤维</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #56B4E9"></span>
+                  <span class="text-sm font-semibold">晚餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~665 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">杂粮粥</td>
+                          <td class="text-xs">薏米+红豆+小米共50g</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground">薏米利水</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">清蒸鲈鱼</td>
+                          <td class="text-xs">鲈鱼80g</td>
+                          <td class="text-xs">清蒸</td>
+                          <td class="text-xs text-muted-foreground">本周第2次鱼 ✓</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">蒜蓉空心菜</td>
+                          <td class="text-xs">空心菜200g</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">豆腐干</td>
+                          <td class="text-xs">50g</td>
+                          <td class="text-xs">凉拌</td>
+                          <td class="text-xs text-muted-foreground">补充蛋白质</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+            <div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">能量~1900kcal | 蛋白质76g | 脂肪48g | 碳水272g | 膳食纤维27g</div>
+          </div>
+        
+          <div class="day-section mb-6">
+            <h3 class="font-semibold text-lg mb-3 pb-2 border-b">周四</h3>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #E69F00"></span>
+                  <span class="text-sm font-semibold">早餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~570 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">燕麦粥</td>
+                          <td class="text-xs">燕麦40g + 低脂牛奶200ml</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">水煮蛋</td>
+                          <td class="text-xs">2个</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">蓝莓</td>
+                          <td class="text-xs">100g</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground">抗氧化</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">全麦面包</td>
+                          <td class="text-xs">1片</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #0072B2"></span>
+                  <span class="text-sm font-semibold">午餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~760 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">糙米饭</td>
+                          <td class="text-xs">糙米60g(生)</td>
+                          <td class="text-xs">蒸</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">番茄炒鸡蛋</td>
+                          <td class="text-xs">番茄150g + 鸡蛋1个</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground">经典低嘌呤菜</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">丝瓜汤</td>
+                          <td class="text-xs">丝瓜200g</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">凉拌海蜇皮</td>
+                          <td class="text-xs">海蜇皮100g(泡发后)</td>
+                          <td class="text-xs">凉拌</td>
+                          <td class="text-xs text-muted-foreground">嘌呤极低的海产品</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #56B4E9"></span>
+                  <span class="text-sm font-semibold">晚餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~570 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">蒸南瓜</td>
+                          <td class="text-xs">南瓜250g</td>
+                          <td class="text-xs">蒸</td>
+                          <td class="text-xs text-muted-foreground">低热量主食替代</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">鸡胸肉沙拉</td>
+                          <td class="text-xs">鸡胸肉60g + 混合生菜200g</td>
+                          <td class="text-xs">鸡胸肉煮熟撕丝，沙拉醋汁</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">柚子</td>
+                          <td class="text-xs">3瓣(约150g)</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground">低糖水果</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+            <div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">能量~1900kcal | 蛋白质73g | 脂肪54g | 碳水260g | 膳食纤维25g</div>
+          </div>
+        
+          <div class="day-section mb-6">
+            <h3 class="font-semibold text-lg mb-3 pb-2 border-b">周五</h3>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #E69F00"></span>
+                  <span class="text-sm font-semibold">早餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~475 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">红薯粥</td>
+                          <td class="text-xs">红薯100g + 大米30g</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">低脂牛奶</td>
+                          <td class="text-xs">300ml</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">水煮蛋</td>
+                          <td class="text-xs">1个</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">小番茄</td>
+                          <td class="text-xs">100g</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #0072B2"></span>
+                  <span class="text-sm font-semibold">午餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~760 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">荞麦面</td>
+                          <td class="text-xs">干面60g</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">芹菜拌豆腐干</td>
+                          <td class="text-xs">芹菜150g + 豆腐干50g</td>
+                          <td class="text-xs">凉拌</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">炒豇豆</td>
+                          <td class="text-xs">豇豆150g</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">紫菜蛋花汤</td>
+                          <td class="text-xs">紫菜2g + 蛋清1个</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #56B4E9"></span>
+                  <span class="text-sm font-semibold">晚餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~665 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">藜麦饭</td>
+                          <td class="text-xs">藜麦+小米共50g(生)</td>
+                          <td class="text-xs">蒸</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">清蒸鸡胸肉</td>
+                          <td class="text-xs">鸡胸肉60g</td>
+                          <td class="text-xs">蒸，先焯水1分钟去嘌呤</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">蒜蓉西兰花</td>
+                          <td class="text-xs">西兰花200g</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">梨</td>
+                          <td class="text-xs">1个(约200g)</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+            <div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">能量~1900kcal | 蛋白质70g | 脂肪50g | 碳水272g | 膳食纤维26g</div>
+          </div>
+        
+          <div class="day-section mb-6">
+            <h3 class="font-semibold text-lg mb-3 pb-2 border-b">周六</h3>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #E69F00"></span>
+                  <span class="text-sm font-semibold">早餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~570 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">全麦吐司</td>
+                          <td class="text-xs">2片</td>
+                          <td class="text-xs">烤</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">牛油果</td>
+                          <td class="text-xs">50g</td>
+                          <td class="text-xs">涂抹面包</td>
+                          <td class="text-xs text-muted-foreground">好脂肪</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">低脂牛奶</td>
+                          <td class="text-xs">300ml</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">水煮蛋</td>
+                          <td class="text-xs">1个</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #0072B2"></span>
+                  <span class="text-sm font-semibold">午餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~760 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">杂粮饭</td>
+                          <td class="text-xs">糙米+黑米共60g(生)</td>
+                          <td class="text-xs">蒸</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">卤牛肉(焯水)</td>
+                          <td class="text-xs">牛肉50g</td>
+                          <td class="text-xs">先焯水2分钟去嘌呤，再卤</td>
+                          <td class="text-xs text-muted-foreground">红肉限量，一周仅此1次</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">冬瓜海带汤</td>
+                          <td class="text-xs">冬瓜200g + 海带(泡发)50g</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground">海带低嘌呤，利水</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">炒木耳菜</td>
+                          <td class="text-xs">木耳菜200g</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #56B4E9"></span>
+                  <span class="text-sm font-semibold">晚餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~570 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">山药粥</td>
+                          <td class="text-xs">山药100g + 小米30g</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">凉拌豆腐</td>
+                          <td class="text-xs">北豆腐100g + 香葱</td>
+                          <td class="text-xs">凉拌</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">蒜蓉菠菜</td>
+                          <td class="text-xs">菠菜200g</td>
+                          <td class="text-xs">少油炒(油6g)</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">樱桃</td>
+                          <td class="text-xs">10颗(约100g)</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+            <div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">能量~1900kcal | 蛋白质75g | 脂肪58g | 碳水258g | 膳食纤维24g</div>
+          </div>
+        
+          <div class="day-section mb-6">
+            <h3 class="font-semibold text-lg mb-3 pb-2 border-b">周日</h3>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #E69F00"></span>
+                  <span class="text-sm font-semibold">早餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~570 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">燕麦酸奶碗</td>
+                          <td class="text-xs">燕麦40g + 酸奶200ml + 蓝莓50g</td>
+                          <td class="text-xs">拌</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">全麦面包</td>
+                          <td class="text-xs">1片</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">水煮蛋</td>
+                          <td class="text-xs">2个</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #0072B2"></span>
+                  <span class="text-sm font-semibold">午餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~760 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">糙米饭</td>
+                          <td class="text-xs">糙米60g(生)</td>
+                          <td class="text-xs">蒸</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">豆腐煲</td>
+                          <td class="text-xs">北豆腐150g + 白菜100g + 粉丝20g</td>
+                          <td class="text-xs">炖</td>
+                          <td class="text-xs text-muted-foreground">丰富植物蛋白</td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">凉拌黄瓜</td>
+                          <td class="text-xs">黄瓜200g</td>
+                          <td class="text-xs">凉拌</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">柚子</td>
+                          <td class="text-xs">3瓣</td>
+                          <td class="text-xs">生食</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+              <div class="meal-section mb-4">
+                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                  <span class="w-2.5 h-2.5 rounded-full" style="background: #56B4E9"></span>
+                  <span class="text-sm font-semibold">晚餐</span>
+                  <span class="text-xs text-muted-foreground ml-auto">~570 kcal</span>
+                </div>
+                <div class="table-container">
+                  <table class="table">
+                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                    <tbody>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">荞麦面</td>
+                          <td class="text-xs">干面50g</td>
+                          <td class="text-xs">煮</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">清蒸鲈鱼</td>
+                          <td class="text-xs">鲈鱼80g</td>
+                          <td class="text-xs">清蒸</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">白灼生菜</td>
+                          <td class="text-xs">生菜200g</td>
+                          <td class="text-xs">白灼</td>
+                          <td class="text-xs text-muted-foreground"></td>
+                        </tr>
+                      
+                        <tr>
+                          <td class="text-xs font-medium">苏打水</td>
+                          <td class="text-xs">300ml</td>
+                          <td class="text-xs">—</td>
+                          <td class="text-xs text-muted-foreground">碱化尿液</td>
+                        </tr>
+                      
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            
+            <div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">能量~1900kcal | 蛋白质78g | 脂肪48g | 碳水268g | 膳食纤维25g</div>
+          </div>
+        
+      </div>
+    </div>
+  
+    </div>
+    <div id="exercise" class="tab-content">
+      
+    <!-- 安全性评估 -->
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">安全性评估</h2></div>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>评估项目</th><th>当前状态</th><th>运动安全性</th></tr></thead>
+            <tbody>
+              
+                <tr><td class="font-medium">痛风（右脚第一跖趾关节）</td><td>近一年发作3次，间歇期</td><td>严格限制高强度运动</td></tr>
+              
+                <tr><td class="font-medium">高尿酸血症</td><td>尿酸 528 μmol/L（显著超标）</td><td>中高强度有氧运动有助降尿酸</td></tr>
+              
+                <tr><td class="font-medium">高甘油三酯血症</td><td>TG 2.2 mmol/L</td><td>有氧运动为主要非药物干预</td></tr>
+              
+                <tr><td class="font-medium">超重</td><td>BMI 26.8，目标减重 13kg</td><td>需配合饮食进行减重</td></tr>
+              
+                <tr><td class="font-medium">虾类过敏</td><td>食后皮疹</td><td>与运动无直接关联</td></tr>
+              
+            </tbody>
+          </table>
+        </div>
+        <div class="alert alert-info mt-4">
+          <p class="text-sm font-medium">王先生可进行中等强度有氧运动，但需严格避免高强度运动和关节冲击。痛风间歇期可安全运动，急性发作期必须停止。建议首次执行运动处方前咨询风湿免疫科医生确认痛风关节状况。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 运动处方 -->
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">运动处方</h2></div>
+      <div class="card-content">
+        <div class="grid-2 mb-4">
+          <div class="p-3 border rounded"><span class="text-xs text-muted-foreground">运动类型</span><p class="text-sm font-medium mt-1">有氧运动为主 + 适量抗阻训练 + 柔韧性训练</p></div>
+          <div class="p-3 border rounded"><span class="text-xs text-muted-foreground">运动强度</span><p class="text-sm font-medium mt-1">中等强度（最大心率的 50%-70%）</p></div>
+          <div class="p-3 border rounded"><span class="text-xs text-muted-foreground">运动频率</span><p class="text-sm font-medium mt-1">每周 4-5 次</p></div>
+          <div class="p-3 border rounded"><span class="text-xs text-muted-foreground">运动时长</span><p class="text-sm font-medium mt-1">30-60 分钟（不含热身与整理）</p></div>
+        </div>
+        <div class="p-3 bg-muted/40 rounded flex items-center gap-2">
+          <span class="text-sm font-medium">靶心率：</span>
+          <span class="badge badge-outline">91-127 bpm</span>
+          <span class="text-sm text-muted-foreground ml-2">最大心率 182 bpm</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 有氧/抗阻/柔韧 -->
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">有氧运动</h2></div>
+        <div class="card-content">
+          <p class="text-sm"><strong>项目：</strong>快走、游泳/水中行走、骑自行车/动感单车、椭圆机、太极拳/八段锦</p>
+          <p class="text-sm mt-2"><strong>强度：</strong>中等</p>
+          <p class="text-sm mt-2"><strong>频率：</strong>每周 4-5 次</p>
+          <p class="text-sm mt-2"><strong>时长：</strong>每次 30-60 分钟</p>
+          <p class="text-xs text-muted-foreground mt-2">周运动总量 ≥ 150 分钟有氧运动，逐步增至 200-300 分钟</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">抗阻训练</h2></div>
+        <div class="card-content">
+          <p class="text-sm"><strong>项目：</strong>弹力带上肢推拉、哑铃弯举/肩推（轻重量）、坐姿腿举/靠墙静蹲、平板支撑、臀桥</p>
+          <p class="text-sm mt-2"><strong>强度：</strong>轻重量、高重复，每组 12-15 次</p>
+          <p class="text-sm mt-2"><strong>频率：</strong>每周 2 次</p>
+          <p class="text-sm mt-2"><strong>时长：</strong>每次 15-20 分钟</p>
+          <p class="text-xs text-muted-foreground mt-2">轻重量、高重复、不追求肌肉肥大，以提升基础代谢和肌力耐力为目标</p>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">柔韧性训练</h2></div>
+        <div class="card-content">
+          <p class="text-sm"><strong>项目：</strong>全身静态拉伸（重点下肢）、瑜伽（初级/修复型）、右脚趾关节活动度练习</p>
+          <p class="text-sm mt-2"><strong>强度：</strong>轻柔拉伸</p>
+          <p class="text-sm mt-2"><strong>频率：</strong>每次运动后 + 每周 1-2 次瑜伽</p>
+          <p class="text-sm mt-2"><strong>时长：</strong>10-15 分钟</p>
+          <p class="text-xs text-muted-foreground mt-2">右脚趾关节活动度练习每日 5 分钟</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 分阶段运动计划 -->
+    
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">适应期 (第1-4周)</h2></div>
+        <div class="card-content">
+          <div class="table-container">
+            <table class="table">
+              <thead><tr><th>星期</th><th>运动内容</th><th>时长</th><th>强度</th></tr></thead>
+              <tbody>
+                
+                  <tr>
+                    <td class="font-medium">周一</td>
+                    <td>快走 + 拉伸</td>
+                    <td>30 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周二</td>
+                    <td>骑自行车/椭圆机 + 上肢弹力带</td>
+                    <td>35 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周三</td>
+                    <td>休息或轻度太极/八段锦</td>
+                    <td>20 min</td>
+                    <td><span class="badge intensity-light">低</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周四</td>
+                    <td>快走 + 下肢力量（靠墙静蹲+臀桥）</td>
+                    <td>35 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周五</td>
+                    <td>游泳/水中行走 + 拉伸</td>
+                    <td>40 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周六</td>
+                    <td>快走/骑车 + 核心训练</td>
+                    <td>35 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周日</td>
+                    <td>完全休息</td>
+                    <td>—</td>
+                    <td><span class="badge intensity-moderate">—</span></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-4 p-3 bg-muted/40 rounded text-center text-sm font-medium">周均运动量：有氧约 155 分钟 + 抗阻约 30 分钟 + 拉伸约 40 分钟</div>
+        </div>
+      </div>
+    
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">进阶期 (第5-12周)</h2></div>
+        <div class="card-content">
+          <div class="table-container">
+            <table class="table">
+              <thead><tr><th>星期</th><th>运动内容</th><th>时长</th><th>强度</th></tr></thead>
+              <tbody>
+                
+                  <tr>
+                    <td class="font-medium">周一</td>
+                    <td>快走/慢跑交替 + 拉伸</td>
+                    <td>40 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周二</td>
+                    <td>骑自行车 + 上肢+核心抗阻</td>
+                    <td>45 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周三</td>
+                    <td>太极拳/瑜伽</td>
+                    <td>30 min</td>
+                    <td><span class="badge intensity-light">低-中</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周四</td>
+                    <td>游泳 + 下肢抗阻 + 拉伸</td>
+                    <td>45 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周五</td>
+                    <td>快走 + 全身抗阻</td>
+                    <td>45 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周六</td>
+                    <td>椭圆机/骑车 + 核心训练</td>
+                    <td>40 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周日</td>
+                    <td>完全休息</td>
+                    <td>—</td>
+                    <td><span class="badge intensity-moderate">—</span></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-4 p-3 bg-muted/40 rounded text-center text-sm font-medium">周均运动量：有氧约 200 分钟 + 抗阻约 45 分钟 + 拉伸约 50 分钟</div>
+        </div>
+      </div>
+    
+      <div class="card">
+        <div class="card-header"><h2 class="card-title">维持期 (第13周起)</h2></div>
+        <div class="card-content">
+          <div class="table-container">
+            <table class="table">
+              <thead><tr><th>星期</th><th>运动内容</th><th>时长</th><th>强度</th></tr></thead>
+              <tbody>
+                
+                  <tr>
+                    <td class="font-medium">周一</td>
+                    <td>有氧运动（快走/游泳/骑车/椭圆机）</td>
+                    <td>40-60 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周二</td>
+                    <td>有氧 + 抗阻训练</td>
+                    <td>45-55 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周三</td>
+                    <td>柔韧性训练（瑜伽/太极）</td>
+                    <td>30 min</td>
+                    <td><span class="badge intensity-light">低-中</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周四</td>
+                    <td>有氧 + 抗阻训练</td>
+                    <td>45-55 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周五</td>
+                    <td>有氧运动</td>
+                    <td>40-50 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周六</td>
+                    <td>有氧 + 柔韧训练</td>
+                    <td>45 min</td>
+                    <td><span class="badge intensity-medium">中等</span></td>
+                  </tr>
+                
+                  <tr>
+                    <td class="font-medium">周日</td>
+                    <td>完全休息</td>
+                    <td>—</td>
+                    <td><span class="badge intensity-moderate">—</span></td>
+                  </tr>
+                
+              </tbody>
+            </table>
+          </div>
+          <div class="mt-4 p-3 bg-muted/40 rounded text-center text-sm font-medium">周均运动量：有氧 ≥200 分钟 + 抗阻 2-3 次 + 柔韧持续保持</div>
+        </div>
+      </div>
+    
+  
+    </div>
+  </main>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+      document.querySelector('[data-tab="' + tabId + '"]').classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+</body>
+</html>

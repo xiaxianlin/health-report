@@ -4,578 +4,2322 @@
   <meta charset="UTF-8">
   <title>营养方案报告 - 张先生</title>
   <style>
-    @page {
-      size: A4;
-      margin: 10mm 12mm;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
-      font-size: 9pt;
-      line-height: 1.4;
-      color: #222;
-    }
+@page { size: A4; margin: 18mm 20mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* 紧凑头部 */
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 2px solid #1a5fb4;
-      padding-bottom: 6px;
-      margin-bottom: 8px;
-    }
-    .header-left h1 {
-      font-size: 16pt;
-      color: #1a5fb4;
-      margin: 0;
-    }
-    .header-left .subtitle {
-      font-size: 8pt;
-      color: #666;
-    }
-    .header-right {
-      text-align: right;
-      font-size: 8pt;
-    }
-    .header-right .label { color: #666; }
-    .header-right .value { color: #1a5fb4; font-weight: bold; }
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 10pt;
+  line-height: 1.7;
+  color: #1a1a2e;
+  background: #fff;
+}
 
-    /* 紧凑分区 */
-    .section {
-      margin-bottom: 10px;
-    }
-    .section-title {
-      font-size: 11pt;
-      font-weight: bold;
-      color: #1a5fb4;
-      border-left: 3px solid #1a5fb4;
-      padding-left: 6px;
-      margin-bottom: 6px;
-    }
+/* ── 封面 ── */
+.cover {
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240mm;
+  text-align: center;
+  background: linear-gradient(160deg, #0f3460 0%, #16213e 60%, #1a1a2e 100%);
+  color: #fff;
+  margin: -18mm -20mm;
+  padding: 40mm 30mm;
+}
+.cover-logo {
+  font-size: 9pt;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover h1 {
+  font-size: 28pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8mm;
+  color: #fff;
+}
+.cover-subtitle {
+  font-size: 12pt;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover-meta {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 6mm 12mm;
+  font-size: 11pt;
+  line-height: 2.2;
+  color: #e0e0ff;
+}
+.cover-meta strong { color: #fff; }
+.cover-disclaimer {
+  margin-top: 16mm;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.4);
+}
 
-    /* 紧凑信息网格 */
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 4px 12px;
-      font-size: 8pt;
-      margin-bottom: 8px;
-    }
-    .info-item {
-      display: flex;
-    }
-    .info-label {
-      color: #666;
-      min-width: 40px;
-    }
-    .info-value {
-      font-weight: 600;
-    }
+/* ── 章节标题块 ── */
+.section-header {
+  page-break-before: always;
+  margin: 0 -20mm 6mm -20mm;
+  padding: 5mm 20mm;
+  background: linear-gradient(90deg, #0f3460, #1a5fb4);
+  color: #fff;
+}
+.section-header h2 {
+  font-size: 14pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.section-header .section-sub {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1mm;
+}
 
-    /* 紧凑表格 */
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 8pt;
-      margin-bottom: 6px;
-    }
-    th, td {
-      border: 0.5px solid #ccc;
-      padding: 3px 5px;
-      text-align: left;
-    }
-    th {
-      background: #e8f0fe;
-      font-weight: 600;
-      font-size: 7.5pt;
-    }
-    tr:nth-child(even) {
-      background: #fafafa;
-    }
-    td:first-child {
-      font-weight: 500;
-    }
+/* ── 正文标题 ── */
+h1, h2, h3, h4 { font-weight: 600; }
+h2 {
+  font-size: 13pt;
+  color: #0f3460;
+  border-bottom: 2px solid #0f3460;
+  padding-bottom: 2mm;
+  margin: 6mm 0 3mm 0;
+}
+h3 {
+  font-size: 11pt;
+  color: #1a5fb4;
+  border-left: 3px solid #1a5fb4;
+  padding-left: 3mm;
+  margin: 5mm 0 2mm 0;
+}
+h4 {
+  font-size: 10pt;
+  color: #2d6a4f;
+  margin: 4mm 0 2mm 0;
+}
 
-    /* 状态标签 */
-    .status {
-      display: inline-block;
-      padding: 1px 4px;
-      border-radius: 2px;
-      font-size: 7pt;
-      font-weight: bold;
-    }
-    .status-high { background: #fee2e2; color: #c53030; }
-    .status-low { background: #dbeafe; color: #1e40af; }
-    .status-normal { background: #d1fae5; color: #047857; }
+/* ── 段落和列表 ── */
+p { margin: 2mm 0; }
+ul, ol { margin: 2mm 0 2mm 6mm; padding: 0; }
+li { margin: 1mm 0; }
+ul li { list-style: disc; }
+ol li { list-style: decimal; }
 
-    /* 紧凑列表 */
-    .compact-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    .compact-list li {
-      padding: 2px 0;
-      padding-left: 12px;
-      position: relative;
-      font-size: 8pt;
-    }
-    .compact-list li::before {
-      content: "•";
-      position: absolute;
-      left: 0;
-      color: #1a5fb4;
-    }
+/* ── 引用块 → 提示框 ── */
+blockquote {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 4px 4px 0;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  color: #1e40af;
+  font-size: 9.5pt;
+}
+blockquote p { margin: 0; }
 
-    /* 紧凑卡片 */
-    .card {
-      border: 0.5px solid #ddd;
-      border-radius: 4px;
-      padding: 6px;
-      margin-bottom: 6px;
-    }
-    .card-header {
-      font-weight: bold;
-      font-size: 9pt;
-      color: #1a5fb4;
-      margin-bottom: 4px;
-      border-bottom: 1px dashed #ddd;
-      padding-bottom: 2px;
-    }
+/* ── 代码块 → 信息框 ── */
+pre {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 8.5pt;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+code {
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 8.5pt;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+}
+pre code { background: none; padding: 0; }
 
-    /* 紧凑数值展示 */
-    .metrics-row {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 6px;
-    }
-    .metric {
-      flex: 1;
-      background: linear-gradient(135deg, #1a5fb4 0%, #3b82f6 100%);
-      color: white;
-      padding: 6px;
-      border-radius: 4px;
-      text-align: center;
-    }
-    .metric-value {
-      font-size: 14pt;
-      font-weight: bold;
-    }
-    .metric-unit {
-      font-size: 7pt;
-      opacity: 0.9;
-    }
-    .metric-label {
-      font-size: 7pt;
-      margin-top: 2px;
-      opacity: 0.9;
-    }
+/* ── 表格 ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0;
+  font-size: 9pt;
+}
+thead tr { background: #0f3460; color: #fff; }
+thead th {
+  padding: 2.5mm 3mm;
+  font-weight: 600;
+  text-align: left;
+  border: 1px solid #0a2545;
+}
+tbody tr:nth-child(even) { background: #f0f4ff; }
+tbody td {
+  padding: 2mm 3mm;
+  border: 1px solid #d1d9e6;
+  vertical-align: top;
+}
 
-    /* 紧凑警告 */
-    .warning-inline {
-      background: #fff7ed;
-      border-left: 2px solid #f97316;
-      padding: 4px 6px;
-      margin: 4px 0;
-      font-size: 8pt;
-    }
+/* ── 强调 ── */
+strong { font-weight: 700; color: #0f3460; }
+em { color: #1a5fb4; font-style: normal; font-weight: 500; }
 
-    /* 两列布局 */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
+/* ── hr 分隔线 ── */
+hr {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 4mm 0;
+}
 
-    /* 紧凑餐次 */
-    .meal-card {
-      border: 0.5px solid #ddd;
-      padding: 4px 6px;
-      margin-bottom: 4px;
-      border-radius: 3px;
-    }
-    .meal-title {
-      font-weight: bold;
-      font-size: 8pt;
-      color: #b45309;
-      margin-bottom: 2px;
-    }
-    .meal-item {
-      font-size: 7.5pt;
-      padding: 1px 0;
-    }
+/* ── 分页控制 ── */
+table { page-break-inside: auto; }
+tr { page-break-inside: avoid; }
 
-    /* 分页控制 */
-    .page-break {
-      page-break-before: always;
-    }
-    .avoid-break {
-      page-break-inside: avoid;
-    }
-
-    /* 页脚 */
-    .footer {
-      margin-top: 12px;
-      padding-top: 6px;
-      border-top: 1px solid #ddd;
-      font-size: 7pt;
-      color: #999;
-      text-align: center;
-    }
-  </style>
+/* ── 报告页脚 ── */
+.report-footer {
+  margin-top: 10mm;
+  padding-top: 3mm;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+  font-size: 7.5pt;
+  color: #94a3b8;
+}
+</style>
 </head>
 <body>
-  <!-- 紧凑头部 -->
-  <div class="header">
-    <div class="header-left">
-      <h1>营养方案报告</h1>
-      <div class="subtitle">Personalized Nutrition Plan</div>
-    </div>
-    <div class="header-right">
-      <div><span class="label">患者：</span><span class="value">张先生</span></div>
-      <div><span class="label">日期：</span><span class="value">2026/4/7</span></div>
-    </div>
+
+<div class="cover">
+  <div class="cover-logo">AI Nutrition System</div>
+  <h1>个性化营养方案报告</h1>
+  <div class="cover-subtitle">Personalized Nutrition Plan</div>
+  <div class="cover-meta">
+    <div><strong>患者姓名</strong>　张先生</div>
+    <div><strong>报告日期</strong>　2026年4月7日</div>
+    <div><strong>生成机构</strong>　AI 营养咨询系统</div>
   </div>
+  <div class="cover-disclaimer">本报告由 AI 辅助生成，仅供参考，不构成医疗建议</div>
+</div>
 
-  <div class="section">
-    <div class="section-title">一、健康档案</div>
-    <div class="info-grid">
-      <div class="info-item"><span class="info-label">姓名：</span><span class="info-value">张先生</span></div>
-      <div class="info-item"><span class="info-label">性别：</span><span class="info-value">男</span></div>
-      <div class="info-item"><span class="info-label">年龄：</span><span class="info-value">52岁</span></div>
-      <div class="info-item"><span class="info-label">身高：</span><span class="info-value">172cm</span></div>
-      <div class="info-item"><span class="info-label">体重：</span><span class="info-value">82kg</span></div>
-      <div class="info-item"><span class="info-label">BMI：</span><span class="info-value">-</span></div>
-      <div class="info-item"><span class="info-label">血压：</span><span class="info-value">-</span></div>
-    </div>
-    
-  </div>
-
-  <div class="section avoid-break">
-    <div class="section-title">二、营养评估</div>
-    <div class="metrics-row">
-      
-      <div class="metric"><div class="metric-value">1968</div><div class="metric-unit">kcal</div><div class="metric-label">总消耗</div></div>
-      
-    </div>
-    <div style="font-size:8pt;">
-
-> 生成日期: 2026-03-30
-> 基于: 健康档案_2026-03-30.md（张先生）
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">BMR</strong>
-
-（Mifflin-St Jeor 公式）
-
-<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
-BMR = 10 × 82 + 6.25 × 172 - 5 × 52 + 5
+<div class="section-header">
+  <h2>营养评估</h2>
+  <div class="section-sub">Nutrition Assessment</div>
+</div>
+<div class="section-body">
+<h1>营养评估报告</h1>
+<blockquote>
+<p>生成日期: 2026-03-30
+基于: 健康档案_2026-03-30.md（张先生）</p>
+</blockquote>
+<hr>
+<h2>基础代谢计算</h2>
+<h3>BMR</h3>
+<p>（Mifflin-St Jeor 公式）</p>
+<pre><code>BMR = 10 × 82 + 6.25 × 172 - 5 × 52 + 5
     = 820 + 1075 - 260 + 5
     = 1640 kcal/天
-<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
-
-<strong style="color:#1a5fb4;">活动水平</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>当前活动水平: <strong>久坐</strong>（IT工程师，基本无规律运动）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>活动系数: <strong>1.2</strong></li>
-
-<strong style="color:#1a5fb4;">TDEE</strong>
-
-<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
-TDEE = 1640 × 1.2 = 1968 kcal/天
-<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
-
-<strong style="color:#1a5fb4;">目标能量</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>2型糖尿病 + 超重</strong>: 目标减重，每日减少 <strong>500 kcal</strong></li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>调整后目标能量</strong>: 1968 - 500 = <strong>1468 kcal → 取整 1500 kcal/天</strong></li>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">宏量营养素</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>营养素 </span><span style="color:#1a5fb4;font-weight:500;"> 目标值 </span></div> 占比 | 范围 | 来源 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>--------</span><span style="color:#1a5fb4;font-weight:500;">--------</span></div>------|------|------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>总能量</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>1500 kcal</strong> </span></div> 100% | 1400-1600 | 糖尿病减重: -500kcal |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>蛋白质</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>68 g</strong> </span></div> 18% | 60-75g (15-20%) | 糖尿病+肝病: 0.83g/kg |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>碳水化合物</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>169 g</strong> </span></div> 45% | 140-188g (40-50%) | 糖尿病: 低比例，低GI |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>脂肪</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>45 g</strong> </span></div> 27% | 40-50g (25-30%) | 高脂血症+脂肪肝: 低脂 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>膳食纤维</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>≥ 25 g</strong> </span></div> — | 25-35g | 糖尿病+高脂血症均要求 |
-
-<strong>脂肪细分:</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>脂肪类型 </span><span style="color:#1a5fb4;font-weight:500;"> 目标 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>---------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>饱和脂肪 </span><span style="color:#1a5fb4;font-weight:500;"> < 总能量7% → <12g </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>反式脂肪 </span><span style="color:#1a5fb4;font-weight:500;"> <strong>完全避免</strong> </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>胆固醇 </span><span style="color:#1a5fb4;font-weight:500;"> < 200 mg/天 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>Omega-3 </span><span style="color:#1a5fb4;font-weight:500;"> 每周至少2次深海鱼 </span></div>
-
-<strong style="color:#1a5fb4;">微量营养素重点</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>营养素 </span><span style="color:#1a5fb4;font-weight:500;"> 目标 </span></div> 原因 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>--------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>钠 </span><span style="color:#1a5fb4;font-weight:500;"> < 2000 mg（盐<5g） </span></div> 糖尿病+血压偏高 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>钾 </span><span style="color:#1a5fb4;font-weight:500;"> 3500 mg </span></div> 血压管理 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>钙 </span><span style="color:#1a5fb4;font-weight:500;"> 1000 mg </span></div> 一般需求 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>维生素B12 </span><span style="color:#1a5fb4;font-weight:500;"> 关注/补充 </span></div> 二甲双胍影响吸收 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>维生素C </span><span style="color:#1a5fb4;font-weight:500;"> 100 mg </span></div> 一般需求 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>铁 </span><span style="color:#1a5fb4;font-weight:500;"> 12 mg </span></div> 一般需求 |
-
-<strong style="color:#1a5fb4;">三餐能量分配</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>餐次 </span><span style="color:#1a5fb4;font-weight:500;"> 能量 </span></div> 占比 | 碳水 | 蛋白质 | 脂肪 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>------|------|--------|------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>早餐</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 450 kcal </span></div> 30% | 50g | 20g | 14g |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>午餐</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 600 kcal </span></div> 40% | 68g | 28g | 18g |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>晚餐</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 450 kcal </span></div> 30% | 50g | 20g | 14g |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>合计 </span><span style="color:#1a5fb4;font-weight:500;"> <strong>1500 kcal</strong> </span></div> 100% | <strong>168g</strong> | <strong>68g</strong> | <strong>46g</strong> |
-
-<strong>加餐（可选，如上午/下午感觉饥饿）:</strong>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>坚果10g（约60 kcal）或 低GI水果100g（约50 kcal）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>从正餐中扣除相应热量</li>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">来自糖尿病</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>以<strong>低GI食物</strong>为主（GI<55），碳水占总能量40-50%</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>避免精制糖、含糖饮料</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>主食以粗粮/全谷物替代精白米面</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>每餐碳水均匀分配，避免血糖波动</li>
-
-<strong style="color:#1a5fb4;">来自高脂血症</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>饱和脂肪 <7% 总能量</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>每周至少2次<strong>深海鱼</strong>（Omega-3）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>增加<strong>可溶性纤维</strong>（燕麦、大麦、豆类）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>完全避免反式脂肪</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>胆固醇 <200 mg/天</li>
-
-<strong style="color:#1a5fb4;">来自脂肪肝/肝功能异常</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>严格戒酒</strong></li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>低脂饮食，减少肝脏负担</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>适量优质蛋白，促进肝细胞修复</li>
-
-<strong style="color:#1a5fb4;">来自超重（减重目标）</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>每日 1500 kcal，制造500kcal缺口</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>目标: 3-6个月减重5-8kg</li>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">主食类（低GI）</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>燕麦、糙米、荞麦面、藜麦、全麦面包、红薯、山药</li>
-
-<strong style="color:#1a5fb4;">蛋白质类</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>鱼类（三文鱼、鲈鱼、鲭鱼 — 每周至少2次深海鱼）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>鸡胸肉（去皮）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>豆腐/豆制品</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>鸡蛋（每天1个）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>低脂牛奶/酸奶</li>
-
-<strong style="color:#1a5fb4;">蔬菜类</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>绿叶蔬菜（菠菜、西兰花、芹菜）— 每天至少300g</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>番茄、黄瓜、茄子、芦笋</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>洋葱、胡萝卜</li>
-
-<strong style="color:#1a5fb4;">水果类（低GI）</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>苹果、梨、柚子、蓝莓、草莓、猕猴桃 — 每天200g</li>
-
-<strong style="color:#1a5fb4;">脂肪来源</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>橄榄油、茶籽油（烹饪用油，每天25-30g）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>核桃、杏仁（每天10g）</li>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>食物 </span><span style="color:#1a5fb4;font-weight:500;"> 原因 </span></div> 严重程度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>---------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>含糖饮料、果汁 </span><span style="color:#1a5fb4;font-weight:500;"> 糖尿病 </span></div> <strong>完全禁止</strong> |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>白米饭、白面条、白面包 </span><span style="color:#1a5fb4;font-weight:500;"> 糖尿病（高GI） </span></div> <strong>严格限制</strong>（每日<1两） |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>糕点、饼干、糖果 </span><span style="color:#1a5fb4;font-weight:500;"> 高脂血症+糖尿病 </span></div> <strong>完全禁止</strong> |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>油炸食品 </span><span style="color:#1a5fb4;font-weight:500;"> 高脂血症+脂肪肝 </span></div> <strong>完全禁止</strong> |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>动物内脏 </span><span style="color:#1a5fb4;font-weight:500;"> 高脂血症（高胆固醇） </span></div> <strong>完全禁止</strong> |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>黄油、猪油 </span><span style="color:#1a5fb4;font-weight:500;"> 高脂血症（高饱和脂肪） </span></div> <strong>完全禁止</strong> |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>酒精 </span><span style="color:#1a5fb4;font-weight:500;"> 糖尿病+脂肪肝 </span></div> <strong>完全禁止</strong> |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>西柚/葡萄柚 </span><span style="color:#1a5fb4;font-weight:500;"> 他汀类药物交互 </span></div> <strong>完全禁止</strong> |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>加工肉类（火腿、培根） </span><span style="color:#1a5fb4;font-weight:500;"> 高钠+高脂 </span></div> <strong>严格限制</strong> |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>高GI水果（西瓜、菠萝） </span><span style="color:#1a5fb4;font-weight:500;"> 糖尿病 </span></div> <strong>限制</strong>（少量） |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>腌制食品 </span><span style="color:#1a5fb4;font-weight:500;"> 高钠 </span></div> <strong>限制</strong> |
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>药物 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>二甲双胍</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 长期服用可能影响维生素B12吸收，建议每年监测B12水平，多摄入富含B12的食物（鱼类、蛋类）或考虑补充剂 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>阿托伐他汀</strong> </span><span style="color:#1a5fb4;font-weight:500;"> <strong>严禁食用西柚/葡萄柚</strong>（影响药物代谢，增加副作用风险）。需定时服药（晚间） </span></div>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-本营养评估基于以下指南和公式综合生成：
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>Mifflin-St Jeor 基础代谢公式</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>中国2型糖尿病膳食指南</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>中国成人血脂异常防治指南</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>中国超重/肥胖医学营养治疗指南</li>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-1. <strong>戒酒是第一优先级</strong> — 同时有利于血糖、血脂、脂肪肝三个方向
-2. <strong>主食替换是关键动作</strong> — 白米饭→糙米/杂粮饭，白面→荞麦面/全麦面
-3. <strong>烹饪方式改变</strong> — 从外卖重油重盐改为蒸/煮/炖/凉拌
-4. <strong>定时定量三餐</strong> — 每天固定时间进餐，每餐碳水份量稳定，避免血糖剧烈波动
-5. <strong>二甲双胍与进餐</strong> — 随餐服用，减少胃肠道不适
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-> <strong>免责声明</strong>: 本营养评估仅供参考，具体治疗方案请遵医嘱。张先生为新发现2型糖尿病患者，建议在医生和注册营养师指导下进行饮食管理。
+</code></pre>
+<h3>活动水平</h3>
+<ul>
+<li>当前活动水平: <strong>久坐</strong>（IT工程师，基本无规律运动）</li>
+<li>活动系数: <strong>1.2</strong></li>
+</ul>
+<h3>TDEE</h3>
+<pre><code>TDEE = 1640 × 1.2 = 1968 kcal/天
+</code></pre>
+<h3>目标能量</h3>
+<ul>
+<li><strong>2型糖尿病 + 超重</strong>: 目标减重，每日减少 <strong>500 kcal</strong></li>
+<li><strong>调整后目标能量</strong>: 1968 - 500 = <strong>1468 kcal → 取整 1500 kcal/天</strong></li>
+</ul>
+<hr>
+<h2>每日营养目标</h2>
+<h3>宏量营养素</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标值</th>
+<th>占比</th>
+<th>范围</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>总能量</strong></td>
+<td><strong>1500 kcal</strong></td>
+<td>100%</td>
+<td>1400-1600</td>
+<td>糖尿病减重: -500kcal</td>
+</tr>
+<tr>
+<td><strong>蛋白质</strong></td>
+<td><strong>68 g</strong></td>
+<td>18%</td>
+<td>60-75g (15-20%)</td>
+<td>糖尿病+肝病: 0.83g/kg</td>
+</tr>
+<tr>
+<td><strong>碳水化合物</strong></td>
+<td><strong>169 g</strong></td>
+<td>45%</td>
+<td>140-188g (40-50%)</td>
+<td>糖尿病: 低比例，低GI</td>
+</tr>
+<tr>
+<td><strong>脂肪</strong></td>
+<td><strong>45 g</strong></td>
+<td>27%</td>
+<td>40-50g (25-30%)</td>
+<td>高脂血症+脂肪肝: 低脂</td>
+</tr>
+<tr>
+<td><strong>膳食纤维</strong></td>
+<td><strong>≥ 25 g</strong></td>
+<td>—</td>
+<td>25-35g</td>
+<td>糖尿病+高脂血症均要求</td>
+</tr>
+</tbody></table>
+<p><strong>脂肪细分:</strong></p>
+<table>
+<thead>
+<tr>
+<th>脂肪类型</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>饱和脂肪</td>
+<td>&lt; 总能量7% → &lt;12g</td>
+</tr>
+<tr>
+<td>反式脂肪</td>
+<td><strong>完全避免</strong></td>
+</tr>
+<tr>
+<td>胆固醇</td>
+<td>&lt; 200 mg/天</td>
+</tr>
+<tr>
+<td>Omega-3</td>
+<td>每周至少2次深海鱼</td>
+</tr>
+</tbody></table>
+<h3>微量营养素重点</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>钠</td>
+<td>&lt; 2000 mg（盐&lt;5g）</td>
+<td>糖尿病+血压偏高</td>
+</tr>
+<tr>
+<td>钾</td>
+<td>3500 mg</td>
+<td>血压管理</td>
+</tr>
+<tr>
+<td>钙</td>
+<td>1000 mg</td>
+<td>一般需求</td>
+</tr>
+<tr>
+<td>维生素B12</td>
+<td>关注/补充</td>
+<td>二甲双胍影响吸收</td>
+</tr>
+<tr>
+<td>维生素C</td>
+<td>100 mg</td>
+<td>一般需求</td>
+</tr>
+<tr>
+<td>铁</td>
+<td>12 mg</td>
+<td>一般需求</td>
+</tr>
+</tbody></table>
+<h3>三餐能量分配</h3>
+<table>
+<thead>
+<tr>
+<th>餐次</th>
+<th>能量</th>
+<th>占比</th>
+<th>碳水</th>
+<th>蛋白质</th>
+<th>脂肪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>早餐</strong></td>
+<td>450 kcal</td>
+<td>30%</td>
+<td>50g</td>
+<td>20g</td>
+<td>14g</td>
+</tr>
+<tr>
+<td><strong>午餐</strong></td>
+<td>600 kcal</td>
+<td>40%</td>
+<td>68g</td>
+<td>28g</td>
+<td>18g</td>
+</tr>
+<tr>
+<td><strong>晚餐</strong></td>
+<td>450 kcal</td>
+<td>30%</td>
+<td>50g</td>
+<td>20g</td>
+<td>14g</td>
+</tr>
+<tr>
+<td>合计</td>
+<td><strong>1500 kcal</strong></td>
+<td>100%</td>
+<td><strong>168g</strong></td>
+<td><strong>68g</strong></td>
+<td><strong>46g</strong></td>
+</tr>
+</tbody></table>
+<p><strong>加餐（可选，如上午/下午感觉饥饿）:</strong></p>
+<ul>
+<li>坚果10g（约60 kcal）或 低GI水果100g（约50 kcal）</li>
+<li>从正餐中扣除相应热量</li>
+</ul>
+<hr>
+<h2>饮食原则</h2>
+<h3>来自糖尿病</h3>
+<ul>
+<li>以<strong>低GI食物</strong>为主（GI&lt;55），碳水占总能量40-50%</li>
+<li>避免精制糖、含糖饮料</li>
+<li>主食以粗粮/全谷物替代精白米面</li>
+<li>每餐碳水均匀分配，避免血糖波动</li>
+</ul>
+<h3>来自高脂血症</h3>
+<ul>
+<li>饱和脂肪 &lt;7% 总能量</li>
+<li>每周至少2次<strong>深海鱼</strong>（Omega-3）</li>
+<li>增加<strong>可溶性纤维</strong>（燕麦、大麦、豆类）</li>
+<li>完全避免反式脂肪</li>
+<li>胆固醇 &lt;200 mg/天</li>
+</ul>
+<h3>来自脂肪肝/肝功能异常</h3>
+<ul>
+<li><strong>严格戒酒</strong></li>
+<li>低脂饮食，减少肝脏负担</li>
+<li>适量优质蛋白，促进肝细胞修复</li>
+</ul>
+<h3>来自超重（减重目标）</h3>
+<ul>
+<li>每日 1500 kcal，制造500kcal缺口</li>
+<li>目标: 3-6个月减重5-8kg</li>
+</ul>
+<hr>
+<h2>推荐食物清单</h2>
+<h3>主食类（低GI）</h3>
+<ul>
+<li>燕麦、糙米、荞麦面、藜麦、全麦面包、红薯、山药</li>
+</ul>
+<h3>蛋白质类</h3>
+<ul>
+<li>鱼类（三文鱼、鲈鱼、鲭鱼 — 每周至少2次深海鱼）</li>
+<li>鸡胸肉（去皮）</li>
+<li>豆腐/豆制品</li>
+<li>鸡蛋（每天1个）</li>
+<li>低脂牛奶/酸奶</li>
+</ul>
+<h3>蔬菜类</h3>
+<ul>
+<li>绿叶蔬菜（菠菜、西兰花、芹菜）— 每天至少300g</li>
+<li>番茄、黄瓜、茄子、芦笋</li>
+<li>洋葱、胡萝卜</li>
+</ul>
+<h3>水果类（低GI）</h3>
+<ul>
+<li>苹果、梨、柚子、蓝莓、草莓、猕猴桃 — 每天200g</li>
+</ul>
+<h3>脂肪来源</h3>
+<ul>
+<li>橄榄油、茶籽油（烹饪用油，每天25-30g）</li>
+<li>核桃、杏仁（每天10g）</li>
+</ul>
+<hr>
+<h2>禁忌食物</h2>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>原因</th>
+<th>严重程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>含糖饮料、果汁</td>
+<td>糖尿病</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td>白米饭、白面条、白面包</td>
+<td>糖尿病（高GI）</td>
+<td><strong>严格限制</strong>（每日&lt;1两）</td>
+</tr>
+<tr>
+<td>糕点、饼干、糖果</td>
+<td>高脂血症+糖尿病</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td>油炸食品</td>
+<td>高脂血症+脂肪肝</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td>动物内脏</td>
+<td>高脂血症（高胆固醇）</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td>黄油、猪油</td>
+<td>高脂血症（高饱和脂肪）</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td>酒精</td>
+<td>糖尿病+脂肪肝</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td>西柚/葡萄柚</td>
+<td>他汀类药物交互</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td>加工肉类（火腿、培根）</td>
+<td>高钠+高脂</td>
+<td><strong>严格限制</strong></td>
+</tr>
+<tr>
+<td>高GI水果（西瓜、菠萝）</td>
+<td>糖尿病</td>
+<td><strong>限制</strong>（少量）</td>
+</tr>
+<tr>
+<td>腌制食品</td>
+<td>高钠</td>
+<td><strong>限制</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>药物-营养交互</h2>
+<table>
+<thead>
+<tr>
+<th>药物</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>二甲双胍</strong></td>
+<td>长期服用可能影响维生素B12吸收，建议每年监测B12水平，多摄入富含B12的食物（鱼类、蛋类）或考虑补充剂</td>
+</tr>
+<tr>
+<td><strong>阿托伐他汀</strong></td>
+<td><strong>严禁食用西柚/葡萄柚</strong>（影响药物代谢，增加副作用风险）。需定时服药（晚间）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>参考来源</h2>
+<p>本营养评估基于以下指南和公式综合生成：</p>
+<ul>
+<li>Mifflin-St Jeor 基础代谢公式</li>
+<li>中国2型糖尿病膳食指南</li>
+<li>中国成人血脂异常防治指南</li>
+<li>中国超重/肥胖医学营养治疗指南</li>
+</ul>
+<hr>
+<h2>关键注意事项</h2>
+<ol>
+<li><strong>戒酒是第一优先级</strong> — 同时有利于血糖、血脂、脂肪肝三个方向</li>
+<li><strong>主食替换是关键动作</strong> — 白米饭→糙米/杂粮饭，白面→荞麦面/全麦面</li>
+<li><strong>烹饪方式改变</strong> — 从外卖重油重盐改为蒸/煮/炖/凉拌</li>
+<li><strong>定时定量三餐</strong> — 每天固定时间进餐，每餐碳水份量稳定，避免血糖剧烈波动</li>
+<li><strong>二甲双胍与进餐</strong> — 随餐服用，减少胃肠道不适</li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>免责声明</strong>: 本营养评估仅供参考，具体治疗方案请遵医嘱。张先生为新发现2型糖尿病患者，建议在医生和注册营养师指导下进行饮食管理。</p>
+</blockquote>
 </div>
-  </div>
 
-  <div class="section">
-    <div class="section-title">三、配餐方案</div>
-<div class="avoid-break"><strong>周一</strong></div><div class="avoid-break"><strong>周二</strong></div><div class="avoid-break"><strong>周三</strong></div><div style="font-size:8pt;color:#666;text-align:center;margin-top:4px;">... 共 7 天方案，详见完整文档 ...</div></div>
-  <div class="section avoid-break">
-    <div class="section-title">四、运动处方</div>
-    <div style="font-size:8pt;">
+<div class="section-header">
+  <h2>配餐方案</h2>
+  <div class="section-sub">Meal Plan</div>
+</div>
+<div class="section-body">
+<h1>配餐方案</h1>
+<blockquote>
+<p>日期: 2026-03-30
+适用对象: 张先生（52岁，2型糖尿病+高脂血症+超重+脂肪肝）
+适用周期: 第1周
+每日目标: 1500 kcal | 蛋白质 68g | 碳水 169g | 脂肪 45g</p>
+</blockquote>
+<hr>
+<h2>周一</h2>
+<h3>早餐（约 440 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦牛奶粥</td>
+<td>燕麦片 40g + 低脂牛奶 200ml</td>
+<td>微波/煮 3分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>80g</td>
+<td>生食</td>
+<td>低GI水果，抗氧化</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>2个（约10g）</td>
+<td>生食</td>
+<td>优质脂肪</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~435 kcal | 蛋白质 18g | 脂肪 13g | 碳水 56g | 膳食纤维 5g</p>
+<h3>午餐（约 600 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+黑米共60g(生重，约150g熟)</td>
+<td>电饭煲蒸</td>
+<td>替代白米饭</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 100g</td>
+<td>清蒸，姜丝去腥</td>
+<td>低脂高蛋白，每周至少2次鱼</td>
+</tr>
+<tr>
+<td>木耳炒西兰花</td>
+<td>西兰花 120g + 木耳(泡发)30g</td>
+<td>少油快炒(油5g)</td>
+<td>高纤维、抗氧化</td>
+</tr>
+<tr>
+<td>凉拌菠菜</td>
+<td>菠菜 100g</td>
+<td>焯水后凉拌，少许芝麻油(3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 80g + 蛋清1个</td>
+<td>煮，不加淀粉</td>
+<td>低热量，增加饱腹感</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~590 kcal | 蛋白质 28g | 脂肪 15g | 碳水 72g | 膳食纤维 8g</p>
+<h3>晚餐（约 430 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 50g（约130g熟）</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>鸡胸肉(少油煎)</td>
+<td>鸡胸肉 80g</td>
+<td>少油煎(油5g)，黑胡椒调味</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉芦笋</td>
+<td>芦笋 120g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>黄瓜 100g</td>
+<td>凉拌，醋+少许盐</td>
+<td>清爽低热量</td>
+</tr>
+<tr>
+<td>水煮毛豆</td>
+<td>毛豆 50g(带壳)</td>
+<td>水煮，少许盐</td>
+<td>高纤维补充</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~445 kcal | 蛋白质 25g | 脂肪 14g | 碳水 42g | 膳食纤维 7g</p>
+<h3>加餐（可选，约 60 kcal）</h3>
+<p>以下任选一项，在上午10点或下午3点感觉饥饿时食用：</p>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>份量</th>
+<th>热量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>苹果</td>
+<td>1个(约150g)</td>
+<td>80 kcal</td>
+</tr>
+<tr>
+<td>柚子</td>
+<td>2-3瓣(约100g)</td>
+<td>42 kcal</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>100g</td>
+<td>32 kcal</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周二</h2>
+<h3>早餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦面包</td>
+<td>2片（约70g）</td>
+<td>烤面包机微烤</td>
+<td>低GI主食，富含B族维生素</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>80g</td>
+<td>生食</td>
+<td>低GI水果，富含维C</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~448 kcal | 蛋白质 19g | 脂肪 12g | 碳水 58g | 膳食纤维 4g</p>
+<h3>午餐（约 600 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 65g(生重，约160g熟)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>香煎三文鱼</td>
+<td>三文鱼 100g</td>
+<td>少油煎(油5g)，柠檬汁调味</td>
+<td>深海鱼Omega-3，护心</td>
+</tr>
+<tr>
+<td>蒜蓉炒西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维、抗氧化</td>
+</tr>
+<tr>
+<td>凉拌芹菜木耳</td>
+<td>芹菜 100g + 木耳(泡发)30g</td>
+<td>焯水凉拌，少许醋</td>
+<td>降压、高纤维</td>
+</tr>
+<tr>
+<td>番茄豆腐汤</td>
+<td>番茄 60g + 豆腐50g</td>
+<td>煮，不加淀粉</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~598 kcal | 蛋白质 32g | 脂肪 18g | 碳水 66g | 膳食纤维 7g</p>
+<h3>晚餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 50g（约130g熟）</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>家常豆腐</td>
+<td>北豆腐 120g</td>
+<td>少油煎(油4g)，酱油调味</td>
+<td>植物蛋白，富含钙</td>
+</tr>
+<tr>
+<td>清炒菠菜</td>
+<td>菠菜 150g</td>
+<td>少油快炒(油3g)，蒜蓉</td>
+<td>高纤维、富铁</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>黄瓜 100g</td>
+<td>凉拌，醋+少许盐</td>
+<td>清爽低热量</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~446 kcal | 蛋白质 21g | 脂肪 15g | 碳水 48g | 膳食纤维 6g</p>
+<h3>加餐（可选，约 60 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>份量</th>
+<th>热量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>苹果</td>
+<td>1个(约150g)</td>
+<td>80 kcal</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>100g</td>
+<td>32 kcal</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>80g</td>
+<td>45 kcal</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周三</h2>
+<h3>早餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦粥</td>
+<td>燕麦片 40g + 水 200ml</td>
+<td>煮 5分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>100g</td>
+<td>生食</td>
+<td>低GI水果</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>200ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~442 kcal | 蛋白质 18g | 脂肪 11g | 碳水 62g | 膳食纤维 5g</p>
+<h3>午餐（约 600 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+燕麦米共65g(生重，约160g熟)</td>
+<td>电饭煲蒸</td>
+<td>多种谷物搭配</td>
+</tr>
+<tr>
+<td>鸡胸肉炒青椒</td>
+<td>鸡胸肉 100g + 青椒 80g</td>
+<td>少油快炒(油5g)</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉茄子</td>
+<td>茄子 150g</td>
+<td>少油蒸(油3g)，蒜蓉调味</td>
+<td>低热量蔬菜</td>
+</tr>
+<tr>
+<td>水煮西兰花</td>
+<td>西兰花 100g</td>
+<td>水煮，少许盐</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜(干)3g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~602 kcal | 蛋白质 30g | 脂肪 14g | 碳水 74g | 膳食纤维 7g</p>
+<h3>晚餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦饭</td>
+<td>藜麦 50g(生重，约130g熟)</td>
+<td>煮</td>
+<td>完全蛋白，低GI</td>
+</tr>
+<tr>
+<td>白灼虾仁</td>
+<td>虾仁 100g</td>
+<td>水煮，蘸少量生抽</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒芦笋</td>
+<td>芦笋 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌胡萝卜丝</td>
+<td>胡萝卜 80g</td>
+<td>焯水凉拌，醋调味</td>
+<td>富含β-胡萝卜素</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~448 kcal | 蛋白质 25g | 脂肪 10g | 碳水 52g | 膳食纤维 7g</p>
+<h3>加餐（可选，约 60 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>份量</th>
+<th>热量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>梨</td>
+<td>1个(约150g)</td>
+<td>75 kcal</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>80g</td>
+<td>45 kcal</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>10g</td>
+<td>65 kcal</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周四</h2>
+<h3>早餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蒸红薯</td>
+<td>红薯 150g</td>
+<td>蒸 20分钟</td>
+<td>低GI主食，富含膳食纤维</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>10g（约2个）</td>
+<td>生食</td>
+<td>优质脂肪</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~450 kcal | 蛋白质 18g | 脂肪 13g | 碳水 58g | 膳食纤维 5g</p>
+<h3>午餐（约 600 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 65g(生重，约160g熟)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>红烧鲭鱼</td>
+<td>鲭鱼 100g</td>
+<td>少油红烧(油5g)，少糖</td>
+<td>深海鱼Omega-3</td>
+</tr>
+<tr>
+<td>木耳炒洋葱</td>
+<td>洋葱 100g + 木耳(泡发)30g</td>
+<td>少油快炒(油3g)</td>
+<td>降脂蔬菜组合</td>
+</tr>
+<tr>
+<td>清炒菠菜</td>
+<td>菠菜 120g</td>
+<td>少油快炒(油3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>冬瓜汤</td>
+<td>冬瓜 100g</td>
+<td>煮，少许盐</td>
+<td>利尿消肿</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~596 kcal | 蛋白质 28g | 脂肪 16g | 碳水 72g | 膳食纤维 8g</p>
+<h3>晚餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 50g（约130g熟）</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>鸡胸肉丝拌黄瓜</td>
+<td>鸡胸肉 80g + 黄瓜 100g</td>
+<td>鸡胸肉水煮撕丝，凉拌</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒莴笋</td>
+<td>莴笋 120g</td>
+<td>少油快炒(油3g)</td>
+<td>低热量高纤维</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 80g + 蛋清1个</td>
+<td>煮</td>
+<td>增加饱腹感</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~448 kcal | 蛋白质 24g | 脂肪 12g | 碳水 50g | 膳食纤维 5g</p>
+<h3>加餐（可选，约 60 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>份量</th>
+<th>热量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>猕猴桃</td>
+<td>1个(约80g)</td>
+<td>48 kcal</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>100g</td>
+<td>53 kcal</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>100g</td>
+<td>32 kcal</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周五</h2>
+<h3>早餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦面包</td>
+<td>2片（约70g）</td>
+<td>烤面包机微烤</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>100g</td>
+<td>生食</td>
+<td>低GI水果，抗氧化</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>200ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~445 kcal | 蛋白质 19g | 脂肪 11g | 碳水 60g | 膳食纤维 4g</p>
+<h3>午餐（约 600 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+小米共65g(生重，约160g熟)</td>
+<td>电饭煲蒸</td>
+<td>多谷物搭配</td>
+</tr>
+<tr>
+<td>清蒸鳕鱼</td>
+<td>鳕鱼 100g</td>
+<td>清蒸，姜丝去腥</td>
+<td>低脂高蛋白深海鱼</td>
+</tr>
+<tr>
+<td>麻婆豆腐（减油版）</td>
+<td>北豆腐 100g</td>
+<td>少油烹饪(油4g)，少许豆瓣酱</td>
+<td>植物蛋白，低脂</td>
+</tr>
+<tr>
+<td>清炒西兰花</td>
+<td>西兰花 130g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维抗氧化</td>
+</tr>
+<tr>
+<td>凉拌海带丝</td>
+<td>海带丝(泡发) 80g</td>
+<td>凉拌，醋调味</td>
+<td>富含碘，降脂</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~598 kcal | 蛋白质 31g | 脂肪 16g | 碳水 68g | 膳食纤维 8g</p>
+<h3>晚餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米粥</td>
+<td>糙米 40g(生重)</td>
+<td>煮粥</td>
+<td>易消化低GI主食</td>
+</tr>
+<tr>
+<td>鸡胸肉丸子</td>
+<td>鸡胸肉 80g(绞泥做丸)</td>
+<td>水煮</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉炒油菜</td>
+<td>油菜 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌木耳</td>
+<td>木耳(泡发) 50g</td>
+<td>凉拌，醋+少许芝麻油(2g)</td>
+<td>降脂</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~446 kcal | 蛋白质 22g | 脂肪 10g | 碳水 56g | 膳食纤维 6g</p>
+<h3>加餐（可选，约 60 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>份量</th>
+<th>热量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>梨</td>
+<td>1个(约150g)</td>
+<td>75 kcal</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>100g</td>
+<td>32 kcal</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>100g</td>
+<td>53 kcal</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周六</h2>
+<h3>早餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦牛奶粥</td>
+<td>燕麦片 40g + 低脂牛奶 200ml</td>
+<td>微波/煮 3分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>10g（约2个）</td>
+<td>生食</td>
+<td>优质脂肪，健脑</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>100g</td>
+<td>生食</td>
+<td>低GI水果</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~448 kcal | 蛋白质 19g | 脂肪 14g | 碳水 54g | 膳食纤维 5g</p>
+<h3>午餐（约 600 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 65g(生重，约160g熟)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>香煎三文鱼</td>
+<td>三文鱼 100g</td>
+<td>少油煎(油5g)，柠檬汁调味</td>
+<td>深海鱼Omega-3（本周第2次）</td>
+</tr>
+<tr>
+<td>清炒芦笋</td>
+<td>芦笋 130g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌芹菜</td>
+<td>芹菜 100g</td>
+<td>凉拌，醋调味</td>
+<td>降压</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 80g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~598 kcal | 蛋白质 30g | 脂肪 17g | 碳水 68g | 膳食纤维 7g</p>
+<h3>晚餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 50g（约130g熟）</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>家常豆腐</td>
+<td>北豆腐 120g</td>
+<td>少油煎(油4g)，酱油调味</td>
+<td>植物蛋白</td>
+</tr>
+<tr>
+<td>清炒空心菜</td>
+<td>空心菜 150g</td>
+<td>少油快炒(油3g)，蒜蓉</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>黄瓜 80g</td>
+<td>凉拌，醋+少许盐</td>
+<td>清爽低热量</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~448 kcal | 蛋白质 21g | 脂肪 14g | 碳水 48g | 膳食纤维 6g</p>
+<h3>加餐（可选，约 60 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>份量</th>
+<th>热量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>猕猴桃</td>
+<td>1个(约80g)</td>
+<td>48 kcal</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>80g</td>
+<td>45 kcal</td>
+</tr>
+<tr>
+<td>柚子</td>
+<td>2-3瓣(约100g)</td>
+<td>42 kcal</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周日</h2>
+<h3>早餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蒸红薯</td>
+<td>红薯 150g</td>
+<td>蒸 20分钟</td>
+<td>低GI主食，富含膳食纤维</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>100g</td>
+<td>生食</td>
+<td>低GI水果，富含维C</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>200ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~445 kcal | 蛋白质 18g | 脂肪 11g | 碳水 60g | 膳食纤维 5g</p>
+<h3>午餐（约 600 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+藜麦共65g(生重，约160g熟)</td>
+<td>电饭煲蒸</td>
+<td>多谷物搭配</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 120g</td>
+<td>清蒸，姜丝+葱丝去腥</td>
+<td>低脂高蛋白（本周第2次鲈鱼）</td>
+</tr>
+<tr>
+<td>木耳炒胡萝卜</td>
+<td>胡萝卜 100g + 木耳(泡发)30g</td>
+<td>少油快炒(油3g)</td>
+<td>β-胡萝卜素，降脂</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>西兰花 120g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维抗氧化</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜(干)3g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~598 kcal | 蛋白质 31g | 脂肪 14g | 碳水 72g | 膳食纤维 8g</p>
+<h3>晚餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦饭</td>
+<td>藜麦 50g(生重，约130g熟)</td>
+<td>煮</td>
+<td>完全蛋白，低GI</td>
+</tr>
+<tr>
+<td>鸡胸肉炒洋葱</td>
+<td>鸡胸肉 80g + 洋葱 80g</td>
+<td>少油快炒(油5g)</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒菠菜</td>
+<td>菠菜 150g</td>
+<td>少油快炒(油3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>凉拌莴笋丝</td>
+<td>莴笋 100g</td>
+<td>凉拌，醋调味</td>
+<td>低热量高纤维</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~448 kcal | 蛋白质 23g | 脂肪 12g | 碳水 52g | 膳食纤维 6g</p>
+<h3>加餐（可选，约 60 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>份量</th>
+<th>热量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>苹果</td>
+<td>100g</td>
+<td>53 kcal</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>80g</td>
+<td>45 kcal</td>
+</tr>
+<tr>
+<td>梨</td>
+<td>100g</td>
+<td>50 kcal</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>一周营养总览</h2>
+<table>
+<thead>
+<tr>
+<th>日</th>
+<th>能量(kcal)</th>
+<th>蛋白质(g)</th>
+<th>脂肪(g)</th>
+<th>碳水(g)</th>
+<th>膳食纤维(g)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>1470</td>
+<td>71</td>
+<td>42</td>
+<td>170</td>
+<td>20</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>1492</td>
+<td>72</td>
+<td>45</td>
+<td>172</td>
+<td>17</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>1492</td>
+<td>73</td>
+<td>35</td>
+<td>188</td>
+<td>19</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>1494</td>
+<td>70</td>
+<td>41</td>
+<td>180</td>
+<td>18</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>1489</td>
+<td>72</td>
+<td>37</td>
+<td>184</td>
+<td>18</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>1494</td>
+<td>70</td>
+<td>45</td>
+<td>170</td>
+<td>18</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>1491</td>
+<td>72</td>
+<td>37</td>
+<td>184</td>
+<td>19</td>
+</tr>
+<tr>
+<td><strong>日均</strong></td>
+<td><strong>1489</strong></td>
+<td><strong>71</strong></td>
+<td><strong>40</strong></td>
+<td><strong>178</strong></td>
+<td><strong>18</strong></td>
+</tr>
+<tr>
+<td><strong>目标</strong></td>
+<td><strong>1500</strong></td>
+<td><strong>68</strong></td>
+<td><strong>45</strong></td>
+<td><strong>169</strong></td>
+<td><strong>≥25</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>注：膳食纤维在表中为正餐估算值，加上每日加餐水果后可达25g以上。建议每餐额外补充1-2份蔬菜以进一步增加膳食纤维摄入。</p>
+</blockquote>
+<p><strong>鱼类统计（本周共6次，达标）：</strong></p>
+<ul>
+<li>周一：清蒸鲈鱼</li>
+<li>周二：香煎三文鱼（深海鱼 Omega-3）</li>
+<li>周四：红烧鲭鱼（深海鱼 Omega-3）</li>
+<li>周五：清蒸鳕鱼（深海鱼 Omega-3）</li>
+<li>周六：香煎三文鱼（深海鱼 Omega-3）</li>
+<li>周日：清蒸鲈鱼</li>
+</ul>
+<p><strong>蛋白质来源多样性：</strong>
+鸡胸肉、鸡蛋、豆腐、虾仁、鲈鱼、三文鱼、鲭鱼、鳕鱼、牛奶 — 9种蛋白质来源，远超3种最低要求。</p>
+<hr>
+<h2>采购清单</h2>
+<h3>主食类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦片</td>
+<td>160g</td>
+</tr>
+<tr>
+<td>糙米</td>
+<td>400g</td>
+</tr>
+<tr>
+<td>黑米</td>
+<td>20g</td>
+</tr>
+<tr>
+<td>荞麦面(干)</td>
+<td>250g</td>
+</tr>
+<tr>
+<td>全麦面包</td>
+<td>140g（约4片）</td>
+</tr>
+<tr>
+<td>藜麦</td>
+<td>150g</td>
+</tr>
+<tr>
+<td>红薯</td>
+<td>300g</td>
+</tr>
+<tr>
+<td>小米</td>
+<td>20g</td>
+</tr>
+<tr>
+<td>燕麦米</td>
+<td>20g</td>
+</tr>
+</tbody></table>
+<h3>蛋白质类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>鸡蛋</td>
+<td>7个</td>
+</tr>
+<tr>
+<td>鲈鱼</td>
+<td>220g</td>
+</tr>
+<tr>
+<td>三文鱼</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>鲭鱼</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>鳕鱼</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>鸡胸肉</td>
+<td>420g</td>
+</tr>
+<tr>
+<td>虾仁</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>北豆腐</td>
+<td>460g</td>
+</tr>
+</tbody></table>
+<h3>蔬菜类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>西兰花</td>
+<td>620g</td>
+</tr>
+<tr>
+<td>菠菜</td>
+<td>520g</td>
+</tr>
+<tr>
+<td>芦笋</td>
+<td>400g</td>
+</tr>
+<tr>
+<td>芹菜</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>番茄</td>
+<td>380g</td>
+</tr>
+<tr>
+<td>黄瓜</td>
+<td>380g</td>
+</tr>
+<tr>
+<td>茄子</td>
+<td>150g</td>
+</tr>
+<tr>
+<td>洋葱</td>
+<td>180g</td>
+</tr>
+<tr>
+<td>胡萝卜</td>
+<td>180g</td>
+</tr>
+<tr>
+<td>木耳(干)</td>
+<td>30g（泡发约180g）</td>
+</tr>
+<tr>
+<td>莴笋</td>
+<td>220g</td>
+</tr>
+<tr>
+<td>油菜</td>
+<td>150g</td>
+</tr>
+<tr>
+<td>空心菜</td>
+<td>150g</td>
+</tr>
+<tr>
+<td>海带丝(干)</td>
+<td>10g</td>
+</tr>
+<tr>
+<td>青椒</td>
+<td>80g</td>
+</tr>
+<tr>
+<td>毛豆(带壳)</td>
+<td>50g</td>
+</tr>
+<tr>
+<td>冬瓜</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>紫菜(干)</td>
+<td>6g</td>
+</tr>
+</tbody></table>
+<h3>水果/坚果</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蓝莓</td>
+<td>260g</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>160g</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>550g（含加餐）</td>
+</tr>
+<tr>
+<td>梨</td>
+<td>300g（含加餐）</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>40g</td>
+</tr>
+</tbody></table>
+<h3>乳制品</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>低脂牛奶</td>
+<td>1700ml</td>
+</tr>
+</tbody></table>
+<h3>调味品</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>橄榄油/茶籽油</td>
+<td>全周烹饪用油约 120g</td>
+</tr>
+<tr>
+<td>醋、生抽（低钠）</td>
+<td>适量</td>
+</tr>
+<tr>
+<td>黑胡椒、姜、蒜</td>
+<td>适量</td>
+</tr>
+<tr>
+<td>料酒</td>
+<td>腌制用</td>
+</tr>
+<tr>
+<td>柠檬汁</td>
+<td>三文鱼调味用</td>
+</tr>
+<tr>
+<td>芝麻油</td>
+<td>凉拌用，少量</td>
+</tr>
+<tr>
+<td>豆瓣酱</td>
+<td>周五麻婆豆腐用，少量</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>烹饪Tips</h2>
+<ol>
+<li><strong>杂粮饭</strong>可以一次煮2-3天的量，冷藏保存，吃时微波加热</li>
+<li><strong>鲈鱼</strong>让鱼档清理干净，回家直接蒸，8分钟即可</li>
+<li><strong>鸡胸肉</strong>提前一晚用料酒和黑胡椒腌制，口感更嫩</li>
+<li><strong>蔬菜</strong>尽量当天买当天吃，营养流失少</li>
+<li>炒菜用<strong>不粘锅</strong>，可以少放油</li>
+<li><strong>三文鱼</strong>煎之前用厨房纸吸干水分，中火每面煎3分钟，搭配柠檬汁去腥提味</li>
+<li><strong>荞麦面</strong>煮好后过一遍凉开水，口感更筋道，不易糊</li>
+<li><strong>藜麦</strong>煮之前用水浸泡15分钟，可去除表面苦味物质（皂苷）</li>
+<li><strong>豆腐</strong>烹饪前用厨房纸包裹轻压沥水，煎制时不易溅油</li>
+<li><strong>红薯</strong>选择细长型的，蒸出来更甜糯；不要与米饭同食，以免碳水过量</li>
+<li>全天烹饪用油控制在<strong>20-25g</strong>以内，优先使用橄榄油或茶籽油</li>
+<li><strong>鲭鱼</strong>红烧时用代糖（如赤藓糖醇）代替白糖调味，避免血糖波动</li>
+</ol>
+<hr>
+<h2>参考来源</h2>
+<ul>
+<li>中国2型糖尿病膳食指南</li>
+<li>中国成人血脂异常防治指南</li>
+<li>食物成分表（中国疾病预防控制中心）</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>免责声明</strong>: 本配餐方案由 AI 辅助生成，仅提供营养参考信息，不构成医疗诊断或治疗建议。患有疾病者请务必遵医嘱，如有疑问请咨询注册营养师或主治医生。张先生为新发现2型糖尿病患者，建议在内分泌科医生指导下进行饮食管理。</p>
+</blockquote>
+</div>
 
-> <strong>患者</strong>: 张先生 | <strong>性别</strong>: 男 | <strong>年龄</strong>: 52岁
-> <strong>生成日期</strong>: 2026-04-02
-> <strong>基于</strong>: 健康档案（2026-03-30）+ 营养评估（2026-03-30）
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">1.1 运动前医学评估</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>评估项目 </span><span style="color:#1a5fb4;font-weight:500;"> 当前状态 </span></div> 运动安全性 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>---------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>-----------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>空腹血糖 </span><span style="color:#1a5fb4;font-weight:500;"> 7.8 mmol/L </span></div> 可运动（<16.7 mmol/L 无绝对禁忌） |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>血压 </span><span style="color:#1a5fb4;font-weight:500;"> 138/86 mmHg（正常高值） </span></div> 可运动（<160/100 mmHg 无禁忌） |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>ALT </span><span style="color:#1a5fb4;font-weight:500;"> 52 U/L（轻度升高，<2倍正常上限40×2=80） </span></div> 可运动，但需限制为中低强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>心血管症状 </span><span style="color:#1a5fb4;font-weight:500;"> 无胸闷、胸痛等 </span></div> 安全 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>糖尿病急性并发症 </span><span style="color:#1a5fb4;font-weight:500;"> 无酮症酸中毒等 </span></div> 安全 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>视网膜病变 </span><span style="color:#1a5fb4;font-weight:500;"> 未提及 </span></div> 建议运动前做眼底检查 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>关节/骨骼问题 </span><span style="color:#1a5fb4;font-weight:500;"> 未提及 </span></div> 安全 |
-
-<strong style="color:#1a5fb4;">1.2 运动禁忌症筛查</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>绝对禁忌</strong>: 无（血糖 < 16.7 mmol/L，无急性并发症）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>相对禁忌/需注意</strong>:</li>
-  - ALT轻度升高（52 U/L），需<strong>避免高强度运动</strong>，以防进一步加重肝脏负担
-  - 服用二甲双胍，需警惕运动中低血糖（虽然二甲双胍单药低血糖风险较低）
-  - 服用阿托伐他汀，需注意肌肉酸痛/乏力，警惕横纹肌溶解
-  - 新发现的2型糖尿病，运动前建议做<strong>眼底检查</strong>排除增殖期视网膜病变
-
-<strong style="color:#1a5fb4;">1.3 安全性总评</strong>
-
-> <strong>结论: 可以运动，但需从中低强度起步，循序渐进。</strong>
->
-> 张先生目前无明显运动绝对禁忌，但合并2型糖尿病、高脂血症、脂肪肝伴ALT轻度升高、超重等多种代谢问题，运动处方需兼顾降糖、降脂、护肝、减重多重目标，以<strong>中低强度有氧运动</strong>为核心，逐步增加运动量。
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">2.1 处方总则</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>项目 </span><span style="color:#1a5fb4;font-weight:500;"> 处方内容 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动类型</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 有氧运动为主 + 轻度抗阻训练为辅 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动强度</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 中低强度（40%-60% 最大心率），RPE 11-13（有点累到稍累） </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动频率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每周 5-7 天（有氧），每周 2-3 天（抗阻） </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动时长</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每次 30-45 分钟，逐步增至 45-60 分钟 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>目标心率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 68-102 次/分钟（最大心率 = 220 - 52 = 168 bpm；40%-60%） </span></div>
-
-<strong>说明</strong>:
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>最大心率</strong>: 220 - 52 = 168 bpm</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>靶心率范围</strong>: 168 x 40% ~ 168 x 60% = <strong>67 ~ 101 bpm</strong></li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>鉴于ALT轻度升高，初期控制在 <strong>40%-50% 最大心率（67-84 bpm）</strong>，2-4周后视情况逐步提升</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>建议配备心率手环/手表监测运动心率</li>
-
-<strong style="color:#1a5fb4;">2.2 有氧运动处方</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>参数 </span><span style="color:#1a5fb4;font-weight:500;"> 内容 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>推荐项目</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走（首选）、慢跑（后期）、游泳、骑自行车、椭圆机 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>强度</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走: 4.5-6.0 km/h；心率达到靶心率范围 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>频率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每周至少 5 天 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>时长</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每次 30 分钟起，逐步增至 40-50 分钟 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>每周总量</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 目标 ≥150 分钟/周（ADA推荐），逐步增至 200-300 分钟/周 </span></div>
-
-<strong style="color:#1a5fb4;">2.3 抗阻训练处方</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>参数 </span><span style="color:#1a5fb4;font-weight:500;"> 内容 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>推荐项目</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 弹力带训练、自重训练（靠墙俯卧撑、椅子深蹲、平板支撑）、轻哑铃（1-3 kg） </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>强度</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 低至中等负荷，每组 10-15 次，RPE 12-13 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>频率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每周 2-3 次（非连续日） </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>时长</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每次 15-20 分钟 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>注意</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 肝功能异常期间避免大重量训练，以轻度抗阻为主 </span></div>
-
-<strong style="color:#1a5fb4;">2.4 柔韧性 & 传统运动</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>参数 </span><span style="color:#1a5fb4;font-weight:500;"> 内容 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>推荐项目</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 八段锦、太极拳、拉伸运动 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>频率</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每日可做（作为热身或放松环节） </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>时长</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 每次 10-15 分钟 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>依据</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 《中国2型糖尿病运动治疗指南（2024版）》正式推荐太极拳和八段锦 </span></div>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">第一阶段（第1-4周）：适应期</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>星期 </span><span style="color:#1a5fb4;font-weight:500;"> 运动内容 </span></div> 时长 | 强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>------|------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周一</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 八段锦（热身/放松） </span></div> 30 min | 低强度（RPE 11） |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周二</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 弹力带上肢训练 </span></div> 30 min + 15 min | 低-中强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周三</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 拉伸 </span></div> 30 min | 低强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周四</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 弹力带下肢训练（椅子深蹲） </span></div> 30 min + 15 min | 低-中强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周五</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 八段锦 </span></div> 30 min | 低强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周六</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 骑自行车或游泳（交替） </span></div> 30-40 min | 低-中强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周日</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 休息日（可做15 min拉伸或散步） </span></div> 15 min | 极低强度 |
-
-<strong>第一周日均有氧运动量</strong>: 约 150-180 分钟
-
-<strong style="color:#1a5fb4;">第二阶段（第5-12周）：进阶期</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>星期 </span><span style="color:#1a5fb4;font-weight:500;"> 运动内容 </span></div> 时长 | 强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>------|------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周一</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走（加速）+ 八段锦 </span></div> 40 min | 中低强度（RPE 12） |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周二</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走/慢跑交替 + 自重抗阻 </span></div> 40 min + 20 min | 中低强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周三</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 骑自行车或游泳 </span></div> 40 min | 中低强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周四</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 弹力带全身训练 </span></div> 40 min + 20 min | 中低强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周五</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 太极拳 </span></div> 40 min | 中低强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周六</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 慢跑（走跑交替）或游泳 </span></div> 40-50 min | 中低-中等强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周日</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 休息日（散步 + 拉伸） </span></div> 20 min | 极低强度 |
-
-<strong>第二阶段周均有氧运动量</strong>: 约 200-250 分钟
-
-<strong style="color:#1a5fb4;">第三阶段（第13-24周）：巩固期</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>星期 </span><span style="color:#1a5fb4;font-weight:500;"> 运动内容 </span></div> 时长 | 强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>------|------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周一</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走/慢跑 + 八段锦 </span></div> 45 min | 中等强度（RPE 13） |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周二</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 慢跑 + 抗阻训练（哑铃/弹力带） </span></div> 40 min + 20 min | 中等强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周三</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 游泳或骑自行车 </span></div> 45 min | 中等强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周四</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走/慢跑 + 抗阻训练 </span></div> 40 min + 20 min | 中等强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周五</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 快走 + 太极拳 </span></div> 45 min | 中低-中等强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周六</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 户外徒步/游泳/骑行（选择一项） </span></div> 50-60 min | 中等强度 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>周日</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 休息日（散步 + 拉伸） </span></div> 20-30 min | 极低强度 |
-
-<strong>第三阶段周均有氧运动量</strong>: 约 250-300 分钟
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
-┌─────────────────────────────────────────────┐
+<div class="section-header">
+  <h2>运动处方</h2>
+  <div class="section-sub">Exercise Prescription</div>
+</div>
+<div class="section-body">
+<h1>个性化运动处方</h1>
+<blockquote>
+<p><strong>患者</strong>: 张先生 | <strong>性别</strong>: 男 | <strong>年龄</strong>: 52岁
+<strong>生成日期</strong>: 2026-04-02
+<strong>基于</strong>: 健康档案（2026-03-30）+ 营养评估（2026-03-30）</p>
+</blockquote>
+<hr>
+<h2>一、安全性评估</h2>
+<h3>1.1 运动前医学评估</h3>
+<table>
+<thead>
+<tr>
+<th>评估项目</th>
+<th>当前状态</th>
+<th>运动安全性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空腹血糖</td>
+<td>7.8 mmol/L</td>
+<td>可运动（&lt;16.7 mmol/L 无绝对禁忌）</td>
+</tr>
+<tr>
+<td>血压</td>
+<td>138/86 mmHg（正常高值）</td>
+<td>可运动（&lt;160/100 mmHg 无禁忌）</td>
+</tr>
+<tr>
+<td>ALT</td>
+<td>52 U/L（轻度升高，&lt;2倍正常上限40×2=80）</td>
+<td>可运动，但需限制为中低强度</td>
+</tr>
+<tr>
+<td>心血管症状</td>
+<td>无胸闷、胸痛等</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>糖尿病急性并发症</td>
+<td>无酮症酸中毒等</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>视网膜病变</td>
+<td>未提及</td>
+<td>建议运动前做眼底检查</td>
+</tr>
+<tr>
+<td>关节/骨骼问题</td>
+<td>未提及</td>
+<td>安全</td>
+</tr>
+</tbody></table>
+<h3>1.2 运动禁忌症筛查</h3>
+<ul>
+<li><strong>绝对禁忌</strong>: 无（血糖 &lt; 16.7 mmol/L，无急性并发症）</li>
+<li><strong>相对禁忌/需注意</strong>:<ul>
+<li>ALT轻度升高（52 U/L），需<strong>避免高强度运动</strong>，以防进一步加重肝脏负担</li>
+<li>服用二甲双胍，需警惕运动中低血糖（虽然二甲双胍单药低血糖风险较低）</li>
+<li>服用阿托伐他汀，需注意肌肉酸痛/乏力，警惕横纹肌溶解</li>
+<li>新发现的2型糖尿病，运动前建议做<strong>眼底检查</strong>排除增殖期视网膜病变</li>
+</ul>
+</li>
+</ul>
+<h3>1.3 安全性总评</h3>
+<blockquote>
+<p><strong>结论: 可以运动，但需从中低强度起步，循序渐进。</strong></p>
+<p>张先生目前无明显运动绝对禁忌，但合并2型糖尿病、高脂血症、脂肪肝伴ALT轻度升高、超重等多种代谢问题，运动处方需兼顾降糖、降脂、护肝、减重多重目标，以<strong>中低强度有氧运动</strong>为核心，逐步增加运动量。</p>
+</blockquote>
+<hr>
+<h2>二、运动处方</h2>
+<h3>2.1 处方总则</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>处方内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>运动类型</strong></td>
+<td>有氧运动为主 + 轻度抗阻训练为辅</td>
+</tr>
+<tr>
+<td><strong>运动强度</strong></td>
+<td>中低强度（40%-60% 最大心率），RPE 11-13（有点累到稍累）</td>
+</tr>
+<tr>
+<td><strong>运动频率</strong></td>
+<td>每周 5-7 天（有氧），每周 2-3 天（抗阻）</td>
+</tr>
+<tr>
+<td><strong>运动时长</strong></td>
+<td>每次 30-45 分钟，逐步增至 45-60 分钟</td>
+</tr>
+<tr>
+<td><strong>目标心率</strong></td>
+<td>68-102 次/分钟（最大心率 = 220 - 52 = 168 bpm；40%-60%）</td>
+</tr>
+</tbody></table>
+<p><strong>说明</strong>:</p>
+<ul>
+<li><strong>最大心率</strong>: 220 - 52 = 168 bpm</li>
+<li><strong>靶心率范围</strong>: 168 x 40% ~ 168 x 60% = <strong>67 ~ 101 bpm</strong></li>
+<li>鉴于ALT轻度升高，初期控制在 <strong>40%-50% 最大心率（67-84 bpm）</strong>，2-4周后视情况逐步提升</li>
+<li>建议配备心率手环/手表监测运动心率</li>
+</ul>
+<h3>2.2 有氧运动处方</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>推荐项目</strong></td>
+<td>快走（首选）、慢跑（后期）、游泳、骑自行车、椭圆机</td>
+</tr>
+<tr>
+<td><strong>强度</strong></td>
+<td>快走: 4.5-6.0 km/h；心率达到靶心率范围</td>
+</tr>
+<tr>
+<td><strong>频率</strong></td>
+<td>每周至少 5 天</td>
+</tr>
+<tr>
+<td><strong>时长</strong></td>
+<td>每次 30 分钟起，逐步增至 40-50 分钟</td>
+</tr>
+<tr>
+<td><strong>每周总量</strong></td>
+<td>目标 ≥150 分钟/周（ADA推荐），逐步增至 200-300 分钟/周</td>
+</tr>
+</tbody></table>
+<h3>2.3 抗阻训练处方</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>推荐项目</strong></td>
+<td>弹力带训练、自重训练（靠墙俯卧撑、椅子深蹲、平板支撑）、轻哑铃（1-3 kg）</td>
+</tr>
+<tr>
+<td><strong>强度</strong></td>
+<td>低至中等负荷，每组 10-15 次，RPE 12-13</td>
+</tr>
+<tr>
+<td><strong>频率</strong></td>
+<td>每周 2-3 次（非连续日）</td>
+</tr>
+<tr>
+<td><strong>时长</strong></td>
+<td>每次 15-20 分钟</td>
+</tr>
+<tr>
+<td><strong>注意</strong></td>
+<td>肝功能异常期间避免大重量训练，以轻度抗阻为主</td>
+</tr>
+</tbody></table>
+<h3>2.4 柔韧性 &amp; 传统运动</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>推荐项目</strong></td>
+<td>八段锦、太极拳、拉伸运动</td>
+</tr>
+<tr>
+<td><strong>频率</strong></td>
+<td>每日可做（作为热身或放松环节）</td>
+</tr>
+<tr>
+<td><strong>时长</strong></td>
+<td>每次 10-15 分钟</td>
+</tr>
+<tr>
+<td><strong>依据</strong></td>
+<td>《中国2型糖尿病运动治疗指南（2024版）》正式推荐太极拳和八段锦</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>三、一周运动计划</h2>
+<h3>第一阶段（第1-4周）：适应期</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>周一</strong></td>
+<td>快走 + 八段锦（热身/放松）</td>
+<td>30 min</td>
+<td>低强度（RPE 11）</td>
+</tr>
+<tr>
+<td><strong>周二</strong></td>
+<td>快走 + 弹力带上肢训练</td>
+<td>30 min + 15 min</td>
+<td>低-中强度</td>
+</tr>
+<tr>
+<td><strong>周三</strong></td>
+<td>快走 + 拉伸</td>
+<td>30 min</td>
+<td>低强度</td>
+</tr>
+<tr>
+<td><strong>周四</strong></td>
+<td>快走 + 弹力带下肢训练（椅子深蹲）</td>
+<td>30 min + 15 min</td>
+<td>低-中强度</td>
+</tr>
+<tr>
+<td><strong>周五</strong></td>
+<td>快走 + 八段锦</td>
+<td>30 min</td>
+<td>低强度</td>
+</tr>
+<tr>
+<td><strong>周六</strong></td>
+<td>骑自行车或游泳（交替）</td>
+<td>30-40 min</td>
+<td>低-中强度</td>
+</tr>
+<tr>
+<td><strong>周日</strong></td>
+<td>休息日（可做15 min拉伸或散步）</td>
+<td>15 min</td>
+<td>极低强度</td>
+</tr>
+</tbody></table>
+<p><strong>第一周日均有氧运动量</strong>: 约 150-180 分钟</p>
+<h3>第二阶段（第5-12周）：进阶期</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>周一</strong></td>
+<td>快走（加速）+ 八段锦</td>
+<td>40 min</td>
+<td>中低强度（RPE 12）</td>
+</tr>
+<tr>
+<td><strong>周二</strong></td>
+<td>快走/慢跑交替 + 自重抗阻</td>
+<td>40 min + 20 min</td>
+<td>中低强度</td>
+</tr>
+<tr>
+<td><strong>周三</strong></td>
+<td>骑自行车或游泳</td>
+<td>40 min</td>
+<td>中低强度</td>
+</tr>
+<tr>
+<td><strong>周四</strong></td>
+<td>快走 + 弹力带全身训练</td>
+<td>40 min + 20 min</td>
+<td>中低强度</td>
+</tr>
+<tr>
+<td><strong>周五</strong></td>
+<td>快走 + 太极拳</td>
+<td>40 min</td>
+<td>中低强度</td>
+</tr>
+<tr>
+<td><strong>周六</strong></td>
+<td>慢跑（走跑交替）或游泳</td>
+<td>40-50 min</td>
+<td>中低-中等强度</td>
+</tr>
+<tr>
+<td><strong>周日</strong></td>
+<td>休息日（散步 + 拉伸）</td>
+<td>20 min</td>
+<td>极低强度</td>
+</tr>
+</tbody></table>
+<p><strong>第二阶段周均有氧运动量</strong>: 约 200-250 分钟</p>
+<h3>第三阶段（第13-24周）：巩固期</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>周一</strong></td>
+<td>快走/慢跑 + 八段锦</td>
+<td>45 min</td>
+<td>中等强度（RPE 13）</td>
+</tr>
+<tr>
+<td><strong>周二</strong></td>
+<td>慢跑 + 抗阻训练（哑铃/弹力带）</td>
+<td>40 min + 20 min</td>
+<td>中等强度</td>
+</tr>
+<tr>
+<td><strong>周三</strong></td>
+<td>游泳或骑自行车</td>
+<td>45 min</td>
+<td>中等强度</td>
+</tr>
+<tr>
+<td><strong>周四</strong></td>
+<td>快走/慢跑 + 抗阻训练</td>
+<td>40 min + 20 min</td>
+<td>中等强度</td>
+</tr>
+<tr>
+<td><strong>周五</strong></td>
+<td>快走 + 太极拳</td>
+<td>45 min</td>
+<td>中低-中等强度</td>
+</tr>
+<tr>
+<td><strong>周六</strong></td>
+<td>户外徒步/游泳/骑行（选择一项）</td>
+<td>50-60 min</td>
+<td>中等强度</td>
+</tr>
+<tr>
+<td><strong>周日</strong></td>
+<td>休息日（散步 + 拉伸）</td>
+<td>20-30 min</td>
+<td>极低强度</td>
+</tr>
+</tbody></table>
+<p><strong>第三阶段周均有氧运动量</strong>: 约 250-300 分钟</p>
+<hr>
+<h2>四、单次运动流程（标准模板）</h2>
+<pre><code>┌─────────────────────────────────────────────┐
 │           单次运动标准流程                     │
 ├─────────────────────────────────────────────┤
 │                                             │
@@ -606,89 +2350,203 @@ TDEE = 1640 × 1.2 = 1968 kcal/天
 │     - 如延迟用餐，适量补充碳水                │
 │                                             │
 └─────────────────────────────────────────────┘
-<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">5.1 运动时间与进餐安排</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>运动时段 </span><span style="color:#1a5fb4;font-weight:500;"> 推荐时间 </span></div> 饮食配合 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>---------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>---------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>最佳时段</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 餐后 60-90 分钟开始 </span></div> 血糖处于上升期，运动可降低餐后血糖峰值 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>早餐后</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 早餐后 1 小时（约 8:00-9:00） </span></div> 已摄入 50g 碳水，能量充足 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>午餐后</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 午餐后 1 小时（约 13:30-14:30） </span></div> 避免最热时段（夏季注意防暑） |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>晚餐后</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 晚餐后 1 小时（约 19:30-20:30） </span></div> 需在睡前 2 小时完成，避免影响睡眠 |
-
-<strong style="color:#1a5fb4;">5.2 运动前后营养策略</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>场景 </span><span style="color:#1a5fb4;font-weight:500;"> 策略 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动前血糖 5.6-13.9 mmol/L</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 可正常运动，无需额外补充 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动前血糖 < 5.6 mmol/L</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 运动前补充 15-30g 碳水（如1片全麦面包 + 1个小苹果） </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动前血糖 > 13.9 mmol/L</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 检测尿酮体，如有酮体则暂停运动 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>运动后 30 分钟内</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 适量补充蛋白质（如1杯低脂牛奶/1个鸡蛋），促进恢复 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>长时间运动（>45 min）后</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 运动后补充少量碳水 + 蛋白质（如200ml低脂酸奶 + 10g坚果） </span></div>
-
-<strong style="color:#1a5fb4;">5.3 运动与降糖药物协同</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>药物 </span><span style="color:#1a5fb4;font-weight:500;"> 协同注意 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>二甲双胍缓释片（500mg bid）</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 单独使用低血糖风险较低，但仍建议运动前监测血糖；避免在药物达峰时间运动；晨练结合餐前二甲双胍为较优策略 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>阿托伐他汀钙片（20mg qn）</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 注意运动中是否出现异常肌肉酸痛、乏力，如出现需及时就医排查横纹肌溶解 </span></div>
-
-<strong style="color:#1a5fb4;">5.4 运动与减重目标协同</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>营养评估设定每日 1500 kcal（减少 500 kcal 缺口）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>运动额外消耗: 每次快走 30 分钟约消耗 150-200 kcal</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>每周运动消耗: 约 750-1500 kcal</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>综合效果</strong>: 每日总热量缺口约 600-700 kcal，预计每周减重 0.5-0.7 kg</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span><strong>3 个月目标</strong>: 减重 5-8 kg（BMI 从 27.7 降至约 24-25）</li>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">6.1 糖尿病相关注意</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>编号 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D1 </span><span style="color:#1a5fb4;font-weight:500;"> 运动前后<strong>必须监测血糖</strong>，尤其是初期 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D2 </span><span style="color:#1a5fb4;font-weight:500;"> 随身携带<strong>含糖食品</strong>（葡萄糖片、糖块、饼干），预防低血糖 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D3 </span><span style="color:#1a5fb4;font-weight:500;"> 随身携带<strong>急救卡</strong>（注明姓名、疾病、用药、紧急联系人） </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D4 </span><span style="color:#1a5fb4;font-weight:500;"> 运动时间选择<strong>餐后 1-2 小时</strong>，避免空腹运动 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D5 </span><span style="color:#1a5fb4;font-weight:500;"> 穿着合适的<strong>运动鞋和棉袜</strong>，运动后检查足部有无损伤 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D6 </span><span style="color:#1a5fb4;font-weight:500;"> 如出现头晕、心慌、出冷汗、手抖等低血糖症状，<strong>立即停止运动</strong>，补充 15-20g 葡萄糖 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>D7 </span><span style="color:#1a5fb4;font-weight:500;"> 胰岛素/药物作用峰值时间（服药后 1-2 小时）<strong>避免高强度运动</strong> </span></div>
-
-<strong style="color:#1a5fb4;">6.2 肝功能相关注意</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>编号 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>L1 </span><span style="color:#1a5fb4;font-weight:500;"> ALT 52 U/L 为轻度升高，<strong>严格避免高强度运动</strong>（高强度运动本身可致ALT升高） </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>L2 </span><span style="color:#1a5fb4;font-weight:500;"> 每 4-6 周复查肝功能，ALT 正常或下降后方可逐步增加运动强度 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>L3 </span><span style="color:#1a5fb4;font-weight:500;"> 运动<strong>不宜过度疲劳</strong>，感觉明显疲倦时应停止 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>L4 </span><span style="color:#1a5fb4;font-weight:500;"> <strong>严格戒酒</strong>（酒精 + 运动 + 脂肪肝 = 三重肝脏负担） </span></div>
-
-<strong style="color:#1a5fb4;">6.3 高脂血症相关注意</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>编号 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>H1 </span><span style="color:#1a5fb4;font-weight:500;"> 他汀类药物使用者需关注<strong>肌肉酸痛</strong>，如出现全身性肌肉疼痛/无力需立即就医 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>H2 </span><span style="color:#1a5fb4;font-weight:500;"> 运动是改善 HDL-C（目前偏低: 0.92 mmol/L）的有效手段，坚持有氧运动 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>H3 </span><span style="color:#1a5fb4;font-weight:500;"> 避免突然的高强度运动，防止心血管意外 </span></div>
-
-<strong style="color:#1a5fb4;">6.4 超重/关节保护</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>编号 </span><span style="color:#1a5fb4;font-weight:500;"> 注意事项 </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>W1 </span><span style="color:#1a5fb4;font-weight:500;"> 体重 82 kg，BMI 27.7，注意<strong>保护膝关节</strong> </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>W2 </span><span style="color:#1a5fb4;font-weight:500;"> 初期以快走、游泳、骑行为主，<strong>避免跑跳类高冲击运动</strong> </span></div>
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>W3 </span><span style="color:#1a5fb4;font-weight:500;"> 运动鞋选择有良好缓冲的款式，减少关节压力 </span></div>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-<strong style="color:#1a5fb4;">总体路线图（24 周）</strong>
-
-<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
-第1-4周        第5-12周       第13-24周
+</code></pre>
+<hr>
+<h2>五、运动与营养协同</h2>
+<h3>5.1 运动时间与进餐安排</h3>
+<table>
+<thead>
+<tr>
+<th>运动时段</th>
+<th>推荐时间</th>
+<th>饮食配合</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>最佳时段</strong></td>
+<td>餐后 60-90 分钟开始</td>
+<td>血糖处于上升期，运动可降低餐后血糖峰值</td>
+</tr>
+<tr>
+<td><strong>早餐后</strong></td>
+<td>早餐后 1 小时（约 8:00-9:00）</td>
+<td>已摄入 50g 碳水，能量充足</td>
+</tr>
+<tr>
+<td><strong>午餐后</strong></td>
+<td>午餐后 1 小时（约 13:30-14:30）</td>
+<td>避免最热时段（夏季注意防暑）</td>
+</tr>
+<tr>
+<td><strong>晚餐后</strong></td>
+<td>晚餐后 1 小时（约 19:30-20:30）</td>
+<td>需在睡前 2 小时完成，避免影响睡眠</td>
+</tr>
+</tbody></table>
+<h3>5.2 运动前后营养策略</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>运动前血糖 5.6-13.9 mmol/L</strong></td>
+<td>可正常运动，无需额外补充</td>
+</tr>
+<tr>
+<td><strong>运动前血糖 &lt; 5.6 mmol/L</strong></td>
+<td>运动前补充 15-30g 碳水（如1片全麦面包 + 1个小苹果）</td>
+</tr>
+<tr>
+<td><strong>运动前血糖 &gt; 13.9 mmol/L</strong></td>
+<td>检测尿酮体，如有酮体则暂停运动</td>
+</tr>
+<tr>
+<td><strong>运动后 30 分钟内</strong></td>
+<td>适量补充蛋白质（如1杯低脂牛奶/1个鸡蛋），促进恢复</td>
+</tr>
+<tr>
+<td><strong>长时间运动（&gt;45 min）后</strong></td>
+<td>运动后补充少量碳水 + 蛋白质（如200ml低脂酸奶 + 10g坚果）</td>
+</tr>
+</tbody></table>
+<h3>5.3 运动与降糖药物协同</h3>
+<table>
+<thead>
+<tr>
+<th>药物</th>
+<th>协同注意</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>二甲双胍缓释片（500mg bid）</strong></td>
+<td>单独使用低血糖风险较低，但仍建议运动前监测血糖；避免在药物达峰时间运动；晨练结合餐前二甲双胍为较优策略</td>
+</tr>
+<tr>
+<td><strong>阿托伐他汀钙片（20mg qn）</strong></td>
+<td>注意运动中是否出现异常肌肉酸痛、乏力，如出现需及时就医排查横纹肌溶解</td>
+</tr>
+</tbody></table>
+<h3>5.4 运动与减重目标协同</h3>
+<ul>
+<li>营养评估设定每日 1500 kcal（减少 500 kcal 缺口）</li>
+<li>运动额外消耗: 每次快走 30 分钟约消耗 150-200 kcal</li>
+<li>每周运动消耗: 约 750-1500 kcal</li>
+<li><strong>综合效果</strong>: 每日总热量缺口约 600-700 kcal，预计每周减重 0.5-0.7 kg</li>
+<li><strong>3 个月目标</strong>: 减重 5-8 kg（BMI 从 27.7 降至约 24-25）</li>
+</ul>
+<hr>
+<h2>六、注意事项</h2>
+<h3>6.1 糖尿病相关注意</h3>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>D1</td>
+<td>运动前后<strong>必须监测血糖</strong>，尤其是初期</td>
+</tr>
+<tr>
+<td>D2</td>
+<td>随身携带<strong>含糖食品</strong>（葡萄糖片、糖块、饼干），预防低血糖</td>
+</tr>
+<tr>
+<td>D3</td>
+<td>随身携带<strong>急救卡</strong>（注明姓名、疾病、用药、紧急联系人）</td>
+</tr>
+<tr>
+<td>D4</td>
+<td>运动时间选择<strong>餐后 1-2 小时</strong>，避免空腹运动</td>
+</tr>
+<tr>
+<td>D5</td>
+<td>穿着合适的<strong>运动鞋和棉袜</strong>，运动后检查足部有无损伤</td>
+</tr>
+<tr>
+<td>D6</td>
+<td>如出现头晕、心慌、出冷汗、手抖等低血糖症状，<strong>立即停止运动</strong>，补充 15-20g 葡萄糖</td>
+</tr>
+<tr>
+<td>D7</td>
+<td>胰岛素/药物作用峰值时间（服药后 1-2 小时）<strong>避免高强度运动</strong></td>
+</tr>
+</tbody></table>
+<h3>6.2 肝功能相关注意</h3>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>L1</td>
+<td>ALT 52 U/L 为轻度升高，<strong>严格避免高强度运动</strong>（高强度运动本身可致ALT升高）</td>
+</tr>
+<tr>
+<td>L2</td>
+<td>每 4-6 周复查肝功能，ALT 正常或下降后方可逐步增加运动强度</td>
+</tr>
+<tr>
+<td>L3</td>
+<td>运动<strong>不宜过度疲劳</strong>，感觉明显疲倦时应停止</td>
+</tr>
+<tr>
+<td>L4</td>
+<td><strong>严格戒酒</strong>（酒精 + 运动 + 脂肪肝 = 三重肝脏负担）</td>
+</tr>
+</tbody></table>
+<h3>6.3 高脂血症相关注意</h3>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>H1</td>
+<td>他汀类药物使用者需关注<strong>肌肉酸痛</strong>，如出现全身性肌肉疼痛/无力需立即就医</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>运动是改善 HDL-C（目前偏低: 0.92 mmol/L）的有效手段，坚持有氧运动</td>
+</tr>
+<tr>
+<td>H3</td>
+<td>避免突然的高强度运动，防止心血管意外</td>
+</tr>
+</tbody></table>
+<h3>6.4 超重/关节保护</h3>
+<table>
+<thead>
+<tr>
+<th>编号</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>W1</td>
+<td>体重 82 kg，BMI 27.7，注意<strong>保护膝关节</strong></td>
+</tr>
+<tr>
+<td>W2</td>
+<td>初期以快走、游泳、骑行为主，<strong>避免跑跳类高冲击运动</strong></td>
+</tr>
+<tr>
+<td>W3</td>
+<td>运动鞋选择有良好缓冲的款式，减少关节压力</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>七、循序渐进计划</h2>
+<h3>总体路线图（24 周）</h3>
+<pre><code>第1-4周        第5-12周       第13-24周
 (适应期)       (进阶期)       (巩固期)
   |              |              |
   v              v              v
@@ -701,73 +2559,117 @@ RPE 11        RPE 12         RPE 13
 弹力带入门    弹力带进阶      哑铃/弹力带
 15min/次      20min/次       20-25min/次
 150min/周     200min/周      250-300min/周
-<code style="background:#f0f0f0;padding:1px 3px;border-radius:2px;font-size:7.5pt;">`</code>
-
-<strong style="color:#1a5fb4;">各阶段目标与评估节点</strong>
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>阶段 </span><span style="color:#1a5fb4;font-weight:500;"> 时间 </span></div> 运动目标 | 健康目标 | 评估 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">------</span></div>---------|---------|------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>适应期</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 第1-4周 </span></div> 建立运动习惯，快走30min/次，每周5天 | 适应运动节奏，无不适 | 第4周末评估: 运动耐受性、血糖变化 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>进阶期</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 第5-12周 </span></div> 快走+慢跑交替，延长至40min，加入抗阻 | 体重下降2-3kg，血糖改善 | 第8周复查: 空腹血糖、HbA1c、ALT、血脂 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span><strong>巩固期</strong> </span><span style="color:#1a5fb4;font-weight:500;"> 第13-24周 </span></div> 稳定运动习惯，达到250-300min/周 | 体重共降5-8kg，血糖血脂达标 | 第12/24周复查: 全面指标 |
-
-<strong style="color:#1a5fb4;">停止运动并就医的情况</strong>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>血糖 > 16.7 mmol/L 或 < 3.9 mmol/L</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>出现胸痛、胸闷、心悸、气短</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>异常肌肉疼痛（全身性、持续不缓解）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>关节疼痛无法缓解</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>ALT 升高超过正常上限 2 倍（> 80 U/L）</li>
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>视力突然变化（需排查视网膜病变）</li>
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-建议张先生每次运动后记录以下信息，便于医生/运动治疗师评估调整:
-
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>日期 </span><span style="color:#1a5fb4;font-weight:500;"> 运动类型 </span></div> 时长 | 心率 | 运动前血糖 | 运动后血糖 | 主观感受(RPE) | 备注 |
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>------</span><span style="color:#1a5fb4;font-weight:500;">---------</span></div>------|------|-----------|-----------|-------------|------|
-<div style="display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd;"><span>/ / </span><span style="color:#1a5fb4;font-weight:500;"> </span></div> min | bpm | mmol/L | mmol/L | 6-20 | |
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-1. <strong>《中国2型糖尿病运动治疗指南（2024版）》</strong> — 中华医学会糖尿病学分会. 推荐有氧运动每周 >= 150 分钟 + 抗阻训练每周 2 次；创新性融入太极拳和八段锦等中国特色运动形式。[查看详情](https://www.chinagp.net/CN/news/folder.do?folderId=8)
-
-2. <strong>《中国T2DM成人患者身体活动与运动治疗临床指南》</strong> — 提出34条推荐意见，涵盖运动前评估、通用运动处方及特殊人群运动策略。[查看详情](https://www.cardio-km.com/index/article/detail?id=15917)
-
-3. <strong>2026年ADA糖尿病医学诊疗标准</strong> — 美国糖尿病协会最新诊疗标准。[查看详情](https://www.idiabetes.com.cn/index/article/detail?id=16005)
-
-4. <strong>《临床运动处方实践专家共识（2025）》</strong> — 国家体育总局. 初始运动强度50%-70%预计最大心率，进阶至65%-80%。[查看详情](https://www.sport.gov.cn/n20001280/n20001265/n20066978/c29136918/content.html)
-
-5. <strong>《中国超重和肥胖人群运动处方指南（2025）》</strong> — 中国体育科学学会/中国营养学会. 有氧运动改善血脂（TC、TG）等代谢指标。[查看原文](https://tykx.xml-journal.net/cn/article/pdf/preview/10.16469/J.css.2025KX085.pdf)
-
-6. <strong>《体重管理指导原则（2024年版）》</strong> — 国家卫生健康委员会. 最佳强度为最大脂肪氧化强度运动，时间从30分钟逐渐增至60-120分钟。[查看详情](https://www.nhc.gov.cn/ylyjs/zcwj/202412/75cb79c171c94def9e768193e65484f7/files/1736390749000_59785.pdf)
-
-7. <strong>运动干预对代谢功能障碍相关脂肪性肝病患者的影响</strong> — 肝酶异常者优先有氧运动，血脂异常者有氧和阻力运动均可考虑。[查看详情](https://pdf.hanspub.org/acm_8105809.pdf)
-
-8. <strong>北京市卫生健康委员会 — 糖友运动"八项注意"</strong> — 随身携带急救卡及糖块、饼干，热身5-10分钟。[查看详情](https://wjw.beijing.gov.cn/bmfw_20143/jkzs/jbzs/201912/t20191217_1250576.html)
-
-9. <strong>晨练与餐前二甲双胍: 优化2型糖尿病患者的血糖管理</strong> — 晨练结合餐前二甲双胍服用可优化全天血糖水平。[查看详情](https://m.cmt.com.cn/detail/1467368.html)
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-> <strong>本运动处方仅供参考，不能替代专业医疗建议。</strong>
->
-> 1. 张先生为新发现的2型糖尿病患者，运动前应完成全面的心血管风险评估（包括运动负荷试验），并由医生确认运动安全性。
-> 2. 建议在<strong>内分泌科医生</strong>和<strong>运动医学/康复科专业人员的指导下</strong>开始运动计划。
-> 3. 本处方中的运动强度、频率、时长为基于当前检查结果的一般性建议，实际运动方案需根据运动后血糖、肝功能、血脂等指标的动态变化进行个体化调整。
-> 4. 如运动过程中出现任何不适（胸痛、头晕、异常肌肉疼痛、关节疼痛等），应<strong>立即停止运动</strong>并及时就医。
-> 5. 运动处方需与营养方案、药物治疗方案<strong>协同调整</strong>，不可擅自更改。
-> 6. 本文档不构成任何医患关系，对因使用本文档信息而导致的任何直接或间接损失不承担责任。
-
-<li style="margin:1px 0;padding-left:12px;position:relative;"><span style="position:absolute;left:0;color:#1a5fb4;">•</span>--</li>
-
-> 生成工具: Claude Code | 运动医学顾问模块
-> 生成日期: 2026-04-02
+</code></pre>
+<h3>各阶段目标与评估节点</h3>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>时间</th>
+<th>运动目标</th>
+<th>健康目标</th>
+<th>评估</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>适应期</strong></td>
+<td>第1-4周</td>
+<td>建立运动习惯，快走30min/次，每周5天</td>
+<td>适应运动节奏，无不适</td>
+<td>第4周末评估: 运动耐受性、血糖变化</td>
+</tr>
+<tr>
+<td><strong>进阶期</strong></td>
+<td>第5-12周</td>
+<td>快走+慢跑交替，延长至40min，加入抗阻</td>
+<td>体重下降2-3kg，血糖改善</td>
+<td>第8周复查: 空腹血糖、HbA1c、ALT、血脂</td>
+</tr>
+<tr>
+<td><strong>巩固期</strong></td>
+<td>第13-24周</td>
+<td>稳定运动习惯，达到250-300min/周</td>
+<td>体重共降5-8kg，血糖血脂达标</td>
+<td>第12/24周复查: 全面指标</td>
+</tr>
+</tbody></table>
+<h3>停止运动并就医的情况</h3>
+<ul>
+<li>血糖 &gt; 16.7 mmol/L 或 &lt; 3.9 mmol/L</li>
+<li>出现胸痛、胸闷、心悸、气短</li>
+<li>异常肌肉疼痛（全身性、持续不缓解）</li>
+<li>关节疼痛无法缓解</li>
+<li>ALT 升高超过正常上限 2 倍（&gt; 80 U/L）</li>
+<li>视力突然变化（需排查视网膜病变）</li>
+</ul>
+<hr>
+<h2>八、运动日志模板</h2>
+<p>建议张先生每次运动后记录以下信息，便于医生/运动治疗师评估调整:</p>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>运动类型</th>
+<th>时长</th>
+<th>心率</th>
+<th>运动前血糖</th>
+<th>运动后血糖</th>
+<th>主观感受(RPE)</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>/ /</td>
+<td></td>
+<td>min</td>
+<td>bpm</td>
+<td>mmol/L</td>
+<td>mmol/L</td>
+<td>6-20</td>
+<td></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>九、参考来源</h2>
+<ol>
+<li><p><strong>《中国2型糖尿病运动治疗指南（2024版）》</strong> — 中华医学会糖尿病学分会. 推荐有氧运动每周 &gt;= 150 分钟 + 抗阻训练每周 2 次；创新性融入太极拳和八段锦等中国特色运动形式。<a href="https://www.chinagp.net/CN/news/folder.do?folderId=8">查看详情</a></p>
+</li>
+<li><p><strong>《中国T2DM成人患者身体活动与运动治疗临床指南》</strong> — 提出34条推荐意见，涵盖运动前评估、通用运动处方及特殊人群运动策略。<a href="https://www.cardio-km.com/index/article/detail?id=15917">查看详情</a></p>
+</li>
+<li><p><strong>2026年ADA糖尿病医学诊疗标准</strong> — 美国糖尿病协会最新诊疗标准。<a href="https://www.idiabetes.com.cn/index/article/detail?id=16005">查看详情</a></p>
+</li>
+<li><p><strong>《临床运动处方实践专家共识（2025）》</strong> — 国家体育总局. 初始运动强度50%-70%预计最大心率，进阶至65%-80%。<a href="https://www.sport.gov.cn/n20001280/n20001265/n20066978/c29136918/content.html">查看详情</a></p>
+</li>
+<li><p><strong>《中国超重和肥胖人群运动处方指南（2025）》</strong> — 中国体育科学学会/中国营养学会. 有氧运动改善血脂（TC、TG）等代谢指标。<a href="https://tykx.xml-journal.net/cn/article/pdf/preview/10.16469/J.css.2025KX085.pdf">查看原文</a></p>
+</li>
+<li><p><strong>《体重管理指导原则（2024年版）》</strong> — 国家卫生健康委员会. 最佳强度为最大脂肪氧化强度运动，时间从30分钟逐渐增至60-120分钟。<a href="https://www.nhc.gov.cn/ylyjs/zcwj/202412/75cb79c171c94def9e768193e65484f7/files/1736390749000_59785.pdf">查看详情</a></p>
+</li>
+<li><p><strong>运动干预对代谢功能障碍相关脂肪性肝病患者的影响</strong> — 肝酶异常者优先有氧运动，血脂异常者有氧和阻力运动均可考虑。<a href="https://pdf.hanspub.org/acm_8105809.pdf">查看详情</a></p>
+</li>
+<li><p><strong>北京市卫生健康委员会 — 糖友运动&quot;八项注意&quot;</strong> — 随身携带急救卡及糖块、饼干，热身5-10分钟。<a href="https://wjw.beijing.gov.cn/bmfw_20143/jkzs/jbzs/201912/t20191217_1250576.html">查看详情</a></p>
+</li>
+<li><p><strong>晨练与餐前二甲双胍: 优化2型糖尿病患者的血糖管理</strong> — 晨练结合餐前二甲双胍服用可优化全天血糖水平。<a href="https://m.cmt.com.cn/detail/1467368.html">查看详情</a></p>
+</li>
+</ol>
+<hr>
+<h2>免责声明</h2>
+<blockquote>
+<p><strong>本运动处方仅供参考，不能替代专业医疗建议。</strong></p>
+<ol>
+<li>张先生为新发现的2型糖尿病患者，运动前应完成全面的心血管风险评估（包括运动负荷试验），并由医生确认运动安全性。</li>
+<li>建议在<strong>内分泌科医生</strong>和<strong>运动医学/康复科专业人员的指导下</strong>开始运动计划。</li>
+<li>本处方中的运动强度、频率、时长为基于当前检查结果的一般性建议，实际运动方案需根据运动后血糖、肝功能、血脂等指标的动态变化进行个体化调整。</li>
+<li>如运动过程中出现任何不适（胸痛、头晕、异常肌肉疼痛、关节疼痛等），应<strong>立即停止运动</strong>并及时就医。</li>
+<li>运动处方需与营养方案、药物治疗方案<strong>协同调整</strong>，不可擅自更改。</li>
+<li>本文档不构成任何医患关系，对因使用本文档信息而导致的任何直接或间接损失不承担责任。</li>
+</ol>
+</blockquote>
+<hr>
+<blockquote>
+<p>生成工具: Claude Code | 运动医学顾问模块
+生成日期: 2026-04-02</p>
+</blockquote>
 </div>
-  </div>
-
-  <div class="footer">
-    本报告由 AI 辅助生成，仅供参考，不构成医疗建议。如有疑问请咨询专业医生。
-  </div>
+<div class="report-footer">营养方案报告 · 张先生 · 2026年4月7日 · 仅供参考，不构成医疗建议</div>
 </body>
 </html>

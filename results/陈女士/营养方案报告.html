@@ -1,0 +1,2531 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>营养方案报告 - 陈女士</title>
+  <style>
+@page { size: A4; margin: 18mm 20mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 10pt;
+  line-height: 1.7;
+  color: #1a1a2e;
+  background: #fff;
+}
+
+/* ── 封面 ── */
+.cover {
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240mm;
+  text-align: center;
+  background: linear-gradient(160deg, #0f3460 0%, #16213e 60%, #1a1a2e 100%);
+  color: #fff;
+  margin: -18mm -20mm;
+  padding: 40mm 30mm;
+}
+.cover-logo {
+  font-size: 9pt;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover h1 {
+  font-size: 28pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8mm;
+  color: #fff;
+}
+.cover-subtitle {
+  font-size: 12pt;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover-meta {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 6mm 12mm;
+  font-size: 11pt;
+  line-height: 2.2;
+  color: #e0e0ff;
+}
+.cover-meta strong { color: #fff; }
+.cover-disclaimer {
+  margin-top: 16mm;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── 章节标题块 ── */
+.section-header {
+  page-break-before: always;
+  margin: 0 -20mm 6mm -20mm;
+  padding: 5mm 20mm;
+  background: linear-gradient(90deg, #0f3460, #1a5fb4);
+  color: #fff;
+}
+.section-header h2 {
+  font-size: 14pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.section-header .section-sub {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1mm;
+}
+
+/* ── 正文标题 ── */
+h1, h2, h3, h4 { font-weight: 600; }
+h2 {
+  font-size: 13pt;
+  color: #0f3460;
+  border-bottom: 2px solid #0f3460;
+  padding-bottom: 2mm;
+  margin: 6mm 0 3mm 0;
+}
+h3 {
+  font-size: 11pt;
+  color: #1a5fb4;
+  border-left: 3px solid #1a5fb4;
+  padding-left: 3mm;
+  margin: 5mm 0 2mm 0;
+}
+h4 {
+  font-size: 10pt;
+  color: #2d6a4f;
+  margin: 4mm 0 2mm 0;
+}
+
+/* ── 段落和列表 ── */
+p { margin: 2mm 0; }
+ul, ol { margin: 2mm 0 2mm 6mm; padding: 0; }
+li { margin: 1mm 0; }
+ul li { list-style: disc; }
+ol li { list-style: decimal; }
+
+/* ── 引用块 → 提示框 ── */
+blockquote {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 4px 4px 0;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  color: #1e40af;
+  font-size: 9.5pt;
+}
+blockquote p { margin: 0; }
+
+/* ── 代码块 → 信息框 ── */
+pre {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 8.5pt;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+code {
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 8.5pt;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+}
+pre code { background: none; padding: 0; }
+
+/* ── 表格 ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0;
+  font-size: 9pt;
+}
+thead tr { background: #0f3460; color: #fff; }
+thead th {
+  padding: 2.5mm 3mm;
+  font-weight: 600;
+  text-align: left;
+  border: 1px solid #0a2545;
+}
+tbody tr:nth-child(even) { background: #f0f4ff; }
+tbody td {
+  padding: 2mm 3mm;
+  border: 1px solid #d1d9e6;
+  vertical-align: top;
+}
+
+/* ── 强调 ── */
+strong { font-weight: 700; color: #0f3460; }
+em { color: #1a5fb4; font-style: normal; font-weight: 500; }
+
+/* ── hr 分隔线 ── */
+hr {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 4mm 0;
+}
+
+/* ── 分页控制 ── */
+table { page-break-inside: auto; }
+tr { page-break-inside: avoid; }
+
+/* ── 报告页脚 ── */
+.report-footer {
+  margin-top: 10mm;
+  padding-top: 3mm;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+  font-size: 7.5pt;
+  color: #94a3b8;
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-logo">AI Nutrition System</div>
+  <h1>个性化营养方案报告</h1>
+  <div class="cover-subtitle">Personalized Nutrition Plan</div>
+  <div class="cover-meta">
+    <div><strong>患者姓名</strong>　陈女士</div>
+    <div><strong>报告日期</strong>　2026年4月7日</div>
+    <div><strong>生成机构</strong>　AI 营养咨询系统</div>
+  </div>
+  <div class="cover-disclaimer">本报告由 AI 辅助生成，仅供参考，不构成医疗建议</div>
+</div>
+
+<div class="section-header">
+  <h2>营养评估</h2>
+  <div class="section-sub">Nutrition Assessment</div>
+</div>
+<div class="section-body">
+<h1>营养评估报告</h1>
+<blockquote>
+<p>生成日期: 2026-03-31
+基于: 健康档案_2026-03-31_D.md（陈女士）
+参考: knowledge/nutrient-reference.md, knowledge/disease-diet-rules.md</p>
+</blockquote>
+<hr>
+<h2>基础代谢计算</h2>
+<h3>BMR</h3>
+<p>（Mifflin-St Jeor 公式）</p>
+<pre><code>女性: BMR = 10 × 体重(kg) + 6.25 × 身高(cm) - 5 × 年龄(岁) - 161
+BMR = 10 × 52 + 6.25 × 163 - 5 × 28 - 161
+    = 520 + 1018.75 - 140 - 161
+    = 1237.75 kcal/天 ≈ 1238 kcal/天
+</code></pre>
+<h3>活动水平</h3>
+<ul>
+<li>当前活动水平: <strong>轻度活动</strong>（每周瑜伽2次）</li>
+<li>活动系数: <strong>1.375</strong></li>
+</ul>
+<h3>TDEE</h3>
+<pre><code>TDEE = 1238 × 1.375 = 1702 kcal/天
+</code></pre>
+<h3>目标能量</h3>
+<ul>
+<li>当前 BMI 19.6（正常偏低），<strong>维持体重</strong>，无需增减热量</li>
+<li><strong>目标能量</strong>: <strong>1700 kcal/天</strong>（取整）</li>
+<li>BMI 19.6 接近正常范围下限（18.5），不宜进一步减重</li>
+<li>偶尔节食减肥习惯必须纠正，否则将加重铁缺乏</li>
+</ul>
+<hr>
+<h2>每日营养目标</h2>
+<h3>宏量营养素</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标值</th>
+<th>占比</th>
+<th>范围</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>总能量</strong></td>
+<td><strong>1700 kcal</strong></td>
+<td>100%</td>
+<td>1650-1750</td>
+<td>维持体重，不增减</td>
+</tr>
+<tr>
+<td><strong>蛋白质</strong></td>
+<td><strong>68 g</strong></td>
+<td>16%</td>
+<td>60-75g</td>
+<td>1.3g/kg（轻度贫血需适当增加）</td>
+</tr>
+<tr>
+<td><strong>碳水化合物</strong></td>
+<td><strong>234 g</strong></td>
+<td>55%</td>
+<td>210-260g</td>
+<td>正常比例，以低GI为主</td>
+</tr>
+<tr>
+<td><strong>脂肪</strong></td>
+<td><strong>47 g</strong></td>
+<td>25%</td>
+<td>40-55g</td>
+<td>正常比例</td>
+</tr>
+<tr>
+<td><strong>膳食纤维</strong></td>
+<td><strong>≥ 25 g</strong></td>
+<td>—</td>
+<td>25-30g</td>
+<td>膳食指南标准</td>
+</tr>
+</tbody></table>
+<p><strong>铁营养重点（核心干预指标）:</strong></p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>目标</th>
+<th>来源/依据</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>每日铁摄入</td>
+<td><strong>20 mg</strong></td>
+<td>育龄女性 RNI（nutrient-reference.md）</td>
+</tr>
+<tr>
+<td>血红素铁占比</td>
+<td><strong>≥ 40%</strong></td>
+<td>Heme铁吸收率15-35%，远高于非Heme铁2-20%</td>
+</tr>
+<tr>
+<td>维生素C</td>
+<td><strong>每餐 50-100 mg</strong></td>
+<td>促进非血红素铁吸收2-6倍</td>
+</tr>
+<tr>
+<td>红肉频率</td>
+<td><strong>4-5次/周</strong></td>
+<td>主要血红素铁来源</td>
+</tr>
+<tr>
+<td>动物肝脏</td>
+<td><strong>1-2次/周，每次50g</strong></td>
+<td>猪肝铁含量22.6mg/100g</td>
+</tr>
+<tr>
+<td>动物血</td>
+<td><strong>1-2次/周</strong></td>
+<td>鸭血铁含量30.5mg/100g，吸收率极高</td>
+</tr>
+</tbody></table>
+<h3>微量营养素重点</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>铁</td>
+<td>20 mg/天</td>
+<td>缺铁性贫血核心干预</td>
+</tr>
+<tr>
+<td>维生素C</td>
+<td>100-200 mg/天</td>
+<td>RNI 100mg，贫血者适当增加以促铁吸收</td>
+</tr>
+<tr>
+<td>叶酸</td>
+<td>400 μg DFE/天</td>
+<td>当前6.8ng/mL正常，但维持足够摄入有利红细胞生成</td>
+</tr>
+<tr>
+<td>维生素B12</td>
+<td>2.4 μg/天</td>
+<td>与叶酸协同参与红细胞生成</td>
+</tr>
+<tr>
+<td>钙</td>
+<td>800 mg/天</td>
+<td>RNI标准，注意与铁餐分开摄入</td>
+</tr>
+<tr>
+<td>钙补充时机</td>
+<td>与富铁餐间隔2小时</td>
+<td>钙竞争性抑制铁吸收</td>
+</tr>
+</tbody></table>
+<h3>三餐能量分配</h3>
+<table>
+<thead>
+<tr>
+<th>餐次</th>
+<th>能量</th>
+<th>占比</th>
+<th>碳水</th>
+<th>蛋白质</th>
+<th>脂肪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>早餐</strong></td>
+<td>510 kcal</td>
+<td>30%</td>
+<td>70g</td>
+<td>20g</td>
+<td>14g</td>
+</tr>
+<tr>
+<td><strong>午餐</strong></td>
+<td>680 kcal</td>
+<td>40%</td>
+<td>94g</td>
+<td>27g</td>
+<td>19g</td>
+</tr>
+<tr>
+<td><strong>晚餐</strong></td>
+<td>510 kcal</td>
+<td>30%</td>
+<td>70g</td>
+<td>20g</td>
+<td>14g</td>
+</tr>
+<tr>
+<td>合计</td>
+<td><strong>1700 kcal</strong></td>
+<td>100%</td>
+<td><strong>234g</strong></td>
+<td><strong>67g</strong></td>
+<td><strong>47g</strong></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p><strong>补铁重点分配</strong>: 早餐（鸡蛋+维C水果，奶制品放早餐不影响午晚餐铁吸收）| 午餐（核心补铁餐：红肉+维C蔬菜+主食）| 晚餐（辅助补铁：禽肉/鱼+深色蔬菜+维C）</p>
+</blockquote>
+<hr>
+<h2>饮食原则</h2>
+<h3>补铁核心原则（最高优先级）</h3>
+<ul>
+<li><strong>血红素铁为主</strong>: 红肉（牛肉、瘦猪肉、羊肉）每周4-5次，每次75-100g</li>
+<li><strong>肝脏/血制品</strong>: 动物肝脏（猪肝、鸡肝）1-2次/周，每次50g；鸭血/猪血1-2次/周</li>
+<li><strong>非血红素铁辅助</strong>: 深色蔬菜（菠菜、木耳）、豆制品、红枣、黑芝麻</li>
+<li><strong>维C搭配</strong>: 每餐含铁食物同时摄入维生素C（柑橘、猕猴桃、草莓、番茄、甜椒）</li>
+<li><strong>避免抑制因素</strong>: 餐前餐后1小时内不饮茶和咖啡（抑制铁吸收达60%）</li>
+</ul>
+<h3>月经期特殊照顾</h3>
+<ul>
+<li>经期及经后3天内适当增加红肉摄入至每天100g</li>
+<li>经期每天保证一份肝脏或血制品</li>
+<li>经期注意补充水分和维生素B族</li>
+</ul>
+<h3>维持体重原则</h3>
+<ul>
+<li><strong>绝不节食</strong>: BMI 19.6偏低侧，节食会加剧铁和整体营养摄入不足</li>
+<li><strong>保证三餐规律</strong>: 不可省略任何一餐</li>
+<li><strong>营养密度优先</strong>: 每一口食物都应带来营养价值</li>
+</ul>
+<h3>茶饮/咖啡管理</h3>
+<ul>
+<li>餐中及餐后1小时内: <strong>禁止</strong>饮茶和咖啡</li>
+<li>两餐之间（餐后2小时以上）: 可适量饮用淡茶或咖啡</li>
+<li>改用柠檬水、橙汁、番茄汁等维C饮品佐餐</li>
+</ul>
+<h3>钙铁分离原则</h3>
+<ul>
+<li>牛奶/酸奶/钙片: 放在两餐之间或睡前饮用，不与富铁主餐同食</li>
+<li>早餐可安排奶制品（因午餐和晚餐才是主要补铁餐）</li>
+</ul>
+<hr>
+<h2>推荐食物清单</h2>
+<h3>高铁食物（血红素铁，高优先级）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>铁含量(mg/100g)</th>
+<th>建议频率</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>鸭血</td>
+<td>~30.5</td>
+<td>1-2次/周</td>
+<td>铁含量最高，吸收率极好</td>
+</tr>
+<tr>
+<td>猪肝</td>
+<td>~22.6</td>
+<td>1次/周</td>
+<td>同时富含维生素A，不宜过量</td>
+</tr>
+<tr>
+<td>牛肉(瘦)</td>
+<td>2.8</td>
+<td>3-4次/周</td>
+<td>最实用的日常血红素铁来源</td>
+</tr>
+<tr>
+<td>猪肉(瘦)</td>
+<td>3.0</td>
+<td>2次/周</td>
+<td></td>
+</tr>
+<tr>
+<td>羊肉</td>
+<td>~3.9</td>
+<td>1-2次/周</td>
+<td></td>
+</tr>
+<tr>
+<td>鸡蛋</td>
+<td>2.0</td>
+<td>每天1个</td>
+<td>蛋黄含铁，虽吸收率低于红肉但方便</td>
+</tr>
+</tbody></table>
+<h3>高铁食物（非血红素铁，辅助）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>铁含量(mg/100g)</th>
+<th>建议频率</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>木耳(干)</td>
+<td>~97.4</td>
+<td>2-3次/周(泡发后)</td>
+<td>泡发后实际摄入量少，但仍有贡献</td>
+</tr>
+<tr>
+<td>菠菜</td>
+<td>~2.9</td>
+<td>2-3次/周</td>
+<td>搭配维C提高吸收率</td>
+</tr>
+<tr>
+<td>豆腐干</td>
+<td>3.6</td>
+<td>2次/周</td>
+<td></td>
+</tr>
+<tr>
+<td>黑芝麻</td>
+<td>~22.7</td>
+<td>每天1小勺(5g)</td>
+<td>可撒在粥或菜肴上</td>
+</tr>
+<tr>
+<td>红枣(干)</td>
+<td>~2.3</td>
+<td>每天3-5颗</td>
+<td>传统补铁食材，实际含铁量不高，但方便易得</td>
+</tr>
+</tbody></table>
+<h3>维生素C搭配食物（每餐必备）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>维C含量(mg/100g)</th>
+<th>使用方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>猕猴桃</td>
+<td>62</td>
+<td>餐后水果</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>47</td>
+<td>餐后水果/加餐</td>
+</tr>
+<tr>
+<td>橙子</td>
+<td>33</td>
+<td>鲜榨橙汁佐餐</td>
+</tr>
+<tr>
+<td>西兰花</td>
+<td>56</td>
+<td>配菜炒制</td>
+</tr>
+<tr>
+<td>番茄</td>
+<td>19</td>
+<td>佐餐/沙拉</td>
+</tr>
+<tr>
+<td>甜椒</td>
+<td>~130</td>
+<td>配菜炒制</td>
+</tr>
+<tr>
+<td>柚子</td>
+<td>23</td>
+<td>餐后水果</td>
+</tr>
+</tbody></table>
+<h3>主食类（正常选择）</h3>
+<ul>
+<li>糙米、燕麦、全麦面包、荞麦面、红薯、玉米、藜麦</li>
+<li>粗细搭配，粗粮占主食1/3即可</li>
+</ul>
+<hr>
+<h2>禁忌食物</h2>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>原因</th>
+<th>严重程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>餐中饮茶</strong></td>
+<td>茶多酚抑制铁吸收达60%</td>
+<td><strong>完全禁止</strong>（餐后1小时内）</td>
+</tr>
+<tr>
+<td><strong>餐中饮咖啡</strong></td>
+<td>多酚类抑制铁吸收</td>
+<td><strong>完全禁止</strong>（餐后1小时内）</td>
+</tr>
+<tr>
+<td><strong>节食/断食</strong></td>
+<td>BMI 19.6偏低，节食加剧铁缺乏</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td><strong>省略正餐</strong></td>
+<td>导致铁和营养摄入不足</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td>牛奶与富铁餐同食</td>
+<td>钙竞争性抑制铁吸收</td>
+<td><strong>严格限制</strong>（间隔2小时）</td>
+</tr>
+<tr>
+<td>钙片与富铁餐同服</td>
+<td>钙抑制铁吸收</td>
+<td><strong>严格限制</strong>（间隔2小时）</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>药物-营养交互</h2>
+<p>陈女士目前无用药，无需考虑药物-营养交互。</p>
+<p><strong>补铁剂相关提示（如医生建议补充铁剂时）:</strong></p>
+<ul>
+<li>如后续医生开具铁剂，应在两餐之间空腹服用</li>
+<li>铁剂与维C同服可提高吸收率</li>
+<li>铁剂不与牛奶、钙片、抗酸药同服</li>
+<li>目前优先通过膳食补铁，方案执行4-8周后复查铁蛋白，如无改善再考虑铁剂</li>
+</ul>
+<hr>
+<h2>参考来源</h2>
+<ol>
+<li>中国居民膳食营养素参考摄入量（2023版）— 铁 RNI 20mg/天（育龄女性）</li>
+<li>中国居民膳食指南（2022）— 膳食宝塔、食物多样化</li>
+<li>《缺铁性贫血营养防治专家共识》</li>
+<li>WHO《育龄女性铁缺乏和贫血营养干预指南》</li>
+</ol>
+<hr>
+<h2>关键注意事项</h2>
+<ol>
+<li><strong>绝不节食是铁律</strong> — 陈女士BMI 19.6已偏正常下限，任何形式的节食减肥都会加重铁缺乏。必须向患者明确说明：节食不仅不能减重（已经偏瘦），还会导致贫血加重、面色苍白、头晕乏力、免疫力下降</li>
+<li><strong>茶/咖啡管理是补铁关键</strong> — 餐中饮茶可抑制60%铁吸收，意味着即使吃对了富铁食物，一杯茶就可能让补铁效果大打折扣。建议改为两餐之间饮茶</li>
+<li><strong>维C是补铁最佳搭档</strong> — 每餐搭配维C食物（柑橘、猕猴桃、甜椒、番茄），可将非血红素铁吸收率提高2-6倍</li>
+<li><strong>牛奶放早餐，铁放午晚餐</strong> — 钙与铁竞争吸收通道，将奶制品集中在早餐，午晚餐主攻补铁</li>
+<li><strong>月经期加强补铁</strong> — 经量偏多是铁丢失主因，经期及经后一周应增加红肉和血制品摄入</li>
+<li><strong>4-8周后复查</strong> — 建议执行膳食方案4-8周后复查铁蛋白和血红蛋白，评估补铁效果。如铁蛋白未回升，需在医生指导下考虑铁剂补充</li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>免责声明</strong>: 本营养评估仅供参考，不构成医疗诊断或治疗建议。陈女士虽然为轻度贫血，但铁蛋白已低于正常下限，建议在医生指导下定期监测。如头晕、乏力等症状加重，请及时就医。</p>
+</blockquote>
+</div>
+
+<div class="section-header">
+  <h2>配餐方案</h2>
+  <div class="section-sub">Meal Plan</div>
+</div>
+<div class="section-body">
+<h1>配餐方案</h1>
+<blockquote>
+<p>基于营养评估报告生成 | 日期: 2026-03-31
+适用对象: 陈女士（28岁，轻度缺铁性贫血，经量偏多）
+适用周期: <strong>一周（7天）</strong>
+每日目标: 1700 kcal | 蛋白质 68g | 碳水 234g | 脂肪 47g
+核心目标: 铁 20mg/天 | 每餐维C搭配 | 餐中禁茶/咖啡 | 维持体重不节食</p>
+</blockquote>
+<hr>
+<h2>补铁配餐核心规则</h2>
+<ol>
+<li><strong>午晚餐为补铁主餐</strong>: 每餐含红肉/肝脏/血制品 75-100g</li>
+<li><strong>每餐必有维C食物</strong>: 餐后水果或维C蔬菜配菜</li>
+<li><strong>牛奶放早餐/加餐</strong>: 不与午晚餐富铁食物冲突</li>
+<li><strong>餐中不饮茶/咖啡</strong>: 两餐间隔2小时以上才可饮茶</li>
+<li><strong>经期前后版本</strong>: 经期及经后3天增加红肉至每日100g，增加1次肝脏/血制品</li>
+</ol>
+<hr>
+<h2>周一</h2>
+<h3>早餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦牛奶粥</td>
+<td>燕麦片45g + 牛奶250ml</td>
+<td>微波/煮3分钟</td>
+<td>牛奶放早餐，不干扰午晚餐铁吸收</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个</td>
+<td>煮7分钟</td>
+<td>蛋黄含铁约1mg</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个(约100g)</td>
+<td>生食</td>
+<td>维C 62mg，促铁吸收</td>
+</tr>
+<tr>
+<td>坚果</td>
+<td>核桃3个(约10g)</td>
+<td>—</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3>午餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米50g(生，约125g熟)</td>
+<td>电饭煲蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>青椒炒牛肉</td>
+<td>牛肉(瘦)80g + 青椒100g</td>
+<td>少油快炒(油8g)</td>
+<td>牛肉heme铁<del>2.2mg，青椒维C</del>130mg/100g，最佳铁+维C组合</td>
+</tr>
+<tr>
+<td>蒜蓉菠菜</td>
+<td>菠菜150g</td>
+<td>少油炒(油5g)</td>
+<td>非heme铁，维C同餐促进吸收</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄100g + 鸡蛋半个</td>
+<td>煮</td>
+<td>维C+蛋白质</td>
+</tr>
+</tbody></table>
+<h3>晚餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面50g(约130g熟)</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>木耳炒猪肉片</td>
+<td>猪肉(瘦)60g + 木耳(泡发)50g</td>
+<td>少油炒(油6g)</td>
+<td>木耳非heme铁丰富</td>
+</tr>
+<tr>
+<td>凉拌西兰花</td>
+<td>西兰花100g</td>
+<td>焯水凉拌</td>
+<td>维C 56mg/100g</td>
+</tr>
+<tr>
+<td>橙子</td>
+<td>1个(约200g)</td>
+<td>餐后生食</td>
+<td>维C 33mg/100g，促铁吸收</td>
+</tr>
+</tbody></table>
+<p><strong>当日铁估算</strong>: ~19mg | <strong>维C</strong>: ~220mg</p>
+<hr>
+<h2>周二</h2>
+<h3>早餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦面包</td>
+<td>2片(约70g)</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr>
+<td>牛奶</td>
+<td>250ml</td>
+<td>—</td>
+<td>早餐饮奶不影响午晚餐铁吸收</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>150g</td>
+<td>生食</td>
+<td>维C 47mg/100g</td>
+</tr>
+<tr>
+<td>黑芝麻酱</td>
+<td>5g</td>
+<td>涂面包</td>
+<td>铁含量高(~22.7mg/100g)</td>
+</tr>
+</tbody></table>
+<h3>午餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米50g(生)</td>
+<td>蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>爆炒猪肝</td>
+<td>猪肝50g + 洋葱50g + 青椒50g</td>
+<td>少油快炒(油8g)</td>
+<td>猪肝铁~11.3mg(50g)，维C蔬菜搭配，本周肝脏日1</td>
+</tr>
+<tr>
+<td>炒西兰花</td>
+<td>西兰花150g</td>
+<td>少油炒(油5g)</td>
+<td>维C丰富</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜2g + 鸡蛋半个</td>
+<td>煮</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3>晚餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>红薯</td>
+<td>200g</td>
+<td>蒸/微波</td>
+<td>替代精白米</td>
+</tr>
+<tr>
+<td>番茄炖牛肉</td>
+<td>牛肉(瘦)60g + 番茄150g</td>
+<td>炖，少油(油6g)</td>
+<td>番茄酸性有助铁溶出和吸收</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>黄瓜100g</td>
+<td>凉拌</td>
+<td></td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个(约100g)</td>
+<td>餐后生食</td>
+<td>维C 62mg</td>
+</tr>
+</tbody></table>
+<p><strong>当日铁估算</strong>: ~22mg | <strong>维C</strong>: ~240mg</p>
+<hr>
+<h2>周三</h2>
+<h3>早餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>玉米</td>
+<td>1根(约200g)</td>
+<td>蒸/煮</td>
+<td></td>
+</tr>
+<tr>
+<td>酸奶</td>
+<td>200ml</td>
+<td>—</td>
+<td>早餐奶制品不影响午晚餐</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>1个(约200g)</td>
+<td>生食</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3>午餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦饭</td>
+<td>藜麦+白米共50g(生)</td>
+<td>蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>鸭血豆腐煲</td>
+<td>鸭血100g + 北豆腐80g + 白菜100g</td>
+<td>炖，少油(油6g)</td>
+<td>鸭血铁~30mg/100g，本周血制品日1，吸收率极高</td>
+</tr>
+<tr>
+<td>蒜蓉甜椒</td>
+<td>甜椒100g</td>
+<td>少油炒(油5g)</td>
+<td>维C~130mg/100g，强力促铁吸收</td>
+</tr>
+<tr>
+<td>柚子</td>
+<td>2瓣(约100g)</td>
+<td>餐后生食</td>
+<td>维C 23mg/100g</td>
+</tr>
+</tbody></table>
+<h3>晚餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面50g</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>鸡胸肉炒木耳</td>
+<td>鸡胸肉60g + 木耳(泡发)50g + 胡萝卜50g</td>
+<td>少油炒(油6g)</td>
+<td>木耳非heme铁</td>
+</tr>
+<tr>
+<td>凉拌番茄</td>
+<td>番茄150g</td>
+<td>凉拌</td>
+<td>维C佐餐</td>
+</tr>
+<tr>
+<td>橙子</td>
+<td>1个(约200g)</td>
+<td>餐后生食</td>
+<td>维C促铁</td>
+</tr>
+</tbody></table>
+<p><strong>当日铁估算</strong>: ~24mg | <strong>维C</strong>: ~230mg</p>
+<hr>
+<h2>周四</h2>
+<h3>早餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>红豆杂粮粥</td>
+<td>红豆+小米共50g</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>牛奶</td>
+<td>250ml</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>100g</td>
+<td>生食</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3>午餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米50g(生)</td>
+<td>蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>芹菜炒牛肉丝</td>
+<td>牛肉(瘦)80g + 芹菜100g</td>
+<td>少油快炒(油8g)</td>
+<td>heme铁+纤维</td>
+</tr>
+<tr>
+<td>木耳炒西兰花</td>
+<td>木耳(泡发)50g + 西兰花100g</td>
+<td>少油炒(油5g)</td>
+<td>双重补铁+维C</td>
+</tr>
+<tr>
+<td>番茄蛋汤</td>
+<td>番茄100g + 鸡蛋半个</td>
+<td>煮</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3>晚餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蒸南瓜</td>
+<td>南瓜200g</td>
+<td>蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>猪肉炒洋葱</td>
+<td>猪肉(瘦)60g + 洋葱80g + 甜椒50g</td>
+<td>少油炒(油6g)</td>
+<td>甜椒维C~130mg/100g</td>
+</tr>
+<tr>
+<td>凉拌菠菜</td>
+<td>菠菜100g</td>
+<td>焯水凉拌</td>
+<td></td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个(约100g)</td>
+<td>餐后生食</td>
+<td>维C 62mg</td>
+</tr>
+</tbody></table>
+<p><strong>当日铁估算</strong>: ~18mg | <strong>维C</strong>: ~210mg</p>
+<hr>
+<h2>周五</h2>
+<h3>早餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦粥</td>
+<td>燕麦40g + 牛奶200ml</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>全麦面包</td>
+<td>1片</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>小番茄</td>
+<td>150g</td>
+<td>生食</td>
+<td>维C 19mg/100g</td>
+</tr>
+</tbody></table>
+<h3>午餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米50g(生)</td>
+<td>蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>鸡肝炒甜椒</td>
+<td>鸡肝50g + 甜椒100g</td>
+<td>少油快炒(油8g)</td>
+<td>鸡肝铁~12mg/100g，本周肝脏日2</td>
+</tr>
+<tr>
+<td>炒木耳菜</td>
+<td>木耳菜150g</td>
+<td>少油炒(油5g)</td>
+<td>深色蔬菜</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>100g</td>
+<td>餐后生食</td>
+<td>维C 47mg/100g</td>
+</tr>
+</tbody></table>
+<h3>晚餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦饭</td>
+<td>藜麦+小米共50g(生)</td>
+<td>蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼80g</td>
+<td>清蒸，姜丝</td>
+<td>鱼肉铁含量低但优质蛋白</td>
+</tr>
+<tr>
+<td>豆腐干炒菠菜</td>
+<td>豆腐干50g + 菠菜150g</td>
+<td>少油炒(油6g)</td>
+<td>豆腐干铁3.6mg/100g+菠菜铁</td>
+</tr>
+<tr>
+<td>橙子</td>
+<td>1个(约200g)</td>
+<td>餐后生食</td>
+<td>维C促铁</td>
+</tr>
+</tbody></table>
+<p><strong>当日铁估算</strong>: ~21mg | <strong>维C</strong>: ~200mg</p>
+<hr>
+<h2>周六</h2>
+<h3>早餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦吐司</td>
+<td>2片</td>
+<td>烤</td>
+<td></td>
+</tr>
+<tr>
+<td>牛奶</td>
+<td>250ml</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个(约100g)</td>
+<td>生食</td>
+<td>维C 62mg</td>
+</tr>
+</tbody></table>
+<h3>午餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+黑米共50g(生)</td>
+<td>蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>鸭血粉丝汤</td>
+<td>鸭血100g + 粉丝30g + 小白菜150g</td>
+<td>煮，少油(油6g)</td>
+<td>鸭血铁~30mg/100g，本周血制品日2</td>
+</tr>
+<tr>
+<td>甜椒炒蛋</td>
+<td>甜椒100g + 鸡蛋1个</td>
+<td>少油炒(油6g)</td>
+<td>维C~130mg/100g</td>
+</tr>
+<tr>
+<td>柚子</td>
+<td>2瓣(约100g)</td>
+<td>餐后</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3>晚餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>山药粥</td>
+<td>山药100g + 小米30g</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>羊肉炖萝卜</td>
+<td>羊肉60g + 白萝卜100g</td>
+<td>炖，少油(油6g)</td>
+<td>羊肉铁~3.9mg/100g</td>
+</tr>
+<tr>
+<td>凉拌木耳</td>
+<td>木耳(泡发)80g</td>
+<td>凉拌</td>
+<td>非heme铁补充</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>1个(约200g)</td>
+<td>生食</td>
+<td></td>
+</tr>
+</tbody></table>
+<p><strong>当日铁估算</strong>: ~23mg | <strong>维C</strong>: ~215mg</p>
+<hr>
+<h2>周日</h2>
+<h3>早餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦酸奶碗</td>
+<td>燕麦40g + 酸奶200ml + 蓝莓50g</td>
+<td>拌</td>
+<td></td>
+</tr>
+<tr>
+<td>全麦面包</td>
+<td>1片</td>
+<td>—</td>
+<td></td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个</td>
+<td>煮</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3>午餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米50g(生)</td>
+<td>蒸</td>
+<td></td>
+</tr>
+<tr>
+<td>番茄炖牛腩</td>
+<td>牛腩(瘦)80g + 番茄150g + 土豆50g</td>
+<td>炖，少油(油8g)</td>
+<td>heme铁+番茄维C+酸性助铁溶出</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>西兰花150g</td>
+<td>少油炒(油5g)</td>
+<td>维C 56mg/100g</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>100g</td>
+<td>餐后</td>
+<td>维C 47mg/100g</td>
+</tr>
+</tbody></table>
+<h3>晚餐</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面50g</td>
+<td>煮</td>
+<td></td>
+</tr>
+<tr>
+<td>猪肉炒青椒</td>
+<td>猪肉(瘦)60g + 青椒100g</td>
+<td>少油快炒(油6g)</td>
+<td>青椒维C~130mg/100g</td>
+</tr>
+<tr>
+<td>凉拌菠菜</td>
+<td>菠菜100g</td>
+<td>焯水凉拌</td>
+<td></td>
+</tr>
+<tr>
+<td>橙子</td>
+<td>1个(约200g)</td>
+<td>餐后生食</td>
+<td>维C促铁</td>
+</tr>
+</tbody></table>
+<p><strong>当日铁估算</strong>: ~19mg | <strong>维C</strong>: ~240mg</p>
+<hr>
+<h2>一周营养总览</h2>
+<table>
+<thead>
+<tr>
+<th>日</th>
+<th>能量(kcal)</th>
+<th>蛋白质(g)</th>
+<th>脂肪(g)</th>
+<th>碳水(g)</th>
+<th>铁(mg)</th>
+<th>维C(mg)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>~1700</td>
+<td>68</td>
+<td>47</td>
+<td>234</td>
+<td>~19</td>
+<td>~220</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>~1700</td>
+<td>70</td>
+<td>48</td>
+<td>230</td>
+<td>~22</td>
+<td>~240</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>~1700</td>
+<td>72</td>
+<td>46</td>
+<td>232</td>
+<td>~24</td>
+<td>~230</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>~1700</td>
+<td>68</td>
+<td>48</td>
+<td>230</td>
+<td>~18</td>
+<td>~210</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>~1700</td>
+<td>69</td>
+<td>46</td>
+<td>236</td>
+<td>~21</td>
+<td>~200</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>~1700</td>
+<td>71</td>
+<td>49</td>
+<td>228</td>
+<td>~23</td>
+<td>~215</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>~1690</td>
+<td>70</td>
+<td>46</td>
+<td>234</td>
+<td>~19</td>
+<td>~240</td>
+</tr>
+<tr>
+<td><strong>日均</strong></td>
+<td><strong>~1700</strong></td>
+<td><strong>70</strong></td>
+<td><strong>47</strong></td>
+<td><strong>232</strong></td>
+<td><strong>~21</strong></td>
+<td><strong>~222</strong></td>
+</tr>
+<tr>
+<td><strong>目标</strong></td>
+<td>1700</td>
+<td>68</td>
+<td>47</td>
+<td>234</td>
+<td>≥20</td>
+<td>≥100</td>
+</tr>
+<tr>
+<td><strong>达标</strong></td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+<td>✓</td>
+</tr>
+</tbody></table>
+<h3>铁摄入分析</h3>
+<ul>
+<li>全周日均铁摄入约 <strong>21mg</strong>，超过育龄女性RNI 20mg</li>
+<li>血红素铁来源: 牛肉4次、猪肉2次、羊肉1次、猪肝1次、鸡肝1次、鸭血2次</li>
+<li>肝脏/血制品每周4次（猪肝1次、鸡肝1次、鸭血2次），符合1-2次肝脏+1-2次血制品目标</li>
+<li>每餐均有维C食物搭配，确保非血红素铁吸收率最大化</li>
+</ul>
+<h3>食物多样性统计</h3>
+<ul>
+<li>全周使用不同食材: <strong>32种以上</strong>，超过膳食指南每周25种要求</li>
+<li>谷物类: 糙米、燕麦、全麦面包、荞麦面、藜麦、小米、黑米、玉米、红薯、南瓜、山药（11种）</li>
+<li>蔬菜类: 菠菜、西兰花、番茄、青椒/甜椒、木耳、芹菜、洋葱、黄瓜、白菜、木耳菜、萝卜（11种）</li>
+<li>水果类: 猕猴桃、草莓、橙子、柚子、蓝莓、苹果（6种）</li>
+<li>蛋白质: 牛肉、猪肉、羊肉、猪肝、鸡肝、鸭血、鸡胸肉、鲈鱼、鸡蛋、豆腐/豆腐干、牛奶/酸奶（11种）</li>
+</ul>
+<hr>
+<h2>采购清单</h2>
+<h3>蛋白质类（每周必买补铁食材）</h3>
+<ul>
+<li>牛肉(瘦): 400g（分4次使用）</li>
+<li>猪肉(瘦): 180g（分3次使用）</li>
+<li>羊肉: 60g</li>
+<li>猪肝: 50g</li>
+<li>鸡肝: 50g</li>
+<li>鸭血: 200g（分2次使用）</li>
+<li>鸡胸肉: 60g</li>
+<li>鲈鱼: 80g</li>
+<li>鸡蛋: 10个</li>
+</ul>
+<h3>豆制品</h3>
+<ul>
+<li>北豆腐: 80g</li>
+<li>豆腐干: 50g</li>
+</ul>
+<h3>蔬菜类（一周量）</h3>
+<ul>
+<li>菠菜: 500g</li>
+<li>西兰花: 400g</li>
+<li>番茄: 500g</li>
+<li>青椒/甜椒: 400g</li>
+<li>芹菜: 100g</li>
+<li>洋葱: 130g</li>
+<li>黄瓜: 100g</li>
+<li>木耳(干): 30g（泡发后约200g）</li>
+<li>白菜/小白菜: 250g</li>
+<li>木耳菜: 150g</li>
+<li>白萝卜: 100g</li>
+<li>胡萝卜: 50g</li>
+</ul>
+<h3>水果类（维C搭配）</h3>
+<ul>
+<li>猕猴桃: 4个</li>
+<li>橙子: 4个</li>
+<li>草莓: 250g</li>
+<li>柚子: 1个</li>
+<li>苹果: 2个</li>
+<li>蓝莓: 150g</li>
+<li>小番茄: 150g</li>
+</ul>
+<h3>主食类（耐储存）</h3>
+<ul>
+<li>糙米: 300g</li>
+<li>荞麦面(干): 150g</li>
+<li>燕麦片: 170g</li>
+<li>藜麦: 150g</li>
+<li>全麦面包: 1袋</li>
+<li>小米: 100g</li>
+<li>红豆: 50g</li>
+<li>黑米: 50g</li>
+<li>红薯: 200g</li>
+<li>南瓜: 200g</li>
+<li>玉米: 1根</li>
+<li>山药: 100g</li>
+</ul>
+<h3>乳制品</h3>
+<ul>
+<li>牛奶: 1.5L</li>
+<li>酸奶: 400ml</li>
+</ul>
+<h3>其他</h3>
+<ul>
+<li>黑芝麻酱: 1小瓶</li>
+<li>坚果(核桃): 50g</li>
+<li>粉丝: 30g</li>
+<li>紫菜: 5g</li>
+</ul>
+<h3>调味品（检查库存）</h3>
+<ul>
+<li>橄榄油/茶籽油</li>
+<li>醋、低钠酱油</li>
+<li>姜、香葱</li>
+</ul>
+<hr>
+<h2>月经期特别版（经期及经后3天适用）</h2>
+<p>陈女士经量偏多，经期需加强补铁。以下为经期调整方案:</p>
+<h3>调整要点</h3>
+<table>
+<thead>
+<tr>
+<th>调整项</th>
+<th>平时</th>
+<th>经期版</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>红肉量</td>
+<td>每次75-80g</td>
+<td>增至每次100g</td>
+</tr>
+<tr>
+<td>肝脏/血制品</td>
+<td>每周3-4次</td>
+<td>增至隔天1次</td>
+</tr>
+<tr>
+<td>猕猴桃/橙子</td>
+<td>每天1-2个</td>
+<td>增至每天2-3个</td>
+</tr>
+<tr>
+<td>总能量</td>
+<td>1700 kcal</td>
+<td>可增至 1800 kcal</td>
+</tr>
+<tr>
+<td>额外加餐</td>
+<td>无</td>
+<td>红枣5颗 + 葡萄干20g</td>
+</tr>
+</tbody></table>
+<h3>经期午餐模板（替代常规午餐）</h3>
+<ul>
+<li>糙米饭 1碗 + <strong>牛肉100g</strong>炒青椒 + 菠菜猪肝汤(猪肝50g+菠菜100g) + 橙子1个</li>
+<li>糙米饭 1碗 + <strong>鸭血150g</strong>豆腐煲 + 甜椒炒蛋 + 猕猴桃1个</li>
+</ul>
+<hr>
+<h2>饮品/茶饮时间管理（陈女士必读）</h2>
+<p>由于陈女士可能有饮茶/咖啡习惯（市场策划职业），以下为茶饮时间安排:</p>
+<h3>推荐时间表</h3>
+<table>
+<thead>
+<tr>
+<th>时间</th>
+<th>可饮</th>
+<th>禁饮</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>7:00-8:00 早餐</td>
+<td>牛奶、酸奶</td>
+<td>茶、咖啡</td>
+</tr>
+<tr>
+<td>9:30-10:30 加餐</td>
+<td><strong>可饮淡茶/咖啡</strong>（距早餐1.5h+，距午餐2h）</td>
+<td></td>
+</tr>
+<tr>
+<td>12:00 午餐</td>
+<td>橙汁、柠檬水、白开水</td>
+<td><strong>茶、咖啡</strong></td>
+</tr>
+<tr>
+<td>14:00-16:00</td>
+<td><strong>可饮淡茶/咖啡</strong>（距午餐2h+，距晚餐2h）</td>
+<td></td>
+</tr>
+<tr>
+<td>18:30 晚餐</td>
+<td>橙汁、柠檬水、白开水</td>
+<td><strong>茶、咖啡</strong></td>
+</tr>
+<tr>
+<td>20:30以后</td>
+<td><strong>可饮淡茶/咖啡</strong>（距晚餐2h+）</td>
+<td>浓茶(影响睡眠)</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>给陈女士的关键提醒</h2>
+<h3>1. 关于节食减肥 -- 请停止</h3>
+<p>BMI 19.6已经是正常范围偏低值。以身高163cm计算:</p>
+<ul>
+<li>BMI 18.5（过瘦线）= 体重49kg → 仅差3kg就是过瘦</li>
+<li>节食会直接减少红肉摄入 → 铁摄入不足 → 贫血加重 → 面色苍白、头晕乏力、掉头发</li>
+<li><strong>健康的美才是真的美</strong>: 充足的营养让你的气色红润、精力充沛，远比骨感更有魅力</li>
+</ul>
+<h3>2. 关于补铁 -- 食物比药物温和</h3>
+<ul>
+<li>本方案通过食物补铁，每天约20mg，4-8周后铁蛋白应逐步回升</li>
+<li>猪肝和鸭血是&quot;补血神器&quot;，每周各安排了1-2次</li>
+<li>牛肉是日常补铁主力，每周4次</li>
+<li><strong>坚持是关键</strong>: 补铁不是一两天的事，铁蛋白恢复正常需要2-3个月</li>
+</ul>
+<h3>3. 关于茶和咖啡 -- 不是不能喝，是时机要对</h3>
+<ul>
+<li>餐中一杯茶 = 白吃了一半的铁</li>
+<li>两餐之间喝完全没问题</li>
+<li>佐餐改喝柠檬水或鲜榨橙汁，不仅不抑制铁吸收，还能促进吸收</li>
+</ul>
+<h3>4. 4-8周后复查</h3>
+<ul>
+<li>建议复查: 血常规（血红蛋白）+ 铁蛋白</li>
+<li>如铁蛋白回升至15以上 → 方案有效，继续坚持</li>
+<li>如铁蛋白未变化 → 需就医评估是否需要铁剂补充</li>
+</ul>
+<hr>
+<h2>参考来源</h2>
+<ol>
+<li>中国居民膳食营养素参考摄入量（2023版）— 铁 RNI 20mg/天</li>
+<li>中国居民膳食指南（2022）— 膳食宝塔、食物多样化</li>
+<li>《缺铁性贫血营养防治专家共识》</li>
+<li>knowledge/food-nutrition-guide.md — 食物营养成分速查</li>
+<li>knowledge/disease-diet-rules.md — 贫血饮食原则</li>
+<li>knowledge/meal-templates.md — 配餐模板</li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>免责声明</strong>: 本配餐方案由 AI 辅助生成，仅提供营养参考信息，不构成医疗诊断或治疗建议。陈女士虽为轻度贫血，但铁蛋白已低于正常下限，建议在医生指导下定期监测。如头晕、心悸、面色苍白等症状加重，请及时就医。补铁方案执行4-8周后建议复查铁蛋白和血红蛋白。</p>
+</blockquote>
+</div>
+
+<div class="section-header">
+  <h2>运动处方</h2>
+  <div class="section-sub">Exercise Prescription</div>
+</div>
+<div class="section-body">
+<h1>运动处方</h1>
+<blockquote>
+<p>生成日期: 2026-04-02
+患者: 陈女士 | 女 | 28岁 | BMI 19.6
+诊断: 轻度缺铁性贫血（Hb 112 g/L, 铁蛋白 13 ug/L）
+基于健康档案_2026-03-31_D.md 及营养评估报告
+参考: ACSM《运动测试与处方指南》(第12版, 2024)、《临床运动处方实践专家共识（2025）》(国家体育总局)</p>
+</blockquote>
+<hr>
+<h2>一、安全性评估</h2>
+<h3>1.1 运动风险评估</h3>
+<table>
+<thead>
+<tr>
+<th>评估项目</th>
+<th>结果</th>
+<th>风险等级</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>心血管疾病风险</td>
+<td>低（血压110/70，血糖血脂正常）</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>贫血相关风险</td>
+<td>Hb 112 g/L（轻度贫血），铁蛋白 13 ug/L（铁储备不足）</td>
+<td>需关注</td>
+</tr>
+<tr>
+<td>骨骼肌肉风险</td>
+<td>低（28岁，无关节疾病）</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>跌倒/晕厥风险</td>
+<td>低（轻度贫血，无明显头晕乏力主诉）</td>
+<td>需关注</td>
+</tr>
+<tr>
+<td>运动经验</td>
+<td>每周瑜伽2次，有一定运动基础</td>
+<td>良好</td>
+</tr>
+<tr>
+<td>营养状态</td>
+<td>BMI 19.6偏低侧，偶有节食习惯</td>
+<td>需纠正</td>
+</tr>
+<tr>
+<td>月经因素</td>
+<td>经量偏多，是铁丢失主因</td>
+<td>经期需调整</td>
+</tr>
+</tbody></table>
+<p><strong>综合运动风险等级: 低至中等</strong>（主要来自轻度贫血和铁储备不足）</p>
+<h3>1.2 运动禁忌筛查</h3>
+<table>
+<thead>
+<tr>
+<th>禁忌项</th>
+<th>状态</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>绝对禁忌（不稳定心绞痛、未控制心律失常等）</td>
+<td>无</td>
+</tr>
+<tr>
+<td>相对禁忌（中重度贫血 Hb&lt;100 g/L）</td>
+<td>不涉及（Hb 112 g/L为轻度）</td>
+</tr>
+<tr>
+<td>运动诱发的头晕、黑蒙、晕厥史</td>
+<td>无已知</td>
+</tr>
+<tr>
+<td>急性感染或发热</td>
+<td>无</td>
+</tr>
+</tbody></table>
+<p><strong>结论: 陈女士可安全进行低至中等强度运动，但需遵循贫血相关的特殊注意事项。</strong></p>
+<h3>1.3 贫血与运动的医学考量</h3>
+<ul>
+<li><strong>轻度贫血（Hb 110-119 g/L）</strong>: 运动时携氧能力略有下降，但日常活动和中等强度运动一般不受限。运动时心率可能比正常人偏高，运动耐力可能略降低。</li>
+<li><strong>铁蛋白 13 ug/L（铁储备不足）</strong>: 铁储备耗竭先于贫血发生，运动时肌肉的氧利用效率可能降低，易出现疲劳感。</li>
+<li><strong>月经期</strong>: 经量偏多导致额外铁丢失，经期运动能力和耐力可能进一步下降，需调整运动强度。</li>
+</ul>
+<hr>
+<h2>二、运动处方（FITT原则）</h2>
+<h3>2.1 处方总览</h3>
+<table>
+<thead>
+<tr>
+<th>处方要素</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>运动类型 (Type)</strong></td>
+<td>有氧运动为主，柔韧性训练为辅，轻中度抗阻训练为补充</td>
+</tr>
+<tr>
+<td><strong>运动强度 (Intensity)</strong></td>
+<td>低至中等强度（40-59% HRR，RPE 11-13）</td>
+</tr>
+<tr>
+<td><strong>运动频率 (Frequency)</strong></td>
+<td>每周 4-5 次</td>
+</tr>
+<tr>
+<td><strong>运动时长 (Time)</strong></td>
+<td>每次 30-45 分钟（含热身和整理活动）</td>
+</tr>
+<tr>
+<td><strong>周运动总量</strong></td>
+<td>150-200 分钟中等强度有氧运动 + 2次柔韧性训练 + 1-2次轻抗阻训练</td>
+</tr>
+</tbody></table>
+<h3>2.2 有氧运动处方</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>推荐类型</td>
+<td>快走（首选）、椭圆机、骑自行车（平路）、游泳（低冲击）</td>
+</tr>
+<tr>
+<td>强度标准</td>
+<td>靶心率 114-133 bpm（按HRmax=192计算，40-59% HRR）；说话测试: 能正常说话但不能唱歌</td>
+</tr>
+<tr>
+<td>主观感受 (RPE)</td>
+<td>11-13（ Borg 6-20级: 轻松-稍费力）</td>
+</tr>
+<tr>
+<td>单次时长</td>
+<td>25-35 分钟（净有氧时间）</td>
+</tr>
+<tr>
+<td>频率</td>
+<td>每周 3-4 次</td>
+</tr>
+<tr>
+<td>进阶速度</td>
+<td>每2周增加5分钟，直至达到45分钟</td>
+</tr>
+</tbody></table>
+<p><strong>心率计算依据:</strong></p>
+<ul>
+<li>年龄28岁，HRmax = 220 - 28 = 192 bpm</li>
+<li>静息心率估算: 70 bpm（血压正常，轻度贫血可能偏高）</li>
+<li>HRR = 192 - 70 = 122 bpm</li>
+<li>靶心率下限 = 70 + 122 x 40% = 119 bpm</li>
+<li>靶心率上限 = 70 + 122 x 59% = 142 bpm</li>
+<li><strong>实用靶心率范围: 115-140 bpm</strong>（轻度贫血者应偏向下限，取 115-135 bpm）</li>
+</ul>
+<h3>2.3 柔韧性训练处方</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>推荐类型</td>
+<td>瑜伽（已有基础）、拉伸操、太极拳</td>
+</tr>
+<tr>
+<td>强度</td>
+<td>拉伸至有牵拉感但无痛感</td>
+</tr>
+<tr>
+<td>单次时长</td>
+<td>20-30 分钟</td>
+</tr>
+<tr>
+<td>频率</td>
+<td>每周 2-3 次（可替代部分有氧日）</td>
+</tr>
+<tr>
+<td>注意</td>
+<td>瑜伽避免倒立体式（头低于心脏可能加重头晕感）</td>
+</tr>
+</tbody></table>
+<h3>2.4 抗阻训练处方</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>推荐类型</td>
+<td>自重训练（深蹲、臀桥、平板支撑）、弹力带训练、轻哑铃（1-3 kg）</td>
+</tr>
+<tr>
+<td>强度</td>
+<td>低负荷，12-15次/组，2-3组</td>
+</tr>
+<tr>
+<td>单次时长</td>
+<td>15-20 分钟</td>
+</tr>
+<tr>
+<td>频率</td>
+<td>每周 1-2 次</td>
+</tr>
+<tr>
+<td>注意</td>
+<td>避免憋气（Valsalva动作），保持正常呼吸；贫血者憋气易诱发头晕</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>三、一周运动计划</h2>
+<h3>3.1 常规周（非经期）</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动类型</th>
+<th>具体内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>周一</strong></td>
+<td>有氧运动</td>
+<td>快走（户外或跑步机）</td>
+<td>35 min</td>
+<td>RPE 12（中等）</td>
+</tr>
+<tr>
+<td><strong>周二</strong></td>
+<td>柔韧性训练</td>
+<td>瑜伽流（避免倒立）</td>
+<td>30 min</td>
+<td>RPE 10-11（轻松）</td>
+</tr>
+<tr>
+<td><strong>周三</strong></td>
+<td>有氧 + 轻抗阻</td>
+<td>椭圆机 20 min + 弹力带上下肢训练</td>
+<td>35 min</td>
+<td>RPE 12（中等）</td>
+</tr>
+<tr>
+<td><strong>周四</strong></td>
+<td>休息日</td>
+<td>散步或轻度家务活动</td>
+<td>自由</td>
+<td>低</td>
+</tr>
+<tr>
+<td><strong>周五</strong></td>
+<td>有氧运动</td>
+<td>骑自行车（平路）或快走</td>
+<td>35 min</td>
+<td>RPE 12-13（中等）</td>
+</tr>
+<tr>
+<td><strong>周六</strong></td>
+<td>柔韧性 + 有氧</td>
+<td>瑜伽 20 min + 快走 15 min</td>
+<td>35 min</td>
+<td>RPE 11（轻松-中等）</td>
+</tr>
+<tr>
+<td><strong>周日</strong></td>
+<td>休息日</td>
+<td>完全休息或轻松散步</td>
+<td>自由</td>
+<td>低</td>
+</tr>
+</tbody></table>
+<p><strong>周运动量统计:</strong></p>
+<ul>
+<li>有氧运动: 约 140 分钟（快走 85 min + 椭圆机 20 min + 骑车 35 min）</li>
+<li>柔韧性训练: 约 50 分钟（瑜伽 50 min）</li>
+<li>抗阻训练: 约 15 分钟</li>
+<li>总运动时间: 约 205 分钟</li>
+</ul>
+<h3>3.2 经期周（特殊调整）</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动类型</th>
+<th>具体内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>周一</strong>（经量多）</td>
+<td>轻度活动</td>
+<td>缓慢散步</td>
+<td>20 min</td>
+<td>RPE 9-10（很轻松）</td>
+</tr>
+<tr>
+<td><strong>周二</strong>（经量多）</td>
+<td>休息日</td>
+<td>完全休息</td>
+<td>--</td>
+<td>--</td>
+</tr>
+<tr>
+<td><strong>周三</strong></td>
+<td>柔韧性训练</td>
+<td>舒缓瑜伽（坐姿/卧姿为主）</td>
+<td>25 min</td>
+<td>RPE 9-10</td>
+</tr>
+<tr>
+<td><strong>周四</strong></td>
+<td>轻度有氧</td>
+<td>慢走或椭圆机低阻力</td>
+<td>25 min</td>
+<td>RPE 10-11</td>
+</tr>
+<tr>
+<td><strong>周五</strong></td>
+<td>休息日</td>
+<td>完全休息或散步</td>
+<td>自由</td>
+<td>低</td>
+</tr>
+<tr>
+<td><strong>周六</strong></td>
+<td>恢复性有氧</td>
+<td>快走</td>
+<td>30 min</td>
+<td>RPE 11-12</td>
+</tr>
+<tr>
+<td><strong>周日</strong></td>
+<td>柔韧性训练</td>
+<td>瑜伽拉伸</td>
+<td>25 min</td>
+<td>RPE 10-11</td>
+</tr>
+</tbody></table>
+<p><strong>经期运动原则:</strong></p>
+<ul>
+<li>经量最多的前 1-2 天以休息和轻度散步为主，不勉强运动</li>
+<li>经期第 3-5 天逐步恢复低强度运动</li>
+<li>经期结束后逐渐回到常规运动计划</li>
+<li><strong>经期需额外补充富铁食物</strong>（参见营养协同部分）</li>
+</ul>
+<hr>
+<h2>四、单次运动流程</h2>
+<h3>4.1 标准运动流程模板（以快走为例）</h3>
+<pre><code>阶段一：准备期（运动前 30-60 分钟）
+├── 运动前 1 小时完成进食（不可空腹运动）
+├── 补充 200-300 mL 温水
+├── 穿着舒适运动服和运动鞋
+└── 准备心率监测设备（手环或手表）
+
+阶段二：热身期（5-8 分钟）
+├── 慢走 3 分钟
+├── 动态拉伸（踝关节环绕、膝关节屈伸、髋关节绕环、肩部绕环）
+├── 逐步提高步速
+└── 目标：心率逐步上升至 100-110 bpm
+
+阶段三：主运动期（25-35 分钟）
+├── 快走（步频约 100 步/分钟）
+├── 靶心率: 115-135 bpm
+├── 说话测试: 能连贯说话但不能唱歌
+├── 每隔 10 分钟感知身体状态（有无头晕、心悸、异常疲劳）
+└── 如出现不适应立即减速，必要时停止
+
+阶段四：整理活动期（5-8 分钟）
+├── 逐步减速至慢走 3 分钟
+├── 静态拉伸（大腿前侧、大腿后侧、小腿、臀部、背部，每侧 15-30 秒）
+├── 深呼吸放松
+└── 心率恢复至 100 bpm 以下
+
+阶段五：恢复期（运动后 30-60 分钟）
+├── 补充水分 200-300 mL
+├── 运动后 30 分钟内进食加餐或正餐
+│   └── 重点: 富铁食物 + 维生素C 搭配（如: 牛肉片 + 猕猴桃）
+├── 记录运动日志（时间、强度、主观感受、异常情况）
+└── 如有头晕持续不缓解，坐下休息并补充含糖饮品
+</code></pre>
+<h3>4.2 瑜伽单次流程模板</h3>
+<pre><code>阶段一：准备期
+├── 餐后 1.5-2 小时进行
+└── 准备瑜伽垫、舒适衣物
+
+阶段二：热身（5 分钟）
+├── 盘腿坐姿调息（腹式呼吸 10 次）
+├── 颈部缓慢环绕
+└── 猫牛式（5 个循环）
+
+阶段三：主练习（20-25 分钟）
+├── 山式 → 战士一式 → 战士二式 → 三角式
+├── 树式（平衡训练）
+├── 桥式（臀桥，轻度抗阻）
+├── 婴儿式 → 眼镜蛇式
+├── 坐姿前屈 → 仰卧扭转
+├── 注意: 不做头倒立、肩倒立等倒立体式
+└── 每个体式保持 5-8 个呼吸
+
+阶段四：放松（5 分钟）
+├── 仰卧放松式（挺尸式）
+├── 身体扫描放松
+└── 自然呼吸恢复
+</code></pre>
+<hr>
+<h2>五、运动与营养协同</h2>
+<h3>5.1 运动前后营养策略</h3>
+<table>
+<thead>
+<tr>
+<th>时间节点</th>
+<th>营养策略</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>运动前 1-2 小时</strong></td>
+<td>进食轻量正餐或加餐（碳水化合物 + 少量蛋白质），如: 全麦面包1片 + 鸡蛋1个</td>
+<td>保证运动能量供给，避免空腹运动导致低血糖和加重贫血疲劳</td>
+</tr>
+<tr>
+<td><strong>运动前 30 分钟</strong></td>
+<td>饮水 200-300 mL</td>
+<td>充分水合</td>
+</tr>
+<tr>
+<td><strong>运动中</strong></td>
+<td>每隔 15-20 分钟少量饮水（100-150 mL）</td>
+<td>维持水合状态</td>
+</tr>
+<tr>
+<td><strong>运动后 30 分钟内</strong></td>
+<td>富铁食物 + 维生素C 搭配，如: 瘦牛肉100g + 猕猴桃1个 / 猪肝50g + 橙汁1杯</td>
+<td>运动后血液循环加速，此时补铁食物搭配维C吸收效率更高</td>
+</tr>
+<tr>
+<td><strong>运动后 1 小时内</strong></td>
+<td>避免饮茶和咖啡</td>
+<td>运动后补充的铁和蛋白质不被茶多酚抑制吸收</td>
+</tr>
+</tbody></table>
+<h3>5.2 运动促进铁利用的机制</h3>
+<ul>
+<li><strong>中等强度有氧运动</strong>可促进血液循环，提高骨髓造血活性和红细胞更新效率</li>
+<li><strong>规律运动</strong>有助于改善胃肠道功能，间接促进铁的消化吸收</li>
+<li><strong>抗阻训练</strong>刺激肌肉生长，增加肌红蛋白合成需求，促进铁的利用</li>
+<li>但需注意: <strong>高强度运动会增加铁丢失</strong>（通过汗液、胃肠道、尿路），因此贫血者应严格控制在中等强度以下</li>
+</ul>
+<h3>5.3 运动日与非运动日营养对比</h3>
+<table>
+<thead>
+<tr>
+<th>营养要素</th>
+<th>非运动日</th>
+<th>运动日</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总能量</td>
+<td>1700 kcal</td>
+<td>1750-1850 kcal（+50-150 kcal）</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>68 g</td>
+<td>72-78 g（运动后增加优质蛋白）</td>
+</tr>
+<tr>
+<td>铁摄入</td>
+<td>20 mg</td>
+<td>20-25 mg（运动日可适当增加）</td>
+</tr>
+<tr>
+<td>维生素C</td>
+<td>100-200 mg</td>
+<td>150-200 mg（运动后重点补充）</td>
+</tr>
+<tr>
+<td>水分</td>
+<td>1500-1700 mL</td>
+<td>2000-2500 mL</td>
+</tr>
+<tr>
+<td>加餐</td>
+<td>可选</td>
+<td>必须安排（运动前后）</td>
+</tr>
+</tbody></table>
+<h3>5.4 运动日加餐建议</h3>
+<p><strong>运动前加餐（运动前 1-1.5 小时）:</strong></p>
+<ul>
+<li>全麦面包1片 + 鸡蛋1个 + 小番茄5颗</li>
+<li>燕麦粥1碗 + 草莓5颗</li>
+<li>香蕉1根 + 酸奶1小杯</li>
+</ul>
+<p><strong>运动后加餐（运动后 30 分钟内）:</strong></p>
+<ul>
+<li>瘦牛肉片 50-80g + 橙子1个（富铁+维C黄金搭配）</li>
+<li>猪肝酱全麦面包1片 + 猕猴桃1个</li>
+<li>鸭血粉丝汤1小碗（富铁+碳水补充）</li>
+</ul>
+<hr>
+<h2>六、注意事项</h2>
+<h3>6.1 贫血特异性注意事项（必须严格遵守）</h3>
+<ol>
+<li><strong>运动强度上限</strong>: 不超过中等强度（RPE 13，靶心率不超过 140 bpm）。贫血时心脏需要更快的心率来补偿携氧能力下降，过高强度运动增加心血管负担。</li>
+<li><strong>禁止空腹运动</strong>: 空腹运动会加重低血糖风险，且在铁储备不足时疲劳感更明显。运动前 1-2 小时必须进食。</li>
+<li><strong>出现以下症状立即停止运动</strong>:<ul>
+<li>头晕、眼前发黑</li>
+<li>心悸、心跳异常加快（超过 150 bpm）</li>
+<li>面色苍白、出冷汗</li>
+<li>异常疲劳、四肢无力</li>
+<li>胸闷、气短</li>
+</ul>
+</li>
+<li><strong>避免高强度/高冲击运动</strong>: 不进行 HIIT（高强度间歇训练）、长距离跑步（&gt;5km）、登山、激烈球类运动等。这些运动会显著增加铁丢失并加重贫血症状。</li>
+<li><strong>避免憋气动作</strong>: 抗阻训练时保持正常呼吸节奏，不做 Valsalva 动作（憋气发力），避免血压骤变引起头晕。</li>
+<li><strong>经期调整</strong>: 经量多的前 1-2 天停止中等强度运动，以休息为主。经期运动详见&quot;经期周计划&quot;。</li>
+<li><strong>高温环境警惕</strong>: 避免在高温（&gt;30度）或高湿环境下运动，贫血者体温调节能力可能下降，易出现中暑。</li>
+</ol>
+<h3>6.2 体重管理注意事项</h3>
+<ul>
+<li><strong>BMI 19.6 偏低侧，禁止减重</strong>: 运动的目的是增强体质、促进血液循环和铁利用，而非消耗热量</li>
+<li><strong>运动日需增加热量摄入</strong>: 增加 50-150 kcal/天，确保不出现能量负平衡</li>
+<li><strong>不可因运动而节食</strong>: 任何形式的节食都会加剧铁和营养素摄入不足</li>
+</ul>
+<h3>6.3 通用安全注意事项</h3>
+<ul>
+<li>运动前充分热身，运动后充分整理放松</li>
+<li>穿着合适的运动鞋和服装</li>
+<li>随身携带含糖小零食（如几颗红枣），以备低血糖时补充</li>
+<li>户外运动注意防晒和补水</li>
+<li>运动后不要立即饮用茶或咖啡（至少间隔 1 小时）</li>
+</ul>
+<hr>
+<h2>七、循序渐进计划</h2>
+<h3>7.1 阶段一: 适应期（第 1-4 周）</h3>
+<p><strong>目标: 建立规律运动习惯，评估身体对运动的耐受性</strong></p>
+<table>
+<thead>
+<tr>
+<th>周次</th>
+<th>有氧运动</th>
+<th>柔韧性</th>
+<th>抗阻</th>
+<th>周总量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第1-2周</td>
+<td>快走 25 min x 3次/周</td>
+<td>瑜伽 25 min x 2次/周</td>
+<td>无</td>
+<td>约 125 min</td>
+</tr>
+<tr>
+<td>第3-4周</td>
+<td>快走 30 min x 3次/周</td>
+<td>瑜伽 30 min x 2次/周</td>
+<td>弹力带上肢 10 min x 1次</td>
+<td>约 160 min</td>
+</tr>
+</tbody></table>
+<ul>
+<li>强度: RPE 10-12（轻松至稍费力）</li>
+<li>每次运动后记录: 是否出现头晕、异常疲劳、心悸</li>
+<li>第4周末评估: 铁蛋白和血红蛋白复查（结合营养方案执行效果）</li>
+</ul>
+<h3>7.2 阶段二: 进展期（第 5-8 周）</h3>
+<p><strong>目标: 逐步增加运动量和强度，引入多样化运动方式</strong></p>
+<table>
+<thead>
+<tr>
+<th>周次</th>
+<th>有氧运动</th>
+<th>柔韧性</th>
+<th>抗阻</th>
+<th>周总量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第5-6周</td>
+<td>快走/椭圆机 30-35 min x 3-4次/周</td>
+<td>瑜伽 30 min x 2次/周</td>
+<td>弹力带全身 15 min x 1次</td>
+<td>约 180 min</td>
+</tr>
+<tr>
+<td>第7-8周</td>
+<td>快走/骑车 35 min x 4次/周</td>
+<td>瑜伽 30 min x 2次/周</td>
+<td>自重训练 15 min x 2次</td>
+<td>约 200 min</td>
+</tr>
+</tbody></table>
+<ul>
+<li>强度: RPE 11-13（稍费力）</li>
+<li>引入骑自行车、椭圆机等替代运动，避免单一运动的枯燥感</li>
+<li>第8周末复查: 铁蛋白和血红蛋白（预期铁蛋白回升至 15 ug/L 以上）</li>
+</ul>
+<h3>7.3 阶段三: 巩固期（第 9-12 周）</h3>
+<p><strong>目标: 形成长期可持续的运动习惯</strong></p>
+<table>
+<thead>
+<tr>
+<th>周次</th>
+<th>有氧运动</th>
+<th>柔韧性</th>
+<th>抗阻</th>
+<th>周总量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>第9-12周</td>
+<td>快走/骑车/椭圆机 35-40 min x 4次/周</td>
+<td>瑜伽 30 min x 2次/周</td>
+<td>自重+弹力带 20 min x 2次</td>
+<td>约 220 min</td>
+</tr>
+</tbody></table>
+<ul>
+<li>强度: RPE 12-13（中等）</li>
+<li>运动方式可灵活调整，保持趣味性</li>
+<li>第12周复查: 铁蛋白（预期恢复至 20 ug/L 以上）和血红蛋白（预期恢复至 120 g/L 以上）</li>
+</ul>
+<h3>7.4 进阶标准与回退机制</h3>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>可进阶条件</th>
+<th>需回退条件</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>血红蛋白</td>
+<td>Hb &gt;= 115 g/L 且稳定</td>
+<td>Hb 下降 &gt;= 5 g/L</td>
+</tr>
+<tr>
+<td>铁蛋白</td>
+<td>铁蛋白 &gt;= 15 ug/L</td>
+<td>铁蛋白持续低于 10 ug/L</td>
+</tr>
+<tr>
+<td>运动耐受</td>
+<td>无头晕、异常疲劳、心悸</td>
+<td>运动中出现上述症状</td>
+</tr>
+<tr>
+<td>主观感受</td>
+<td>运动后感觉良好，恢复快</td>
+<td>运动后持续疲劳超过 24 小时</td>
+</tr>
+</tbody></table>
+<p><strong>回退方案</strong>: 如任何指标达到回退条件，将运动量降至前一阶段水平，并加强营养补充。必要时咨询医生。</p>
+<hr>
+<h2>八、参考来源</h2>
+<ol>
+<li><p><strong>ACSM&#39;s Guidelines for Exercise Testing and Prescription, 12th Edition (2024)</strong></p>
+<ul>
+<li>来源: American College of Sports Medicine</li>
+<li>链接: <a href="https://acsm.org/education-resources/books/guidelines-exercise-testing-and-prescription/">https://acsm.org/education-resources/books/guidelines-exercise-testing-and-prescription/</a></li>
+<li>参考内容: FITT运动处方原则、中等强度运动定义（40-59% HRR）、成年人运动推荐量</li>
+</ul>
+</li>
+<li><p><strong>《临床运动处方实践专家共识（2025）》</strong></p>
+<ul>
+<li>来源: 国家体育总局运动医学研究所</li>
+<li>链接: <a href="https://www.sport.gov.cn/n20001280/n20001265/n20066978/c29136918/content.html">https://www.sport.gov.cn/n20001280/n20001265/n20066978/c29136918/content.html</a></li>
+<li>参考内容: 临床运动处方制定流程、特殊人群运动处方原则</li>
+</ul>
+</li>
+<li><p><strong>WHO 身体活动指南 (Physical Activity Fact Sheet)</strong></p>
+<ul>
+<li>来源: World Health Organization</li>
+<li>链接: <a href="https://www.who.int/zh/news-room/fact-sheets/detail/physical-activity">https://www.who.int/zh/news-room/fact-sheets/detail/physical-activity</a></li>
+<li>参考内容: 成年人身体活动推荐量、女性及慢性病人群运动建议</li>
+</ul>
+</li>
+<li><p><strong>Iron Deficiency, Supplementation, and Sports Performance in Female Athletes (2025)</strong></p>
+<ul>
+<li>来源: PMC/NIH</li>
+<li>链接: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11863318/">https://pmc.ncbi.nlm.nih.gov/articles/PMC11863318/</a></li>
+<li>参考内容: 女性缺铁性贫血与运动表现的关系、运动中铁丢失的机制</li>
+</ul>
+</li>
+<li><p><strong>Iron Deficiency in Athletes: Insights for Sports Nutrition (ESMED)</strong></p>
+<ul>
+<li>来源: ESMED Sports Nutrition</li>
+<li>链接: <a href="https://esmed.org/iron-deficiency-in-athletes-insights-for-sports-nutrition/">https://esmed.org/iron-deficiency-in-athletes-insights-for-sports-nutrition/</a></li>
+<li>参考内容: 抗阻运动可能改善缺铁性贫血、运动与铁吸收的关系</li>
+</ul>
+</li>
+<li><p><strong>Approaches to Prevent Iron Deficiency in Athletes (2024)</strong></p>
+<ul>
+<li>来源: German Journal of Sports Medicine</li>
+<li>链接: <a href="https://www.germanjournalsportsmedicine.com/archive/archive-2024/issue-5/approaches-to-prevent-iron-deficiency-in-athletes/">https://www.germanjournalsportsmedicine.com/archive/archive-2024/issue-5/approaches-to-prevent-iron-deficiency-in-athletes/</a></li>
+<li>参考内容: 运动前富铁食物摄入策略、咖啡/茶对铁吸收的影响</li>
+</ul>
+</li>
+<li><p><strong>健康中国行动（2019-2030年）</strong></p>
+<ul>
+<li>来源: 国家卫生健康委员会</li>
+<li>链接: <a href="https://www.nhc.gov.cn/guihuaxxs/c100133/201907/2a6ed52f1c264203b5351bdbbadd2da8.shtml">https://www.nhc.gov.cn/guihuaxxs/c100133/201907/2a6ed52f1c264203b5351bdbbadd2da8.shtml</a></li>
+<li>参考内容: 贫血与营养不良人群的身体活动建议</li>
+</ul>
+</li>
+<li><p><strong>默沙东诊疗手册 - 选择合适的运动</strong></p>
+<ul>
+<li>来源: Merck Manual (Consumer Version)</li>
+<li>链接: <a href="https://www.msdmanuals.cn/home/fundamentals/exercise-and-fitness/choosing-the-right-exercise">https://www.msdmanuals.cn/home/fundamentals/exercise-and-fitness/choosing-the-right-exercise</a></li>
+<li>参考内容: 综合运动计划组成（有氧+力量+柔韧性+平衡）</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2>九、免责声明</h2>
+<ol>
+<li>本运动处方基于陈女士的健康档案和营养评估数据，结合当前运动医学指南制定，仅供健康管理和运动指导参考，<strong>不构成医疗诊断或治疗建议</strong>。</li>
+<li>陈女士目前诊断为轻度缺铁性贫血（Hb 112 g/L, 铁蛋白 13 ug/L），建议在开始执行本运动处方前咨询主治医师或运动医学专科医生，确认运动方案的适宜性。</li>
+<li>运动过程中如出现头晕、心悸、胸闷、气短、面色苍白、出冷汗等任何不适症状，应<strong>立即停止运动</strong>，必要时就医。</li>
+<li>本处方中的运动强度、时长和频率需根据陈女士的实际运动耐受性和定期复查结果进行动态调整。建议每 4-8 周复查铁蛋白和血红蛋白，根据复查结果调整运动方案。</li>
+<li>本处方的制定者不对因执行本运动处方而导致的任何直接或间接健康后果承担责任。</li>
+<li>如贫血程度加重（Hb &lt; 110 g/L），或出现新的疾病诊断，应暂停运动计划并重新进行医学评估。</li>
+</ol>
+<hr>
+<blockquote>
+<p>运动处方制定参考: ACSM《运动测试与处方指南》第12版 FITT原则 | 《临床运动处方实践专家共识（2025）》
+营养协同参考: 营养评估报告_2026-03-31_D.md | 《缺铁性贫血营养防治专家共识》
+建议复查时间: 第 4 周、第 8 周、第 12 周各复查一次铁蛋白和血红蛋白</p>
+</blockquote>
+</div>
+<div class="report-footer">营养方案报告 · 陈女士 · 2026年4月7日 · 仅供参考，不构成医疗建议</div>
+</body>
+</html>

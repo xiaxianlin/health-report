@@ -87,7 +87,13 @@
       "Bash(git ls-tree:*)",
       "Bash(git config:*)",
       "Bash(pnpm install:*)",
-      "Bash(npx playwright:*)"
+      "Bash(npx playwright:*)",
+      "Bash(grep -c '`\\\\|--\\\\s*$\\\\|\\\\s*|\\\\s*$' results/张先生/营养方案报告.html)",
+      "Bash(grep -n '`\\\\|--\\\\s*$' results/张先生/营养方案报告.html)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm build:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(head -50 /Users/bytedance/projects/营养方案/web/data/*.json)"
     ]
   }
 }
