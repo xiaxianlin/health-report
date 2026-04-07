@@ -1304,57 +1304,45 @@
       "evaluations": [
         {
           "item": "心血管疾病风险",
-          "result": "低（血压110/70，血糖血脂正常）",
-          "riskLevel": "安全"
+          "status": "低（血压110/70，血糖血脂正常）",
+          "safety": "安全"
         },
         {
           "item": "贫血相关风险",
-          "result": "Hb 112 g/L（轻度贫血），铁蛋白 13 ug/L（铁储备不足）",
-          "riskLevel": "需关注"
+          "status": "Hb 112 g/L（轻度贫血），铁蛋白 13 ug/L（铁储备不足）",
+          "safety": "需关注"
         },
         {
           "item": "骨骼肌肉风险",
-          "result": "低（28岁，无关节疾病）",
-          "riskLevel": "安全"
+          "status": "低（28岁，无关节疾病）",
+          "safety": "安全"
         },
         {
           "item": "跌倒/晕厥风险",
-          "result": "低（轻度贫血，无明显头晕乏力主诉）",
-          "riskLevel": "需关注"
+          "status": "低（轻度贫血，无明显头晕乏力主诉）",
+          "safety": "需关注"
         },
         {
           "item": "运动经验",
-          "result": "每周瑜伽2次，有一定运动基础",
-          "riskLevel": "良好"
+          "status": "每周瑜伽2次，有一定运动基础",
+          "safety": "良好"
         },
         {
           "item": "营养状态",
-          "result": "BMI 19.6偏低侧，偶有节食习惯",
-          "riskLevel": "需纠正"
+          "status": "BMI 19.6偏低侧，偶有节食习惯",
+          "safety": "需纠正"
         },
         {
           "item": "月经因素",
-          "result": "经量偏多，是铁丢失主因",
-          "riskLevel": "经期需调整"
+          "status": "经量偏多，是铁丢失主因",
+          "safety": "经期需调整"
         }
       ],
       "contraindications": [
-        {
-          "item": "绝对禁忌（不稳定心绞痛、未控制心律失常等）",
-          "status": "无"
-        },
-        {
-          "item": "相对禁忌（中重度贫血 Hb<100 g/L）",
-          "status": "不涉及（Hb 112 g/L为轻度）"
-        },
-        {
-          "item": "运动诱发的头晕、黑蒙、晕厥史",
-          "status": "无已知"
-        },
-        {
-          "item": "急性感染或发热",
-          "status": "无"
-        }
+        "绝对禁忌（不稳定心绞痛、未控制心律失常等） - 无",
+        "相对禁忌（中重度贫血 Hb<100 g/L） - 不涉及（Hb 112 g/L为轻度）",
+        "运动诱发的头晕、黑蒙、晕厥史 - 无已知",
+        "急性感染或发热 - 无"
       ],
       "conclusion": "陈女士可安全进行低至中等强度运动，但需遵循贫血相关的特殊注意事项。"
     },
@@ -1363,7 +1351,6 @@
       "intensity": "低至中等强度（40-59% HRR，RPE 11-13）",
       "frequency": "每周 4-5 次",
       "duration": "每次 30-45 分钟（含热身和整理活动）",
-      "weeklyVolume": "150-200 分钟中等强度有氧运动 + 2次柔韧性训练 + 1-2次轻抗阻训练",
       "targetHR": "115-135 bpm",
       "maxHR": 192
     },
@@ -1396,109 +1383,96 @@
         "days": [
           {
             "day": "周一",
-            "type": "有氧运动",
             "content": "快走（户外或跑步机）",
             "duration": "35 min",
             "intensity": "RPE 12（中等）"
           },
           {
             "day": "周二",
-            "type": "柔韧性训练",
             "content": "瑜伽流（避免倒立）",
             "duration": "30 min",
             "intensity": "RPE 10-11（轻松）"
           },
           {
             "day": "周三",
-            "type": "有氧 + 轻抗阻",
             "content": "椭圆机 20 min + 弹力带上下肢训练",
             "duration": "35 min",
             "intensity": "RPE 12（中等）"
           },
           {
             "day": "周四",
-            "type": "休息日",
             "content": "散步或轻度家务活动",
             "duration": "自由",
             "intensity": "低"
           },
           {
             "day": "周五",
-            "type": "有氧运动",
             "content": "骑自行车（平路）或快走",
             "duration": "35 min",
             "intensity": "RPE 12-13（中等）"
           },
           {
             "day": "周六",
-            "type": "柔韧性 + 有氧",
             "content": "瑜伽 20 min + 快走 15 min",
             "duration": "35 min",
             "intensity": "RPE 11（轻松-中等）"
           },
           {
             "day": "周日",
-            "type": "休息日",
             "content": "完全休息或轻松散步",
             "duration": "自由",
             "intensity": "低"
           }
         ],
-        "weeklySummary": {
+        "weeklyTotal": {
           "aerobic": "约 140 分钟（快走 85 min + 椭圆机 20 min + 骑车 35 min）",
           "flexibility": "约 50 分钟（瑜伽 50 min）",
           "resistance": "约 15 分钟",
           "total": "约 205 分钟"
-        }
+        },
+        "weeks": ""
       },
       {
         "name": "经期周（特殊调整）",
         "days": [
           {
             "day": "周一（经量多）",
-            "type": "轻度活动",
             "content": "缓慢散步",
             "duration": "20 min",
             "intensity": "RPE 9-10（很轻松）"
           },
           {
             "day": "周二（经量多）",
-            "type": "休息日",
             "content": "完全休息",
             "duration": "--",
             "intensity": "--"
           },
           {
             "day": "周三",
-            "type": "柔韧性训练",
             "content": "舒缓瑜伽（坐姿/卧姿为主）",
             "duration": "25 min",
             "intensity": "RPE 9-10"
           },
           {
             "day": "周四",
-            "type": "轻度有氧",
             "content": "慢走或椭圆机低阻力",
             "duration": "25 min",
             "intensity": "RPE 10-11"
           },
           {
             "day": "周五",
-            "type": "休息日",
             "content": "完全休息或散步",
             "duration": "自由",
             "intensity": "低"
           },
           {
             "day": "周六",
-            "type": "恢复性有氧",
             "content": "快走",
             "duration": "30 min",
             "intensity": "RPE 11-12"
           },
           {
             "day": "周日",
-            "type": "柔韧性训练",
             "content": "瑜伽拉伸",
             "duration": "25 min",
             "intensity": "RPE 10-11"
@@ -1509,7 +1483,8 @@
           "经期第 3-5 天逐步恢复低强度运动",
           "经期结束后逐渐回到常规运动计划",
           "经期需额外补充富铁食物（参见营养协同部分）"
-        ]
+        ],
+        "weeks": ""
       }
     ],
     "sessionFlow": [
@@ -1523,82 +1498,51 @@
     "nutritionSynergy": {
       "timing": [
         {
-          "timepoint": "运动前 1-2 小时",
-          "strategy": "进食轻量正餐或加餐（碳水化合物 + 少量蛋白质），如: 全麦面包1片 + 鸡蛋1个",
-          "purpose": "保证运动能量供给，避免空腹运动导致低血糖和加重贫血疲劳"
+          "period": "运动前 1-2 小时",
+          "time": "进食轻量正餐或加餐（碳水化合物 + 少量蛋白质），如: 全麦面包1片 + 鸡蛋1个",
+          "note": "保证运动能量供给，避免空腹运动导致低血糖和加重贫血疲劳"
         },
         {
-          "timepoint": "运动前 30 分钟",
-          "strategy": "饮水 200-300 mL",
-          "purpose": "充分水合"
+          "period": "运动前 30 分钟",
+          "time": "饮水 200-300 mL",
+          "note": "充分水合"
         },
         {
-          "timepoint": "运动中",
-          "strategy": "每隔 15-20 分钟少量饮水（100-150 mL）",
-          "purpose": "维持水合状态"
+          "period": "运动中",
+          "time": "每隔 15-20 分钟少量饮水（100-150 mL）",
+          "note": "维持水合状态"
         },
         {
-          "timepoint": "运动后 30 分钟内",
-          "strategy": "富铁食物 + 维生素C 搭配，如: 瘦牛肉100g + 猕猴桃1个 / 猪肝50g + 橙汁1杯",
-          "purpose": "运动后血液循环加速，此时补铁食物搭配维C吸收效率更高"
+          "period": "运动后 30 分钟内",
+          "time": "富铁食物 + 维生素C 搭配，如: 瘦牛肉100g + 猕猴桃1个 / 猪肝50g + 橙汁1杯",
+          "note": "运动后血液循环加速，此时补铁食物搭配维C吸收效率更高"
         },
         {
-          "timepoint": "运动后 1 小时内",
-          "strategy": "避免饮茶和咖啡",
-          "purpose": "运动后补充的铁和蛋白质不被茶多酚抑制吸收"
+          "period": "运动后 1 小时内",
+          "time": "避免饮茶和咖啡",
+          "note": "运动后补充的铁和蛋白质不被茶多酚抑制吸收"
         }
       ],
       "strategies": [
-        "中等强度有氧运动可促进血液循环，提高骨髓造血活性和红细胞更新效率",
-        "规律运动有助于改善胃肠道功能，间接促进铁的消化吸收",
-        "抗阻训练刺激肌肉生长，增加肌红蛋白合成需求，促进铁的利用",
-        "高强度运动会增加铁丢失（通过汗液、胃肠道、尿路），因此贫血者应严格控制在中等强度以下"
-      ],
-      "nutritionComparison": [
         {
-          "nutrient": "总能量",
-          "restDay": "1700 kcal",
-          "exerciseDay": "1750-1850 kcal（+50-150 kcal）"
+          "scenario": "中等强度有氧运动可促进血液循环，提高骨髓造血活性和红细胞更新效率",
+          "strategy": "中等强度有氧运动可促进血液循环，提高骨髓造血活性和红细胞更新效率"
         },
         {
-          "nutrient": "蛋白质",
-          "restDay": "68 g",
-          "exerciseDay": "72-78 g（运动后增加优质蛋白）"
+          "scenario": "规律运动有助于改善胃肠道功能，间接促进铁的消化吸收",
+          "strategy": "规律运动有助于改善胃肠道功能，间接促进铁的消化吸收"
         },
         {
-          "nutrient": "铁摄入",
-          "restDay": "20 mg",
-          "exerciseDay": "20-25 mg（运动日可适当增加）"
+          "scenario": "抗阻训练刺激肌肉生长，增加肌红蛋白合成需求，促进铁的利用",
+          "strategy": "抗阻训练刺激肌肉生长，增加肌红蛋白合成需求，促进铁的利用"
         },
         {
-          "nutrient": "维生素C",
-          "restDay": "100-200 mg",
-          "exerciseDay": "150-200 mg（运动后重点补充）"
-        },
-        {
-          "nutrient": "水分",
-          "restDay": "1500-1700 mL",
-          "exerciseDay": "2000-2500 mL"
-        },
-        {
-          "nutrient": "加餐",
-          "restDay": "可选",
-          "exerciseDay": "必须安排（运动前后）"
+          "scenario": "高强度运动会增加铁丢失（通过汗液、胃肠道、尿路），因此贫血者应严格控制在中等强度以下",
+          "strategy": "高强度运动会增加铁丢失（通过汗液、胃肠道、尿路），因此贫血者应严格控制在中等强度以下"
         }
       ],
-      "snackSuggestions": {
-        "preExercise": [
-          "全麦面包1片 + 鸡蛋1个 + 小番茄5颗",
-          "燕麦粥1碗 + 草莓5颗",
-          "香蕉1根 + 酸奶1小杯"
-        ],
-        "postExercise": [
-          "瘦牛肉片 50-80g + 橙子1个（富铁+维C黄金搭配）",
-          "猪肝酱全麦面包1片 + 猕猴桃1个",
-          "鸭血粉丝汤1小碗（富铁+碳水补充）"
-        ]
-      },
-      "energyBalance": "非运动日 1700 kcal，运动日 1750-1850 kcal（+50-150 kcal）；蛋白质非运动日 68g，运动日 72-78g；铁摄入 20-25 mg；运动日需增加热量摄入确保不出现能量负平衡，不可因运动而节食"
+      "energyBalance": "非运动日 1700 kcal，运动日 1750-1850 kcal（+50-150 kcal）；蛋白质非运动日 68g，运动日 72-78g；铁摄入 20-25 mg；运动日需增加热量摄入确保不出现能量负平衡，不可因运动而节食",
+      "drugInteractions": []
     },
     "precautions": [
       {

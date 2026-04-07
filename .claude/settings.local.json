@@ -93,7 +93,8 @@
       "Bash(pnpm add:*)",
       "Bash(pnpm build:*)",
       "Bash(pnpm dev:*)",
-      "Bash(head -50 /Users/bytedance/projects/营养方案/web/data/*.json)"
+      "Bash(head -50 /Users/bytedance/projects/营养方案/web/data/*.json)",
+      "mcp__ide__executeCode"
     ]
   }
 }

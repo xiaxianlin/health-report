@@ -38,7 +38,10 @@ disable-model-invocation: true
 
 section(安全性评估):
   ### 1.1 运动前医学评估 → 表格(3列): evaluations: [{item, status, safety}]
+    注：如果表格列名为"当前状态"/"运动安全性"，则映射为 status/safety
+    如果列名为"评估结果"/"风险等级"，则同样映射为 status/safety
   ### 1.2 运动禁忌症筛查 → 列表: contraindications: string[]
+    注：每项应为字符串。如果是表格，提取第一列内容
   ### 1.3 安全性总评 → blockquote: conclusion: string
 
 section(运动处方):
@@ -49,6 +52,7 @@ section(运动处方):
     运动时长 → prescription.duration
     目标心率 → prescription.targetHR（提取为字符串）
     最大心率 → prescription.maxHR（从说明中提取数字）
+    注：忽略"每周运动量"等非标准字段
   ### 2.2 有氧运动处方 → 表格(2列，key-value): aerobic: {exercises, intensity, frequency, duration, notes}
     推荐项目 → exercises, 强度 → intensity, 频率 → frequency, 时长 → duration, 注意/每周总量 → notes
   ### 2.3 抗阻训练处方 → 同上格式: resistance: {...}
@@ -57,9 +61,9 @@ section(运动处方):
 section(一周运动计划) → 按 ### 子标题分阶段:
   phases: [{
     name: string（子标题中提取，如"适应期"）,
-    weeks: string（如"第1-4周"）,
-    days: [{day, content, duration, intensity}],  // 表格4列
-    weeklyTotal: string（表格下方的总结行）
+    weeks: string（如"第1-4周"，如缺失则根据 name 推断）,
+    days: [{day, content, duration, intensity}],  // 表格4列，忽略 type 字段
+    weeklyTotal: string（表格下方的总结行，如为"weeklySummary"则映射为 weeklyTotal）
   }]
 
 section(单次运动流程) → 代码块中的编号步骤:
@@ -67,9 +71,15 @@ section(单次运动流程) → 代码块中的编号步骤:
 
 section(运动与营养协同):
   ### 5.1 运动时间与进餐安排 → 表格(3列): timing: [{period, time, note}]
+    注：如果表格列名为"时间点/策略/目的"，则映射为 period/time/note
+    标准字段：period（时段）, time（时间）, note（说明）
   ### 5.2 运动前后营养策略 → 表格(2列): strategies: [{scenario, strategy}]
+    注：每行必须转换为 {scenario, strategy} 对象格式
+    如果源数据是字符串列表，转换为对象列表
   ### 5.3 运动与降糖药物协同 → 表格(2列): drugInteractions: [{drug, note}]
+    注：如该 section 不存在，设为空数组 []
   ### 5.4 运动与减重目标协同 → 列表合并为: energyBalance: string
+    注：如无此 section，使用空字符串 ""
 
 section(注意事项) → 按 ### 子标题分组:
   precautions: [{category: string, items: string[]}]
@@ -179,7 +189,7 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
 - `id`: 使用 Bash 工具执行 `python3 -c "import uuid; print(uuid.uuid4())"` 生成 UUID v4
 - `viewCode`: 使用 Bash 工具执行 `python3 -c "import random, string; print(''.join(random.choices(string.ascii_lowercase + string.digits, k=18)))"` 生成 18 位随机字符串（小写字母+数字）
 
-**如果 `web/data/` 下已存在该用户的 JSON 文件（且包含 `id` 和 `viewCode`），则复用已有值，不要重新生成。**
+**如果 `results/<用户名>/data.json` 已存在（且包含 `id` 和 `viewCode`），则复用已有值，不要重新生成。**
 
 向用户报告生成的查看码。
 
@@ -250,7 +260,7 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
     date: string,
     safety: {
       evaluations: { item: string, status: string, safety: string }[],
-      contraindications: string[],
+      contraindications: string[],  // 字符串数组，不是对象数组
       conclusion: string
     },
     prescription: {
@@ -260,22 +270,30 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
       duration: string,
       targetHR: string,
       maxHR: number
+      // 注：无 weeklyVolume 字段
     },
     aerobic: { exercises: string, intensity: string, frequency: string, duration: string, notes: string },
     resistance: { exercises: string, intensity: string, frequency: string, duration: string, notes: string },
     flexibility: { exercises: string, intensity: string, frequency: string, duration: string, notes: string },
     phases: {
       name: string,
-      weeks: string,
-      days: { day: string, content: string, duration: string, intensity: string }[],
-      weeklyTotal: string
+      weeks: string,  // 如"第1-4周"，必须存在
+      days: {
+        day: string,
+        content: string,
+        duration: string,
+        intensity: string
+        // 注：无 type 字段
+      }[],
+      weeklyTotal: string  // 注：不是 weeklySummary
     }[],
     sessionFlow: string[],
     nutritionSynergy: {
       timing: { period: string, time: string, note: string }[],
-      strategies: { scenario: string, strategy: string }[],
-      drugInteractions: { drug: string, note: string }[],
+      strategies: { scenario: string, strategy: string }[],  // 必须是对象数组
+      drugInteractions: { drug: string, note: string }[],  // 必须存在，可为空
       energyBalance: string
+      // 注：无 nutritionComparison, snackSuggestions 字段
     },
     precautions: { category: string, items: string[] }[],
     stopConditions: string[],
@@ -287,10 +305,9 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
 
 ### 步骤 5: 保存和验证
 
-1. 将 JSON 写入 `web/data/<id>.json`（使用步骤 3.5 生成的 UUID 作为文件名）
-2. 如果之前存在 `<用户名>.json` 旧文件，删除旧文件
-3. 使用 Read 工具读取文件头部，确认存在且 JSON 合法
-4. 对所有转换后的 JSON 做基本校验：
+1. 将 JSON 写入 `results/<用户名>/data.json`
+2. 使用 Read 工具读取文件头部，确认存在且 JSON 合法
+3. 对所有转换后的 JSON 做基本校验：
    - id 非空且为合法 UUID 格式
    - viewCode 为 18 位随机字符串
    - name 非空
@@ -298,11 +315,31 @@ section(关键注意事项) → 编号列表: keyNotes: string[]
    - nutritionAssessment 的 macros 至少有 3 项（如有评估文件）
    - mealPlans 的每个 plan 的 days 至少有 1 天（如有配餐文件）
    - exercisePrescription 的 phases 至少有 1 个阶段（如有运动处方文件）
+   - exercisePrescription.safety.evaluations 使用 status/safety 字段（非 result/riskLevel）
+   - exercisePrescription.safety.contraindications 为字符串数组
+   - exercisePrescription.phases 使用 weeklyTotal 字段（非 weeklySummary）
+   - exercisePrescription.nutritionSynergy.strategies 为对象数组 {scenario, strategy}
 
 ## 输出
 
-1. 每个用户目录下生成 JSON 文件（文件名为 UUID）
+1. 每个用户目录下生成 `data.json` 文件（路径：`results/<用户名>/data.json`）
 2. 向用户报告转换结果：每个用户的 name、查看码、labGroups 数、macros 数、mealPlans 数
+
+## 数据一致性规范
+
+为确保所有生成的 data.json 结构一致，必须遵循以下规则：
+
+| 字段路径 | 类型 | 说明 |
+|---------|------|------|
+| `exercisePrescription.safety.evaluations[]` | `{item, status, safety}` | 使用 status/safety，**禁用** result/riskLevel |
+| `exercisePrescription.safety.contraindications[]` | `string[]` | 字符串数组，**禁用** `{item, status}` 对象 |
+| `exercisePrescription.prescription` | object | **无** weeklyVolume 字段 |
+| `exercisePrescription.phases[].weeks` | string | 必须存在，如"第1-4周" |
+| `exercisePrescription.phases[].weeklyTotal` | string | 使用 weeklyTotal，**禁用** weeklySummary |
+| `exercisePrescription.phases[].days[]` | object | **无** type 字段 |
+| `exercisePrescription.nutritionSynergy.timing[]` | `{period, time, note}` | 标准字段名 |
+| `exercisePrescription.nutritionSynergy.strategies[]` | `{scenario, strategy}` | 对象数组，**禁用** 字符串数组 |
+| `exercisePrescription.nutritionSynergy` | object | **无** nutritionComparison/snackSuggestions 字段 |
 
 ## 注意事项
 
