@@ -319,7 +319,7 @@
   <header>
     <div class="header-content">
       <h1>营养方案报告</h1>
-      <p class="text-muted-foreground">夏先生 · </p>
+      <p class="text-muted-foreground">夏先生 · 2025-09-20</p>
     </div>
   </header>
 
@@ -338,21 +338,21 @@
       <div class="card-header">
         <div class="flex justify-between items-center">
           <h2 class="card-title">基本信息</h2>
-          <span class="text-xs text-muted-foreground"></span>
+          <span class="text-xs text-muted-foreground">2025-09-20</span>
         </div>
       </div>
       <div class="card-content">
         <p class="text-lg font-bold mb-4">夏先生</p>
         <div class="grid-4">
           <div><span class="text-xs text-muted-foreground">性别</span><p class="text-sm font-medium">男</p></div>
-          <div><span class="text-xs text-muted-foreground">年龄</span><p class="text-sm font-medium">0 岁</p></div>
+          <div><span class="text-xs text-muted-foreground">年龄</span><p class="text-sm font-medium">35 岁</p></div>
           <div><span class="text-xs text-muted-foreground">身高</span><p class="text-sm font-medium">170 cm</p></div>
           <div><span class="text-xs text-muted-foreground">体重</span><p class="text-sm font-medium">87.1 kg</p></div>
           <div>
             <span class="text-xs text-muted-foreground">BMI</span>
             <div class="flex items-center gap-2">
-              <span class="text-sm font-medium">0</span>
-              <span class="badge badge-secondary"></span>
+              <span class="text-sm font-medium">30</span>
+              <span class="badge badge-secondary">肥胖</span>
             </div>
           </div>
           <div><span class="text-xs text-muted-foreground">血压</span><p class="text-sm font-medium">97/58 mmHg（收缩压正常，舒张压偏低<60） mmHg</p></div>
@@ -490,19 +490,16 @@
   
 
     <!-- 用药信息 -->
-    <div class="card">
-      <div class="card-header"><h2 class="card-title">用药信息</h2></div>
-      <div class="card-content">
-        <div class="table-container">
-          <table class="table">
-            <thead><tr><th>药品</th><th>剂量</th><th>用途</th><th>备注</th></tr></thead>
-            <tbody>
-              
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+    
+
+    <!-- 生活方式 -->
+    
+
+    <!-- 营养重点关注方向 -->
+    
+
+    <!-- 过敏信息 -->
+    
   
     </div>
     <div id="assessment" class="tab-content">
@@ -515,15 +512,15 @@
       <div class="card-content">
         <div class="grid-3">
           <div class="stat-card">
-            <div class="stat-value">10</div>
+            <div class="stat-value">1767</div>
             <div class="stat-label">基础代谢率 (BMR) kcal</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">1767</div>
+            <div class="stat-value">2120</div>
             <div class="stat-label">总能量消耗 (TDEE) kcal</div>
           </div>
           <div class="stat-card">
-            <div class="stat-value">0</div>
+            <div class="stat-value">1620</div>
             <div class="stat-label">目标摄入能量 kcal</div>
           </div>
         </div>
@@ -754,17 +751,103 @@
       </div>
     </div>
 
+    <!-- 微量营养素 -->
+    
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">微量营养素重点</h2></div>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>营养素</th><th>目标</th><th>原因</th></tr></thead>
+            <tbody>
+              
+                <tr>
+                  <td class="font-medium">钠</td>
+                  <td>< 2000 mg（盐<5g）</td>
+                  <td class="text-muted-foreground">心血管保护</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">钾</td>
+                  <td>3500 mg</td>
+                  <td class="text-muted-foreground">血压管理</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">钙</td>
+                  <td>1000 mg</td>
+                  <td class="text-muted-foreground">一般需求</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">镁</td>
+                  <td>400 mg</td>
+                  <td class="text-muted-foreground">血脂管理、代谢健康</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">维生素E</td>
+                  <td>14 mg</td>
+                  <td class="text-muted-foreground">肝脏保护、抗氧化</td>
+                </tr>
+              
+                <tr>
+                  <td class="font-medium">维生素C</td>
+                  <td>100 mg</td>
+                  <td class="text-muted-foreground">抗氧化、促进铁吸收</td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+
     <!-- 餐次能量分配 -->
     <div class="card">
       <div class="card-header"><h2 class="card-title">餐次能量分配</h2></div>
       <div class="card-content">
         <div class="space-y-3 mb-4">
           
+              <div class="flex items-center gap-3">
+                <span class="w-12 text-sm font-medium text-right">早餐</span>
+                <div class="progress-bar flex-1">
+                  <div class="progress-fill" style="width: 30%; background: #E69F00">
+                    485 kcal · 30%
+                  </div>
+                </div>
+              </div>
+            
+              <div class="flex items-center gap-3">
+                <span class="w-12 text-sm font-medium text-right">午餐</span>
+                <div class="progress-bar flex-1">
+                  <div class="progress-fill" style="width: 40%; background: #0072B2">
+                    650 kcal · 40%
+                  </div>
+                </div>
+              </div>
+            
+              <div class="flex items-center gap-3">
+                <span class="w-12 text-sm font-medium text-right">晚餐</span>
+                <div class="progress-bar flex-1">
+                  <div class="progress-fill" style="width: 30%; background: #56B4E9">
+                    485 kcal · 30%
+                  </div>
+                </div>
+              </div>
+            
         </div>
         <div class="table-container">
           <table class="table">
             <thead><tr><th>餐次</th><th>能量 (kcal)</th><th>占比</th><th>蛋白质 (g)</th><th>碳水 (g)</th><th>脂肪 (g)</th></tr></thead>
             <tbody>
+              
+                <tr><td class="font-medium">早餐</td><td>485</td><td>30%</td><td>25</td><td>60</td><td>16</td></tr>
+              
+                <tr><td class="font-medium">午餐</td><td>650</td><td>40%</td><td>35</td><td>78</td><td>22</td></tr>
+              
+                <tr><td class="font-medium">晚餐</td><td>485</td><td>30%</td><td>30</td><td>57</td><td>16</td></tr>
               
             </tbody>
           </table>
@@ -845,7 +928,7 @@
                   <tr>
                     <td class="font-medium">蛋黄过量</td>
                     <td class="text-muted-foreground">胆固醇超标</td>
-                    <td><span class="badge badge-warning">严格限制（每天≤1个）</span></td>
+                    <td><span class="badge badge-warning">严格限制</span></td>
                   </tr>
                 
                   <tr>
@@ -884,6 +967,30 @@
         </div>
       </div>
     </div>
+
+    <!-- 饮食原则 -->
+    
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">饮食原则</h2></div>
+      <div class="card-content">
+        <ul class="list-disc pl-5 space-y-2">
+          <li>**减重是首要目标**：减重3-5%可逆转脂肪肝</li><li>严格**戒酒**（即使非酒精性也应避免）</li><li>避免**果糖**，特别是含糖饮料</li><li>避免**加工肉类**，减少红肉</li><li>优先采用**地中海饮食**模式</li><li>每日1620 kcal，制造500kcal缺口</li><li>每周减重0.5-1kg</li><li>主食以全谷物为主，至少占一半</li><li>控制总能量，定时定量三餐</li><li>每日膳食胆固醇 **<300 mg**</li><li>限制**动物内脏**、**蛋黄**（每周3-4个）</li><li>减少**饱和脂肪**摄入</li><li>优先选择富含不饱和脂肪酸的**橄榄油**、**茶籽油**</li><li>增加富含钙、镁的食物</li><li>严格**低脂饮食**，减少肝脏负担</li><li>适量优质蛋白，促进肝细胞修复</li><li>避免肝损药物和毒素</li><li>增加维生素E等抗氧化营养素</li>
+        </ul>
+      </div>
+    </div>
+    
+
+    <!-- 关键注意事项 -->
+    
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">关键注意事项</h2></div>
+      <div class="card-content">
+        <ul class="list-disc pl-5 space-y-2">
+          <li>**戒酒是第一优先级** — 对脂肪肝和肝功能恢复至关重要</li><li>**地中海饮食模式** — 优先推荐的饮食方式，富含橄榄油、鱼类、蔬果</li><li>**减重速度控制** — 每周0.5-1kg为宜，过快减重可能加重肝损伤</li><li>**胆固醇控制** — 每日<300mg，严格控制动物内脏和蛋黄</li><li>**定期复查** — 建议3-6个月后复查肝功能、血脂、肝脏B超</li>
+        </ul>
+      </div>
+    </div>
+    
 
     <!-- 药物交互 -->
     

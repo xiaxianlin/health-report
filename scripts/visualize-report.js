@@ -182,6 +182,7 @@ function generateProfileSection(data) {
     ${labGroupsHtml}
 
     <!-- 用药信息 -->
+    ${data.medications && data.medications.length > 0 ? `
     <div class="card">
       <div class="card-header"><h2 class="card-title">用药信息</h2></div>
       <div class="card-content">
@@ -197,6 +198,43 @@ function generateProfileSection(data) {
         </div>
       </div>
     </div>
+    ` : ''}
+
+    <!-- 生活方式 -->
+    ${data.lifestyles && data.lifestyles.length > 0 ? `
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">生活方式</h2></div>
+      <div class="card-content">
+        <ul class="list-disc pl-5 space-y-1">
+          ${data.lifestyles.map(l => `<li>${l}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+    ` : ''}
+
+    <!-- 营养重点关注方向 -->
+    ${data.nutritionNotes && data.nutritionNotes.length > 0 ? `
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">营养重点关注方向</h2></div>
+      <div class="card-content">
+        <ul class="list-disc pl-5 space-y-1">
+          ${data.nutritionNotes.map(n => `<li>${n}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+    ` : ''}
+
+    <!-- 过敏信息 -->
+    ${data.allergies && data.allergies.length > 0 ? `
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">过敏信息</h2></div>
+      <div class="card-content">
+        <div class="flex flex-wrap gap-2">
+          ${data.allergies.map(a => `<span class="badge badge-destructive">${a}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+    ` : ''}
   `;
 }
 
@@ -264,6 +302,29 @@ function generateAssessmentSection(data) {
         </div>
       </div>
     </div>
+
+    <!-- 微量营养素 -->
+    ${na.microTargets && na.microTargets.length > 0 ? `
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">微量营养素重点</h2></div>
+      <div class="card-content">
+        <div class="table-container">
+          <table class="table">
+            <thead><tr><th>营养素</th><th>目标</th><th>原因</th></tr></thead>
+            <tbody>
+              ${na.microTargets.map(m => `
+                <tr>
+                  <td class="font-medium">${m.name}</td>
+                  <td>${m.target}</td>
+                  <td class="text-muted-foreground">${m.reason}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    ` : ''}
 
     <!-- 餐次能量分配 -->
     <div class="card">
@@ -334,8 +395,32 @@ function generateAssessmentSection(data) {
       </div>
     </div>
 
+    <!-- 饮食原则 -->
+    ${na.principles && na.principles.length > 0 ? `
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">饮食原则</h2></div>
+      <div class="card-content">
+        <ul class="list-disc pl-5 space-y-2">
+          ${na.principles.map(p => `<li>${p}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+    ` : ''}
+
+    <!-- 关键注意事项 -->
+    ${na.keyNotes && na.keyNotes.length > 0 ? `
+    <div class="card">
+      <div class="card-header"><h2 class="card-title">关键注意事项</h2></div>
+      <div class="card-content">
+        <ul class="list-disc pl-5 space-y-2">
+          ${na.keyNotes.map(n => `<li>${n}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+    ` : ''}
+
     <!-- 药物交互 -->
-    ${na.drugInteractions.length > 0 ? `
+    ${na.drugInteractions && na.drugInteractions.length > 0 ? `
     <div class="card">
       <div class="card-header"><h2 class="card-title">药物-营养交互</h2></div>
       <div class="card-content">

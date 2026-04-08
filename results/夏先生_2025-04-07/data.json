@@ -3,13 +3,13 @@
   "viewCode": "eoy16k41bx2mbsetiw",
   "name": "夏先生",
   "gender": "男",
-  "age": 0,
+  "age": 35,
   "height": 170,
   "weight": 87.1,
-  "bmi": 0,
-  "bmiCategory": "",
+  "bmi": 30,
+  "bmiCategory": "肥胖",
   "bloodPressure": "97/58 mmHg（收缩压正常，舒张压偏低<60）",
-  "date": "",
+  "date": "2025-09-20",
   "allergies": [],
   "diagnoses": [
     "**轻度脂肪肝**（腹部彩超提示）— 肝区光点细密，近场回声增强",
@@ -114,9 +114,9 @@
   "lifestyles": [],
   "nutritionNotes": [],
   "nutritionAssessment": {
-    "bmr": 10,
-    "tdee": 1767,
-    "targetEnergy": 0,
+    "bmr": 1767,
+    "tdee": 2120,
+    "targetEnergy": 1620,
     "activityLevel": "久坐",
     "macros": [
       {
@@ -280,7 +280,32 @@
         "reason": "抗氧化、促进铁吸收"
       }
     ],
-    "mealDistribution": [],
+    "mealDistribution": [
+      {
+        "meal": "早餐",
+        "energy": 485,
+        "percent": 30,
+        "protein": 25,
+        "carbs": 60,
+        "fat": 16
+      },
+      {
+        "meal": "午餐",
+        "energy": 650,
+        "percent": 40,
+        "protein": 35,
+        "carbs": 78,
+        "fat": 22
+      },
+      {
+        "meal": "晚餐",
+        "energy": 485,
+        "percent": 30,
+        "protein": 30,
+        "carbs": 57,
+        "fat": 16
+      }
+    ],
     "principles": [
       "**减重是首要目标**：减重3-5%可逆转脂肪肝",
       "严格**戒酒**（即使非酒精性也应避免）",
