@@ -1,0 +1,4216 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>营养方案报告 - 夏先生</title>
+  <style>
+@page { size: A4; margin: 18mm 20mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 10pt;
+  line-height: 1.7;
+  color: #1a1a2e;
+  background: #fff;
+}
+
+/* ── 封面 ── */
+.cover {
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240mm;
+  text-align: center;
+  background: linear-gradient(160deg, #0f3460 0%, #16213e 60%, #1a1a2e 100%);
+  color: #fff;
+  margin: -18mm -20mm;
+  padding: 40mm 30mm;
+}
+.cover-logo {
+  font-size: 9pt;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover h1 {
+  font-size: 28pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8mm;
+  color: #fff;
+}
+.cover-subtitle {
+  font-size: 12pt;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover-meta {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 6mm 12mm;
+  font-size: 11pt;
+  line-height: 2.2;
+  color: #e0e0ff;
+}
+.cover-meta strong { color: #fff; }
+.cover-disclaimer {
+  margin-top: 16mm;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── 章节标题块 ── */
+.section-header {
+  page-break-before: always;
+  margin: 0 -20mm 6mm -20mm;
+  padding: 5mm 20mm;
+  background: linear-gradient(90deg, #0f3460, #1a5fb4);
+  color: #fff;
+}
+.section-header h2 {
+  font-size: 14pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.section-header .section-sub {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1mm;
+}
+
+/* ── 正文标题 ── */
+h1, h2, h3, h4 { font-weight: 600; }
+h2 {
+  font-size: 13pt;
+  color: #0f3460;
+  border-bottom: 2px solid #0f3460;
+  padding-bottom: 2mm;
+  margin: 6mm 0 3mm 0;
+}
+h3 {
+  font-size: 11pt;
+  color: #1a5fb4;
+  border-left: 3px solid #1a5fb4;
+  padding-left: 3mm;
+  margin: 5mm 0 2mm 0;
+}
+h4 {
+  font-size: 10pt;
+  color: #2d6a4f;
+  margin: 4mm 0 2mm 0;
+}
+
+/* ── 段落和列表 ── */
+p { margin: 2mm 0; }
+ul, ol { margin: 2mm 0 2mm 6mm; padding: 0; }
+li { margin: 1mm 0; }
+ul li { list-style: disc; }
+ol li { list-style: decimal; }
+
+/* ── 引用块 → 提示框 ── */
+blockquote {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 4px 4px 0;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  color: #1e40af;
+  font-size: 9.5pt;
+}
+blockquote p { margin: 0; }
+
+/* ── 代码块 → 信息框 ── */
+pre {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 8.5pt;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+code {
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 8.5pt;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+}
+pre code { background: none; padding: 0; }
+
+/* ── 表格 ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0;
+  font-size: 9pt;
+}
+thead tr { background: #0f3460; color: #fff; }
+thead th {
+  padding: 2.5mm 3mm;
+  font-weight: 600;
+  text-align: left;
+  border: 1px solid #0a2545;
+}
+tbody tr:nth-child(even) { background: #f0f4ff; }
+tbody td {
+  padding: 2mm 3mm;
+  border: 1px solid #d1d9e6;
+  vertical-align: top;
+}
+
+/* ── 强调 ── */
+strong { font-weight: 700; color: #0f3460; }
+em { color: #1a5fb4; font-style: normal; font-weight: 500; }
+
+/* ── hr 分隔线 ── */
+hr {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 4mm 0;
+}
+
+/* ── 分页控制 ── */
+table { page-break-inside: auto; }
+tr { page-break-inside: avoid; }
+
+/* ── 报告页脚 ── */
+.report-footer {
+  margin-top: 10mm;
+  padding-top: 3mm;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+  font-size: 7.5pt;
+  color: #94a3b8;
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-logo">AI Nutrition System</div>
+  <h1>个性化营养方案报告</h1>
+  <div class="cover-subtitle">Personalized Nutrition Plan</div>
+  <div class="cover-meta">
+    <div><strong>患者姓名</strong>　夏先生</div>
+    <div><strong>报告日期</strong>　2026年4月8日</div>
+    <div><strong>生成机构</strong>　AI 营养咨询系统</div>
+  </div>
+  <div class="cover-disclaimer">本报告由 AI 辅助生成，仅供参考，不构成医疗建议</div>
+</div>
+
+<div class="section-header">
+  <h2>营养评估</h2>
+  <div class="section-sub">Nutrition Assessment</div>
+</div>
+<div class="section-body">
+<h1>营养评估报告</h1>
+<blockquote>
+<p>生成日期: 2025-04-07
+基于: 健康档案（2025-09-20）</p>
+</blockquote>
+<hr>
+<h2>基础代谢计算</h2>
+<h3>BMR</h3>
+<p>（Mifflin-St Jeor 公式）</p>
+<p>假设年龄35岁（IT从业人员典型年龄）：</p>
+<pre><code>BMR = 10 × 87.1 + 6.25 × 170.5 - 5 × 35 + 5
+    = 871 + 1065.625 - 175 + 5
+    = 1766.625 ≈ 1767 kcal/天
+</code></pre>
+<p><strong>BMR: 1767 kcal/天</strong></p>
+<h3>活动水平</h3>
+<ul>
+<li>当前活动水平: <strong>久坐</strong>（IT工程师，软通动力员工）</li>
+<li>活动系数: <strong>1.2</strong></li>
+</ul>
+<h3>TDEE</h3>
+<pre><code>TDEE = 1767 × 1.2 = 2120 kcal/天
+</code></pre>
+<p><strong>TDEE: 2120 kcal/天</strong></p>
+<h3>目标能量</h3>
+<ul>
+<li><strong>肥胖 + 脂肪肝</strong>: 目标减重，每日减少 <strong>500 kcal</strong></li>
+<li><strong>调整后目标能量</strong>: 2120 - 500 = <strong>1620 kcal/天</strong></li>
+<li><strong>目标</strong>: 3-6个月减重8-12kg（BMI从30降至约26）</li>
+</ul>
+<hr>
+<h2>每日营养目标</h2>
+<h3>宏量营养素</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标值</th>
+<th>占比</th>
+<th>范围</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>总能量</strong></td>
+<td><strong>1620 kcal</strong></td>
+<td>100%</td>
+<td>1500-1700</td>
+<td>减重: -500kcal</td>
+</tr>
+<tr>
+<td><strong>蛋白质</strong></td>
+<td><strong>90 g</strong></td>
+<td>22%</td>
+<td>80-100g (20-25%)</td>
+<td>脂肪肝: 1.0-1.2g/kg</td>
+</tr>
+<tr>
+<td><strong>碳水化合物</strong></td>
+<td><strong>195 g</strong></td>
+<td>48%</td>
+<td>170-220g (45-55%)</td>
+<td>低GI主食为主</td>
+</tr>
+<tr>
+<td><strong>脂肪</strong></td>
+<td><strong>54 g</strong></td>
+<td>30%</td>
+<td>45-60g (25-30%)</td>
+<td>低脂饮食</td>
+</tr>
+<tr>
+<td><strong>膳食纤维</strong></td>
+<td><strong>≥ 30 g</strong></td>
+<td>—</td>
+<td>25-35g</td>
+<td>脂肪肝+高胆固醇</td>
+</tr>
+</tbody></table>
+<p><strong>脂肪细分:</strong></p>
+<table>
+<thead>
+<tr>
+<th>脂肪类型</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>饱和脂肪</td>
+<td>&lt; 总能量10% → &lt;18g</td>
+</tr>
+<tr>
+<td>反式脂肪</td>
+<td><strong>完全避免</strong></td>
+</tr>
+<tr>
+<td>胆固醇</td>
+<td>&lt; 300 mg/天</td>
+</tr>
+<tr>
+<td>Omega-3</td>
+<td>每周至少2次深海鱼</td>
+</tr>
+</tbody></table>
+<h3>微量营养素重点</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>钠</td>
+<td>&lt; 2000 mg（盐&lt;5g）</td>
+<td>心血管保护</td>
+</tr>
+<tr>
+<td>钾</td>
+<td>3500 mg</td>
+<td>血压管理</td>
+</tr>
+<tr>
+<td>钙</td>
+<td>1000 mg</td>
+<td>一般需求</td>
+</tr>
+<tr>
+<td>镁</td>
+<td>400 mg</td>
+<td>血脂管理、代谢健康</td>
+</tr>
+<tr>
+<td>维生素E</td>
+<td>14 mg</td>
+<td>肝脏保护、抗氧化</td>
+</tr>
+<tr>
+<td>维生素C</td>
+<td>100 mg</td>
+<td>抗氧化、促进铁吸收</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>饮食原则</h2>
+<h3>来自脂肪肝</h3>
+<ul>
+<li><strong>减重是首要目标</strong>：减重3-5%可逆转脂肪肝</li>
+<li>严格<strong>戒酒</strong>（即使非酒精性也应避免）</li>
+<li>避免<strong>果糖</strong>，特别是含糖饮料</li>
+<li>避免<strong>加工肉类</strong>，减少红肉</li>
+<li>优先采用<strong>地中海饮食</strong>模式</li>
+</ul>
+<h3>来自肥胖（减重目标）</h3>
+<ul>
+<li>每日1620 kcal，制造500kcal缺口</li>
+<li>每周减重0.5-1kg</li>
+<li>主食以全谷物为主，至少占一半</li>
+<li>控制总能量，定时定量三餐</li>
+</ul>
+<h3>来自高胆固醇</h3>
+<ul>
+<li>每日膳食胆固醇 <strong>&lt;300 mg</strong></li>
+<li>限制<strong>动物内脏</strong>、<strong>蛋黄</strong>（每周3-4个）</li>
+<li>减少<strong>饱和脂肪</strong>摄入</li>
+<li>优先选择富含不饱和脂肪酸的<strong>橄榄油</strong>、<strong>茶籽油</strong></li>
+<li>增加富含钙、镁的食物</li>
+</ul>
+<h3>来自AST轻度升高（肝功能保护）</h3>
+<ul>
+<li>严格<strong>低脂饮食</strong>，减少肝脏负担</li>
+<li>适量优质蛋白，促进肝细胞修复</li>
+<li>避免肝损药物和毒素</li>
+<li>增加维生素E等抗氧化营养素</li>
+</ul>
+<hr>
+<h2>推荐食物清单</h2>
+<h3>主食类（全谷物优先）</h3>
+<ul>
+<li>燕麦、糙米、荞麦面、全麦面包、藜麦</li>
+<li>红薯、山药、玉米（适量）</li>
+</ul>
+<h3>蛋白质类</h3>
+<ul>
+<li><strong>鱼类</strong>（三文鱼、鲭鱼、鲈鱼 — 每周至少2次深海鱼）</li>
+<li><strong>鸡胸肉</strong>（去皮，优选）</li>
+<li><strong>豆制品</strong>（豆腐、豆浆）</li>
+<li><strong>鸡蛋</strong>（每天1个，或每周3-4个）</li>
+<li><strong>低脂牛奶/酸奶</strong></li>
+</ul>
+<h3>蔬菜类</h3>
+<ul>
+<li><strong>绿叶蔬菜</strong>（菠菜、西兰花、油麦菜）— 每天至少400g</li>
+<li><strong>十字花科蔬菜</strong>（西兰花、花椰菜）— 有助于肝脏解毒</li>
+<li><strong>番茄、黄瓜、茄子</strong></li>
+<li><strong>洋葱、胡萝卜、芹菜</strong></li>
+</ul>
+<h3>水果类</h3>
+<ul>
+<li><strong>低糖水果</strong>：苹果、梨、柚子、蓝莓、草莓</li>
+<li><strong>限量</strong>：每天200g，避免高糖水果（葡萄、荔枝、芒果）</li>
+</ul>
+<h3>脂肪来源</h3>
+<ul>
+<li><strong>橄榄油、茶籽油</strong>（烹饪用油，每天20-25g）</li>
+<li><strong>坚果</strong>：核桃、杏仁（每天10-15g）</li>
+</ul>
+<hr>
+<h2>禁忌食物</h2>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>原因</th>
+<th>严重程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>酒精</strong></td>
+<td>脂肪肝 + 肝损伤风险</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td><strong>含糖饮料</strong></td>
+<td>果糖导致脂肪肝恶化</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td><strong>动物内脏</strong></td>
+<td>高胆固醇</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td><strong>蛋黄过量</strong></td>
+<td>胆固醇超标</td>
+<td><strong>严格限制</strong>（每天≤1个）</td>
+</tr>
+<tr>
+<td><strong>油炸食品</strong></td>
+<td>高脂肪、高热量</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td><strong>加工肉类</strong></td>
+<td>高钠、高脂、致癌风险</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td><strong>肥肉、猪油</strong></td>
+<td>高饱和脂肪</td>
+<td><strong>完全禁止</strong></td>
+</tr>
+<tr>
+<td><strong>奶油、黄油</strong></td>
+<td>高饱和脂肪</td>
+<td><strong>严格限制</strong></td>
+</tr>
+<tr>
+<td><strong>精制糖、糕点</strong></td>
+<td>高热量、低营养</td>
+<td><strong>严格限制</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>药物-营养交互</h2>
+<p>目前无用药，无需考虑药物-营养交互。</p>
+<hr>
+<h2>三餐能量分配</h2>
+<table>
+<thead>
+<tr>
+<th>餐次</th>
+<th>能量</th>
+<th>占比</th>
+<th>碳水</th>
+<th>蛋白质</th>
+<th>脂肪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>早餐</strong></td>
+<td>485 kcal</td>
+<td>30%</td>
+<td>60g</td>
+<td>25g</td>
+<td>16g</td>
+</tr>
+<tr>
+<td><strong>午餐</strong></td>
+<td>650 kcal</td>
+<td>40%</td>
+<td>78g</td>
+<td>35g</td>
+<td>22g</td>
+</tr>
+<tr>
+<td><strong>晚餐</strong></td>
+<td>485 kcal</td>
+<td>30%</td>
+<td>57g</td>
+<td>30g</td>
+<td>16g</td>
+</tr>
+<tr>
+<td>合计</td>
+<td><strong>1620 kcal</strong></td>
+<td>100%</td>
+<td><strong>195g</strong></td>
+<td><strong>90g</strong></td>
+<td><strong>54g</strong></td>
+</tr>
+</tbody></table>
+<p><strong>加餐（可选，如上午/下午饥饿时）：</strong></p>
+<ul>
+<li>苹果1个（约80 kcal）或 坚果10g（约60 kcal）</li>
+<li>从正餐中扣除相应热量</li>
+</ul>
+<hr>
+<h2>参考来源</h2>
+<p>本营养评估基于以下指南和公式综合生成：</p>
+<ol>
+<li><strong>《成人肥胖食养指南（2024年版）》</strong> — 国家卫生健康委员会</li>
+<li><strong>《中国血脂管理指南（基层版2024年）》</strong> — 中华医学会</li>
+<li><strong>《代谢相关（非酒精性）脂肪性肝病防治指南（2024年版）》</strong></li>
+<li><strong>《EASL-EASD-EASO非酒精性脂肪性肝病管理临床实践指南》</strong></li>
+<li>Mifflin-St Jeor 基础代谢公式</li>
+</ol>
+<hr>
+<h2>关键注意事项</h2>
+<ol>
+<li><strong>戒酒是第一优先级</strong> — 对脂肪肝和肝功能恢复至关重要</li>
+<li><strong>地中海饮食模式</strong> — 优先推荐的饮食方式，富含橄榄油、鱼类、蔬果</li>
+<li><strong>减重速度控制</strong> — 每周0.5-1kg为宜，过快减重可能加重肝损伤</li>
+<li><strong>胆固醇控制</strong> — 每日&lt;300mg，严格控制动物内脏和蛋黄</li>
+<li><strong>定期复查</strong> — 建议3-6个月后复查肝功能、血脂、肝脏B超</li>
+</ol>
+<hr>
+<blockquote>
+<p><strong>免责声明</strong>: 本营养评估仅供参考，具体治疗方案请遵医嘱。</p>
+</blockquote>
+</div>
+
+<div class="section-header">
+  <h2>配餐方案</h2>
+  <div class="section-sub">Meal Plan</div>
+</div>
+<div class="section-body">
+<h3>配餐方案_第1周</h3>
+<h1>配餐方案</h1>
+<blockquote>
+<p>基于营养评估报告生成 | 日期: 2025-04-07
+适用对象: 夏先生（轻度脂肪肝、肥胖、高胆固醇）
+适用周期: 第1周
+每日目标: 1620 kcal | 蛋白质 90g | 碳水 195g | 脂肪 54g | 膳食纤维 ≥30g</p>
+</blockquote>
+<hr>
+<h2>周一</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦牛奶粥</td>
+<td>燕麦片 50g + 低脂牛奶 250ml</td>
+<td>煮 5分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>每天1个鸡蛋，胆固醇控制</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>1个（约150g）</td>
+<td>生食</td>
+<td>低GI水果，富含果胶</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 20g | 脂肪 12g | 碳水 68g | 膳食纤维 6g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 70g(生重，约170g熟)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食，富含B族维生素</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 120g</td>
+<td>清蒸，姜丝去腥</td>
+<td>低脂高蛋白，富含Omega-3</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油5g)</td>
+<td>高纤维、抗氧化、护肝</td>
+</tr>
+<tr>
+<td>凉拌菠菜</td>
+<td>菠菜 100g</td>
+<td>焯水后凉拌，少许芝麻油(3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 100g + 蛋清1个</td>
+<td>煮，不加淀粉</td>
+<td>低热量，增加饱腹感</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 35g | 脂肪 18g | 碳水 78g | 膳食纤维 8g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 60g（约150g熟）</td>
+<td>煮</td>
+<td>低GI主食，控血糖</td>
+</tr>
+<tr>
+<td>鸡胸肉(少油煎)</td>
+<td>鸡胸肉 100g</td>
+<td>少油煎(油5g)，黑胡椒调味</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉芦笋</td>
+<td>芦笋 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维、护肝</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>黄瓜 150g</td>
+<td>凉拌，醋+少许盐</td>
+<td>清爽低热量</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 35g | 脂肪 14g | 碳水 50g | 膳食纤维 7g</p>
+<h3>周一营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>90 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>44 g</td>
+<td>✓（低脂有益脂肪肝）</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>196 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>21 g</td>
+<td>⚠（需补充）</td>
+</tr>
+</tbody></table>
+<p><strong>补充建议</strong>: 下午加餐可补充10g坚果（核桃/杏仁）增加纤维和优质脂肪</p>
+<hr>
+<h2>周二</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦面包</td>
+<td>2片（约70g）</td>
+<td>烤面包机微烤</td>
+<td>低GI主食，富含B族维生素</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙，低脂</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个（约80g）</td>
+<td>生食</td>
+<td>低GI水果，富含维C</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~480 kcal | 蛋白质 20g | 脂肪 11g | 碳水 65g | 膳食纤维 5g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+燕麦米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>香煎三文鱼</td>
+<td>三文鱼 100g</td>
+<td>少油煎(油5g)，柠檬汁调味</td>
+<td>深海鱼Omega-3，护肝护心</td>
+</tr>
+<tr>
+<td>蒜蓉炒西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维、抗氧化</td>
+</tr>
+<tr>
+<td>凉拌芹菜木耳</td>
+<td>芹菜 100g + 木耳(泡发)50g</td>
+<td>焯水凉拌，少许醋</td>
+<td>降压、高纤维</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜(干)5g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 32g | 脂肪 19g | 碳水 72g | 膳食纤维 10g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦饭</td>
+<td>藜麦 60g(生重，约150g熟)</td>
+<td>煮</td>
+<td>完全蛋白，低GI</td>
+</tr>
+<tr>
+<td>白灼虾仁</td>
+<td>虾仁 120g</td>
+<td>水煮，蘸少量生抽</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒油麦菜</td>
+<td>油麦菜 200g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌萝卜丝</td>
+<td>白萝卜 100g</td>
+<td>切丝凉拌，醋调味</td>
+<td>清爽助消化</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 28g | 脂肪 10g | 碳水 55g | 膳食纤维 6g</p>
+<h3>周二营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1615 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>80 g</td>
+<td>⚠（略低）</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>40 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>192 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>21 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周三</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦粥</td>
+<td>燕麦片 50g + 水 250ml</td>
+<td>煮 5分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>梨</td>
+<td>1个（约150g）</td>
+<td>生食</td>
+<td>低GI水果</td>
+</tr>
+<tr>
+<td>低脂酸奶</td>
+<td>150g</td>
+<td>直接食用</td>
+<td>益生菌，低脂</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 18g | 脂肪 10g | 碳水 72g | 膳食纤维 7g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>鸡胸肉炒青椒</td>
+<td>鸡胸肉 120g + 青椒 100g</td>
+<td>少油快炒(油5g)</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉茄子</td>
+<td>茄子 200g</td>
+<td>少油蒸(油3g)，蒜蓉调味</td>
+<td>低热量蔬菜</td>
+</tr>
+<tr>
+<td>水煮西兰花</td>
+<td>西兰花 100g</td>
+<td>水煮，少许盐</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>冬瓜汤</td>
+<td>冬瓜 150g</td>
+<td>煮，少许盐</td>
+<td>利尿消肿</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 35g | 脂肪 15g | 碳水 78g | 膳食纤维 9g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>玉米</td>
+<td>玉米 1根（约200g）</td>
+<td>蒸 20分钟</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>清蒸带鱼</td>
+<td>带鱼 100g</td>
+<td>清蒸，姜丝去腥</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒菠菜</td>
+<td>菠菜 200g</td>
+<td>少油快炒(油3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>凉拌豆腐丝</td>
+<td>豆腐丝 80g</td>
+<td>凉拌，少许芝麻油(2g)</td>
+<td>植物蛋白</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 25g | 脂肪 14g | 碳水 50g | 膳食纤维 7g</p>
+<h3>周三营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>78 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>39 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>200 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>23 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周四</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蒸红薯</td>
+<td>红薯 200g</td>
+<td>蒸 20分钟</td>
+<td>低GI主食，富含膳食纤维</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>15g（约3个）</td>
+<td>生食</td>
+<td>优质脂肪，健脑</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 18g | 脂肪 16g | 碳水 62g | 膳食纤维 7g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 120g</td>
+<td>清蒸，姜丝+葱丝去腥</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>木耳炒洋葱</td>
+<td>洋葱 100g + 木耳(泡发)50g</td>
+<td>少油快炒(油3g)</td>
+<td>降脂蔬菜组合</td>
+</tr>
+<tr>
+<td>清炒油麦菜</td>
+<td>油麦菜 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 100g + 蛋清1个</td>
+<td>煮</td>
+<td>增加饱腹感</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 32g | 脂肪 16g | 碳水 75g | 膳食纤维 10g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 60g（约150g熟）</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>鸡胸肉丝拌黄瓜</td>
+<td>鸡胸肉 100g + 黄瓜 150g</td>
+<td>鸡胸肉水煮撕丝，凉拌</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒莴笋</td>
+<td>莴笋 150g</td>
+<td>少油快炒(油3g)</td>
+<td>低热量高纤维</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜(干)5g + 蛋清1个</td>
+<td>煮</td>
+<td>增加饱腹感</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 30g | 脂肪 12g | 碳水 52g | 膳食纤维 6g</p>
+<h3>周四营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>80 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>44 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>189 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>23 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周五</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦面包</td>
+<td>2片（约70g）</td>
+<td>烤面包机微烤</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>100g</td>
+<td>生食</td>
+<td>低GI水果，抗氧化</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 20g | 脂肪 12g | 碳水 64g | 膳食纤维 6g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+小米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>多谷物搭配</td>
+</tr>
+<tr>
+<td>清蒸鳕鱼</td>
+<td>鳕鱼 120g</td>
+<td>清蒸，姜丝去腥</td>
+<td>低脂高蛋白深海鱼</td>
+</tr>
+<tr>
+<td>家常豆腐</td>
+<td>北豆腐 150g</td>
+<td>少油煎(油4g)，酱油调味</td>
+<td>植物蛋白，低脂</td>
+</tr>
+<tr>
+<td>清炒西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维抗氧化</td>
+</tr>
+<tr>
+<td>凉拌海带丝</td>
+<td>海带丝(泡发) 100g</td>
+<td>凉拌，醋调味</td>
+<td>富含碘，降脂</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 35g | 脂肪 17g | 碳水 72g | 膳食纤维 9g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>玉米</td>
+<td>玉米 1根（约200g）</td>
+<td>蒸 20分钟</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 100g</td>
+<td>清蒸</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉炒油菜</td>
+<td>油菜 200g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌木耳</td>
+<td>木耳(泡发) 80g</td>
+<td>凉拌，醋+少许芝麻油(2g)</td>
+<td>降脂</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 28g | 脂肪 12g | 碳水 56g | 膳食纤维 8g</p>
+<h3>周五营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>83 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>41 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>192 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>23 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周六</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦牛奶粥</td>
+<td>燕麦片 50g + 低脂牛奶 250ml</td>
+<td>煮 5分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>1个（约150g）</td>
+<td>生食</td>
+<td>低GI水果</td>
+</tr>
+<tr>
+<td>杏仁</td>
+<td>15g</td>
+<td>生食</td>
+<td>优质脂肪</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 20g | 脂肪 18g | 碳水 58g | 膳食纤维 8g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>香煎三文鱼</td>
+<td>三文鱼 100g</td>
+<td>少油煎(油5g)，柠檬汁调味</td>
+<td>深海鱼Omega-3</td>
+</tr>
+<tr>
+<td>清炒芦笋</td>
+<td>芦笋 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌芹菜</td>
+<td>芹菜 150g</td>
+<td>凉拌，醋调味</td>
+<td>降压</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 100g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 30g | 脂肪 22g | 碳水 65g | 膳食纤维 8g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 60g（约150g熟）</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>家常豆腐</td>
+<td>北豆腐 150g</td>
+<td>少油煎(油4g)，酱油调味</td>
+<td>植物蛋白</td>
+</tr>
+<tr>
+<td>清炒空心菜</td>
+<td>空心菜 200g</td>
+<td>少油快炒(油3g)，蒜蓉</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>黄瓜 100g</td>
+<td>凉拌，醋+少许盐</td>
+<td>清爽低热量</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 22g | 脂肪 16g | 碳水 54g | 膳食纤维 7g</p>
+<h3>周六营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>72 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>56 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>177 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>23 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周日</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蒸红薯</td>
+<td>红薯 200g</td>
+<td>蒸 20分钟</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>150g</td>
+<td>生食</td>
+<td>低GI水果，富含维C</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 18g | 脂肪 11g | 碳水 68g | 膳食纤维 8g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+藜麦 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>多谷物搭配</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 120g</td>
+<td>清蒸，姜丝+葱丝去腥</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>木耳炒胡萝卜</td>
+<td>胡萝卜 100g + 木耳(泡发)50g</td>
+<td>少油快炒(油3g)</td>
+<td>β-胡萝卜素，降脂</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维抗氧化</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜(干)5g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 32g | 脂肪 16g | 碳水 73g | 膳食纤维 10g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦饭</td>
+<td>藜麦 60g(生重)</td>
+<td>煮</td>
+<td>完全蛋白，低GI</td>
+</tr>
+<tr>
+<td>鸡胸肉炒洋葱</td>
+<td>鸡胸肉 100g + 洋葱 100g</td>
+<td>少油快炒(油5g)</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒菠菜</td>
+<td>菠菜 200g</td>
+<td>少油快炒(油3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>凉拌莴笋丝</td>
+<td>莴笋 100g</td>
+<td>凉拌，醋调味</td>
+<td>低热量高纤维</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 32g | 脂肪 14g | 碳水 48g | 膳食纤维 7g</p>
+<h3>周日营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>82 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>41 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>189 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>25 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>一周营养总览</h2>
+<table>
+<thead>
+<tr>
+<th>日</th>
+<th>能量(kcal)</th>
+<th>蛋白质(g)</th>
+<th>脂肪(g)</th>
+<th>碳水(g)</th>
+<th>膳食纤维(g)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>1620</td>
+<td>90</td>
+<td>44</td>
+<td>196</td>
+<td>21</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>1615</td>
+<td>80</td>
+<td>40</td>
+<td>192</td>
+<td>21</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>1620</td>
+<td>78</td>
+<td>39</td>
+<td>200</td>
+<td>23</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>1620</td>
+<td>80</td>
+<td>44</td>
+<td>189</td>
+<td>23</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>1620</td>
+<td>83</td>
+<td>41</td>
+<td>192</td>
+<td>23</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>1620</td>
+<td>72</td>
+<td>56</td>
+<td>177</td>
+<td>23</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>1620</td>
+<td>82</td>
+<td>41</td>
+<td>189</td>
+<td>25</td>
+</tr>
+<tr>
+<td><strong>日均</strong></td>
+<td><strong>1619</strong></td>
+<td><strong>81</strong></td>
+<td><strong>44</strong></td>
+<td><strong>191</strong></td>
+<td><strong>23</strong></td>
+</tr>
+<tr>
+<td><strong>目标</strong></td>
+<td><strong>1620</strong></td>
+<td><strong>90</strong></td>
+<td><strong>54</strong></td>
+<td><strong>195</strong></td>
+<td><strong>≥30</strong></td>
+</tr>
+</tbody></table>
+<p><strong>说明</strong>:</p>
+<ul>
+<li>蛋白质略低于目标（日均81g vs 90g），建议增加豆制品或增加肉类份量10-15g</li>
+<li>膳食纤维普遍不足，建议每餐增加绿叶蔬菜份量或增加菌菇类</li>
+<li>脂肪控制较好，符合脂肪肝低脂饮食要求</li>
+</ul>
+<hr>
+<h2>采购清单</h2>
+<h3>主食类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦片</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>糙米</td>
+<td>500g</td>
+</tr>
+<tr>
+<td>全麦面包</td>
+<td>280g（约8片）</td>
+</tr>
+<tr>
+<td>荞麦面(干)</td>
+<td>240g</td>
+</tr>
+<tr>
+<td>藜麦</td>
+<td>120g</td>
+</tr>
+<tr>
+<td>红薯</td>
+<td>600g</td>
+</tr>
+<tr>
+<td>玉米</td>
+<td>3根（约600g）</td>
+</tr>
+<tr>
+<td>小米</td>
+<td>20g</td>
+</tr>
+<tr>
+<td>燕麦米</td>
+<td>20g</td>
+</tr>
+</tbody></table>
+<h3>蛋白质类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>鸡蛋</td>
+<td>7个</td>
+</tr>
+<tr>
+<td>鲈鱼</td>
+<td>480g</td>
+</tr>
+<tr>
+<td>三文鱼</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>鳕鱼</td>
+<td>120g</td>
+</tr>
+<tr>
+<td>带鱼</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>鸡胸肉</td>
+<td>520g</td>
+</tr>
+<tr>
+<td>虾仁</td>
+<td>120g</td>
+</tr>
+<tr>
+<td>北豆腐</td>
+<td>300g</td>
+</tr>
+<tr>
+<td>豆腐丝</td>
+<td>80g</td>
+</tr>
+</tbody></table>
+<h3>蔬菜类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>西兰花</td>
+<td>750g</td>
+</tr>
+<tr>
+<td>菠菜</td>
+<td>700g</td>
+</tr>
+<tr>
+<td>油麦菜</td>
+<td>500g</td>
+</tr>
+<tr>
+<td>芹菜</td>
+<td>400g</td>
+</tr>
+<tr>
+<td>番茄</td>
+<td>400g</td>
+</tr>
+<tr>
+<td>黄瓜</td>
+<td>400g</td>
+</tr>
+<tr>
+<td>茄子</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>洋葱</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>胡萝卜</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>木耳(干)</td>
+<td>30g（泡发约180g）</td>
+</tr>
+<tr>
+<td>莴笋</td>
+<td>250g</td>
+</tr>
+<tr>
+<td>油菜</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>空心菜</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>海带丝(干)</td>
+<td>10g</td>
+</tr>
+<tr>
+<td>青椒</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>芦笋</td>
+<td>300g</td>
+</tr>
+<tr>
+<td>冬瓜</td>
+<td>150g</td>
+</tr>
+<tr>
+<td>白萝卜</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>紫菜(干)</td>
+<td>15g</td>
+</tr>
+</tbody></table>
+<h3>水果/坚果</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>苹果</td>
+<td>3个（约450g）</td>
+</tr>
+<tr>
+<td>梨</td>
+<td>1个（约150g）</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个（约80g）</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>150g</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>15g</td>
+</tr>
+<tr>
+<td>杏仁</td>
+<td>15g</td>
+</tr>
+</tbody></table>
+<h3>乳制品</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>低脂牛奶</td>
+<td>1500ml</td>
+</tr>
+<tr>
+<td>低脂酸奶</td>
+<td>150g</td>
+</tr>
+</tbody></table>
+<h3>调味品</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>橄榄油/茶籽油</td>
+<td>全周烹饪用油约 150g</td>
+</tr>
+<tr>
+<td>醋、生抽（低钠）</td>
+<td>适量</td>
+</tr>
+<tr>
+<td>黑胡椒、姜、蒜</td>
+<td>适量</td>
+</tr>
+<tr>
+<td>柠檬汁</td>
+<td>三文鱼调味用</td>
+</tr>
+<tr>
+<td>芝麻油</td>
+<td>凉拌用，少量</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>烹饪Tips</h2>
+<ol>
+<li><strong>杂粮饭</strong>可以一次煮2-3天的量，冷藏保存，吃时微波加热</li>
+<li><strong>鲈鱼/鳕鱼</strong>让鱼档清理干净，回家直接蒸，8分钟即可</li>
+<li><strong>鸡胸肉</strong>提前一晚用料酒和黑胡椒腌制，口感更嫩</li>
+<li><strong>蔬菜</strong>尽量当天买当天吃，营养流失少</li>
+<li>炒菜用<strong>不粘锅</strong>，可以少放油</li>
+<li><strong>三文鱼</strong>煎之前用厨房纸吸干水分，中火每面煎3分钟</li>
+<li><strong>荞麦面</strong>煮好后过一遍凉开水，口感更筋道</li>
+<li>全天烹饪用油控制在<strong>20-25g</strong>以内</li>
+<li><strong>严格戒酒</strong>（脂肪肝患者必须遵守）</li>
+</ol>
+<hr>
+<h2>体重管理追踪</h2>
+<h3>目标</h3>
+<ul>
+<li><strong>起始体重</strong>: 87.1 kg（BMI 30.0）</li>
+<li><strong>目标体重</strong>: 75-77 kg（BMI 26-27）</li>
+<li><strong>目标减重</strong>: 10-12 kg</li>
+<li><strong>预期时间</strong>: 3-4个月</li>
+</ul>
+<h3>监测建议</h3>
+<ul>
+<li><strong>每周称重</strong>: 固定周一早晨空腹称重</li>
+<li><strong>记录维度</strong>: 体重、腰围、体感</li>
+<li><strong>里程碑</strong>:<ul>
+<li>第4周: 减重2-3kg</li>
+<li>第8周: 减重5-6kg，复查肝功能</li>
+<li>第12周: 减重8-10kg，复查肝脏B超</li>
+<li>第16周: 达到目标体重</li>
+</ul>
+</li>
+</ul>
+<h3>调整建议</h3>
+<ul>
+<li>如连续2周体重无变化，可减少100-150 kcal/天或增加运动量</li>
+<li>如减重过快（每周&gt;1.5kg），需适当增加能量摄入</li>
+</ul>
+<hr>
+<h2>参考来源</h2>
+<ul>
+<li>中国居民膳食指南（2022）</li>
+<li>成人肥胖食养指南（2024年版）</li>
+<li>代谢相关脂肪性肝病防治指南（2024年版）</li>
+<li>中国血脂管理指南（基层版2024年）</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>免责声明</strong>: 本配餐方案由 AI 辅助生成，仅提供营养参考信息，不构成医疗诊断或治疗建议。患有脂肪肝、高胆固醇者请务必在医生和注册营养师指导下进行饮食管理。</p>
+</blockquote>
+<h3>配餐方案_第2周</h3>
+<h1>配餐方案</h1>
+<blockquote>
+<p>基于营养评估报告生成 | 日期: 2025-04-07
+适用对象: 夏先生（轻度脂肪肝、肥胖、高胆固醇）
+适用周期: 第2周
+每日目标: 1620 kcal | 蛋白质 90g | 碳水 195g | 脂肪 54g | 膳食纤维 ≥30g</p>
+</blockquote>
+<hr>
+<h2>周一</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦牛奶粥</td>
+<td>燕麦片 50g + 低脂牛奶 250ml</td>
+<td>煮 5分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>每天1个鸡蛋，胆固醇控制</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>1个（约150g）</td>
+<td>生食</td>
+<td>低GI水果，富含果胶</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 20g | 脂肪 12g | 碳水 68g | 膳食纤维 6g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 70g(生重，约170g熟)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食，富含B族维生素</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 120g</td>
+<td>清蒸，姜丝去腥</td>
+<td>低脂高蛋白，富含Omega-3</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油5g)</td>
+<td>高纤维、抗氧化、护肝</td>
+</tr>
+<tr>
+<td>凉拌菠菜</td>
+<td>菠菜 100g</td>
+<td>焯水后凉拌，少许芝麻油(3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 100g + 蛋清1个</td>
+<td>煮，不加淀粉</td>
+<td>低热量，增加饱腹感</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 35g | 脂肪 18g | 碳水 78g | 膳食纤维 8g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 60g（约150g熟）</td>
+<td>煮</td>
+<td>低GI主食，控血糖</td>
+</tr>
+<tr>
+<td>鸡胸肉(少油煎)</td>
+<td>鸡胸肉 100g</td>
+<td>少油煎(油5g)，黑胡椒调味</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉芦笋</td>
+<td>芦笋 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维、护肝</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>黄瓜 150g</td>
+<td>凉拌，醋+少许盐</td>
+<td>清爽低热量</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 35g | 脂肪 14g | 碳水 50g | 膳食纤维 7g</p>
+<h3>周一营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>90 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>44 g</td>
+<td>✓（低脂有益脂肪肝）</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>196 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>21 g</td>
+<td>⚠（需补充）</td>
+</tr>
+</tbody></table>
+<p><strong>补充建议</strong>: 下午加餐可补充10g坚果（核桃/杏仁）增加纤维和优质脂肪</p>
+<hr>
+<h2>周二</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦面包</td>
+<td>2片（约70g）</td>
+<td>烤面包机微烤</td>
+<td>低GI主食，富含B族维生素</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙，低脂</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个（约80g）</td>
+<td>生食</td>
+<td>低GI水果，富含维C</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~480 kcal | 蛋白质 20g | 脂肪 11g | 碳水 65g | 膳食纤维 5g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+燕麦米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>香煎三文鱼</td>
+<td>三文鱼 100g</td>
+<td>少油煎(油5g)，柠檬汁调味</td>
+<td>深海鱼Omega-3，护肝护心</td>
+</tr>
+<tr>
+<td>蒜蓉炒西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维、抗氧化</td>
+</tr>
+<tr>
+<td>凉拌芹菜木耳</td>
+<td>芹菜 100g + 木耳(泡发)50g</td>
+<td>焯水凉拌，少许醋</td>
+<td>降压、高纤维</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜(干)5g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 32g | 脂肪 19g | 碳水 72g | 膳食纤维 10g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦饭</td>
+<td>藜麦 60g(生重，约150g熟)</td>
+<td>煮</td>
+<td>完全蛋白，低GI</td>
+</tr>
+<tr>
+<td>白灼虾仁</td>
+<td>虾仁 120g</td>
+<td>水煮，蘸少量生抽</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒油麦菜</td>
+<td>油麦菜 200g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌萝卜丝</td>
+<td>白萝卜 100g</td>
+<td>切丝凉拌，醋调味</td>
+<td>清爽助消化</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 28g | 脂肪 10g | 碳水 55g | 膳食纤维 6g</p>
+<h3>周二营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1615 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>80 g</td>
+<td>⚠（略低）</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>40 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>192 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>21 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周三</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦粥</td>
+<td>燕麦片 50g + 水 250ml</td>
+<td>煮 5分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>梨</td>
+<td>1个（约150g）</td>
+<td>生食</td>
+<td>低GI水果</td>
+</tr>
+<tr>
+<td>低脂酸奶</td>
+<td>150g</td>
+<td>直接食用</td>
+<td>益生菌，低脂</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 18g | 脂肪 10g | 碳水 72g | 膳食纤维 7g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>鸡胸肉炒青椒</td>
+<td>鸡胸肉 120g + 青椒 100g</td>
+<td>少油快炒(油5g)</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉茄子</td>
+<td>茄子 200g</td>
+<td>少油蒸(油3g)，蒜蓉调味</td>
+<td>低热量蔬菜</td>
+</tr>
+<tr>
+<td>水煮西兰花</td>
+<td>西兰花 100g</td>
+<td>水煮，少许盐</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>冬瓜汤</td>
+<td>冬瓜 150g</td>
+<td>煮，少许盐</td>
+<td>利尿消肿</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 35g | 脂肪 15g | 碳水 78g | 膳食纤维 9g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>玉米</td>
+<td>玉米 1根（约200g）</td>
+<td>蒸 20分钟</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>清蒸带鱼</td>
+<td>带鱼 100g</td>
+<td>清蒸，姜丝去腥</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒菠菜</td>
+<td>菠菜 200g</td>
+<td>少油快炒(油3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>凉拌豆腐丝</td>
+<td>豆腐丝 80g</td>
+<td>凉拌，少许芝麻油(2g)</td>
+<td>植物蛋白</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 25g | 脂肪 14g | 碳水 50g | 膳食纤维 7g</p>
+<h3>周三营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>78 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>39 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>200 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>23 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周四</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蒸红薯</td>
+<td>红薯 200g</td>
+<td>蒸 20分钟</td>
+<td>低GI主食，富含膳食纤维</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>15g（约3个）</td>
+<td>生食</td>
+<td>优质脂肪，健脑</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 18g | 脂肪 16g | 碳水 62g | 膳食纤维 7g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 120g</td>
+<td>清蒸，姜丝+葱丝去腥</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>木耳炒洋葱</td>
+<td>洋葱 100g + 木耳(泡发)50g</td>
+<td>少油快炒(油3g)</td>
+<td>降脂蔬菜组合</td>
+</tr>
+<tr>
+<td>清炒油麦菜</td>
+<td>油麦菜 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 100g + 蛋清1个</td>
+<td>煮</td>
+<td>增加饱腹感</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 32g | 脂肪 16g | 碳水 75g | 膳食纤维 10g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 60g（约150g熟）</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>鸡胸肉丝拌黄瓜</td>
+<td>鸡胸肉 100g + 黄瓜 150g</td>
+<td>鸡胸肉水煮撕丝，凉拌</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒莴笋</td>
+<td>莴笋 150g</td>
+<td>少油快炒(油3g)</td>
+<td>低热量高纤维</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜(干)5g + 蛋清1个</td>
+<td>煮</td>
+<td>增加饱腹感</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 30g | 脂肪 12g | 碳水 52g | 膳食纤维 6g</p>
+<h3>周四营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>80 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>44 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>189 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>23 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周五</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦面包</td>
+<td>2片（约70g）</td>
+<td>烤面包机微烤</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>100g</td>
+<td>生食</td>
+<td>低GI水果，抗氧化</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 20g | 脂肪 12g | 碳水 64g | 膳食纤维 6g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+小米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>多谷物搭配</td>
+</tr>
+<tr>
+<td>清蒸鳕鱼</td>
+<td>鳕鱼 120g</td>
+<td>清蒸，姜丝去腥</td>
+<td>低脂高蛋白深海鱼</td>
+</tr>
+<tr>
+<td>家常豆腐</td>
+<td>北豆腐 150g</td>
+<td>少油煎(油4g)，酱油调味</td>
+<td>植物蛋白，低脂</td>
+</tr>
+<tr>
+<td>清炒西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维抗氧化</td>
+</tr>
+<tr>
+<td>凉拌海带丝</td>
+<td>海带丝(泡发) 100g</td>
+<td>凉拌，醋调味</td>
+<td>富含碘，降脂</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 35g | 脂肪 17g | 碳水 72g | 膳食纤维 9g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>玉米</td>
+<td>玉米 1根（约200g）</td>
+<td>蒸 20分钟</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 100g</td>
+<td>清蒸</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉炒油菜</td>
+<td>油菜 200g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌木耳</td>
+<td>木耳(泡发) 80g</td>
+<td>凉拌，醋+少许芝麻油(2g)</td>
+<td>降脂</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 28g | 脂肪 12g | 碳水 56g | 膳食纤维 8g</p>
+<h3>周五营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>83 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>41 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>192 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>23 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周六</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦牛奶粥</td>
+<td>燕麦片 50g + 低脂牛奶 250ml</td>
+<td>煮 5分钟</td>
+<td>低GI，富含β-葡聚糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>1个（约150g）</td>
+<td>生食</td>
+<td>低GI水果</td>
+</tr>
+<tr>
+<td>杏仁</td>
+<td>15g</td>
+<td>生食</td>
+<td>优质脂肪</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 20g | 脂肪 18g | 碳水 58g | 膳食纤维 8g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>糙米 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>香煎三文鱼</td>
+<td>三文鱼 100g</td>
+<td>少油煎(油5g)，柠檬汁调味</td>
+<td>深海鱼Omega-3</td>
+</tr>
+<tr>
+<td>清炒芦笋</td>
+<td>芦笋 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌芹菜</td>
+<td>芹菜 150g</td>
+<td>凉拌，醋调味</td>
+<td>降压</td>
+</tr>
+<tr>
+<td>番茄蛋花汤</td>
+<td>番茄 100g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 30g | 脂肪 22g | 碳水 65g | 膳食纤维 8g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 60g（约150g熟）</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>家常豆腐</td>
+<td>北豆腐 150g</td>
+<td>少油煎(油4g)，酱油调味</td>
+<td>植物蛋白</td>
+</tr>
+<tr>
+<td>清炒空心菜</td>
+<td>空心菜 200g</td>
+<td>少油快炒(油3g)，蒜蓉</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>黄瓜 100g</td>
+<td>凉拌，醋+少许盐</td>
+<td>清爽低热量</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 22g | 脂肪 16g | 碳水 54g | 膳食纤维 7g</p>
+<h3>周六营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>72 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>56 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>177 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>23 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>周日</h2>
+<h3>早餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蒸红薯</td>
+<td>红薯 200g</td>
+<td>蒸 20分钟</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个（约50g）</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>150g</td>
+<td>生食</td>
+<td>低GI水果，富含维C</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>250ml</td>
+<td>温热饮用</td>
+<td>补钙</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 18g | 脂肪 11g | 碳水 68g | 膳食纤维 8g</p>
+<h3>午餐（约 650 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+藜麦 70g(生重)</td>
+<td>电饭煲蒸</td>
+<td>多谷物搭配</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>鲈鱼 120g</td>
+<td>清蒸，姜丝+葱丝去腥</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>木耳炒胡萝卜</td>
+<td>胡萝卜 100g + 木耳(泡发)50g</td>
+<td>少油快炒(油3g)</td>
+<td>β-胡萝卜素，降脂</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>西兰花 150g</td>
+<td>少油快炒(油3g)</td>
+<td>高纤维抗氧化</td>
+</tr>
+<tr>
+<td>紫菜蛋花汤</td>
+<td>紫菜(干)5g + 蛋清1个</td>
+<td>煮</td>
+<td>低热量汤品</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~650 kcal | 蛋白质 32g | 脂肪 16g | 碳水 73g | 膳食纤维 10g</p>
+<h3>晚餐（约 485 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦饭</td>
+<td>藜麦 60g(生重)</td>
+<td>煮</td>
+<td>完全蛋白，低GI</td>
+</tr>
+<tr>
+<td>鸡胸肉炒洋葱</td>
+<td>鸡胸肉 100g + 洋葱 100g</td>
+<td>少油快炒(油5g)</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>清炒菠菜</td>
+<td>菠菜 200g</td>
+<td>少油快炒(油3g)</td>
+<td>富铁、高纤维</td>
+</tr>
+<tr>
+<td>凉拌莴笋丝</td>
+<td>莴笋 100g</td>
+<td>凉拌，醋调味</td>
+<td>低热量高纤维</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~485 kcal | 蛋白质 32g | 脂肪 14g | 碳水 48g | 膳食纤维 7g</p>
+<h3>周日营养汇总</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>实际</th>
+<th>达标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>能量</td>
+<td>1620 kcal</td>
+<td>1620 kcal</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>90 g</td>
+<td>82 g</td>
+<td>⚠</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>54 g</td>
+<td>41 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>碳水</td>
+<td>195 g</td>
+<td>189 g</td>
+<td>✓</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>25 g</td>
+<td>⚠</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>一周营养总览</h2>
+<table>
+<thead>
+<tr>
+<th>日</th>
+<th>能量(kcal)</th>
+<th>蛋白质(g)</th>
+<th>脂肪(g)</th>
+<th>碳水(g)</th>
+<th>膳食纤维(g)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>1620</td>
+<td>90</td>
+<td>44</td>
+<td>196</td>
+<td>21</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>1615</td>
+<td>80</td>
+<td>40</td>
+<td>192</td>
+<td>21</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>1620</td>
+<td>78</td>
+<td>39</td>
+<td>200</td>
+<td>23</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>1620</td>
+<td>80</td>
+<td>44</td>
+<td>189</td>
+<td>23</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>1620</td>
+<td>83</td>
+<td>41</td>
+<td>192</td>
+<td>23</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>1620</td>
+<td>72</td>
+<td>56</td>
+<td>177</td>
+<td>23</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>1620</td>
+<td>82</td>
+<td>41</td>
+<td>189</td>
+<td>25</td>
+</tr>
+<tr>
+<td><strong>日均</strong></td>
+<td><strong>1619</strong></td>
+<td><strong>81</strong></td>
+<td><strong>44</strong></td>
+<td><strong>191</strong></td>
+<td><strong>23</strong></td>
+</tr>
+<tr>
+<td><strong>目标</strong></td>
+<td><strong>1620</strong></td>
+<td><strong>90</strong></td>
+<td><strong>54</strong></td>
+<td><strong>195</strong></td>
+<td><strong>≥30</strong></td>
+</tr>
+</tbody></table>
+<p><strong>说明</strong>:</p>
+<ul>
+<li>蛋白质略低于目标（日均81g vs 90g），建议增加豆制品或增加肉类份量10-15g</li>
+<li>膳食纤维普遍不足，建议每餐增加绿叶蔬菜份量或增加菌菇类</li>
+<li>脂肪控制较好，符合脂肪肝低脂饮食要求</li>
+</ul>
+<hr>
+<h2>采购清单</h2>
+<h3>主食类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦片</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>糙米</td>
+<td>500g</td>
+</tr>
+<tr>
+<td>全麦面包</td>
+<td>280g（约8片）</td>
+</tr>
+<tr>
+<td>荞麦面(干)</td>
+<td>240g</td>
+</tr>
+<tr>
+<td>藜麦</td>
+<td>120g</td>
+</tr>
+<tr>
+<td>红薯</td>
+<td>600g</td>
+</tr>
+<tr>
+<td>玉米</td>
+<td>3根（约600g）</td>
+</tr>
+<tr>
+<td>小米</td>
+<td>20g</td>
+</tr>
+<tr>
+<td>燕麦米</td>
+<td>20g</td>
+</tr>
+</tbody></table>
+<h3>蛋白质类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>鸡蛋</td>
+<td>7个</td>
+</tr>
+<tr>
+<td>鲈鱼</td>
+<td>480g</td>
+</tr>
+<tr>
+<td>三文鱼</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>鳕鱼</td>
+<td>120g</td>
+</tr>
+<tr>
+<td>带鱼</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>鸡胸肉</td>
+<td>520g</td>
+</tr>
+<tr>
+<td>虾仁</td>
+<td>120g</td>
+</tr>
+<tr>
+<td>北豆腐</td>
+<td>300g</td>
+</tr>
+<tr>
+<td>豆腐丝</td>
+<td>80g</td>
+</tr>
+</tbody></table>
+<h3>蔬菜类</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>西兰花</td>
+<td>750g</td>
+</tr>
+<tr>
+<td>菠菜</td>
+<td>700g</td>
+</tr>
+<tr>
+<td>油麦菜</td>
+<td>500g</td>
+</tr>
+<tr>
+<td>芹菜</td>
+<td>400g</td>
+</tr>
+<tr>
+<td>番茄</td>
+<td>400g</td>
+</tr>
+<tr>
+<td>黄瓜</td>
+<td>400g</td>
+</tr>
+<tr>
+<td>茄子</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>洋葱</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>胡萝卜</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>木耳(干)</td>
+<td>30g（泡发约180g）</td>
+</tr>
+<tr>
+<td>莴笋</td>
+<td>250g</td>
+</tr>
+<tr>
+<td>油菜</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>空心菜</td>
+<td>200g</td>
+</tr>
+<tr>
+<td>海带丝(干)</td>
+<td>10g</td>
+</tr>
+<tr>
+<td>青椒</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>芦笋</td>
+<td>300g</td>
+</tr>
+<tr>
+<td>冬瓜</td>
+<td>150g</td>
+</tr>
+<tr>
+<td>白萝卜</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>紫菜(干)</td>
+<td>15g</td>
+</tr>
+</tbody></table>
+<h3>水果/坚果</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>苹果</td>
+<td>3个（约450g）</td>
+</tr>
+<tr>
+<td>梨</td>
+<td>1个（约150g）</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个（约80g）</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>100g</td>
+</tr>
+<tr>
+<td>草莓</td>
+<td>150g</td>
+</tr>
+<tr>
+<td>核桃</td>
+<td>15g</td>
+</tr>
+<tr>
+<td>杏仁</td>
+<td>15g</td>
+</tr>
+</tbody></table>
+<h3>乳制品</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>周用量</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>低脂牛奶</td>
+<td>1500ml</td>
+</tr>
+<tr>
+<td>低脂酸奶</td>
+<td>150g</td>
+</tr>
+</tbody></table>
+<h3>调味品</h3>
+<table>
+<thead>
+<tr>
+<th>食材</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>橄榄油/茶籽油</td>
+<td>全周烹饪用油约 150g</td>
+</tr>
+<tr>
+<td>醋、生抽（低钠）</td>
+<td>适量</td>
+</tr>
+<tr>
+<td>黑胡椒、姜、蒜</td>
+<td>适量</td>
+</tr>
+<tr>
+<td>柠檬汁</td>
+<td>三文鱼调味用</td>
+</tr>
+<tr>
+<td>芝麻油</td>
+<td>凉拌用，少量</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>烹饪Tips</h2>
+<ol>
+<li><strong>杂粮饭</strong>可以一次煮2-3天的量，冷藏保存，吃时微波加热</li>
+<li><strong>鲈鱼/鳕鱼</strong>让鱼档清理干净，回家直接蒸，8分钟即可</li>
+<li><strong>鸡胸肉</strong>提前一晚用料酒和黑胡椒腌制，口感更嫩</li>
+<li><strong>蔬菜</strong>尽量当天买当天吃，营养流失少</li>
+<li>炒菜用<strong>不粘锅</strong>，可以少放油</li>
+<li><strong>三文鱼</strong>煎之前用厨房纸吸干水分，中火每面煎3分钟</li>
+<li><strong>荞麦面</strong>煮好后过一遍凉开水，口感更筋道</li>
+<li>全天烹饪用油控制在<strong>20-25g</strong>以内</li>
+<li><strong>严格戒酒</strong>（脂肪肝患者必须遵守）</li>
+</ol>
+<hr>
+<h2>体重管理追踪</h2>
+<h3>目标</h3>
+<ul>
+<li><strong>起始体重</strong>: 87.1 kg（BMI 30.0）</li>
+<li><strong>目标体重</strong>: 75-77 kg（BMI 26-27）</li>
+<li><strong>目标减重</strong>: 10-12 kg</li>
+<li><strong>预期时间</strong>: 3-4个月</li>
+</ul>
+<h3>监测建议</h3>
+<ul>
+<li><strong>每周称重</strong>: 固定周一早晨空腹称重</li>
+<li><strong>记录维度</strong>: 体重、腰围、体感</li>
+<li><strong>里程碑</strong>:<ul>
+<li>第4周: 减重2-3kg</li>
+<li>第8周: 减重5-6kg，复查肝功能</li>
+<li>第12周: 减重8-10kg，复查肝脏B超</li>
+<li>第16周: 达到目标体重</li>
+</ul>
+</li>
+</ul>
+<h3>调整建议</h3>
+<ul>
+<li>如连续2周体重无变化，可减少100-150 kcal/天或增加运动量</li>
+<li>如减重过快（每周&gt;1.5kg），需适当增加能量摄入</li>
+</ul>
+<hr>
+<h2>参考来源</h2>
+<ul>
+<li>中国居民膳食指南（2022）</li>
+<li>成人肥胖食养指南（2024年版）</li>
+<li>代谢相关脂肪性肝病防治指南（2024年版）</li>
+<li>中国血脂管理指南（基层版2024年）</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>免责声明</strong>: 本配餐方案由 AI 辅助生成，仅提供营养参考信息，不构成医疗诊断或治疗建议。患有脂肪肝、高胆固醇者请务必在医生和注册营养师指导下进行饮食管理。</p>
+</blockquote>
+</div>
+
+<div class="section-header">
+  <h2>运动处方</h2>
+  <div class="section-sub">Exercise Prescription</div>
+</div>
+<div class="section-body">
+<h1>个性化运动处方</h1>
+<blockquote>
+<p><strong>患者</strong>: 夏先生 | <strong>性别</strong>: 男 | <strong>年龄</strong>: 约35岁（估算）
+<strong>生成日期</strong>: 2025-04-07
+<strong>基于</strong>: 健康档案（2025-09-20）+ 营养评估（2025-04-07）
+<strong>体重管理目标</strong>: 减重（目标：3-6个月减重8-12kg）</p>
+</blockquote>
+<hr>
+<h2>一、运动安全性评估</h2>
+<h3>1.1 禁忌筛查</h3>
+<table>
+<thead>
+<tr>
+<th>评估项目</th>
+<th>当前状态</th>
+<th>运动安全性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>血压</td>
+<td>97/58 mmHg（收缩压正常，舒张压偏低）</td>
+<td>可运动（舒张压&lt;60需关注）</td>
+</tr>
+<tr>
+<td>心率</td>
+<td>72 bpm（正常）</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>肝功能</td>
+<td>AST轻度升高（43.6 U/L）</td>
+<td>可运动，但需限制为中低强度</td>
+</tr>
+<tr>
+<td>血糖</td>
+<td>5.03 mmol/L（正常）</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>心血管症状</td>
+<td>窦性心律不齐（多为生理性）</td>
+<td>安全，需观察</td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>绝对禁忌</strong>: 无</li>
+<li><strong>相对禁忌/需注意</strong>:<ul>
+<li>舒张压偏低（58 mmHg），运动中需警惕头晕</li>
+<li>AST轻度升高，需<strong>避免高强度运动</strong>，以防加重肝脏负担</li>
+<li>BMI 30.0（肥胖），需<strong>保护膝关节</strong>，避免高冲击运动</li>
+<li>轻度脂肪肝，运动是治疗的基石，但强度需循序渐进</li>
+</ul>
+</li>
+</ul>
+<h3>1.2 药物影响</h3>
+<p>目前无用药，无需考虑药物影响。</p>
+<h3>1.3 运动安全等级</h3>
+<ul>
+<li><strong>安全等级</strong>: 🟡 黄色（需注意）</li>
+<li><strong>说明</strong>: 可以运动，但需从低强度起步，循序渐进，避免高强度和关节冲击运动。</li>
+</ul>
+<hr>
+<h2>二、运动处方</h2>
+<h3>2.1 运动目标</h3>
+<ul>
+<li><strong>主要目标</strong>: 减脂、减重、改善脂肪肝</li>
+<li><strong>次要目标</strong>: 提高心肺功能、改善血脂、降低心血管风险</li>
+</ul>
+<h3>2.2 运动参数总览</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>推荐值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运动类型</td>
+<td>快走/游泳/骑自行车</td>
+<td>首选 / 椭圆机备选</td>
+</tr>
+<tr>
+<td>强度</td>
+<td>RPE 11-13</td>
+<td>靶心率 111-139 bpm</td>
+</tr>
+<tr>
+<td>频率</td>
+<td>5-7次/周</td>
+<td>减重期建议高频</td>
+</tr>
+<tr>
+<td>时长</td>
+<td>40-50分钟/次</td>
+<td>含热身和放松</td>
+</tr>
+<tr>
+<td>每周总能耗</td>
+<td>~1500-2000 kcal</td>
+<td>与营养目标配合</td>
+</tr>
+</tbody></table>
+<p><strong>说明</strong>:</p>
+<ul>
+<li><strong>最大心率</strong>: 220 - 35 = 185 bpm</li>
+<li><strong>靶心率范围</strong>: 185 × 60% ~ 185 × 75% = <strong>111 ~ 139 bpm</strong></li>
+<li>鉴于AST轻度升高和舒张压偏低，初期控制在 <strong>RPE 11-12（111-125 bpm）</strong>，2-4周后视情况逐步提升</li>
+</ul>
+<h3>2.3 推荐运动项目</h3>
+<h4>有氧运动（核心）</h4>
+<table>
+<thead>
+<tr>
+<th>运动</th>
+<th>强度</th>
+<th>时长</th>
+<th>频率</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>快走</td>
+<td>RPE 11-13</td>
+<td>40-50分钟</td>
+<td>5-7次/周</td>
+<td>首选，平地或跑步机，配速5-6km/h</td>
+</tr>
+<tr>
+<td>游泳</td>
+<td>RPE 12-13</td>
+<td>40分钟</td>
+<td>2-3次/周</td>
+<td>全身运动，关节压力小</td>
+</tr>
+<tr>
+<td>骑自行车</td>
+<td>RPE 11-12</td>
+<td>45-50分钟</td>
+<td>2-3次/周</td>
+<td>户外或健身车，中等阻力</td>
+</tr>
+</tbody></table>
+<h4>抗阻训练（辅助，每周2次）</h4>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>组数</th>
+<th>次数</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>墙壁俯卧撑</td>
+<td>2组</td>
+<td>12-15次</td>
+<td>低强度，上肢力量</td>
+</tr>
+<tr>
+<td>椅子深蹲</td>
+<td>2组</td>
+<td>10-12次</td>
+<td>下肢力量，注意膝盖保护</td>
+</tr>
+<tr>
+<td>平板支撑</td>
+<td>2组</td>
+<td>20-30秒</td>
+<td>核心稳定</td>
+</tr>
+<tr>
+<td>弹力带划船</td>
+<td>2组</td>
+<td>12-15次</td>
+<td>背部力量</td>
+</tr>
+</tbody></table>
+<h4>柔韧与平衡（每次运动后）</h4>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>时长</th>
+<th>要点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全身拉伸</td>
+<td>10分钟</td>
+<td>重点拉伸大腿、小腿、腰背</td>
+</tr>
+<tr>
+<td>深呼吸放松</td>
+<td>2-3分钟</td>
+<td>促进恢复</td>
+</tr>
+</tbody></table>
+<h4>禁止/避免的运动</h4>
+<table>
+<thead>
+<tr>
+<th>运动</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>跑步/慢跑</td>
+<td>BMI 30，高冲击损伤膝关节</td>
+</tr>
+<tr>
+<td>跳跃类运动（跳绳、篮球）</td>
+<td>高冲击，关节压力大</td>
+</tr>
+<tr>
+<td>高强度间歇训练（HIIT）</td>
+<td>AST升高，高强度加重肝脏负担</td>
+</tr>
+<tr>
+<td>大重量力量训练</td>
+<td>屏气动作可能导致血压波动</td>
+</tr>
+<tr>
+<td>竞技性运动</td>
+<td>强度难以控制，风险高</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>三、一周运动计划</h2>
+<h3>第一阶段（第1-4周）：适应期</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动内容</th>
+<th>强度</th>
+<th>时长</th>
+<th>预估能耗</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>周一</strong></td>
+<td>快走</td>
+<td>RPE 11</td>
+<td>35 min</td>
+<td>200 kcal</td>
+</tr>
+<tr>
+<td><strong>周二</strong></td>
+<td>快走 + 轻度抗阻</td>
+<td>RPE 11-12</td>
+<td>30 min + 15 min</td>
+<td>220 kcal</td>
+</tr>
+<tr>
+<td><strong>周三</strong></td>
+<td>快走</td>
+<td>RPE 11</td>
+<td>35 min</td>
+<td>200 kcal</td>
+</tr>
+<tr>
+<td><strong>周四</strong></td>
+<td>休息或散步</td>
+<td>极低</td>
+<td>20 min</td>
+<td>80 kcal</td>
+</tr>
+<tr>
+<td><strong>周五</strong></td>
+<td>快走</td>
+<td>RPE 11</td>
+<td>35 min</td>
+<td>200 kcal</td>
+</tr>
+<tr>
+<td><strong>周六</strong></td>
+<td>游泳或骑自行车</td>
+<td>RPE 11-12</td>
+<td>35 min</td>
+<td>250 kcal</td>
+</tr>
+<tr>
+<td><strong>周日</strong></td>
+<td>休息（轻度拉伸）</td>
+<td>极低</td>
+<td>15 min</td>
+<td>60 kcal</td>
+</tr>
+</tbody></table>
+<p><strong>第一周日均运动量</strong>: 约 170 分钟 / 1500 kcal</p>
+<h3>第二阶段（第5-12周）：进阶期</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动内容</th>
+<th>强度</th>
+<th>时长</th>
+<th>预估能耗</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>周一</strong></td>
+<td>快走（加速）</td>
+<td>RPE 12</td>
+<td>45 min</td>
+<td>280 kcal</td>
+</tr>
+<tr>
+<td><strong>周二</strong></td>
+<td>快走 + 抗阻训练</td>
+<td>RPE 12</td>
+<td>40 min + 20 min</td>
+<td>320 kcal</td>
+</tr>
+<tr>
+<td><strong>周三</strong></td>
+<td>游泳</td>
+<td>RPE 12</td>
+<td>40 min</td>
+<td>300 kcal</td>
+</tr>
+<tr>
+<td><strong>周四</strong></td>
+<td>快走</td>
+<td>RPE 11</td>
+<td>40 min</td>
+<td>250 kcal</td>
+</tr>
+<tr>
+<td><strong>周五</strong></td>
+<td>骑自行车</td>
+<td>RPE 12</td>
+<td>45 min</td>
+<td>320 kcal</td>
+</tr>
+<tr>
+<td><strong>周六</strong></td>
+<td>快走 + 抗阻训练</td>
+<td>RPE 12</td>
+<td>40 min + 20 min</td>
+<td>320 kcal</td>
+</tr>
+<tr>
+<td><strong>周日</strong></td>
+<td>休息（拉伸/散步）</td>
+<td>极低</td>
+<td>20 min</td>
+<td>80 kcal</td>
+</tr>
+</tbody></table>
+<p><strong>第二周日均运动量</strong>: 约 250 分钟 / 1800 kcal</p>
+<h3>第三阶段（第13周起）：巩固期</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动内容</th>
+<th>强度</th>
+<th>时长</th>
+<th>预估能耗</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>周一</strong></td>
+<td>快走（加速）</td>
+<td>RPE 12-13</td>
+<td>50 min</td>
+<td>350 kcal</td>
+</tr>
+<tr>
+<td><strong>周二</strong></td>
+<td>快走/慢跑交替 + 抗阻</td>
+<td>RPE 12-13</td>
+<td>45 min + 20 min</td>
+<td>380 kcal</td>
+</tr>
+<tr>
+<td><strong>周三</strong></td>
+<td>游泳</td>
+<td>RPE 12-13</td>
+<td>45 min</td>
+<td>350 kcal</td>
+</tr>
+<tr>
+<td><strong>周四</strong></td>
+<td>骑自行车</td>
+<td>RPE 12</td>
+<td>50 min</td>
+<td>380 kcal</td>
+</tr>
+<tr>
+<td><strong>周五</strong></td>
+<td>快走</td>
+<td>RPE 12</td>
+<td>50 min</td>
+<td>350 kcal</td>
+</tr>
+<tr>
+<td><strong>周六</strong></td>
+<td>游泳/骑行（交替）</td>
+<td>RPE 12-13</td>
+<td>50 min</td>
+<td>380 kcal</td>
+</tr>
+<tr>
+<td><strong>周日</strong></td>
+<td>休息（拉伸/瑜伽）</td>
+<td>极低</td>
+<td>20-30 min</td>
+<td>100 kcal</td>
+</tr>
+</tbody></table>
+<p><strong>第三周日均运动量</strong>: 约 300 分钟 / 2000 kcal</p>
+<hr>
+<h2>四、单次运动标准流程</h2>
+<h3>热身（5-10分钟）</h3>
+<ol>
+<li>关节活动：踝、膝、髋、肩各转10圈</li>
+<li>慢速步行 3-5 分钟</li>
+<li>动态拉伸：弓步拉伸、侧弓步各10次</li>
+</ol>
+<h3>主体运动（30-40分钟）</h3>
+<ol>
+<li>快走/游泳/骑行（维持靶心率111-139 bpm）</li>
+<li>保持均匀呼吸，可正常说话但不能唱歌的强度</li>
+<li>每10分钟感知一次身体状态</li>
+</ol>
+<h3>整理放松（5-10分钟）</h3>
+<ol>
+<li>减速慢走 3-5 分钟</li>
+<li>静态拉伸（大腿前侧、后侧、小腿、腰背）各保持20-30秒</li>
+<li>深呼吸放松</li>
+</ol>
+<p><strong>总计</strong>: 40-60 分钟</p>
+<hr>
+<h2>五、运动与营养协同</h2>
+<h3>5.1 运动时间安排</h3>
+<table>
+<thead>
+<tr>
+<th>运动时段</th>
+<th>推荐时间</th>
+<th>饮食配合</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>最佳时段</strong></td>
+<td>餐后 60-90 分钟开始</td>
+<td>血糖稳定，能量充足</td>
+</tr>
+<tr>
+<td><strong>晨练</strong></td>
+<td>早餐后 1 小时（约 8:00-9:00）</td>
+<td>已摄入早餐，避免空腹</td>
+</tr>
+<tr>
+<td><strong>傍晚</strong></td>
+<td>晚餐后 1 小时（约 19:00-20:00）</td>
+<td>睡前2小时完成，避免影响睡眠</td>
+</tr>
+</tbody></table>
+<h3>5.2 运动营养补充</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>运动前</strong></td>
+<td>正常饮食后运动，无需额外补充</td>
+</tr>
+<tr>
+<td><strong>运动中</strong></td>
+<td>携带水壶，每15-20分钟补水150ml</td>
+</tr>
+<tr>
+<td><strong>运动后</strong></td>
+<td>运动后30分钟内可补充1杯低脂牛奶或1个鸡蛋</td>
+</tr>
+</tbody></table>
+<h3>5.3 补水计划</h3>
+<ul>
+<li><strong>运动前2小时</strong>: 饮水 400-500 ml</li>
+<li><strong>运动中</strong>: 每15-20分钟补水 150-200 ml</li>
+<li><strong>运动后</strong>: 补充体重损失的150%（一般300-500ml）</li>
+<li><strong>全天目标</strong>: 每日饮水 2000-2500 ml（促进代谢，帮助脂肪肝恢复）</li>
+</ul>
+<h3>5.4 能量平衡</h3>
+<ul>
+<li><strong>营养目标能量</strong>: 1620 kcal/天</li>
+<li><strong>运动日均消耗</strong>: ~250-300 kcal（第二阶段）</li>
+<li><strong>净摄入</strong>: ~1320-1370 kcal/天</li>
+<li><strong>综合效果</strong>: 每周减重约0.7-1.0 kg，预计8-12周减重8-12kg</li>
+</ul>
+<hr>
+<h2>六、注意事项与应急处理</h2>
+<h3>一般注意事项</h3>
+<ol>
+<li><strong>运动前后监测</strong>: 初期建议记录运动前后的心率、血压、主观感受</li>
+<li><strong>循序渐进</strong>: 从低强度开始，每周增加不超过10%的运动量</li>
+<li><strong>关节保护</strong>: 穿有缓冲功能的运动鞋，避免硬地面长时间运动</li>
+<li><strong>血压注意</strong>: 舒张压偏低，运动后起身时放慢速度，防止体位性低血压</li>
+<li><strong>肝功能监测</strong>: 每4-6周复查肝功能，AST正常后可逐步增加强度</li>
+</ol>
+<h3>疾病特殊注意</h3>
+<table>
+<thead>
+<tr>
+<th>疾病</th>
+<th>注意事项</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>脂肪肝</strong></td>
+<td>戒酒是第一优先级；严格避免高脂饮食；坚持运动是逆转关键</td>
+</tr>
+<tr>
+<td><strong>肥胖</strong></td>
+<td>保护膝关节，避免跑跳；体重下降5%即可改善脂肪肝</td>
+</tr>
+<tr>
+<td><strong>高胆固醇</strong></td>
+<td>运动有助于改善血脂，配合低脂饮食效果更佳</td>
+</tr>
+<tr>
+<td><strong>AST升高</strong></td>
+<td>运动中如出现明显疲劳持续24小时以上，需降低强度</td>
+</tr>
+</tbody></table>
+<h3>运动中不适处理</h3>
+<table>
+<thead>
+<tr>
+<th>症状</th>
+<th>处理方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>头晕/眼前发黑</td>
+<td>立即停止，坐下休息，补充糖水或果汁</td>
+</tr>
+<tr>
+<td>胸闷/心悸</td>
+<td>停止运动，如持续需就医</td>
+</tr>
+<tr>
+<td>膝关节疼痛</td>
+<td>停止运动，冰敷，改为游泳等无冲击运动</td>
+</tr>
+<tr>
+<td>极度疲劳/恶心</td>
+<td>降低强度或停止，休息补水</td>
+</tr>
+<tr>
+<td>低血糖症状</td>
+<td>立即停止，进食含糖食品</td>
+</tr>
+</tbody></table>
+<h3>何时需要就医</h3>
+<ul>
+<li>运动中出现胸痛、胸闷、呼吸困难</li>
+<li>关节疼痛持续不缓解</li>
+<li>AST升高超过正常上限2倍（&gt;80 U/L）</li>
+<li>出现黄疸、尿液深黄等肝功能恶化表现</li>
+<li>体重下降过快（每周&gt;1.5kg）</li>
+</ul>
+<hr>
+<h2>七、循序渐进计划（新手/久坐人群）</h2>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>周数</th>
+<th>运动内容</th>
+<th>单次时长</th>
+<th>频率</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>适应期</strong></td>
+<td>第1-2周</td>
+<td>散步+拉伸</td>
+<td>20-25分钟</td>
+<td>3-4次/周</td>
+<td>RPE 10-11</td>
+</tr>
+<tr>
+<td><strong>提升期</strong></td>
+<td>第3-4周</td>
+<td>快走+轻度抗阻</td>
+<td>30-35分钟</td>
+<td>4-5次/周</td>
+<td>RPE 11-12</td>
+</tr>
+<tr>
+<td><strong>巩固期</strong></td>
+<td>第5-8周</td>
+<td>目标运动项目</td>
+<td>40-45分钟</td>
+<td>5-6次/周</td>
+<td>RPE 12-13</td>
+</tr>
+<tr>
+<td><strong>维持期</strong></td>
+<td>第9周起</td>
+<td>完整运动处方</td>
+<td>40-50分钟</td>
+<td>5-7次/周</td>
+<td>RPE 12-14</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>参考来源</h2>
+<ol>
+<li><strong>《体重管理指导原则（2024年版）》</strong> — 国家卫生健康委员会</li>
+<li><strong>《代谢相关（非酒精性）脂肪性肝病防治指南（2024年版）》</strong></li>
+<li><strong>《中国超重和肥胖人群运动处方指南》</strong> — 中国体育科学学会/中国营养学会</li>
+<li><strong>ACSM（美国运动医学会）运动处方指南</strong></li>
+</ol>
+<hr>
+<h2>免责声明</h2>
+<blockquote>
+<p><strong>免责声明</strong>: 本运动处方由 AI 辅助生成，仅提供运动参考信息，不构成医疗诊断或治疗建议。患有脂肪肝、肝功能异常者在开始运动前请务必咨询主治医生，运动中出现不适应立即停止并就医。</p>
+</blockquote>
+</div>
+<div class="report-footer">营养方案报告 · 夏先生 · 2026年4月8日 · 仅供参考，不构成医疗建议</div>
+</body>
+</html>

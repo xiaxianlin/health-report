@@ -364,49 +364,93 @@ function generateMealPlanSection(data) {
     return '<div class="card"><div class="card-content">暂无配餐方案</div></div>';
   }
 
-  const mealPlan = mealPlans[0]; // 显示第1周
   const mealColors = { '早餐': COLORS.breakfast, '午餐': COLORS.lunch, '晚餐': COLORS.dinner, '加餐': COLORS.snack };
+  const hasMultiWeek = mealPlans.length > 1;
+
+  // 生成周选择器（如果有多周）
+  const weekSelector = hasMultiWeek ? `
+    <div class="week-selector mb-4" style="display: flex; gap: 8px; flex-wrap: wrap;">
+      ${mealPlans.map((plan, idx) => `
+        <button class="week-tab ${idx === 0 ? 'active' : ''}" data-week="${idx}" onclick="switchWeek(${idx})"
+                style="padding: 8px 16px; border: 1px solid var(--border); border-radius: 6px; background: ${idx === 0 ? 'var(--primary)' : 'var(--secondary)'}; color: ${idx === 0 ? '#fff' : 'var(--foreground)'}; cursor: pointer;">
+          第${plan.weekNumber}周
+        </button>
+      `).join('')}
+    </div>
+  ` : '';
+
+  // 生成每周的内容
+  const weeksContent = mealPlans.map((mealPlan, weekIdx) => `
+    <div class="week-content ${weekIdx === 0 ? 'active' : ''}" data-week-content="${weekIdx}" style="${weekIdx === 0 ? '' : 'display: none;'}">
+      <div class="card-header" style="margin-bottom: 16px;">
+        <p class="text-sm text-muted-foreground">每日目标: ${mealPlan.targetEnergy || '-'} kcal | 蛋白质 ${mealPlan.targetProtein || '-'}g | 碳水 ${mealPlan.targetCarbs || '-'}g | 脂肪 ${mealPlan.targetFat || '-'}g</p>
+      </div>
+      ${mealPlan.days.map((day) => `
+        <div class="day-section mb-6">
+          <h3 class="font-semibold text-lg mb-3 pb-2 border-b">${day.day}</h3>
+          ${day.meals.map(meal => `
+            <div class="meal-section mb-4">
+              <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
+                <span class="w-2.5 h-2.5 rounded-full" style="background: ${mealColors[meal.type] || '#999'}"></span>
+                <span class="text-sm font-semibold">${meal.type}</span>
+                <span class="text-xs text-muted-foreground ml-auto">${meal.energy}</span>
+              </div>
+              <div class="table-container">
+                <table class="table">
+                  <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
+                  <tbody>
+                    ${meal.items.map(item => `
+                      <tr>
+                        <td class="text-xs font-medium">${item.food}</td>
+                        <td class="text-xs">${item.amount}</td>
+                        <td class="text-xs">${item.method}</td>
+                        <td class="text-xs text-muted-foreground">${item.note}</td>
+                      </tr>
+                    `).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `).join('')}
+          ${day.dailyTotal ? `<div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">${day.dailyTotal}</div>` : ''}
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
 
   return `
     <!-- 每日食谱 -->
     <div class="card">
       <div class="card-header">
-        <h2 class="card-title">第${mealPlan.weekNumber}周食谱</h2>
-        <p class="text-sm text-muted-foreground">每日目标: ${mealPlan.targetEnergy} kcal | 蛋白质 ${mealPlan.targetProtein}g | 碳水 ${mealPlan.targetCarbs}g | 脂肪 ${mealPlan.targetFat}g</p>
+        <h2 class="card-title">配餐方案 (${mealPlans.length} 周)</h2>
       </div>
       <div class="card-content">
-        ${mealPlan.days.map((day, dayIndex) => `
-          <div class="day-section mb-6">
-            <h3 class="font-semibold text-lg mb-3 pb-2 border-b">${day.day}</h3>
-            ${day.meals.map(meal => `
-              <div class="meal-section mb-4">
-                <div class="flex items-center gap-2 mb-2 p-2 bg-muted/50 rounded">
-                  <span class="w-2.5 h-2.5 rounded-full" style="background: ${mealColors[meal.type] || '#999'}"></span>
-                  <span class="text-sm font-semibold">${meal.type}</span>
-                  <span class="text-xs text-muted-foreground ml-auto">${meal.energy}</span>
-                </div>
-                <div class="table-container">
-                  <table class="table">
-                    <thead><tr><th class="text-xs">食物</th><th class="text-xs w-32">用量</th><th class="text-xs">做法</th><th class="text-xs">备注</th></tr></thead>
-                    <tbody>
-                      ${meal.items.map(item => `
-                        <tr>
-                          <td class="text-xs font-medium">${item.food}</td>
-                          <td class="text-xs">${item.amount}</td>
-                          <td class="text-xs">${item.method}</td>
-                          <td class="text-xs text-muted-foreground">${item.note}</td>
-                        </tr>
-                      `).join('')}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            `).join('')}
-            ${day.dailyTotal ? `<div class="mt-2 p-2 bg-muted/40 rounded text-center text-sm text-muted-foreground">${day.dailyTotal}</div>` : ''}
-          </div>
-        `).join('')}
+        ${weekSelector}
+        ${weeksContent}
       </div>
     </div>
+    ${hasMultiWeek ? `
+    <script>
+      function switchWeek(weekIdx) {
+        // 更新按钮状态
+        document.querySelectorAll('.week-tab').forEach((btn, idx) => {
+          if (idx === weekIdx) {
+            btn.classList.add('active');
+            btn.style.background = 'var(--primary)';
+            btn.style.color = '#fff';
+          } else {
+            btn.classList.remove('active');
+            btn.style.background = 'var(--secondary)';
+            btn.style.color = 'var(--foreground)';
+          }
+        });
+        // 显示对应周内容
+        document.querySelectorAll('.week-content').forEach((content, idx) => {
+          content.style.display = idx === weekIdx ? 'block' : 'none';
+        });
+      }
+    </script>
+    ` : ''}
   `;
 }
 
@@ -885,26 +929,83 @@ function generateHTML(data) {
 }
 
 /**
+ * 查找患者目录（支持姓名或姓名_日期格式）
+ * 优先选择包含 data.json 的最新日期目录
+ */
+function findPatientDir(patientName) {
+  // 1. 查找以姓名开头的目录（姓名_日期格式），优先使用最新的
+  const datedDirs = fs.readdirSync(RESULTS_DIR)
+    .filter(f => fs.statSync(path.join(RESULTS_DIR, f)).isDirectory())
+    .filter(f => f.startsWith(patientName + '_'))
+    .filter(f => fs.existsSync(path.join(RESULTS_DIR, f, 'data.json')))
+    .sort(); // 按字母排序，最新的日期会在后面
+
+  if (datedDirs.length > 0) {
+    return datedDirs[datedDirs.length - 1]; // 返回最新的
+  }
+
+  // 2. 直接匹配完整目录名（且包含 data.json）
+  const directPath = path.join(RESULTS_DIR, patientName);
+  if (fs.existsSync(path.join(directPath, 'data.json'))) {
+    return patientName;
+  }
+
+  // 3. 如果没有找到带 data.json 的目录，返回原始名称
+  return patientName;
+}
+
+/**
  * 处理单个患者
  */
 function processPatient(patientName) {
-  const patientDir = path.join(RESULTS_DIR, patientName);
+  // 查找实际目录名
+  const actualDirName = findPatientDir(patientName);
+  const patientDir = path.join(RESULTS_DIR, actualDirName);
   const dataPath = path.join(patientDir, 'data.json');
   const outputPath = path.join(patientDir, '可视化报告.html');
 
-  if (!fs.existsSync(dataPath)) {
-    console.log(`❌ ${patientName} - 未找到 data.json`);
+  // 检查目录是否存在
+  if (!fs.existsSync(patientDir)) {
+    console.error(`❌ ${patientName} - 目录不存在: ${patientDir}`);
     return false;
   }
 
+  // 检查 data.json 是否存在
+  if (!fs.existsSync(dataPath)) {
+    console.error(`❌ ${patientName} - 未找到 data.json`);
+    console.error(`   路径: ${dataPath}`);
+    return false;
+  }
+
+  if (actualDirName !== patientName) {
+    console.log(`📁 使用目录: ${actualDirName}`);
+  }
+
   try {
-    const data = JSON.parse(fs.readFileSync(dataPath, 'utf-8'));
+    // 读取并解析 JSON
+    let data;
+    try {
+      const content = fs.readFileSync(dataPath, 'utf-8');
+      data = JSON.parse(content);
+    } catch (e) {
+      console.error(`❌ ${patientName} - JSON 解析失败: ${e.message}`);
+      console.error(`   请检查 data.json 是否损坏`);
+      return false;
+    }
+
+    // 验证必要字段
+    if (!data.name) {
+      console.error(`❌ ${patientName} - data.json 缺少必要字段: name`);
+      return false;
+    }
+
+    // 生成 HTML
     const html = generateHTML(data);
     fs.writeFileSync(outputPath, html, 'utf-8');
     console.log(`✅ ${patientName} - 可视化报告.html`);
     return true;
   } catch (error) {
-    console.log(`❌ ${patientName} - 生成失败: ${error.message}`);
+    console.error(`❌ ${patientName} - 生成失败: ${error.message}`);
     return false;
   }
 }
@@ -918,7 +1019,13 @@ function main() {
 
   if (patientName) {
     // 处理单个患者
-    processPatient(patientName);
+    const result = processPatient(patientName);
+    if (!result) {
+      console.log('\n提示:');
+      console.log('  1. 确保已运行: node scripts/data-transform.js <姓名>');
+      console.log('  2. 检查 results/<姓名>/ 目录是否存在');
+      process.exit(1);
+    }
   } else {
     // 处理所有患者
     const patients = fs.readdirSync(RESULTS_DIR)

@@ -1,0 +1,2836 @@
+{
+  "id": "9488f0c6-349f-46d4-bed7-eb97dc2ec9b4",
+  "viewCode": "eoy16k41bx2mbsetiw",
+  "name": "夏先生",
+  "gender": "男",
+  "age": 0,
+  "height": 170,
+  "weight": 87.1,
+  "bmi": 0,
+  "bmiCategory": "",
+  "bloodPressure": "97/58 mmHg（收缩压正常，舒张压偏低<60）",
+  "date": "",
+  "allergies": [],
+  "diagnoses": [
+    "**轻度脂肪肝**（腹部彩超提示）— 肝区光点细密，近场回声增强",
+    "**肥胖** — BMI 30.0，属于肥胖范围（BMI≥28）",
+    "**总胆固醇增高** — 5.71 mmol/L（参考<5.2）",
+    "**天门冬氨酸氨基转移酶（AST）增高** — 43.60 U/L（参考15-40）",
+    "**舒张压降低** — 58 mmHg（参考60-89）",
+    "**双眼屈光不正**",
+    "**双眼眼压降低**",
+    "**窦性心律不齐**",
+    "**前列腺钙化灶**"
+  ],
+  "medications": [],
+  "labGroups": [
+    {
+      "title": "血液检查",
+      "results": [
+        {
+          "indicator": "空腹血糖",
+          "value": "5.03",
+          "unit": "mmol/L",
+          "reference": "3.9-6.1",
+          "status": "normal"
+        },
+        {
+          "indicator": "总胆固醇",
+          "value": "5.71",
+          "unit": "mmol/L",
+          "reference": "<5.2",
+          "status": "normal"
+        },
+        {
+          "indicator": "LDL-C",
+          "value": "未检测",
+          "unit": "mmol/L",
+          "reference": "<3.4",
+          "status": "normal"
+        },
+        {
+          "indicator": "HDL-C",
+          "value": "未检测",
+          "unit": "mmol/L",
+          "reference": ">1.0",
+          "status": "normal"
+        },
+        {
+          "indicator": "甘油三酯",
+          "value": "1.57",
+          "unit": "mmol/L",
+          "reference": "<1.7",
+          "status": "normal"
+        },
+        {
+          "indicator": "ALT",
+          "value": "27.90",
+          "unit": "U/L",
+          "reference": "9-50",
+          "status": "normal"
+        },
+        {
+          "indicator": "AST",
+          "value": "43.60",
+          "unit": "U/L",
+          "reference": "15-40",
+          "status": "normal"
+        },
+        {
+          "indicator": "肌酐",
+          "value": "68",
+          "unit": "μmol/L",
+          "reference": "53-106",
+          "status": "normal"
+        },
+        {
+          "indicator": "BUN",
+          "value": "4.72",
+          "unit": "mmol/L",
+          "reference": "2.9-8.2",
+          "status": "normal"
+        },
+        {
+          "indicator": "尿酸",
+          "value": "403",
+          "unit": "μmol/L",
+          "reference": "208-428",
+          "status": "normal"
+        },
+        {
+          "indicator": "血红蛋白",
+          "value": "151",
+          "unit": "g/L",
+          "reference": "130-175",
+          "status": "normal"
+        }
+      ]
+    },
+    {
+      "title": "其他检查",
+      "results": []
+    }
+  ],
+  "lifestyles": [],
+  "nutritionNotes": [],
+  "nutritionAssessment": {
+    "bmr": 10,
+    "tdee": 1767,
+    "targetEnergy": 0,
+    "activityLevel": "久坐",
+    "macros": [
+      {
+        "name": "总能量",
+        "target": 1620,
+        "unit": "100%",
+        "percent": 1500,
+        "range": "减重: -500kcal",
+        "source": ""
+      },
+      {
+        "name": "蛋白质",
+        "target": 90,
+        "unit": "22%",
+        "percent": 80,
+        "range": "脂肪肝: 1.0-1.2g/kg",
+        "source": ""
+      },
+      {
+        "name": "碳水化合物",
+        "target": 195,
+        "unit": "48%",
+        "percent": 170,
+        "range": "低GI主食为主",
+        "source": ""
+      },
+      {
+        "name": "脂肪",
+        "target": 54,
+        "unit": "30%",
+        "percent": 45,
+        "range": "低脂饮食",
+        "source": ""
+      },
+      {
+        "name": "膳食纤维",
+        "target": 0,
+        "unit": "—",
+        "percent": 25,
+        "range": "脂肪肝+高胆固醇",
+        "source": ""
+      },
+      {
+        "name": "脂肪类型",
+        "target": 0,
+        "unit": "g",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "饱和脂肪",
+        "target": 0,
+        "unit": "g",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "反式脂肪",
+        "target": 0,
+        "unit": "g",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "胆固醇",
+        "target": 0,
+        "unit": "g",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "Omega-3",
+        "target": 0,
+        "unit": "g",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "钠",
+        "target": 0,
+        "unit": "心血管保护",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "钾",
+        "target": 3500,
+        "unit": "血压管理",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "钙",
+        "target": 1000,
+        "unit": "一般需求",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "镁",
+        "target": 400,
+        "unit": "血脂管理、代谢健康",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "维生素E",
+        "target": 14,
+        "unit": "肝脏保护、抗氧化",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "维生素C",
+        "target": 100,
+        "unit": "抗氧化、促进铁吸收",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      }
+    ],
+    "microTargets": [
+      {
+        "name": "钠",
+        "target": "< 2000 mg（盐<5g）",
+        "reason": "心血管保护"
+      },
+      {
+        "name": "钾",
+        "target": "3500 mg",
+        "reason": "血压管理"
+      },
+      {
+        "name": "钙",
+        "target": "1000 mg",
+        "reason": "一般需求"
+      },
+      {
+        "name": "镁",
+        "target": "400 mg",
+        "reason": "血脂管理、代谢健康"
+      },
+      {
+        "name": "维生素E",
+        "target": "14 mg",
+        "reason": "肝脏保护、抗氧化"
+      },
+      {
+        "name": "维生素C",
+        "target": "100 mg",
+        "reason": "抗氧化、促进铁吸收"
+      }
+    ],
+    "mealDistribution": [],
+    "principles": [
+      "**减重是首要目标**：减重3-5%可逆转脂肪肝",
+      "严格**戒酒**（即使非酒精性也应避免）",
+      "避免**果糖**，特别是含糖饮料",
+      "避免**加工肉类**，减少红肉",
+      "优先采用**地中海饮食**模式",
+      "每日1620 kcal，制造500kcal缺口",
+      "每周减重0.5-1kg",
+      "主食以全谷物为主，至少占一半",
+      "控制总能量，定时定量三餐",
+      "每日膳食胆固醇 **<300 mg**",
+      "限制**动物内脏**、**蛋黄**（每周3-4个）",
+      "减少**饱和脂肪**摄入",
+      "优先选择富含不饱和脂肪酸的**橄榄油**、**茶籽油**",
+      "增加富含钙、镁的食物",
+      "严格**低脂饮食**，减少肝脏负担",
+      "适量优质蛋白，促进肝细胞修复",
+      "避免肝损药物和毒素",
+      "增加维生素E等抗氧化营养素"
+    ],
+    "recommendedFoods": [
+      {
+        "category": "主食类（全谷物优先）",
+        "items": [
+          {
+            "name": "燕麦、糙米、荞麦面、全麦面包、藜麦"
+          },
+          {
+            "name": "红薯、山药、玉米（适量）"
+          }
+        ]
+      },
+      {
+        "category": "蛋白质类",
+        "items": [
+          {
+            "name": "**鱼类**（三文鱼、鲭鱼、鲈鱼 — 每周至少2次深海鱼）"
+          },
+          {
+            "name": "**鸡胸肉**（去皮，优选）"
+          },
+          {
+            "name": "**豆制品**（豆腐、豆浆）"
+          },
+          {
+            "name": "**鸡蛋**（每天1个，或每周3-4个）"
+          },
+          {
+            "name": "**低脂牛奶/酸奶**"
+          }
+        ]
+      },
+      {
+        "category": "蔬菜类",
+        "items": [
+          {
+            "name": "**绿叶蔬菜**（菠菜、西兰花、油麦菜）— 每天至少400g"
+          },
+          {
+            "name": "**十字花科蔬菜**（西兰花、花椰菜）— 有助于肝脏解毒"
+          },
+          {
+            "name": "**番茄、黄瓜、茄子**"
+          },
+          {
+            "name": "**洋葱、胡萝卜、芹菜**"
+          }
+        ]
+      },
+      {
+        "category": "水果类",
+        "items": [
+          {
+            "name": "**低糖水果**：苹果、梨、柚子、蓝莓、草莓"
+          },
+          {
+            "name": "**限量**：每天200g，避免高糖水果（葡萄、荔枝、芒果）"
+          }
+        ]
+      },
+      {
+        "category": "脂肪来源",
+        "items": [
+          {
+            "name": "**橄榄油、茶籽油**（烹饪用油，每天20-25g）"
+          },
+          {
+            "name": "**坚果**：核桃、杏仁（每天10-15g）"
+          },
+          {
+            "name": "--"
+          }
+        ]
+      }
+    ],
+    "forbiddenFoods": [
+      {
+        "food": "酒精",
+        "reason": "脂肪肝 + 肝损伤风险",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "含糖饮料",
+        "reason": "果糖导致脂肪肝恶化",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "动物内脏",
+        "reason": "高胆固醇",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "蛋黄过量",
+        "reason": "胆固醇超标",
+        "severity": "严格限制"
+      },
+      {
+        "food": "油炸食品",
+        "reason": "高脂肪、高热量",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "加工肉类",
+        "reason": "高钠、高脂、致癌风险",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "肥肉、猪油",
+        "reason": "高饱和脂肪",
+        "severity": "完全禁止"
+      },
+      {
+        "food": "奶油、黄油",
+        "reason": "高饱和脂肪",
+        "severity": "严格限制"
+      },
+      {
+        "food": "精制糖、糕点",
+        "reason": "高热量、低营养",
+        "severity": "严格限制"
+      }
+    ],
+    "drugInteractions": [],
+    "keyNotes": [
+      "**戒酒是第一优先级** — 对脂肪肝和肝功能恢复至关重要",
+      "**地中海饮食模式** — 优先推荐的饮食方式，富含橄榄油、鱼类、蔬果",
+      "**减重速度控制** — 每周0.5-1kg为宜，过快减重可能加重肝损伤",
+      "**胆固醇控制** — 每日<300mg，严格控制动物内脏和蛋黄",
+      "**定期复查** — 建议3-6个月后复查肝功能、血脂、肝脏B超"
+    ],
+    "references": []
+  },
+  "mealPlans": [
+    {
+      "weekNumber": 1,
+      "targetEnergy": 1620,
+      "targetProtein": 0,
+      "targetCarbs": 0,
+      "targetFat": 0,
+      "days": [
+        {
+          "day": "周一",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "燕麦牛奶粥",
+                  "amount": "燕麦片 50g + 低脂牛奶 250ml",
+                  "method": "煮 5分钟",
+                  "note": "低GI，富含β-葡聚糖"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "每天1个鸡蛋，胆固醇控制"
+                },
+                {
+                  "food": "苹果",
+                  "amount": "1个（约150g）",
+                  "method": "生食",
+                  "note": "低GI水果，富含果胶"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "糙米饭",
+                  "amount": "糙米 70g(生重，约170g熟)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食，富含B族维生素"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼 120g",
+                  "method": "清蒸，姜丝去腥",
+                  "note": "低脂高蛋白，富含Omega-3"
+                },
+                {
+                  "food": "蒜蓉西兰花",
+                  "amount": "西兰花 150g",
+                  "method": "少油快炒(油5g)",
+                  "note": "高纤维、抗氧化、护肝"
+                },
+                {
+                  "food": "凉拌菠菜",
+                  "amount": "菠菜 100g",
+                  "method": "焯水后凉拌，少许芝麻油(3g)",
+                  "note": "富铁、高纤维"
+                },
+                {
+                  "food": "番茄蛋花汤",
+                  "amount": "番茄 100g + 蛋清1个",
+                  "method": "煮，不加淀粉",
+                  "note": "低热量，增加饱腹感"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "荞麦面",
+                  "amount": "干面 60g（约150g熟）",
+                  "method": "煮",
+                  "note": "低GI主食，控血糖"
+                },
+                {
+                  "food": "鸡胸肉(少油煎)",
+                  "amount": "鸡胸肉 100g",
+                  "method": "少油煎(油5g)，黑胡椒调味",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "蒜蓉芦笋",
+                  "amount": "芦笋 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维、护肝"
+                },
+                {
+                  "food": "凉拌黄瓜",
+                  "amount": "黄瓜 150g",
+                  "method": "凉拌，醋+少许盐",
+                  "note": "清爽低热量"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "90 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "44 g",
+                  "note": "✓（低脂有益脂肪肝）"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "196 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "21 g",
+                  "note": "⚠（需补充）"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周二",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "全麦面包",
+                  "amount": "2片（约70g）",
+                  "method": "烤面包机微烤",
+                  "note": "低GI主食，富含B族维生素"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "低脂牛奶",
+                  "amount": "250ml",
+                  "method": "温热饮用",
+                  "note": "补钙，低脂"
+                },
+                {
+                  "food": "猕猴桃",
+                  "amount": "1个（约80g）",
+                  "method": "生食",
+                  "note": "低GI水果，富含维C"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "杂粮饭",
+                  "amount": "糙米+燕麦米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "香煎三文鱼",
+                  "amount": "三文鱼 100g",
+                  "method": "少油煎(油5g)，柠檬汁调味",
+                  "note": "深海鱼Omega-3，护肝护心"
+                },
+                {
+                  "food": "蒜蓉炒西兰花",
+                  "amount": "西兰花 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维、抗氧化"
+                },
+                {
+                  "food": "凉拌芹菜木耳",
+                  "amount": "芹菜 100g + 木耳(泡发)50g",
+                  "method": "焯水凉拌，少许醋",
+                  "note": "降压、高纤维"
+                },
+                {
+                  "food": "紫菜蛋花汤",
+                  "amount": "紫菜(干)5g + 蛋清1个",
+                  "method": "煮",
+                  "note": "低热量汤品"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "藜麦饭",
+                  "amount": "藜麦 60g(生重，约150g熟)",
+                  "method": "煮",
+                  "note": "完全蛋白，低GI"
+                },
+                {
+                  "food": "白灼虾仁",
+                  "amount": "虾仁 120g",
+                  "method": "水煮，蘸少量生抽",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "清炒油麦菜",
+                  "amount": "油麦菜 200g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌萝卜丝",
+                  "amount": "白萝卜 100g",
+                  "method": "切丝凉拌，醋调味",
+                  "note": "清爽助消化"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1615 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "80 g",
+                  "note": "⚠（略低）"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "40 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "192 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "21 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周三",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "燕麦粥",
+                  "amount": "燕麦片 50g + 水 250ml",
+                  "method": "煮 5分钟",
+                  "note": "低GI，富含β-葡聚糖"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "梨",
+                  "amount": "1个（约150g）",
+                  "method": "生食",
+                  "note": "低GI水果"
+                },
+                {
+                  "food": "低脂酸奶",
+                  "amount": "150g",
+                  "method": "直接食用",
+                  "note": "益生菌，低脂"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "糙米饭",
+                  "amount": "糙米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "鸡胸肉炒青椒",
+                  "amount": "鸡胸肉 120g + 青椒 100g",
+                  "method": "少油快炒(油5g)",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "蒜蓉茄子",
+                  "amount": "茄子 200g",
+                  "method": "少油蒸(油3g)，蒜蓉调味",
+                  "note": "低热量蔬菜"
+                },
+                {
+                  "food": "水煮西兰花",
+                  "amount": "西兰花 100g",
+                  "method": "水煮，少许盐",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "冬瓜汤",
+                  "amount": "冬瓜 150g",
+                  "method": "煮，少许盐",
+                  "note": "利尿消肿"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "玉米",
+                  "amount": "玉米 1根（约200g）",
+                  "method": "蒸 20分钟",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "清蒸带鱼",
+                  "amount": "带鱼 100g",
+                  "method": "清蒸，姜丝去腥",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "清炒菠菜",
+                  "amount": "菠菜 200g",
+                  "method": "少油快炒(油3g)",
+                  "note": "富铁、高纤维"
+                },
+                {
+                  "food": "凉拌豆腐丝",
+                  "amount": "豆腐丝 80g",
+                  "method": "凉拌，少许芝麻油(2g)",
+                  "note": "植物蛋白"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "78 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "39 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "200 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "23 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周四",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "蒸红薯",
+                  "amount": "红薯 200g",
+                  "method": "蒸 20分钟",
+                  "note": "低GI主食，富含膳食纤维"
+                },
+                {
+                  "food": "低脂牛奶",
+                  "amount": "250ml",
+                  "method": "温热饮用",
+                  "note": "补钙"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "核桃",
+                  "amount": "15g（约3个）",
+                  "method": "生食",
+                  "note": "优质脂肪，健脑"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "糙米饭",
+                  "amount": "糙米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼 120g",
+                  "method": "清蒸，姜丝+葱丝去腥",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "木耳炒洋葱",
+                  "amount": "洋葱 100g + 木耳(泡发)50g",
+                  "method": "少油快炒(油3g)",
+                  "note": "降脂蔬菜组合"
+                },
+                {
+                  "food": "清炒油麦菜",
+                  "amount": "油麦菜 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "番茄蛋花汤",
+                  "amount": "番茄 100g + 蛋清1个",
+                  "method": "煮",
+                  "note": "增加饱腹感"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "荞麦面",
+                  "amount": "干面 60g（约150g熟）",
+                  "method": "煮",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "鸡胸肉丝拌黄瓜",
+                  "amount": "鸡胸肉 100g + 黄瓜 150g",
+                  "method": "鸡胸肉水煮撕丝，凉拌",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "清炒莴笋",
+                  "amount": "莴笋 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "低热量高纤维"
+                },
+                {
+                  "food": "紫菜蛋花汤",
+                  "amount": "紫菜(干)5g + 蛋清1个",
+                  "method": "煮",
+                  "note": "增加饱腹感"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "80 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "44 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "189 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "23 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周五",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "全麦面包",
+                  "amount": "2片（约70g）",
+                  "method": "烤面包机微烤",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "蓝莓",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": "低GI水果，抗氧化"
+                },
+                {
+                  "food": "低脂牛奶",
+                  "amount": "250ml",
+                  "method": "温热饮用",
+                  "note": "补钙"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "杂粮饭",
+                  "amount": "糙米+小米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "多谷物搭配"
+                },
+                {
+                  "food": "清蒸鳕鱼",
+                  "amount": "鳕鱼 120g",
+                  "method": "清蒸，姜丝去腥",
+                  "note": "低脂高蛋白深海鱼"
+                },
+                {
+                  "food": "家常豆腐",
+                  "amount": "北豆腐 150g",
+                  "method": "少油煎(油4g)，酱油调味",
+                  "note": "植物蛋白，低脂"
+                },
+                {
+                  "food": "清炒西兰花",
+                  "amount": "西兰花 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维抗氧化"
+                },
+                {
+                  "food": "凉拌海带丝",
+                  "amount": "海带丝(泡发) 100g",
+                  "method": "凉拌，醋调味",
+                  "note": "富含碘，降脂"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "玉米",
+                  "amount": "玉米 1根（约200g）",
+                  "method": "蒸 20分钟",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼 100g",
+                  "method": "清蒸",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "蒜蓉炒油菜",
+                  "amount": "油菜 200g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌木耳",
+                  "amount": "木耳(泡发) 80g",
+                  "method": "凉拌，醋+少许芝麻油(2g)",
+                  "note": "降脂"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "83 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "41 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "192 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "23 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周六",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "燕麦牛奶粥",
+                  "amount": "燕麦片 50g + 低脂牛奶 250ml",
+                  "method": "煮 5分钟",
+                  "note": "低GI，富含β-葡聚糖"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "苹果",
+                  "amount": "1个（约150g）",
+                  "method": "生食",
+                  "note": "低GI水果"
+                },
+                {
+                  "food": "杏仁",
+                  "amount": "15g",
+                  "method": "生食",
+                  "note": "优质脂肪"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "糙米饭",
+                  "amount": "糙米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "香煎三文鱼",
+                  "amount": "三文鱼 100g",
+                  "method": "少油煎(油5g)，柠檬汁调味",
+                  "note": "深海鱼Omega-3"
+                },
+                {
+                  "food": "清炒芦笋",
+                  "amount": "芦笋 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌芹菜",
+                  "amount": "芹菜 150g",
+                  "method": "凉拌，醋调味",
+                  "note": "降压"
+                },
+                {
+                  "food": "番茄蛋花汤",
+                  "amount": "番茄 100g + 蛋清1个",
+                  "method": "煮",
+                  "note": "低热量汤品"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "荞麦面",
+                  "amount": "干面 60g（约150g熟）",
+                  "method": "煮",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "家常豆腐",
+                  "amount": "北豆腐 150g",
+                  "method": "少油煎(油4g)，酱油调味",
+                  "note": "植物蛋白"
+                },
+                {
+                  "food": "清炒空心菜",
+                  "amount": "空心菜 200g",
+                  "method": "少油快炒(油3g)，蒜蓉",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌黄瓜",
+                  "amount": "黄瓜 100g",
+                  "method": "凉拌，醋+少许盐",
+                  "note": "清爽低热量"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "72 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "56 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "177 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "23 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周日",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "蒸红薯",
+                  "amount": "红薯 200g",
+                  "method": "蒸 20分钟",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "草莓",
+                  "amount": "150g",
+                  "method": "生食",
+                  "note": "低GI水果，富含维C"
+                },
+                {
+                  "food": "低脂牛奶",
+                  "amount": "250ml",
+                  "method": "温热饮用",
+                  "note": "补钙"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "杂粮饭",
+                  "amount": "糙米+藜麦 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "多谷物搭配"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼 120g",
+                  "method": "清蒸，姜丝+葱丝去腥",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "木耳炒胡萝卜",
+                  "amount": "胡萝卜 100g + 木耳(泡发)50g",
+                  "method": "少油快炒(油3g)",
+                  "note": "β-胡萝卜素，降脂"
+                },
+                {
+                  "food": "蒜蓉西兰花",
+                  "amount": "西兰花 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维抗氧化"
+                },
+                {
+                  "food": "紫菜蛋花汤",
+                  "amount": "紫菜(干)5g + 蛋清1个",
+                  "method": "煮",
+                  "note": "低热量汤品"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "藜麦饭",
+                  "amount": "藜麦 60g(生重)",
+                  "method": "煮",
+                  "note": "完全蛋白，低GI"
+                },
+                {
+                  "food": "鸡胸肉炒洋葱",
+                  "amount": "鸡胸肉 100g + 洋葱 100g",
+                  "method": "少油快炒(油5g)",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "清炒菠菜",
+                  "amount": "菠菜 200g",
+                  "method": "少油快炒(油3g)",
+                  "note": "富铁、高纤维"
+                },
+                {
+                  "food": "凉拌莴笋丝",
+                  "amount": "莴笋 100g",
+                  "method": "凉拌，醋调味",
+                  "note": "低热量高纤维"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "82 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "41 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "189 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "25 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        }
+      ],
+      "weeklySummary": [
+        {
+          "day": "周一",
+          "energy": 1620,
+          "protein": 90,
+          "fat": 44,
+          "carbs": 196
+        },
+        {
+          "day": "周二",
+          "energy": 1615,
+          "protein": 80,
+          "fat": 40,
+          "carbs": 192
+        },
+        {
+          "day": "周三",
+          "energy": 1620,
+          "protein": 78,
+          "fat": 39,
+          "carbs": 200
+        },
+        {
+          "day": "周四",
+          "energy": 1620,
+          "protein": 80,
+          "fat": 44,
+          "carbs": 189
+        },
+        {
+          "day": "周五",
+          "energy": 1620,
+          "protein": 83,
+          "fat": 41,
+          "carbs": 192
+        },
+        {
+          "day": "周六",
+          "energy": 1620,
+          "protein": 72,
+          "fat": 56,
+          "carbs": 177
+        },
+        {
+          "day": "周日",
+          "energy": 1620,
+          "protein": 82,
+          "fat": 41,
+          "carbs": 189
+        },
+        {
+          "day": "目标",
+          "energy": 1620,
+          "protein": 90,
+          "fat": 54,
+          "carbs": 195
+        }
+      ],
+      "weeklyAnalysis": [],
+      "shoppingList": [
+        {
+          "category": "主食类",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "蛋白质类",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "蔬菜类",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "水果/坚果",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "乳制品",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "调味品",
+          "items": [
+            "-----|------|",
+            "--"
+          ]
+        }
+      ],
+      "references": []
+    },
+    {
+      "weekNumber": 2,
+      "targetEnergy": 1620,
+      "targetProtein": 0,
+      "targetCarbs": 0,
+      "targetFat": 0,
+      "days": [
+        {
+          "day": "周一",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "燕麦牛奶粥",
+                  "amount": "燕麦片 50g + 低脂牛奶 250ml",
+                  "method": "煮 5分钟",
+                  "note": "低GI，富含β-葡聚糖"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "每天1个鸡蛋，胆固醇控制"
+                },
+                {
+                  "food": "苹果",
+                  "amount": "1个（约150g）",
+                  "method": "生食",
+                  "note": "低GI水果，富含果胶"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "糙米饭",
+                  "amount": "糙米 70g(生重，约170g熟)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食，富含B族维生素"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼 120g",
+                  "method": "清蒸，姜丝去腥",
+                  "note": "低脂高蛋白，富含Omega-3"
+                },
+                {
+                  "food": "蒜蓉西兰花",
+                  "amount": "西兰花 150g",
+                  "method": "少油快炒(油5g)",
+                  "note": "高纤维、抗氧化、护肝"
+                },
+                {
+                  "food": "凉拌菠菜",
+                  "amount": "菠菜 100g",
+                  "method": "焯水后凉拌，少许芝麻油(3g)",
+                  "note": "富铁、高纤维"
+                },
+                {
+                  "food": "番茄蛋花汤",
+                  "amount": "番茄 100g + 蛋清1个",
+                  "method": "煮，不加淀粉",
+                  "note": "低热量，增加饱腹感"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "荞麦面",
+                  "amount": "干面 60g（约150g熟）",
+                  "method": "煮",
+                  "note": "低GI主食，控血糖"
+                },
+                {
+                  "food": "鸡胸肉(少油煎)",
+                  "amount": "鸡胸肉 100g",
+                  "method": "少油煎(油5g)，黑胡椒调味",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "蒜蓉芦笋",
+                  "amount": "芦笋 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维、护肝"
+                },
+                {
+                  "food": "凉拌黄瓜",
+                  "amount": "黄瓜 150g",
+                  "method": "凉拌，醋+少许盐",
+                  "note": "清爽低热量"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "90 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "44 g",
+                  "note": "✓（低脂有益脂肪肝）"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "196 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "21 g",
+                  "note": "⚠（需补充）"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周二",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "全麦面包",
+                  "amount": "2片（约70g）",
+                  "method": "烤面包机微烤",
+                  "note": "低GI主食，富含B族维生素"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "低脂牛奶",
+                  "amount": "250ml",
+                  "method": "温热饮用",
+                  "note": "补钙，低脂"
+                },
+                {
+                  "food": "猕猴桃",
+                  "amount": "1个（约80g）",
+                  "method": "生食",
+                  "note": "低GI水果，富含维C"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "杂粮饭",
+                  "amount": "糙米+燕麦米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "香煎三文鱼",
+                  "amount": "三文鱼 100g",
+                  "method": "少油煎(油5g)，柠檬汁调味",
+                  "note": "深海鱼Omega-3，护肝护心"
+                },
+                {
+                  "food": "蒜蓉炒西兰花",
+                  "amount": "西兰花 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维、抗氧化"
+                },
+                {
+                  "food": "凉拌芹菜木耳",
+                  "amount": "芹菜 100g + 木耳(泡发)50g",
+                  "method": "焯水凉拌，少许醋",
+                  "note": "降压、高纤维"
+                },
+                {
+                  "food": "紫菜蛋花汤",
+                  "amount": "紫菜(干)5g + 蛋清1个",
+                  "method": "煮",
+                  "note": "低热量汤品"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "藜麦饭",
+                  "amount": "藜麦 60g(生重，约150g熟)",
+                  "method": "煮",
+                  "note": "完全蛋白，低GI"
+                },
+                {
+                  "food": "白灼虾仁",
+                  "amount": "虾仁 120g",
+                  "method": "水煮，蘸少量生抽",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "清炒油麦菜",
+                  "amount": "油麦菜 200g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌萝卜丝",
+                  "amount": "白萝卜 100g",
+                  "method": "切丝凉拌，醋调味",
+                  "note": "清爽助消化"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1615 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "80 g",
+                  "note": "⚠（略低）"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "40 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "192 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "21 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周三",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "燕麦粥",
+                  "amount": "燕麦片 50g + 水 250ml",
+                  "method": "煮 5分钟",
+                  "note": "低GI，富含β-葡聚糖"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "梨",
+                  "amount": "1个（约150g）",
+                  "method": "生食",
+                  "note": "低GI水果"
+                },
+                {
+                  "food": "低脂酸奶",
+                  "amount": "150g",
+                  "method": "直接食用",
+                  "note": "益生菌，低脂"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "糙米饭",
+                  "amount": "糙米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "鸡胸肉炒青椒",
+                  "amount": "鸡胸肉 120g + 青椒 100g",
+                  "method": "少油快炒(油5g)",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "蒜蓉茄子",
+                  "amount": "茄子 200g",
+                  "method": "少油蒸(油3g)，蒜蓉调味",
+                  "note": "低热量蔬菜"
+                },
+                {
+                  "food": "水煮西兰花",
+                  "amount": "西兰花 100g",
+                  "method": "水煮，少许盐",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "冬瓜汤",
+                  "amount": "冬瓜 150g",
+                  "method": "煮，少许盐",
+                  "note": "利尿消肿"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "玉米",
+                  "amount": "玉米 1根（约200g）",
+                  "method": "蒸 20分钟",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "清蒸带鱼",
+                  "amount": "带鱼 100g",
+                  "method": "清蒸，姜丝去腥",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "清炒菠菜",
+                  "amount": "菠菜 200g",
+                  "method": "少油快炒(油3g)",
+                  "note": "富铁、高纤维"
+                },
+                {
+                  "food": "凉拌豆腐丝",
+                  "amount": "豆腐丝 80g",
+                  "method": "凉拌，少许芝麻油(2g)",
+                  "note": "植物蛋白"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "78 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "39 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "200 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "23 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周四",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "蒸红薯",
+                  "amount": "红薯 200g",
+                  "method": "蒸 20分钟",
+                  "note": "低GI主食，富含膳食纤维"
+                },
+                {
+                  "food": "低脂牛奶",
+                  "amount": "250ml",
+                  "method": "温热饮用",
+                  "note": "补钙"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "核桃",
+                  "amount": "15g（约3个）",
+                  "method": "生食",
+                  "note": "优质脂肪，健脑"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "糙米饭",
+                  "amount": "糙米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼 120g",
+                  "method": "清蒸，姜丝+葱丝去腥",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "木耳炒洋葱",
+                  "amount": "洋葱 100g + 木耳(泡发)50g",
+                  "method": "少油快炒(油3g)",
+                  "note": "降脂蔬菜组合"
+                },
+                {
+                  "food": "清炒油麦菜",
+                  "amount": "油麦菜 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "番茄蛋花汤",
+                  "amount": "番茄 100g + 蛋清1个",
+                  "method": "煮",
+                  "note": "增加饱腹感"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "荞麦面",
+                  "amount": "干面 60g（约150g熟）",
+                  "method": "煮",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "鸡胸肉丝拌黄瓜",
+                  "amount": "鸡胸肉 100g + 黄瓜 150g",
+                  "method": "鸡胸肉水煮撕丝，凉拌",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "清炒莴笋",
+                  "amount": "莴笋 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "低热量高纤维"
+                },
+                {
+                  "food": "紫菜蛋花汤",
+                  "amount": "紫菜(干)5g + 蛋清1个",
+                  "method": "煮",
+                  "note": "增加饱腹感"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "80 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "44 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "189 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "23 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周五",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "全麦面包",
+                  "amount": "2片（约70g）",
+                  "method": "烤面包机微烤",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "蓝莓",
+                  "amount": "100g",
+                  "method": "生食",
+                  "note": "低GI水果，抗氧化"
+                },
+                {
+                  "food": "低脂牛奶",
+                  "amount": "250ml",
+                  "method": "温热饮用",
+                  "note": "补钙"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "杂粮饭",
+                  "amount": "糙米+小米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "多谷物搭配"
+                },
+                {
+                  "food": "清蒸鳕鱼",
+                  "amount": "鳕鱼 120g",
+                  "method": "清蒸，姜丝去腥",
+                  "note": "低脂高蛋白深海鱼"
+                },
+                {
+                  "food": "家常豆腐",
+                  "amount": "北豆腐 150g",
+                  "method": "少油煎(油4g)，酱油调味",
+                  "note": "植物蛋白，低脂"
+                },
+                {
+                  "food": "清炒西兰花",
+                  "amount": "西兰花 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维抗氧化"
+                },
+                {
+                  "food": "凉拌海带丝",
+                  "amount": "海带丝(泡发) 100g",
+                  "method": "凉拌，醋调味",
+                  "note": "富含碘，降脂"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "玉米",
+                  "amount": "玉米 1根（约200g）",
+                  "method": "蒸 20分钟",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼 100g",
+                  "method": "清蒸",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "蒜蓉炒油菜",
+                  "amount": "油菜 200g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌木耳",
+                  "amount": "木耳(泡发) 80g",
+                  "method": "凉拌，醋+少许芝麻油(2g)",
+                  "note": "降脂"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "83 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "41 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "192 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "23 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周六",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "燕麦牛奶粥",
+                  "amount": "燕麦片 50g + 低脂牛奶 250ml",
+                  "method": "煮 5分钟",
+                  "note": "低GI，富含β-葡聚糖"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "苹果",
+                  "amount": "1个（约150g）",
+                  "method": "生食",
+                  "note": "低GI水果"
+                },
+                {
+                  "food": "杏仁",
+                  "amount": "15g",
+                  "method": "生食",
+                  "note": "优质脂肪"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "糙米饭",
+                  "amount": "糙米 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "香煎三文鱼",
+                  "amount": "三文鱼 100g",
+                  "method": "少油煎(油5g)，柠檬汁调味",
+                  "note": "深海鱼Omega-3"
+                },
+                {
+                  "food": "清炒芦笋",
+                  "amount": "芦笋 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌芹菜",
+                  "amount": "芹菜 150g",
+                  "method": "凉拌，醋调味",
+                  "note": "降压"
+                },
+                {
+                  "food": "番茄蛋花汤",
+                  "amount": "番茄 100g + 蛋清1个",
+                  "method": "煮",
+                  "note": "低热量汤品"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "荞麦面",
+                  "amount": "干面 60g（约150g熟）",
+                  "method": "煮",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "家常豆腐",
+                  "amount": "北豆腐 150g",
+                  "method": "少油煎(油4g)，酱油调味",
+                  "note": "植物蛋白"
+                },
+                {
+                  "food": "清炒空心菜",
+                  "amount": "空心菜 200g",
+                  "method": "少油快炒(油3g)，蒜蓉",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌黄瓜",
+                  "amount": "黄瓜 100g",
+                  "method": "凉拌，醋+少许盐",
+                  "note": "清爽低热量"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "72 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "56 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "177 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "23 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        },
+        {
+          "day": "周日",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "蒸红薯",
+                  "amount": "红薯 200g",
+                  "method": "蒸 20分钟",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个（约50g）",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "草莓",
+                  "amount": "150g",
+                  "method": "生食",
+                  "note": "低GI水果，富含维C"
+                },
+                {
+                  "food": "低脂牛奶",
+                  "amount": "250ml",
+                  "method": "温热饮用",
+                  "note": "补钙"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "650 kcal",
+              "items": [
+                {
+                  "food": "杂粮饭",
+                  "amount": "糙米+藜麦 70g(生重)",
+                  "method": "电饭煲蒸",
+                  "note": "多谷物搭配"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "鲈鱼 120g",
+                  "method": "清蒸，姜丝+葱丝去腥",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "木耳炒胡萝卜",
+                  "amount": "胡萝卜 100g + 木耳(泡发)50g",
+                  "method": "少油快炒(油3g)",
+                  "note": "β-胡萝卜素，降脂"
+                },
+                {
+                  "food": "蒜蓉西兰花",
+                  "amount": "西兰花 150g",
+                  "method": "少油快炒(油3g)",
+                  "note": "高纤维抗氧化"
+                },
+                {
+                  "food": "紫菜蛋花汤",
+                  "amount": "紫菜(干)5g + 蛋清1个",
+                  "method": "煮",
+                  "note": "低热量汤品"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "485 kcal",
+              "items": [
+                {
+                  "food": "藜麦饭",
+                  "amount": "藜麦 60g(生重)",
+                  "method": "煮",
+                  "note": "完全蛋白，低GI"
+                },
+                {
+                  "food": "鸡胸肉炒洋葱",
+                  "amount": "鸡胸肉 100g + 洋葱 100g",
+                  "method": "少油快炒(油5g)",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "清炒菠菜",
+                  "amount": "菠菜 200g",
+                  "method": "少油快炒(油3g)",
+                  "note": "富铁、高纤维"
+                },
+                {
+                  "food": "凉拌莴笋丝",
+                  "amount": "莴笋 100g",
+                  "method": "凉拌，醋调味",
+                  "note": "低热量高纤维"
+                },
+                {
+                  "food": "营养素",
+                  "amount": "目标",
+                  "method": "实际",
+                  "note": "达标"
+                },
+                {
+                  "food": "能量",
+                  "amount": "1620 kcal",
+                  "method": "1620 kcal",
+                  "note": "✓"
+                },
+                {
+                  "food": "蛋白质",
+                  "amount": "90 g",
+                  "method": "82 g",
+                  "note": "⚠"
+                },
+                {
+                  "food": "脂肪",
+                  "amount": "54 g",
+                  "method": "41 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "碳水",
+                  "amount": "195 g",
+                  "method": "189 g",
+                  "note": "✓"
+                },
+                {
+                  "food": "膳食纤维",
+                  "amount": "≥30 g",
+                  "method": "25 g",
+                  "note": "⚠"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        }
+      ],
+      "weeklySummary": [
+        {
+          "day": "周一",
+          "energy": 1620,
+          "protein": 90,
+          "fat": 44,
+          "carbs": 196
+        },
+        {
+          "day": "周二",
+          "energy": 1615,
+          "protein": 80,
+          "fat": 40,
+          "carbs": 192
+        },
+        {
+          "day": "周三",
+          "energy": 1620,
+          "protein": 78,
+          "fat": 39,
+          "carbs": 200
+        },
+        {
+          "day": "周四",
+          "energy": 1620,
+          "protein": 80,
+          "fat": 44,
+          "carbs": 189
+        },
+        {
+          "day": "周五",
+          "energy": 1620,
+          "protein": 83,
+          "fat": 41,
+          "carbs": 192
+        },
+        {
+          "day": "周六",
+          "energy": 1620,
+          "protein": 72,
+          "fat": 56,
+          "carbs": 177
+        },
+        {
+          "day": "周日",
+          "energy": 1620,
+          "protein": 82,
+          "fat": 41,
+          "carbs": 189
+        },
+        {
+          "day": "目标",
+          "energy": 1620,
+          "protein": 90,
+          "fat": 54,
+          "carbs": 195
+        }
+      ],
+      "weeklyAnalysis": [],
+      "shoppingList": [
+        {
+          "category": "主食类",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "蛋白质类",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "蔬菜类",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "水果/坚果",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "乳制品",
+          "items": [
+            "-----|--------|"
+          ]
+        },
+        {
+          "category": "调味品",
+          "items": [
+            "-----|------|",
+            "--"
+          ]
+        }
+      ],
+      "references": []
+    }
+  ],
+  "exercisePrescription": {
+    "date": "2025-04-07",
+    "safety": {
+      "evaluations": [
+        {
+          "item": "血压",
+          "status": "97/58 mmHg（收缩压正常，舒张压偏低）",
+          "safety": "可运动（舒张压<60需关注）"
+        },
+        {
+          "item": "心率",
+          "status": "72 bpm（正常）",
+          "safety": "安全"
+        },
+        {
+          "item": "肝功能",
+          "status": "AST轻度升高（43.6 U/L）",
+          "safety": "可运动，但需限制为中低强度"
+        },
+        {
+          "item": "血糖",
+          "status": "5.03 mmol/L（正常）",
+          "safety": "安全"
+        },
+        {
+          "item": "心血管症状",
+          "status": "窦性心律不齐（多为生理性）",
+          "safety": "安全，需观察"
+        }
+      ],
+      "contraindications": [],
+      "conclusion": ""
+    },
+    "prescription": {
+      "type": "快走/游泳/骑自行车",
+      "intensity": "AST升高，高强度加重肝脏负担",
+      "frequency": "5-7次/周",
+      "duration": "40-50分钟/次",
+      "targetHR": "",
+      "maxHR": 220
+    },
+    "aerobic": {
+      "exercises": "快走, 游泳, 骑自行车, 动作, 墙壁俯卧撑, 椅子深蹲, 平板支撑, 弹力带划船, 动作, 全身拉伸, 深呼吸放松, 运动, 跑步/慢跑, 跳跃类运动（跳绳、篮球）, 高强度间歇训练（HIIT）, 大重量力量训练, 竞技性运动",
+      "intensity": "RPE 11-13",
+      "frequency": "40-50分钟",
+      "duration": "5-7次/周",
+      "notes": "首选，平地或跑步机，配速5-6km/h"
+    },
+    "resistance": {
+      "exercises": "墙壁俯卧撑, 椅子深蹲, 平板支撑, 弹力带划船, 动作, 全身拉伸, 深呼吸放松, 运动, 跑步/慢跑, 跳跃类运动（跳绳、篮球）, 高强度间歇训练（HIIT）, 大重量力量训练, 竞技性运动",
+      "intensity": "2组",
+      "frequency": "12-15次",
+      "duration": "低强度，上肢力量",
+      "notes": ""
+    },
+    "flexibility": {
+      "exercises": "全身拉伸, 深呼吸放松, 运动, 跑步/慢跑, 跳跃类运动（跳绳、篮球）, 高强度间歇训练（HIIT）, 大重量力量训练, 竞技性运动",
+      "intensity": "",
+      "frequency": "",
+      "duration": "10分钟",
+      "notes": ""
+    },
+    "phases": [
+      {
+        "name": "第一阶段：适应期",
+        "weeks": "第1-4周",
+        "days": [
+          {
+            "day": "周一",
+            "content": "快走",
+            "duration": "RPE 11",
+            "intensity": "35 min"
+          },
+          {
+            "day": "周二",
+            "content": "快走 + 轻度抗阻",
+            "duration": "RPE 11-12",
+            "intensity": "30 min + 15 min"
+          },
+          {
+            "day": "周三",
+            "content": "快走",
+            "duration": "RPE 11",
+            "intensity": "35 min"
+          },
+          {
+            "day": "周四",
+            "content": "休息或散步",
+            "duration": "极低",
+            "intensity": "20 min"
+          },
+          {
+            "day": "周五",
+            "content": "快走",
+            "duration": "RPE 11",
+            "intensity": "35 min"
+          },
+          {
+            "day": "周六",
+            "content": "游泳或骑自行车",
+            "duration": "RPE 11-12",
+            "intensity": "35 min"
+          },
+          {
+            "day": "周日",
+            "content": "休息（轻度拉伸）",
+            "duration": "极低",
+            "intensity": "15 min"
+          }
+        ],
+        "weeklyTotal": ""
+      },
+      {
+        "name": "第二阶段：进阶期",
+        "weeks": "第5-12周",
+        "days": [
+          {
+            "day": "周一",
+            "content": "快走（加速）",
+            "duration": "RPE 12",
+            "intensity": "45 min"
+          },
+          {
+            "day": "周二",
+            "content": "快走 + 抗阻训练",
+            "duration": "RPE 12",
+            "intensity": "40 min + 20 min"
+          },
+          {
+            "day": "周三",
+            "content": "游泳",
+            "duration": "RPE 12",
+            "intensity": "40 min"
+          },
+          {
+            "day": "周四",
+            "content": "快走",
+            "duration": "RPE 11",
+            "intensity": "40 min"
+          },
+          {
+            "day": "周五",
+            "content": "骑自行车",
+            "duration": "RPE 12",
+            "intensity": "45 min"
+          },
+          {
+            "day": "周六",
+            "content": "快走 + 抗阻训练",
+            "duration": "RPE 12",
+            "intensity": "40 min + 20 min"
+          },
+          {
+            "day": "周日",
+            "content": "休息（拉伸/散步）",
+            "duration": "极低",
+            "intensity": "20 min"
+          }
+        ],
+        "weeklyTotal": ""
+      },
+      {
+        "name": "第三阶段：巩固期",
+        "weeks": "第13周起",
+        "days": [
+          {
+            "day": "周一",
+            "content": "快走（加速）",
+            "duration": "RPE 12-13",
+            "intensity": "50 min"
+          },
+          {
+            "day": "周二",
+            "content": "快走/慢跑交替 + 抗阻",
+            "duration": "RPE 12-13",
+            "intensity": "45 min + 20 min"
+          },
+          {
+            "day": "周三",
+            "content": "游泳",
+            "duration": "RPE 12-13",
+            "intensity": "45 min"
+          },
+          {
+            "day": "周四",
+            "content": "骑自行车",
+            "duration": "RPE 12",
+            "intensity": "50 min"
+          },
+          {
+            "day": "周五",
+            "content": "快走",
+            "duration": "RPE 12",
+            "intensity": "50 min"
+          },
+          {
+            "day": "周六",
+            "content": "游泳/骑行（交替）",
+            "duration": "RPE 12-13",
+            "intensity": "50 min"
+          },
+          {
+            "day": "周日",
+            "content": "休息（拉伸/瑜伽）",
+            "duration": "极低",
+            "intensity": "20-30 min"
+          }
+        ],
+        "weeklyTotal": ""
+      }
+    ],
+    "sessionFlow": [
+      "关节活动：踝、膝、髋、肩各转10圈",
+      "慢速步行 3-5 分钟",
+      "动态拉伸：弓步拉伸、侧弓步各10次",
+      "快走/游泳/骑行（维持靶心率111-139 bpm）",
+      "保持均匀呼吸，可正常说话但不能唱歌的强度",
+      "每10分钟感知一次身体状态",
+      "减速慢走 3-5 分钟",
+      "静态拉伸（大腿前侧、后侧、小腿、腰背）各保持20-30秒",
+      "深呼吸放松"
+    ],
+    "nutritionSynergy": {
+      "timing": [
+        {
+          "period": "最佳时段",
+          "time": "餐后 60-90 分钟开始",
+          "note": "血糖稳定，能量充足"
+        },
+        {
+          "period": "晨练",
+          "time": "早餐后 1 小时（约 8:00-9:00）",
+          "note": "已摄入早餐，避免空腹"
+        },
+        {
+          "period": "傍晚",
+          "time": "晚餐后 1 小时（约 19:00-20:00）",
+          "note": "睡前2小时完成，避免影响睡眠"
+        }
+      ],
+      "strategies": [
+        {
+          "scenario": "运动前",
+          "strategy": "正常饮食后运动，无需额外补充"
+        },
+        {
+          "scenario": "运动中",
+          "strategy": "携带水壶，每15-20分钟补水150ml"
+        },
+        {
+          "scenario": "运动后",
+          "strategy": "运动后30分钟内可补充1杯低脂牛奶或1个鸡蛋"
+        }
+      ],
+      "drugInteractions": [],
+      "energyBalance": ""
+    },
+    "precautions": [],
+    "stopConditions": [],
+    "progression": [],
+    "references": []
+  }
+}

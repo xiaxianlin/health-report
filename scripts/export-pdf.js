@@ -298,39 +298,97 @@ ${body}
 </html>`;
 }
 
+// ── 查找患者目录 ──────────────────────────────────────────
+function findPatientDir(patientName) {
+  // 1. 查找以姓名开头的目录（姓名_日期格式），优先使用最新的
+  const datedDirs = fs.readdirSync(RESULTS_DIR)
+    .filter(f => fs.statSync(path.join(RESULTS_DIR, f)).isDirectory())
+    .filter(f => f.startsWith(patientName + '_'))
+    .filter(f => fs.existsSync(path.join(RESULTS_DIR, f, 'data.json')))
+    .sort();
+
+  if (datedDirs.length > 0) {
+    return datedDirs[datedDirs.length - 1];
+  }
+
+  // 2. 直接匹配完整目录名（且包含 data.json）
+  const directPath = path.join(RESULTS_DIR, patientName);
+  if (fs.existsSync(path.join(directPath, 'data.json'))) {
+    return patientName;
+  }
+
+  // 3. 如果没有找到带 data.json 的目录，返回原始名称
+  return patientName;
+}
+
 // ── 导出单个患者 ──────────────────────────────────────────
 async function exportPatient(patientName) {
-  const patientDir = path.join(RESULTS_DIR, patientName);
+  // 查找实际目录名
+  const actualDirName = findPatientDir(patientName);
+  const patientDir = path.join(RESULTS_DIR, actualDirName);
+
   if (!fs.existsSync(patientDir)) {
-    console.error(`❌ 目录不存在: ${patientDir}`);
+    console.error(`❌ ${patientName} - 目录不存在: ${patientDir}`);
     return false;
+  }
+
+  if (actualDirName !== patientName) {
+    console.log(`📁 使用目录: ${actualDirName}`);
   }
 
   console.log(`\n📋 处理: ${patientName}`);
 
+  // 检查是否有内容可以导出
   const { html, included } = buildHtml(patientName, patientDir);
+
+  if (included.length === 0) {
+    console.error(`❌ ${patientName} - 没有可导出的内容`);
+    console.error(`   提示: 请先运行 /nutrition-assess 和 /meal-plan 生成方案`);
+    return false;
+  }
 
   const htmlPath = path.join(patientDir, '营养方案报告.html');
   const pdfPath = path.join(patientDir, '营养方案报告.pdf');
 
-  fs.writeFileSync(htmlPath, html, 'utf8');
+  // 写入 HTML 文件
+  try {
+    fs.writeFileSync(htmlPath, html, 'utf8');
+  } catch (e) {
+    console.error(`❌ ${patientName} - 写入 HTML 失败: ${e.message}`);
+    return false;
+  }
 
-  const browser = await chromium.launch();
-  const page = await browser.newPage();
-  await page.setContent(html, { waitUntil: 'networkidle' });
-  await page.pdf({
-    path: pdfPath,
-    format: 'A4',
-    printBackground: true,
-    margin: { top: '0', right: '0', bottom: '0', left: '0' },
-  });
-  await browser.close();
+  // 生成 PDF
+  let browser;
+  try {
+    browser = await chromium.launch();
+  } catch (e) {
+    console.error(`❌ ${patientName} - 启动浏览器失败`);
+    console.error(`   提示: 请运行 'npx playwright install chromium' 安装依赖`);
+    return false;
+  }
 
-  const size = Math.round(fs.statSync(pdfPath).size / 1024);
-  console.log(`✅ ${patientName} - 营养方案报告.pdf (${size} KB)`);
-  included.forEach(s => console.log(`   - ${s}: ✓`));
-  console.log(`   输出路径: ${pdfPath}`);
-  return true;
+  try {
+    const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: 'networkidle' });
+    await page.pdf({
+      path: pdfPath,
+      format: 'A4',
+      printBackground: true,
+      margin: { top: '0', right: '0', bottom: '0', left: '0' },
+    });
+    await browser.close();
+
+    const size = Math.round(fs.statSync(pdfPath).size / 1024);
+    console.log(`✅ ${patientName} - 营养方案报告.pdf (${size} KB)`);
+    included.forEach(s => console.log(`   - ${s}: ✓`));
+    console.log(`   输出路径: ${pdfPath}`);
+    return true;
+  } catch (e) {
+    console.error(`❌ ${patientName} - PDF 生成失败: ${e.message}`);
+    if (browser) await browser.close();
+    return false;
+  }
 }
 
 // ── 主入口 ────────────────────────────────────────────────
@@ -338,7 +396,13 @@ async function main() {
   const target = process.argv[2];
 
   if (target) {
-    await exportPatient(target);
+    const result = await exportPatient(target);
+    if (!result) {
+      console.log('\n提示:');
+      console.log('  1. 确保已运行: node scripts/data-transform.js <姓名>');
+      console.log('  2. 检查 Playwright 是否安装: npx playwright install chromium');
+      process.exit(1);
+    }
   } else {
     const patients = fs.readdirSync(RESULTS_DIR)
       .filter(d => fs.statSync(path.join(RESULTS_DIR, d)).isDirectory());

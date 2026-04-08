@@ -46,9 +46,15 @@ knowledge/               # 知识库
   nutrient-reference.md  # 营养素参考
   references/            # 检索保存的参考资料
 
-results/                 # 患者方案输出（按姓名分目录）
-  <姓名>/
+results/                 # 患者方案输出
+  <姓名>/                  # 工作目录（存放 Markdown 源文件）
     健康档案.md
+    营养评估.md
+    配餐方案_第1周.md
+    运动处方.md
+
+  <姓名>_<日期>/           # 版本化输出目录（自动生成，包含所有导出文件）
+    健康档案.md            # 从工作目录复制
     营养评估.md
     配餐方案_第1周.md
     运动处方.md
@@ -60,8 +66,19 @@ scripts/                 # 独立脚本
   export-pdf.js          # PDF 导出脚本
   visualize-report.js    # 可视化报告生成脚本
 
-records/                 # 输入病历文件
+records/                 # 客户档案输入目录（按客户分子目录）
+  <客户姓名>/              # 每个客户一个独立目录
+    体检报告.pdf           # 体检报告（PDF格式）
+    病历.pdf               # 病历档案（PDF格式）
+    手动录入.md            # 手动录入的健康数据（Markdown格式）
+    其他检查报告.jpg        # 其他格式的检查报告
 ```
+
+**records 目录使用说明**：
+- 每个客户在 `records/` 下有一个独立子目录
+- 支持多种输入格式：PDF 体检报告、PDF 病历、Markdown 手动录入
+- 文件名应清晰标识内容类型，便于识别
+- 示例：`records/夏显林/爱康国宾体检报告_2025.pdf`
 
 ### 关键数据类型
 
@@ -80,6 +97,9 @@ JSON 数据结构定义见 `data.json`：
 # 安装依赖
 npm install
 
+# 数据转换（Markdown → JSON，自动生成带日期目录）
+node scripts/data-transform.js <姓名>
+
 # PDF 导出（单个患者）
 node scripts/export-pdf.js <姓名>
 
@@ -91,6 +111,9 @@ node scripts/visualize-report.js <姓名>
 
 # 可视化报告（所有患者）
 node scripts/visualize-report.js
+
+# 目录迁移（旧格式 → 新格式）
+node scripts/migrate-directories.js
 ```
 
 ## Skills 使用指南
@@ -101,7 +124,7 @@ node scripts/visualize-report.js
 |-------|------|
 | `/nutrition-workflow` | 完整工作流：病历 → 健康档案 → 营养评估 → 配餐方案 → 运动处方 |
 | `/nutrition-workflow resume` | 继续上次中断的流程 |
-| `/parse-medical-record <文件>` | 仅解析病历为健康档案 |
+| `/parse-medical-record <文件>` | 解析病历为健康档案（支持 records/<客户>/ 目录或直接文件路径） |
 | `/nutrition-assess <姓名>` | 基于健康档案生成营养评估 |
 | `/meal-plan <姓名>` | 生成配餐方案 |
 | `/exercise-plan <姓名>` | 生成运动处方 |
@@ -111,21 +134,58 @@ node scripts/visualize-report.js
 
 ### Workflow 流程
 
+**方式一：从 records 目录读取（推荐）**
+
 ```
-/nutrition-workflow <病历文件>
+客户档案存入 records/<客户姓名>/
   ↓
-生成健康档案.md → 用户确认
+/parse-medical-record records/<客户姓名>/体检报告.pdf
   ↓
-检索参考 → 生成营养评估.md → 用户确认
+生成 results/<姓名>/健康档案.md → 用户确认
   ↓
-生成运动处方.md → 用户确认
+/nutrition-assess <姓名> → 生成 results/<姓名>/营养评估.md
   ↓
-检索菜谱 → 生成配餐方案.md
+/exercise-plan <姓名> → 生成 results/<姓名>/运动处方.md
   ↓
-/data-transform <姓名> → 生成 results/<姓名>/data.json
+/meal-plan <姓名> → 生成 results/<姓名>/配餐方案_第1周.md
+  ↓
+/data-transform <姓名> → 生成 results/<姓名>_<日期>/
   ↓
 /export-pdf <姓名> 或 /visualize-report <姓名>
 ```
+
+**方式二：直接指定文件路径**
+
+```
+/parse-medical-report <文件路径>
+  ↓
+生成 results/<姓名>/健康档案.md
+  ↓
+...后续步骤相同
+```
+
+**目录结构说明**：
+
+1. **工作目录** (`results/<姓名>/`)
+   - 存放 Markdown 源文件（健康档案、营养评估等）
+   - 由 `/nutrition-workflow` 生成和更新
+   - 可随时修改，是主要的编辑位置
+
+2. **版本化输出目录** (`results/<姓名>_<日期>/`)
+   - 由 `/data-transform` 自动生成
+   - 目录名包含日期，保证唯一性（如 `夏先生_2025-04-07`）
+   - 包含所有输出文件：data.json、PDF、HTML
+   - **只读**，不应直接修改
+
+**工作流程**：
+1. 在 `results/<姓名>/` 编辑 Markdown 文件
+2. 运行 `data-transform <姓名>` 生成带日期的版本目录
+3. 运行 `export-pdf` 或 `visualize-report` 生成最终报告
+4. 如需修改，回到步骤1重新编辑，会生成新的日期版本
+
+**脚本模糊匹配**：
+- 输入"夏先生"会自动匹配最新的 `夏先生_<日期>` 目录
+- 优先使用带日期的版本目录，其次使用工作目录
 
 ## Key Conventions
 
