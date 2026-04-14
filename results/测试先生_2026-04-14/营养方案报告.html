@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>营养方案报告 - 测试先生</title>
+  <style>
+@page { size: A4; margin: 18mm 20mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 10pt;
+  line-height: 1.7;
+  color: #1a1a2e;
+  background: #fff;
+}
+
+/* ── 封面 ── */
+.cover {
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240mm;
+  text-align: center;
+  background: linear-gradient(160deg, #0f3460 0%, #16213e 60%, #1a1a2e 100%);
+  color: #fff;
+  margin: -18mm -20mm;
+  padding: 40mm 30mm;
+}
+.cover-logo {
+  font-size: 9pt;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover h1 {
+  font-size: 28pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8mm;
+  color: #fff;
+}
+.cover-subtitle {
+  font-size: 12pt;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover-meta {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 6mm 12mm;
+  font-size: 11pt;
+  line-height: 2.2;
+  color: #e0e0ff;
+}
+.cover-meta strong { color: #fff; }
+.cover-disclaimer {
+  margin-top: 16mm;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── 章节标题块 ── */
+.section-header {
+  page-break-before: always;
+  margin: 0 -20mm 6mm -20mm;
+  padding: 5mm 20mm;
+  background: linear-gradient(90deg, #0f3460, #1a5fb4);
+  color: #fff;
+}
+.section-header h2 {
+  font-size: 14pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.section-header .section-sub {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1mm;
+}
+
+/* ── 正文标题 ── */
+h1, h2, h3, h4 { font-weight: 600; }
+h2 {
+  font-size: 13pt;
+  color: #0f3460;
+  border-bottom: 2px solid #0f3460;
+  padding-bottom: 2mm;
+  margin: 6mm 0 3mm 0;
+}
+h3 {
+  font-size: 11pt;
+  color: #1a5fb4;
+  border-left: 3px solid #1a5fb4;
+  padding-left: 3mm;
+  margin: 5mm 0 2mm 0;
+}
+h4 {
+  font-size: 10pt;
+  color: #2d6a4f;
+  margin: 4mm 0 2mm 0;
+}
+
+/* ── 段落和列表 ── */
+p { margin: 2mm 0; }
+ul, ol { margin: 2mm 0 2mm 6mm; padding: 0; }
+li { margin: 1mm 0; }
+ul li { list-style: disc; }
+ol li { list-style: decimal; }
+
+/* ── 引用块 → 提示框 ── */
+blockquote {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 4px 4px 0;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  color: #1e40af;
+  font-size: 9.5pt;
+}
+blockquote p { margin: 0; }
+
+/* ── 代码块 → 信息框 ── */
+pre {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 8.5pt;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+code {
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 8.5pt;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+}
+pre code { background: none; padding: 0; }
+
+/* ── 表格 ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0;
+  font-size: 9pt;
+}
+thead tr { background: #0f3460; color: #fff; }
+thead th {
+  padding: 2.5mm 3mm;
+  font-weight: 600;
+  text-align: left;
+  border: 1px solid #0a2545;
+}
+tbody tr:nth-child(even) { background: #f0f4ff; }
+tbody td {
+  padding: 2mm 3mm;
+  border: 1px solid #d1d9e6;
+  vertical-align: top;
+}
+
+/* ── 强调 ── */
+strong { font-weight: 700; color: #0f3460; }
+em { color: #1a5fb4; font-style: normal; font-weight: 500; }
+
+/* ── hr 分隔线 ── */
+hr {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 4mm 0;
+}
+
+/* ── 分页控制 ── */
+table { page-break-inside: auto; }
+tr { page-break-inside: avoid; }
+
+/* ── 报告页脚 ── */
+.report-footer {
+  margin-top: 10mm;
+  padding-top: 3mm;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+  font-size: 7.5pt;
+  color: #94a3b8;
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-logo">AI Nutrition System</div>
+  <h1>个性化营养方案报告</h1>
+  <div class="cover-subtitle">Personalized Nutrition Plan</div>
+  <div class="cover-meta">
+    <div><strong>患者姓名</strong>　测试先生</div>
+    <div><strong>报告日期</strong>　2026年4月14日</div>
+    <div><strong>生成机构</strong>　AI 营养咨询系统</div>
+  </div>
+  <div class="cover-disclaimer">本报告由 AI 辅助生成，仅供参考，不构成医疗建议</div>
+</div>
+
+<div class="section-header">
+  <h2>营养评估</h2>
+  <div class="section-sub">Nutrition Assessment</div>
+</div>
+<div class="section-body">
+<h1>营养评估报告</h1>
+<blockquote>
+<p>生成日期: 2026-04-14
+基于: 健康档案（测试先生）</p>
+</blockquote>
+<h2>基础代谢计算</h2>
+<h3>BMR</h3>
+<pre><code>BMR = 10 × 86 + 6.25 × 172 - 5 × 52 + 5
+    = 1680 kcal/天
+</code></pre>
+<h3>活动水平</h3>
+<ul>
+<li>当前活动水平: <strong>久坐</strong></li>
+<li>活动系数: <strong>1.2</strong></li>
+</ul>
+<h3>TDEE</h3>
+<pre><code>TDEE = 1680 × 1.2 = 2016 kcal/天
+</code></pre>
+<h3>目标能量</h3>
+<ul>
+<li>体重目标: <strong>减重</strong></li>
+<li>调整量: <strong>-500 kcal</strong></li>
+<li>目标能量: <strong>1500 kcal/天</strong></li>
+</ul>
+<h2>每日营养目标</h2>
+<h3>宏量营养素</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标值</th>
+<th>占比</th>
+<th>范围</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>总能量</td>
+<td>1500 kcal</td>
+<td>100%</td>
+<td>1450-1550</td>
+<td>TDEE计算+减重</td>
+</tr>
+<tr>
+<td>蛋白质</td>
+<td>75 g</td>
+<td>20%</td>
+<td>70-85g</td>
+<td>减重+代谢病管理</td>
+</tr>
+<tr>
+<td>碳水化合物</td>
+<td>150 g</td>
+<td>40%</td>
+<td>140-170g</td>
+<td>糖尿病控制</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>50 g</td>
+<td>30%</td>
+<td>45-55g</td>
+<td>高脂血症+脂肪肝</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>≥30 g</td>
+<td>—</td>
+<td>25-35g</td>
+<td>糖尿病+血脂管理</td>
+</tr>
+</tbody></table>
+<h3>微量营养素重点</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>原因</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>钠</td>
+<td>&lt; 1500 mg</td>
+<td>高血压</td>
+</tr>
+<tr>
+<td>钾</td>
+<td>3500 mg</td>
+<td>血压管理</td>
+</tr>
+<tr>
+<td>钙</td>
+<td>1000 mg</td>
+<td>基础需求</td>
+</tr>
+<tr>
+<td>维生素B12</td>
+<td>关注/必要时补充</td>
+<td>二甲双胍可能影响吸收</td>
+</tr>
+</tbody></table>
+<h3>三餐能量分配</h3>
+<table>
+<thead>
+<tr>
+<th>餐次</th>
+<th>能量</th>
+<th>占比</th>
+<th>蛋白质</th>
+<th>碳水</th>
+<th>脂肪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>早餐</td>
+<td>450 kcal</td>
+<td>30%</td>
+<td>22g</td>
+<td>45g</td>
+<td>15g</td>
+</tr>
+<tr>
+<td>午餐</td>
+<td>600 kcal</td>
+<td>40%</td>
+<td>30g</td>
+<td>60g</td>
+<td>20g</td>
+</tr>
+<tr>
+<td>晚餐</td>
+<td>450 kcal</td>
+<td>30%</td>
+<td>23g</td>
+<td>45g</td>
+<td>15g</td>
+</tr>
+<tr>
+<td>合计</td>
+<td>1500 kcal</td>
+<td>100%</td>
+<td>75g</td>
+<td>150g</td>
+<td>50g</td>
+</tr>
+</tbody></table>
+<h2>饮食原则</h2>
+<ol>
+<li>优先控制总能量摄入，目标每周减重 0.5 kg 左右。</li>
+<li>主食以全谷物、杂豆、薯类部分替代精白米面。</li>
+<li>限制添加糖、含糖饮料、糕点和夜宵。</li>
+<li>限制饱和脂肪与反式脂肪，优先橄榄油、坚果、鱼类脂肪。</li>
+<li>严格控盐，优先蒸、煮、炖、拌。</li>
+<li>限酒，疑似脂肪肝阶段尽量戒酒。</li>
+</ol>
+<h2>推荐食物清单</h2>
+<h3>主食类</h3>
+<ul>
+<li>燕麦、糙米、藜麦、全麦面包、荞麦面、红薯</li>
+</ul>
+<h3>蛋白质类</h3>
+<ul>
+<li>鸡胸肉、鱼类、虾、鸡蛋、豆腐、低糖酸奶、低脂奶</li>
+</ul>
+<h3>蔬菜类</h3>
+<ul>
+<li>西兰花、菠菜、芹菜、番茄、黄瓜、菌菇类、海带</li>
+</ul>
+<h3>水果类</h3>
+<ul>
+<li>苹果、梨、猕猴桃、蓝莓、草莓</li>
+</ul>
+<h2>禁忌/限制食物清单</h2>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>原因</th>
+<th>严重程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>含糖饮料</td>
+<td>血糖管理</td>
+<td>完全禁止</td>
+</tr>
+<tr>
+<td>油炸食品</td>
+<td>血脂+脂肪肝</td>
+<td>完全禁止</td>
+</tr>
+<tr>
+<td>动物内脏</td>
+<td>高胆固醇/高嘌呤</td>
+<td>完全禁止</td>
+</tr>
+<tr>
+<td>白米饭大量食用</td>
+<td>高GI</td>
+<td>严格限制</td>
+</tr>
+<tr>
+<td>腌制食品</td>
+<td>高钠</td>
+<td>严格限制</td>
+</tr>
+<tr>
+<td>酒精</td>
+<td>肝功能+代谢风险</td>
+<td>完全禁止</td>
+</tr>
+<tr>
+<td>西柚/葡萄柚</td>
+<td>与阿托伐他汀相互作用</td>
+<td>完全禁止</td>
+</tr>
+</tbody></table>
+<h2>药物-营养交互提示</h2>
+<ul>
+<li><strong>二甲双胍</strong>：长期使用关注维生素B12吸收。</li>
+<li><strong>阿托伐他汀</strong>：避免西柚/葡萄柚。</li>
+<li><strong>氯沙坦</strong>：整体饮食以控盐为主。</li>
+</ul>
+<h2>参考来源</h2>
+<ol>
+<li>Medical News Today - Type 2 diabetes food list</li>
+<li>NHLBI - DASH Eating Plan</li>
+<li>Mayo Clinic - Self-care for fatty liver disease</li>
+</ol>
+<blockquote>
+<p><strong>免责声明</strong>：本营养评估基于公开资料改写的测试案例，仅用于系统流程验证，不构成医疗建议或诊断。</p>
+</blockquote>
+</div>
+
+<div class="section-header">
+  <h2>配餐方案</h2>
+  <div class="section-sub">Meal Plan</div>
+</div>
+<div class="section-body">
+<h1>配餐方案</h1>
+<blockquote>
+<p>日期: 2026-04-14
+适用对象: 测试先生（52岁，2型糖尿病+高血压+高脂血症+超重+疑似脂肪肝）
+适用周期: 第1周
+每日目标: 1500 kcal | 蛋白质 75g | 碳水 150g | 脂肪 50g</p>
+</blockquote>
+<h2>周一</h2>
+<h3>早餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦牛奶粥</td>
+<td>燕麦片 40g + 低脂牛奶 200ml</td>
+<td>微波/煮 3分钟</td>
+<td>低GI</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个</td>
+<td>煮 7分钟</td>
+<td>优质蛋白</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个</td>
+<td>生食</td>
+<td>低GI水果</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~445 kcal | 蛋白质 20g | 脂肪 12g | 碳水 58g | 膳食纤维 5g</p>
+<h3>午餐（约 600 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>杂粮饭</td>
+<td>糙米+燕麦米 65g（生重）</td>
+<td>电饭煲蒸</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>100g</td>
+<td>清蒸</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>150g</td>
+<td>少油快炒</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌菠菜</td>
+<td>100g</td>
+<td>焯水凉拌</td>
+<td>富铁</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~598 kcal | 蛋白质 31g | 脂肪 16g | 碳水 65g | 膳食纤维 8g</p>
+<h3>晚餐（约 450 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>份量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>干面 50g</td>
+<td>煮</td>
+<td>低GI主食</td>
+</tr>
+<tr>
+<td>鸡胸肉</td>
+<td>80g</td>
+<td>少油煎</td>
+<td>低脂高蛋白</td>
+</tr>
+<tr>
+<td>蒜蓉芦笋</td>
+<td>120g</td>
+<td>少油快炒</td>
+<td>高纤维</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>100g</td>
+<td>凉拌</td>
+<td>清爽低热量</td>
+</tr>
+</tbody></table>
+<p><strong>营养估算:</strong> 能量 ~445 kcal | 蛋白质 24g | 脂肪 14g | 碳水 42g | 膳食纤维 6g</p>
+<h2>一周营养总览</h2>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>能量(kcal)</th>
+<th>蛋白质(g)</th>
+<th>脂肪(g)</th>
+<th>碳水(g)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>1493</td>
+<td>75</td>
+<td>42</td>
+<td>165</td>
+</tr>
+</tbody></table>
+<h2>采购清单</h2>
+<h3>每周必买（生鲜）</h3>
+<ul>
+<li>蔬菜: 西兰花、菠菜、芦笋、黄瓜</li>
+<li>蛋白质: 鲈鱼、鸡胸肉、鸡蛋</li>
+<li>水果: 猕猴桃</li>
+</ul>
+<h2>参考来源</h2>
+<ol>
+<li>Verywell Health - sample diabetic meal plan</li>
+<li>Cleveland Clinic - DASH Diet meal plans</li>
+<li>Bedford Gastroenterology - fatty liver diet plan</li>
+</ol>
+<blockquote>
+<p><strong>免责声明</strong>：本配餐方案基于公开资料改写的测试案例，仅用于系统流程验证，不构成医疗建议或诊断。</p>
+</blockquote>
+</div>
+
+<div class="section-header">
+  <h2>运动处方</h2>
+  <div class="section-sub">Exercise Prescription</div>
+</div>
+<div class="section-body">
+<h1>个性化运动处方</h1>
+<blockquote>
+<p><strong>患者</strong>: 测试先生 | <strong>性别</strong>: 男 | <strong>年龄</strong>: 52岁
+<strong>生成日期</strong>: 2026-04-14
+<strong>基于</strong>: 健康档案 + 营养评估</p>
+</blockquote>
+<h2>一、安全性评估</h2>
+<h3>1.1 运动前医学评估</h3>
+<table>
+<thead>
+<tr>
+<th>评估项目</th>
+<th>当前状态</th>
+<th>运动安全性</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>空腹血糖</td>
+<td>7.8 mmol/L</td>
+<td>可运动</td>
+</tr>
+<tr>
+<td>血压</td>
+<td>142/88 mmHg</td>
+<td>可运动，先从中低强度开始</td>
+</tr>
+<tr>
+<td>ALT</td>
+<td>56 U/L</td>
+<td>可运动，但避免高强度</td>
+</tr>
+<tr>
+<td>心血管症状</td>
+<td>未提供明显异常</td>
+<td>安全起步</td>
+</tr>
+</tbody></table>
+<h3>1.2 运动禁忌症筛查</h3>
+<ul>
+<li><strong>绝对禁忌</strong>: 当前未见明确绝对禁忌</li>
+<li><strong>相对禁忌/需注意</strong>: 久坐基础差、ALT轻度升高、避免空腹运动、注意膝关节负荷</li>
+</ul>
+<h3>1.3 安全性总评</h3>
+<blockquote>
+<p><strong>结论：可以运动，建议从中低强度快走+轻抗阻开始。</strong></p>
+</blockquote>
+<h2>二、运动处方</h2>
+<h3>2.1 处方总则</h3>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>处方内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运动类型</td>
+<td>有氧为主 + 抗阻为辅</td>
+</tr>
+<tr>
+<td>运动强度</td>
+<td>中低强度（RPE 11-13）</td>
+</tr>
+<tr>
+<td>运动频率</td>
+<td>有氧每周 5-6 天；抗阻每周 2-3 天</td>
+</tr>
+<tr>
+<td>运动时长</td>
+<td>每次 30-45 分钟</td>
+</tr>
+<tr>
+<td>目标心率</td>
+<td>67-101 次/分钟</td>
+</tr>
+</tbody></table>
+<h3>2.2 有氧运动处方</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>推荐项目</td>
+<td>快走、骑自行车、椭圆机、游泳</td>
+</tr>
+<tr>
+<td>强度</td>
+<td>微喘但能说话</td>
+</tr>
+<tr>
+<td>频率</td>
+<td>每周至少 5 天</td>
+</tr>
+<tr>
+<td>时长</td>
+<td>每次 30-45 分钟</td>
+</tr>
+</tbody></table>
+<h3>2.3 抗阻训练处方</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>推荐项目</td>
+<td>弹力带、自重深蹲、靠墙俯卧撑、轻哑铃</td>
+</tr>
+<tr>
+<td>强度</td>
+<td>每组 10-15 次，2-3 组</td>
+</tr>
+<tr>
+<td>频率</td>
+<td>每周 2-3 次</td>
+</tr>
+<tr>
+<td>时长</td>
+<td>每次 15-20 分钟</td>
+</tr>
+</tbody></table>
+<h2>三、一周运动计划</h2>
+<h3>第一阶段（第1-4周）：适应期</h3>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>运动内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>快走 + 拉伸</td>
+<td>30 min</td>
+<td>低强度</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>快走 + 弹力带训练</td>
+<td>30 + 15 min</td>
+<td>低-中强度</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>快走</td>
+<td>30 min</td>
+<td>低强度</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>快走 + 自重训练</td>
+<td>30 + 15 min</td>
+<td>低-中强度</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>快走 + 拉伸</td>
+<td>30 min</td>
+<td>低强度</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>骑行或游泳</td>
+<td>30-40 min</td>
+<td>中低强度</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>休息或散步</td>
+<td>20 min</td>
+<td>极低强度</td>
+</tr>
+</tbody></table>
+<h2>四、参考来源</h2>
+<ol>
+<li>Chinese adults with type 2 diabetes physical activity guideline</li>
+<li>ADA/ACSM exercise summary</li>
+<li>Mayo Clinic hypertension exercise advice</li>
+</ol>
+<blockquote>
+<p><strong>免责声明</strong>：本运动处方基于公开资料改写的测试案例，仅用于系统流程验证，不构成医疗建议或诊断。</p>
+</blockquote>
+</div>
+<div class="report-footer">营养方案报告 · 测试先生 · 2026年4月14日 · 仅供参考，不构成医疗建议</div>
+</body>
+</html>

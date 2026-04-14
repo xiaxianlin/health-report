@@ -1,0 +1,556 @@
+{
+  "id": "fc0626ff-8610-4b76-97a9-4615ad179809",
+  "viewCode": "cd66szjmyzd7wqz3v4",
+  "name": "测试先生",
+  "gender": "男",
+  "age": 52,
+  "height": 172,
+  "weight": 86,
+  "bmi": 29.1,
+  "bmiCategory": "",
+  "bloodPressure": "142/88 mmHg",
+  "date": "",
+  "allergies": [],
+  "diagnoses": [],
+  "medications": [],
+  "labGroups": [
+    {
+      "title": "血液检查",
+      "results": [
+        {
+          "indicator": "空腹血糖",
+          "value": "7.8",
+          "unit": "mmol/L",
+          "reference": "3.9-6.1",
+          "status": "normal"
+        },
+        {
+          "indicator": "糖化血红蛋白(HbA1c)",
+          "value": "7.2",
+          "unit": "%",
+          "reference": "4.0-6.0",
+          "status": "normal"
+        },
+        {
+          "indicator": "总胆固醇",
+          "value": "5.8",
+          "unit": "mmol/L",
+          "reference": "<5.2",
+          "status": "normal"
+        },
+        {
+          "indicator": "LDL-C",
+          "value": "3.7",
+          "unit": "mmol/L",
+          "reference": "<3.4",
+          "status": "normal"
+        },
+        {
+          "indicator": "HDL-C",
+          "value": "0.95",
+          "unit": "mmol/L",
+          "reference": ">1.0",
+          "status": "normal"
+        },
+        {
+          "indicator": "甘油三酯",
+          "value": "2.4",
+          "unit": "mmol/L",
+          "reference": "<1.7",
+          "status": "normal"
+        },
+        {
+          "indicator": "ALT",
+          "value": "56",
+          "unit": "U/L",
+          "reference": "男: 9-50",
+          "status": "normal"
+        },
+        {
+          "indicator": "AST",
+          "value": "34",
+          "unit": "U/L",
+          "reference": "男: 15-40",
+          "status": "normal"
+        },
+        {
+          "indicator": "肌酐",
+          "value": "88",
+          "unit": "μmol/L",
+          "reference": "男: 53-106",
+          "status": "normal"
+        },
+        {
+          "indicator": "尿酸",
+          "value": "420",
+          "unit": "μmol/L",
+          "reference": "男: 208-428",
+          "status": "normal"
+        }
+      ]
+    }
+  ],
+  "lifestyles": [],
+  "nutritionNotes": [],
+  "nutritionAssessment": {
+    "bmr": 10,
+    "tdee": 1680,
+    "targetEnergy": 0,
+    "activityLevel": "久坐",
+    "macros": [
+      {
+        "name": "总能量",
+        "target": 1500,
+        "unit": "100%",
+        "percent": 1450,
+        "range": "TDEE计算+减重",
+        "source": ""
+      },
+      {
+        "name": "蛋白质",
+        "target": 75,
+        "unit": "20%",
+        "percent": 70,
+        "range": "减重+代谢病管理",
+        "source": ""
+      },
+      {
+        "name": "碳水化合物",
+        "target": 150,
+        "unit": "40%",
+        "percent": 140,
+        "range": "糖尿病控制",
+        "source": ""
+      },
+      {
+        "name": "脂肪",
+        "target": 50,
+        "unit": "30%",
+        "percent": 45,
+        "range": "高脂血症+脂肪肝",
+        "source": ""
+      },
+      {
+        "name": "膳食纤维",
+        "target": 0,
+        "unit": "—",
+        "percent": 25,
+        "range": "糖尿病+血脂管理",
+        "source": ""
+      },
+      {
+        "name": "钠",
+        "target": 0,
+        "unit": "高血压",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "钾",
+        "target": 3500,
+        "unit": "血压管理",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "钙",
+        "target": 1000,
+        "unit": "基础需求",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "维生素B12",
+        "target": 0,
+        "unit": "二甲双胍可能影响吸收",
+        "percent": 0,
+        "range": "",
+        "source": ""
+      },
+      {
+        "name": "餐次",
+        "target": 0,
+        "unit": "占比",
+        "percent": 0,
+        "range": "碳水",
+        "source": "脂肪"
+      },
+      {
+        "name": "早餐",
+        "target": 450,
+        "unit": "30%",
+        "percent": 22,
+        "range": "45g",
+        "source": "15g"
+      },
+      {
+        "name": "午餐",
+        "target": 600,
+        "unit": "40%",
+        "percent": 30,
+        "range": "60g",
+        "source": "20g"
+      },
+      {
+        "name": "晚餐",
+        "target": 450,
+        "unit": "30%",
+        "percent": 23,
+        "range": "45g",
+        "source": "15g"
+      },
+      {
+        "name": "合计",
+        "target": 1500,
+        "unit": "100%",
+        "percent": 75,
+        "range": "150g",
+        "source": "50g"
+      }
+    ],
+    "microTargets": [
+      {
+        "name": "钠",
+        "target": "< 1500 mg",
+        "reason": "高血压"
+      },
+      {
+        "name": "钾",
+        "target": "3500 mg",
+        "reason": "血压管理"
+      },
+      {
+        "name": "钙",
+        "target": "1000 mg",
+        "reason": "基础需求"
+      },
+      {
+        "name": "维生素B12",
+        "target": "关注/必要时补充",
+        "reason": "二甲双胍可能影响吸收"
+      },
+      {
+        "name": "餐次",
+        "target": "能量",
+        "reason": "占比"
+      },
+      {
+        "name": "早餐",
+        "target": "450 kcal",
+        "reason": "30%"
+      },
+      {
+        "name": "午餐",
+        "target": "600 kcal",
+        "reason": "40%"
+      },
+      {
+        "name": "晚餐",
+        "target": "450 kcal",
+        "reason": "30%"
+      },
+      {
+        "name": "合计",
+        "target": "1500 kcal",
+        "reason": "100%"
+      }
+    ],
+    "mealDistribution": [
+      {
+        "meal": "早餐",
+        "energy": 450,
+        "percent": 30,
+        "protein": 22,
+        "carbs": 45,
+        "fat": 15
+      },
+      {
+        "meal": "午餐",
+        "energy": 600,
+        "percent": 40,
+        "protein": 30,
+        "carbs": 60,
+        "fat": 20
+      },
+      {
+        "meal": "晚餐",
+        "energy": 450,
+        "percent": 30,
+        "protein": 23,
+        "carbs": 45,
+        "fat": 15
+      },
+      {
+        "meal": "合计",
+        "energy": 1500,
+        "percent": 100,
+        "protein": 75,
+        "carbs": 150,
+        "fat": 50
+      }
+    ],
+    "principles": [],
+    "recommendedFoods": [
+      {
+        "category": "主食类",
+        "items": [
+          {
+            "name": "燕麦、糙米、藜麦、全麦面包、荞麦面、红薯"
+          }
+        ]
+      },
+      {
+        "category": "蛋白质类",
+        "items": [
+          {
+            "name": "鸡胸肉、鱼类、虾、鸡蛋、豆腐、低糖酸奶、低脂奶"
+          }
+        ]
+      },
+      {
+        "category": "蔬菜类",
+        "items": [
+          {
+            "name": "西兰花、菠菜、芹菜、番茄、黄瓜、菌菇类、海带"
+          }
+        ]
+      },
+      {
+        "category": "水果类",
+        "items": [
+          {
+            "name": "苹果、梨、猕猴桃、蓝莓、草莓"
+          }
+        ]
+      }
+    ],
+    "forbiddenFoods": [],
+    "drugInteractions": [],
+    "keyNotes": [],
+    "references": []
+  },
+  "mealPlans": [
+    {
+      "weekNumber": 1,
+      "targetEnergy": 1500,
+      "targetProtein": 0,
+      "targetCarbs": 0,
+      "targetFat": 0,
+      "days": [
+        {
+          "day": "周一",
+          "meals": [
+            {
+              "type": "早餐",
+              "energy": "450 kcal",
+              "items": [
+                {
+                  "food": "燕麦牛奶粥",
+                  "amount": "燕麦片 40g + 低脂牛奶 200ml",
+                  "method": "微波/煮 3分钟",
+                  "note": "低GI"
+                },
+                {
+                  "food": "水煮蛋",
+                  "amount": "1个",
+                  "method": "煮 7分钟",
+                  "note": "优质蛋白"
+                },
+                {
+                  "food": "猕猴桃",
+                  "amount": "1个",
+                  "method": "生食",
+                  "note": "低GI水果"
+                }
+              ]
+            },
+            {
+              "type": "午餐",
+              "energy": "600 kcal",
+              "items": [
+                {
+                  "food": "杂粮饭",
+                  "amount": "糙米+燕麦米 65g（生重）",
+                  "method": "电饭煲蒸",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "清蒸鲈鱼",
+                  "amount": "100g",
+                  "method": "清蒸",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "蒜蓉西兰花",
+                  "amount": "150g",
+                  "method": "少油快炒",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌菠菜",
+                  "amount": "100g",
+                  "method": "焯水凉拌",
+                  "note": "富铁"
+                }
+              ]
+            },
+            {
+              "type": "晚餐",
+              "energy": "450 kcal",
+              "items": [
+                {
+                  "food": "荞麦面",
+                  "amount": "干面 50g",
+                  "method": "煮",
+                  "note": "低GI主食"
+                },
+                {
+                  "food": "鸡胸肉",
+                  "amount": "80g",
+                  "method": "少油煎",
+                  "note": "低脂高蛋白"
+                },
+                {
+                  "food": "蒜蓉芦笋",
+                  "amount": "120g",
+                  "method": "少油快炒",
+                  "note": "高纤维"
+                },
+                {
+                  "food": "凉拌黄瓜",
+                  "amount": "100g",
+                  "method": "凉拌",
+                  "note": "清爽低热量"
+                }
+              ]
+            }
+          ],
+          "dailyTotal": ""
+        }
+      ],
+      "weeklySummary": [
+        {
+          "day": "周一",
+          "energy": 1493,
+          "protein": 75,
+          "fat": 42,
+          "carbs": 165
+        }
+      ],
+      "weeklyAnalysis": [],
+      "shoppingList": [
+        {
+          "category": "每周必买（生鲜）",
+          "items": [
+            "蔬菜: 西兰花、菠菜、芦笋、黄瓜",
+            "蛋白质: 鲈鱼、鸡胸肉、鸡蛋",
+            "水果: 猕猴桃"
+          ]
+        }
+      ],
+      "references": []
+    }
+  ],
+  "exercisePrescription": {
+    "date": "2026-04-14",
+    "safety": {
+      "evaluations": [],
+      "contraindications": [],
+      "conclusion": ""
+    },
+    "prescription": {
+      "type": "",
+      "intensity": "",
+      "frequency": "",
+      "duration": "",
+      "targetHR": "",
+      "maxHR": 0
+    },
+    "aerobic": {
+      "exercises": "",
+      "intensity": "",
+      "frequency": "",
+      "duration": "",
+      "notes": ""
+    },
+    "resistance": {
+      "exercises": "",
+      "intensity": "",
+      "frequency": "",
+      "duration": "",
+      "notes": ""
+    },
+    "flexibility": {
+      "exercises": "",
+      "intensity": "",
+      "frequency": "",
+      "duration": "",
+      "notes": ""
+    },
+    "phases": [
+      {
+        "name": "第一阶段：适应期",
+        "weeks": "第1-4周",
+        "days": [
+          {
+            "day": "周一",
+            "content": "快走 + 拉伸",
+            "duration": "30 min",
+            "intensity": "低强度"
+          },
+          {
+            "day": "周二",
+            "content": "快走 + 弹力带训练",
+            "duration": "30 + 15 min",
+            "intensity": "低-中强度"
+          },
+          {
+            "day": "周三",
+            "content": "快走",
+            "duration": "30 min",
+            "intensity": "低强度"
+          },
+          {
+            "day": "周四",
+            "content": "快走 + 自重训练",
+            "duration": "30 + 15 min",
+            "intensity": "低-中强度"
+          },
+          {
+            "day": "周五",
+            "content": "快走 + 拉伸",
+            "duration": "30 min",
+            "intensity": "低强度"
+          },
+          {
+            "day": "周六",
+            "content": "骑行或游泳",
+            "duration": "30-40 min",
+            "intensity": "中低强度"
+          },
+          {
+            "day": "周日",
+            "content": "休息或散步",
+            "duration": "20 min",
+            "intensity": "极低强度"
+          }
+        ],
+        "weeklyTotal": ""
+      }
+    ],
+    "sessionFlow": [],
+    "nutritionSynergy": {
+      "timing": [],
+      "strategies": [],
+      "drugInteractions": [],
+      "energyBalance": ""
+    },
+    "precautions": [],
+    "stopConditions": [],
+    "progression": [],
+    "references": []
+  }
+}
