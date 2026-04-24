@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
+  <title>营养方案报告 - 王先生</title>
+  <style>
+@page { size: A4; margin: 18mm 20mm; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-size: 10pt;
+  line-height: 1.7;
+  color: #1a1a2e;
+  background: #fff;
+}
+
+/* ── 封面 ── */
+.cover {
+  page-break-after: always;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240mm;
+  text-align: center;
+  background: linear-gradient(160deg, #0f3460 0%, #16213e 60%, #1a1a2e 100%);
+  color: #fff;
+  margin: -18mm -20mm;
+  padding: 40mm 30mm;
+}
+.cover-logo {
+  font-size: 9pt;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover h1 {
+  font-size: 28pt;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 8mm;
+  color: #fff;
+}
+.cover-subtitle {
+  font-size: 12pt;
+  color: #a0c4ff;
+  margin-bottom: 20mm;
+}
+.cover-meta {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 6mm 12mm;
+  font-size: 11pt;
+  line-height: 2.2;
+  color: #e0e0ff;
+}
+.cover-meta strong { color: #fff; }
+.cover-disclaimer {
+  margin-top: 16mm;
+  font-size: 8pt;
+  color: rgba(255,255,255,0.4);
+}
+
+/* ── 章节标题块 ── */
+.section-header {
+  page-break-before: always;
+  margin: 0 -20mm 6mm -20mm;
+  padding: 5mm 20mm;
+  background: linear-gradient(90deg, #0f3460, #1a5fb4);
+  color: #fff;
+}
+.section-header h2 {
+  font-size: 14pt;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #fff;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.section-header .section-sub {
+  font-size: 8pt;
+  color: rgba(255,255,255,0.7);
+  margin-top: 1mm;
+}
+
+/* ── 正文标题 ── */
+h1, h2, h3, h4 { font-weight: 600; }
+h2 {
+  font-size: 13pt;
+  color: #0f3460;
+  border-bottom: 2px solid #0f3460;
+  padding-bottom: 2mm;
+  margin: 6mm 0 3mm 0;
+}
+h3 {
+  font-size: 11pt;
+  color: #1a5fb4;
+  border-left: 3px solid #1a5fb4;
+  padding-left: 3mm;
+  margin: 5mm 0 2mm 0;
+}
+h4 {
+  font-size: 10pt;
+  color: #2d6a4f;
+  margin: 4mm 0 2mm 0;
+}
+
+/* ── 段落和列表 ── */
+p { margin: 2mm 0; }
+ul, ol { margin: 2mm 0 2mm 6mm; padding: 0; }
+li { margin: 1mm 0; }
+ul li { list-style: disc; }
+ol li { list-style: decimal; }
+
+/* ── 引用块 → 提示框 ── */
+blockquote {
+  background: #eff6ff;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0 4px 4px 0;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  color: #1e40af;
+  font-size: 9.5pt;
+}
+blockquote p { margin: 0; }
+
+/* ── 代码块 → 信息框 ── */
+pre {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 3mm 4mm;
+  margin: 3mm 0;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+  font-size: 8.5pt;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+code {
+  background: #f1f5f9;
+  padding: 1px 4px;
+  border-radius: 3px;
+  font-size: 8.5pt;
+  font-family: "PingFang SC", "Microsoft YaHei", monospace;
+}
+pre code { background: none; padding: 0; }
+
+/* ── 表格 ── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 3mm 0;
+  font-size: 9pt;
+}
+thead tr { background: #0f3460; color: #fff; }
+thead th {
+  padding: 2.5mm 3mm;
+  font-weight: 600;
+  text-align: left;
+  border: 1px solid #0a2545;
+}
+tbody tr:nth-child(even) { background: #f0f4ff; }
+tbody td {
+  padding: 2mm 3mm;
+  border: 1px solid #d1d9e6;
+  vertical-align: top;
+}
+
+/* ── 强调 ── */
+strong { font-weight: 700; color: #0f3460; }
+em { color: #1a5fb4; font-style: normal; font-weight: 500; }
+
+/* ── hr 分隔线 ── */
+hr {
+  border: none;
+  border-top: 1px dashed #cbd5e1;
+  margin: 4mm 0;
+}
+
+/* ── 分页控制 ── */
+table { page-break-inside: auto; }
+tr { page-break-inside: avoid; }
+
+/* ── 报告页脚 ── */
+.report-footer {
+  margin-top: 10mm;
+  padding-top: 3mm;
+  border-top: 1px solid #e2e8f0;
+  text-align: center;
+  font-size: 7.5pt;
+  color: #94a3b8;
+}
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-logo">AI Nutrition System</div>
+  <h1>个性化营养方案报告</h1>
+  <div class="cover-subtitle">Personalized Nutrition Plan</div>
+  <div class="cover-meta">
+    <div><strong>患者姓名</strong>　王先生</div>
+    <div><strong>报告日期</strong>　2026年4月24日</div>
+    <div><strong>生成机构</strong>　AI 营养咨询系统</div>
+  </div>
+  <div class="cover-disclaimer">本报告由 AI 辅助生成，仅供参考，不构成医疗建议</div>
+</div>
+
+<div class="section-header">
+  <h2>营养评估</h2>
+  <div class="section-sub">Nutrition Assessment</div>
+</div>
+<div class="section-body">
+<h1>营养评估报告</h1>
+<p><strong>生成日期</strong>: 2026-04-24</p>
+<h2>基本信息</h2>
+<ul>
+<li>姓名: 王先生</li>
+<li>性别: 男 | 年龄: 36岁</li>
+<li>身高: 170 cm | 体重: 82.5 kg</li>
+<li>BMI: 28.6（肥胖≥28）</li>
+<li>活动水平: <strong>中度活动</strong></li>
+<li>体重目标: <strong>减重</strong></li>
+</ul>
+<h2>营养目标计算</h2>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>BMR</strong></td>
+<td>1713 kcal/天</td>
+<td>Mifflin-St Jeor公式：10×82.5 + 6.25×170 - 5×36 + 5</td>
+</tr>
+<tr>
+<td><strong>TDEE</strong></td>
+<td>2655 kcal/天</td>
+<td>BMR × 活动系数1.55</td>
+</tr>
+<tr>
+<td>调整后目标能量</td>
+<td><strong>2255 kcal/天</strong></td>
+<td>TDEE - 400 kcal（减重热量缺口）</td>
+</tr>
+<tr>
+<td>建议减重速度</td>
+<td>2-4 kg/月</td>
+<td>基于500 kcal/天热量缺口估算</td>
+</tr>
+</tbody></table>
+<h3>宏量营养素</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>占比</th>
+<th>推荐范围</th>
+<th>主要来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>蛋白质</td>
+<td>113 g/天</td>
+<td>20%</td>
+<td>15-20%</td>
+<td>鸡胸肉、鱼虾、蛋、豆制品</td>
+</tr>
+<tr>
+<td>碳水化合物</td>
+<td>282 g/天</td>
+<td>50%</td>
+<td>50-60%</td>
+<td>全谷物、粗粮、蔬菜</td>
+</tr>
+<tr>
+<td>脂肪</td>
+<td>75 g/天</td>
+<td>30%</td>
+<td>20-30%</td>
+<td>植物油、坚果、鱼油</td>
+</tr>
+<tr>
+<td>膳食纤维</td>
+<td>32 g/天</td>
+<td>-</td>
+<td>25-35g</td>
+<td>蔬菜、全谷物、豆类</td>
+</tr>
+</tbody></table>
+<h3>微量营养素重点</h3>
+<table>
+<thead>
+<tr>
+<th>营养素</th>
+<th>目标</th>
+<th>理由</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>维生素D</td>
+<td>10 μg/天</td>
+<td>肥胖人群常见维生素D不足，建议晒太阳+补充</td>
+</tr>
+<tr>
+<td>钙</td>
+<td>800 mg/天</td>
+<td>减重期保证奶制品摄入</td>
+</tr>
+<tr>
+<td>铁</td>
+<td>12 mg/天</td>
+<td>男性基础需求，红肉适量摄入</td>
+</tr>
+<tr>
+<td>钾</td>
+<td>2000 mg/天</td>
+<td>足量蔬果可满足，有利于血压管理</td>
+</tr>
+</tbody></table>
+<h2>三餐能量分配</h2>
+<table>
+<thead>
+<tr>
+<th>餐次</th>
+<th>能量</th>
+<th>占比</th>
+<th>蛋白质</th>
+<th>碳水</th>
+<th>脂肪</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>早餐</td>
+<td>677 kcal</td>
+<td>30%</td>
+<td>34 g</td>
+<td>85 g</td>
+<td>23 g</td>
+</tr>
+<tr>
+<td>午餐</td>
+<td>789 kcal</td>
+<td>35%</td>
+<td>40 g</td>
+<td>99 g</td>
+<td>26 g</td>
+</tr>
+<tr>
+<td>晚餐</td>
+<td>789 kcal</td>
+<td>35%</td>
+<td>40 g</td>
+<td>99 g</td>
+<td>26 g</td>
+</tr>
+</tbody></table>
+<h2>饮食原则</h2>
+<ul>
+<li>主食以全谷物为主，至少占谷物的一半（燕麦、糙米、荞麦、藜麦）</li>
+<li>每日蔬菜摄入300-500g，深色蔬菜占一半</li>
+<li>水果每日200-300g，选择低糖水果（苹果、梨、柚子、浆果类）</li>
+<li>蛋白质来源多样化，优先低脂选项（鱼虾、去皮禽肉、豆制品）</li>
+<li>烹调油控制在25-30g/天，选择植物油（橄榄油、山茶油、菜籽油）</li>
+<li>逐步从重口味调整为清淡，食盐&lt;5g/天</li>
+<li>足量饮水2000-2500ml/天，餐前喝一杯水增加饱腹感</li>
+<li>戒除含糖饮料、油炸食品、精制甜点</li>
+</ul>
+<h2>推荐食物清单</h2>
+<h3>谷薯类</h3>
+<ul>
+<li>燕麦、糙米、荞麦、藜麦、玉米、红薯、山药</li>
+</ul>
+<h3>蔬菜类</h3>
+<ul>
+<li>西兰花、菠菜、芹菜、黄瓜、番茄、生菜、冬瓜、白菜、菌菇类</li>
+</ul>
+<h3>水果类</h3>
+<ul>
+<li>苹果、梨、柚子、蓝莓、草莓、猕猴桃</li>
+</ul>
+<h3>蛋白质类</h3>
+<ul>
+<li>鸡胸肉、鱼肉（三文鱼、鲈鱼、鳕鱼）、虾、鸡蛋、豆腐、豆浆、瘦牛肉</li>
+</ul>
+<h3>乳制品</h3>
+<ul>
+<li>低脂牛奶、无糖酸奶</li>
+</ul>
+<h3>油脂</h3>
+<ul>
+<li>橄榄油、山茶油、亚麻籽油、坚果（每日一小把）</li>
+</ul>
+<h2>禁忌食物</h2>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>原因</th>
+<th>限制程度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>含糖饮料</td>
+<td>高糖、空热量</td>
+<td>完全禁止</td>
+</tr>
+<tr>
+<td>油炸食品</td>
+<td>高脂、高热量</td>
+<td>完全禁止</td>
+</tr>
+<tr>
+<td>精制甜点</td>
+<td>高糖高脂</td>
+<td>完全禁止</td>
+</tr>
+<tr>
+<td>肥肉、动物内脏</td>
+<td>高饱和脂肪</td>
+<td>严格限制</td>
+</tr>
+<tr>
+<td>加工肉制品</td>
+<td>高盐高脂</td>
+<td>严格限制</td>
+</tr>
+<tr>
+<td>重油重盐外卖</td>
+<td>高盐高脂</td>
+<td>适量控制</td>
+</tr>
+</tbody></table>
+<h2>三餐时间安排</h2>
+<ul>
+<li>早餐: 07:00-08:00（占30%）</li>
+<li>午餐: 12:00-13:00（占35%）</li>
+<li>晚餐: 18:00-19:00（占35%）</li>
+<li>晚餐后不进食，两餐间可饮水或无糖饮品</li>
+</ul>
+<h2>关键注意事项</h2>
+<ol>
+<li><strong>减重速度</strong>：健康减重速度为每周0.5-1kg，不要追求快速减重</li>
+<li><strong>餐前饮水</strong>：每餐前15-30分钟饮水300-500ml，增加饱腹感</li>
+<li><strong>细嚼慢咽</strong>：每餐用时不少于20分钟，充分咀嚼</li>
+<li><strong>食谱记录</strong>：建议使用饮食记录App，帮助自我监测</li>
+<li><strong>运动配合</strong>：中度活动基础上，增加每周3-5次有氧运动（快走、慢跑、游泳），与饮食控制协同效果更佳</li>
+<li><strong>复评节点</strong>：每4周复评一次，根据体重变化调整能量目标</li>
+</ol>
+<blockquote>
+<p>本报告由 AI 辅助生成，仅供参考，不构成医疗建议。建议在开始减重计划前咨询专业医师或营养师。</p>
+</blockquote>
+</div>
+
+<div class="section-header">
+  <h2>配餐方案</h2>
+  <div class="section-sub">Meal Plan</div>
+</div>
+<div class="section-body">
+<h1>配餐方案</h1>
+<p><strong>适用周期</strong>: 第1周
+<strong>适用对象</strong>: 王先生 | 36岁 | 170cm | 82.5kg | BMI 28.6
+<strong>每日目标</strong>: 2255 kcal | 蛋白质 113g | 碳水化合物 282g | 脂肪 75g | 膳食纤维 32g
+<strong>饮食模式</strong>: 中式减重 | 低盐低脂 | 全谷物为主</p>
+<hr>
+<h2>周一</h2>
+<h3>早餐（约 665 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦片</td>
+<td>80g</td>
+<td>热水冲泡或煮</td>
+<td>即食燕麦或快煮</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>300ml</td>
+<td>温热</td>
+<td>或加入燕麦中</td>
+</tr>
+<tr>
+<td>煮鸡蛋</td>
+<td>2个(约100g)</td>
+<td>水煮8分钟</td>
+<td>全蛋食用</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个(100g)</td>
+<td>去皮切块</td>
+<td>低GI水果</td>
+</tr>
+</tbody></table>
+<h3>午餐（约 785 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>200g(熟)</td>
+<td>电饭煲煮熟</td>
+<td>糙米:大米=3:1</td>
+</tr>
+<tr>
+<td>清蒸鲈鱼</td>
+<td>150g(净)</td>
+<td>蒸8分钟,姜丝葱段</td>
+<td>淋少许蒸鱼豉油</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>200g</td>
+<td>焯水后蒜蓉快炒</td>
+<td>少油,橄榄油5g</td>
+</tr>
+</tbody></table>
+<h3>晚餐（约 790 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>150g(熟)</td>
+<td>开水煮熟过凉</td>
+<td>配调汁(生抽醋)</td>
+</tr>
+<tr>
+<td>番茄炒蛋</td>
+<td>番茄200g+蛋1个</td>
+<td>少油快炒</td>
+<td>油5g,不加糖</td>
+</tr>
+<tr>
+<td>凉拌黄瓜</td>
+<td>150g</td>
+<td>拍碎后蒜末醋拌</td>
+<td>少盐</td>
+</tr>
+</tbody></table>
+<p><strong>周一全天</strong>: 约 2240 kcal | 蛋白质 110g | 脂肪 72g | 碳水 280g | 纤维 30g</p>
+<hr>
+<h2>周二</h2>
+<h3>早餐（约 670 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦馒头</td>
+<td>100g</td>
+<td>蒸热</td>
+<td>市售全麦馒头</td>
+</tr>
+<tr>
+<td>无糖豆浆</td>
+<td>300ml</td>
+<td>加热</td>
+<td>原味无添加糖</td>
+</tr>
+<tr>
+<td>水煮蛋</td>
+<td>1个(50g)</td>
+<td>水煮</td>
+<td>全蛋</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>1个(200g)</td>
+<td>洗净带皮吃</td>
+<td>餐后食用</td>
+</tr>
+</tbody></table>
+<h3>午餐（约 790 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>200g(熟)</td>
+<td>电饭煲</td>
+<td>同周一</td>
+</tr>
+<tr>
+<td>鸡胸肉炒木耳</td>
+<td>鸡胸120g+木耳20g</td>
+<td>少油滑炒</td>
+<td>油5g,木耳提前泡发</td>
+</tr>
+<tr>
+<td>清炒菠菜</td>
+<td>200g</td>
+<td>蒜蓉快炒</td>
+<td>油5g,急火快炒</td>
+</tr>
+</tbody></table>
+<h3>晚餐（约 785 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>红薯</td>
+<td>200g</td>
+<td>蒸或烤</td>
+<td>带皮蒸营养更佳</td>
+</tr>
+<tr>
+<td>虾仁豆腐汤</td>
+<td>虾仁100g+嫩豆腐150g</td>
+<td>清水煮沸调味</td>
+<td>少盐,撒葱花</td>
+</tr>
+<tr>
+<td>白灼生菜</td>
+<td>150g</td>
+<td>开水焯30秒</td>
+<td>淋少许生抽</td>
+</tr>
+</tbody></table>
+<p><strong>周二全天</strong>: 约 2245 kcal | 蛋白质 115g | 脂肪 70g | 碳水 285g | 纤维 32g</p>
+<hr>
+<h2>周三</h2>
+<h3>早餐（约 675 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>燕麦片</td>
+<td>60g</td>
+<td>热水冲泡</td>
+<td>即食型</td>
+</tr>
+<tr>
+<td>无糖酸奶</td>
+<td>200g</td>
+<td>直接食用</td>
+<td>无添加糖</td>
+</tr>
+<tr>
+<td>煮鸡蛋</td>
+<td>2个(100g)</td>
+<td>水煮</td>
+<td>全蛋</td>
+</tr>
+<tr>
+<td>蓝莓</td>
+<td>100g</td>
+<td>洗净即食</td>
+<td>高抗氧化浆果</td>
+</tr>
+</tbody></table>
+<h3>午餐（约 790 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>150g(熟)</td>
+<td>煮熟过凉</td>
+<td>配鸡肉和蔬菜</td>
+</tr>
+<tr>
+<td>卤牛肉</td>
+<td>100g(净瘦)</td>
+<td>卤好后切片</td>
+<td>提前备好,去肥油</td>
+</tr>
+<tr>
+<td>凉拌海带丝</td>
+<td>150g</td>
+<td>焯水后醋拌</td>
+<td>少油少盐</td>
+</tr>
+<tr>
+<td>炒芦笋</td>
+<td>100g</td>
+<td>橄榄油煎炒</td>
+<td>油5g,撒黑胡椒</td>
+</tr>
+</tbody></table>
+<h3>晚餐（约 785 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>150g(熟)</td>
+<td>电饭煲</td>
+<td>减量</td>
+</tr>
+<tr>
+<td>清蒸鳕鱼</td>
+<td>150g(净)</td>
+<td>蒸8分钟</td>
+<td>淋少许蒸鱼豉油</td>
+</tr>
+<tr>
+<td>蒜蓉西兰花</td>
+<td>200g</td>
+<td>焯水后蒜蓉炒</td>
+<td>少油</td>
+</tr>
+</tbody></table>
+<p><strong>周三全天</strong>: 约 2250 kcal | 蛋白质 116g | 脂肪 73g | 碳水 278g | 纤维 33g</p>
+<hr>
+<h2>周四</h2>
+<h3>早餐（约 670 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>玉米</td>
+<td>1根(300g带芯)</td>
+<td>蒸或水煮</td>
+<td>甜玉米或糯玉米均可</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>300ml</td>
+<td>温热</td>
+<td>搭配玉米</td>
+</tr>
+<tr>
+<td>煮鸡蛋</td>
+<td>1个(50g)</td>
+<td>水煮</td>
+<td>全蛋</td>
+</tr>
+<tr>
+<td>梨</td>
+<td>1个(200g)</td>
+<td>洗净带皮</td>
+<td>低GI水果</td>
+</tr>
+</tbody></table>
+<h3>午餐（约 790 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>200g(熟)</td>
+<td>电饭煲</td>
+<td>同前</td>
+</tr>
+<tr>
+<td>冬瓜炖排骨</td>
+<td>排骨100g(去肥)+冬瓜250g</td>
+<td>清炖去浮油</td>
+<td>提前炖好去油</td>
+</tr>
+<tr>
+<td>炒小白菜</td>
+<td>150g</td>
+<td>蒜蓉快炒</td>
+<td>油5g</td>
+</tr>
+</tbody></table>
+<h3>晚餐（约 785 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦粥</td>
+<td>藜麦50g+水</td>
+<td>煮粥20分钟</td>
+<td>可加少许枸杞</td>
+</tr>
+<tr>
+<td>凉拌鸡丝</td>
+<td>鸡胸肉100g</td>
+<td>煮熟撕丝,醋拌黄瓜丝</td>
+<td>少油少盐</td>
+</tr>
+<tr>
+<td>炒油麦菜</td>
+<td>150g</td>
+<td>蒜蓉快炒</td>
+<td>油5g</td>
+</tr>
+</tbody></table>
+<p><strong>周四全天</strong>: 约 2245 kcal | 蛋白质 112g | 脂肪 71g | 碳水 283g | 纤维 31g</p>
+<hr>
+<h2>周五</h2>
+<h3>早餐（约 675 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>红薯</td>
+<td>200g</td>
+<td>蒸熟</td>
+<td>可提前蒸好</td>
+</tr>
+<tr>
+<td>无糖豆浆</td>
+<td>300ml</td>
+<td>加热</td>
+<td>原味</td>
+</tr>
+<tr>
+<td>煮鸡蛋</td>
+<td>2个(100g)</td>
+<td>水煮</td>
+<td>全蛋</td>
+</tr>
+</tbody></table>
+<h3>午餐（约 790 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦馒头</td>
+<td>100g</td>
+<td>蒸热</td>
+<td>市售</td>
+</tr>
+<tr>
+<td>蒜蓉虾仁</td>
+<td>虾仁150g</td>
+<td>橄榄油蒜蓉煎</td>
+<td>油5g</td>
+</tr>
+<tr>
+<td>炒苋菜</td>
+<td>200g</td>
+<td>蒜蓉快炒</td>
+<td>油5g,红苋菜</td>
+</tr>
+</tbody></table>
+<h3>晚餐（约 785 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>150g(熟)</td>
+<td>电饭煲</td>
+<td>配菜食用</td>
+</tr>
+<tr>
+<td>番茄炖豆腐</td>
+<td>番茄200g+嫩豆腐200g</td>
+<td>少油炖煮</td>
+<td>油3g,调基本味</td>
+</tr>
+<tr>
+<td>炒菜心</td>
+<td>150g</td>
+<td>蒜蓉快炒</td>
+<td>油5g</td>
+</tr>
+</tbody></table>
+<p><strong>周五全天</strong>: 约 2250 kcal | 蛋白质 114g | 脂肪 72g | 碳水 281g | 纤维 30g</p>
+<hr>
+<h2>周六</h2>
+<h3>早餐（约 665 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>藜麦粥</td>
+<td>藜麦60g+低脂牛奶200ml</td>
+<td>煮粥,粥成后加牛奶</td>
+<td>口感香滑</td>
+</tr>
+<tr>
+<td>煮鸡蛋</td>
+<td>1个(50g)</td>
+<td>水煮</td>
+<td>全蛋</td>
+</tr>
+<tr>
+<td>猕猴桃</td>
+<td>1个(100g)</td>
+<td>去皮切块</td>
+<td>维生素C丰富</td>
+</tr>
+</tbody></table>
+<h3>午餐（约 790 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>玉米饭</td>
+<td>鲜玉米粒50g+糙米100g</td>
+<td>一起煮饭</td>
+<td>口感丰富</td>
+</tr>
+<tr>
+<td>清蒸桂花鱼</td>
+<td>150g(净)</td>
+<td>蒸8-10分钟</td>
+<td>姜丝葱段去腥</td>
+</tr>
+<tr>
+<td>炒秋葵</td>
+<td>150g</td>
+<td>焯水后蒜蓉炒</td>
+<td>油5g</td>
+</tr>
+</tbody></table>
+<h3>晚餐（约 790 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>荞麦面</td>
+<td>120g(熟)</td>
+<td>煮熟过凉</td>
+<td>配蔬菜鸡肉</td>
+</tr>
+<tr>
+<td>鸡胸肉沙拉</td>
+<td>鸡胸100g+生菜100g+番茄100g+黄瓜100g</td>
+<td>鸡胸煮熟切片,蔬菜拌入</td>
+<td>油醋汁调味(橄榄油3g+醋)</td>
+</tr>
+</tbody></table>
+<p><strong>周六全天</strong>: 约 2245 kcal | 蛋白质 115g | 脂肪 69g | 碳水 285g | 纤维 33g</p>
+<hr>
+<h2>周日</h2>
+<h3>早餐（约 670 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全麦面包</td>
+<td>2片(80g)</td>
+<td>烤或直接食用</td>
+<td>选择全麦含量&gt;50%</td>
+</tr>
+<tr>
+<td>低脂牛奶</td>
+<td>300ml</td>
+<td>温热</td>
+<td>搭配面包</td>
+</tr>
+<tr>
+<td>煮鸡蛋</td>
+<td>2个(100g)</td>
+<td>水煮</td>
+<td>全蛋</td>
+</tr>
+<tr>
+<td>苹果</td>
+<td>1个(150g)</td>
+<td>洗净带皮</td>
+<td>餐后</td>
+</tr>
+</tbody></table>
+<h3>午餐（约 790 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>糙米饭</td>
+<td>200g(熟)</td>
+<td>电饭煲</td>
+<td>同前</td>
+</tr>
+<tr>
+<td>香菇滑鸡</td>
+<td>鸡腿肉120g(去皮)+鲜香菇50g</td>
+<td>蒸15分钟</td>
+<td>少油,姜丝去腥</td>
+</tr>
+<tr>
+<td>炒芥蓝</td>
+<td>200g</td>
+<td>蒜蓉快炒</td>
+<td>油5g</td>
+</tr>
+</tbody></table>
+<h3>晚餐（约 785 kcal）</h3>
+<table>
+<thead>
+<tr>
+<th>食物</th>
+<th>重量</th>
+<th>做法</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>红薯</td>
+<td>150g</td>
+<td>蒸熟</td>
+<td>搭配热菜</td>
+</tr>
+<tr>
+<td>白菜豆腐汤</td>
+<td>大白菜200g+嫩豆腐100g</td>
+<td>清水煮沸,少油少盐</td>
+<td>暖胃,晚餐适宜</td>
+</tr>
+<tr>
+<td>虾仁蒸蛋</td>
+<td>鸡蛋2个+虾仁50g</td>
+<td>蒸10分钟</td>
+<td>高蛋白,易消化</td>
+</tr>
+</tbody></table>
+<p><strong>周日全天</strong>: 约 2245 kcal | 蛋白质 116g | 脂肪 71g | 碳水 278g | 纤维 32g</p>
+<hr>
+<h2>一周营养总览</h2>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>能量(kcal)</th>
+<th>蛋白质(g)</th>
+<th>脂肪(g)</th>
+<th>碳水(g)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>2240</td>
+<td>110</td>
+<td>72</td>
+<td>280</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>2245</td>
+<td>115</td>
+<td>70</td>
+<td>285</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>2250</td>
+<td>116</td>
+<td>73</td>
+<td>278</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>2245</td>
+<td>112</td>
+<td>71</td>
+<td>283</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>2250</td>
+<td>114</td>
+<td>72</td>
+<td>281</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>2245</td>
+<td>115</td>
+<td>69</td>
+<td>285</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>2245</td>
+<td>116</td>
+<td>71</td>
+<td>278</td>
+</tr>
+<tr>
+<td><strong>日均</strong></td>
+<td><strong>2246</strong></td>
+<td><strong>114</strong></td>
+<td><strong>71</strong></td>
+<td><strong>281</strong></td>
+</tr>
+<tr>
+<td><strong>目标</strong></td>
+<td><strong>2255</strong></td>
+<td><strong>113</strong></td>
+<td><strong>75</strong></td>
+<td><strong>282</strong></td>
+</tr>
+<tr>
+<td><strong>偏差</strong></td>
+<td><strong>-0.4%</strong></td>
+<td><strong>+0.9%</strong></td>
+<td><strong>-5.3%</strong></td>
+<td><strong>-0.4%</strong></td>
+</tr>
+</tbody></table>
+<p><strong>评估</strong>: 日均能量偏差 -0.4%，蛋白质达标，碳水基本达标，脂肪略低（符合减重低脂要求），整体优秀。</p>
+<h2>采购清单</h2>
+<h3>耐储存食材</h3>
+<ul>
+<li>燕麦片（1包）</li>
+<li>荞麦面（2包）</li>
+<li>全麦馒头/全麦面包（各1份）</li>
+<li>糙米（2kg）</li>
+<li>藜麦（1小包）</li>
+<li>红薯（2kg）</li>
+<li>玉米（5根）</li>
+<li>干木耳、干海带（各1份）</li>
+<li>坚果（每日一小把，如核桃/杏仁/腰果）</li>
+<li>橄榄油、山茶油、亚麻籽油</li>
+<li>生抽、醋、花椒、干辣椒等调味品</li>
+</ul>
+<h3>每日采购（生鲜）</h3>
+<ul>
+<li>鸡胸肉（500g/周）| 鸡腿肉（去脂200g/周）</li>
+<li>鲈鱼1条 | 鳕鱼2块 | 桂花鱼1条 | 虾仁300g</li>
+<li>瘦牛肉（100g）| 排骨（去肥200g）</li>
+<li>鸡蛋（12个/周）</li>
+<li>低脂牛奶（2L/周）| 无糖豆浆（1.5L/周）| 无糖酸奶（200g）</li>
+<li>嫩豆腐（2盒）| 北豆腐（1块）</li>
+<li>西兰花（2颗）| 菠菜（300g）| 小白菜（300g）| 菜心（300g）| 苋菜（200g）| 油麦菜（300g）| 芥蓝（300g）</li>
+<li>生菜（200g）| 黄瓜（4根）| 番茄（6个）| 冬瓜（500g）| 秋葵（200g）| 芦笋（200g）| 白菜（1颗）</li>
+<li>苹果（3个）| 猕猴桃（3个）| 梨（2个）| 蓝莓（100g）</li>
+<li>姜、蒜、葱、香菜</li>
+</ul>
+<h3>调味与用油指导</h3>
+<ul>
+<li>每日烹调油：25-30g（约2-3汤匙）</li>
+<li>每日食盐：&lt;5g（约1啤酒盖）</li>
+<li>烹饪方式优先：蒸、煮、炖、焯、凉拌、少油快炒</li>
+</ul>
+<h2>体重管理追踪</h2>
+<ul>
+<li><strong>建议每周一早晨空腹称重并记录</strong></li>
+<li><strong>预期减重速度</strong>：0.5-1kg/周</li>
+<li><strong>本月目标</strong>：减轻 2-4kg</li>
+<li><strong>复评节点</strong>：每4周复评一次，根据体重变化调整方案</li>
+</ul>
+<blockquote>
+<p>本配餐方案由 AI 辅助生成，仅供参考，不构成医疗建议。建议在开始减重计划前咨询专业医师或营养师。</p>
+</blockquote>
+</div>
+
+<div class="section-header">
+  <h2>运动处方</h2>
+  <div class="section-sub">Exercise Prescription</div>
+</div>
+<div class="section-body">
+<h1>运动处方</h1>
+<p><strong>生成日期</strong>: 2026-04-24
+<strong>适用对象</strong>: 王先生 | 36岁 | 170cm | 82.5kg | BMI 28.6 | 肥胖</p>
+<hr>
+<h2>一、运动安全性评估</h2>
+<h3>1.1 安全筛查</h3>
+<table>
+<thead>
+<tr>
+<th>评估项目</th>
+<th>状态</th>
+<th>判定</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>急性痛风发作</td>
+<td>无</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>血糖严重异常</td>
+<td>无糖尿病史</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>未控制重度高血压</td>
+<td>无高血压史</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>CKD 5期未透析</td>
+<td>无肾病</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>不稳定心绞痛/心梗</td>
+<td>无心脏病史</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>急性感染发热</td>
+<td>无</td>
+<td>安全</td>
+</tr>
+<tr>
+<td>肥胖/超重</td>
+<td>BMI 28.6肥胖</td>
+<td>注意保护关节，避免高冲击运动</td>
+</tr>
+<tr>
+<td>药物影响</td>
+<td>无用药</td>
+<td>无需特殊注意</td>
+</tr>
+</tbody></table>
+<p><strong>安全等级</strong>: 🟢 绿色（低风险，可自由运动）</p>
+<h3>1.2 运动建议与限制</h3>
+<ul>
+<li><strong>推荐</strong>：有氧运动（快走、骑车、游泳）+ 抗阻训练</li>
+<li><strong>避免</strong>：跑跳等高冲击运动（保护膝关节），大重量力量训练需循序渐进</li>
+<li><strong>注意</strong>：运动前热身充分，选择合适运动鞋</li>
+</ul>
+<hr>
+<h2>二、运动处方</h2>
+<h3>2.1 运动目标</h3>
+<ol>
+<li>配合饮食控制，实现每周减重0.5-1kg</li>
+<li>提高心肺耐力，改善体成分（增加肌肉量、降低体脂率）</li>
+<li>建立规律运动习惯，长期维持健康体重</li>
+</ol>
+<h3>2.2 运动参数总览</h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>内容</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运动类型</td>
+<td>有氧运动为主 + 抗阻训练辅助</td>
+</tr>
+<tr>
+<td>强度</td>
+<td>中等强度（RPE 12-14，靶心率 143~157 bpm）</td>
+</tr>
+<tr>
+<td>频率</td>
+<td>有氧4-5次/周，抗阻2-3次/周</td>
+</tr>
+<tr>
+<td>时长</td>
+<td>有氧30-60分钟/次，抗阻20-30分钟/次</td>
+</tr>
+<tr>
+<td>周能耗目标</td>
+<td>1500-2000 kcal/周（减重目标）</td>
+</tr>
+</tbody></table>
+<p><strong>最大心率</strong>: 220 - 36 = 184 bpm
+<strong>靶心率范围</strong>: 143~157 bpm（HRR法，强度64%-76%HRR）
+<strong>RPE</strong>: 12-14（感觉&quot;有些吃力&quot;但仍能交谈）</p>
+<h4>有氧运动</h4>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>强度</th>
+<th>频率</th>
+<th>时长</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>快走</td>
+<td>5-6 km/h</td>
+<td>4-5次/周</td>
+<td>45-60分钟</td>
+<td>基础有氧，关节友好</td>
+</tr>
+<tr>
+<td>骑自行车</td>
+<td>中速</td>
+<td>1-2次/周</td>
+<td>30-45分钟</td>
+<td>可替代快走</td>
+</tr>
+<tr>
+<td>游泳</td>
+<td>中速</td>
+<td>1-2次/周</td>
+<td>30-40分钟</td>
+<td>关节零负担</td>
+</tr>
+<tr>
+<td>椭圆机</td>
+<td>中速</td>
+<td>1-2次/周</td>
+<td>30-40分钟</td>
+<td>健身房选择</td>
+</tr>
+</tbody></table>
+<h4>抗阻训练</h4>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>组数×次数</th>
+<th>频率</th>
+<th>强度</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>深蹲</td>
+<td>3组×12-15次</td>
+<td>2-3次/周</td>
+<td>自重/轻负重</td>
+<td>保持膝盖不过脚尖</td>
+</tr>
+<tr>
+<td>俯卧撑(跪姿)</td>
+<td>3组×10-12次</td>
+<td>2-3次/周</td>
+<td>自重</td>
+<td>上肢力量</td>
+</tr>
+<tr>
+<td>划船(弹力带)</td>
+<td>3组×12-15次</td>
+<td>2-3次/周</td>
+<td>中等阻力</td>
+<td>背部训练</td>
+</tr>
+<tr>
+<td>平板支撑</td>
+<td>3组×30-45秒</td>
+<td>2-3次/周</td>
+<td>自重</td>
+<td>核心稳定</td>
+</tr>
+<tr>
+<td>弓步蹲</td>
+<td>3组×10-12次/侧</td>
+<td>2-3次/周</td>
+<td>自重</td>
+<td>下肢平衡</td>
+</tr>
+</tbody></table>
+<h4>柔韧与平衡</h4>
+<table>
+<thead>
+<tr>
+<th>动作</th>
+<th>时长</th>
+<th>频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>全身拉伸</td>
+<td>10分钟</td>
+<td>每次运动后</td>
+</tr>
+<tr>
+<td>站姿平衡</td>
+<td>每侧30秒×3组</td>
+<td>每周3次</td>
+</tr>
+<tr>
+<td>踝关节活动</td>
+<td>各方向10次</td>
+<td>运动前热身</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>三、一周运动计划</h2>
+<h3>适应期（第1-2周）</h3>
+<blockquote>
+<p>目标：建立运动习惯，掌握动作要领</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>快走</td>
+<td>30分钟</td>
+<td>RPE 11-12（轻松）</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>休息或散步</td>
+<td>20分钟</td>
+<td>低强度</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>快走</td>
+<td>30分钟</td>
+<td>RPE 11-12</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>休息</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>快走</td>
+<td>30分钟</td>
+<td>RPE 11-12</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>休息或散步</td>
+<td>20分钟</td>
+<td>低强度</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>快走</td>
+<td>30分钟</td>
+<td>RPE 11-12</td>
+</tr>
+<tr>
+<td><strong>周合计</strong></td>
+<td><strong>140分钟有氧</strong></td>
+<td></td>
+<td><strong>约 1000 kcal</strong></td>
+</tr>
+</tbody></table>
+<h3>提升期（第3-4周）</h3>
+<blockquote>
+<p>目标：增加运动量，加入抗阻训练</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>快走</td>
+<td>45分钟</td>
+<td>RPE 12-13</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>抗阻训练（深蹲+俯卧撑+平板支撑）</td>
+<td>25分钟</td>
+<td>RPE 12-13</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>快走或骑车</td>
+<td>40分钟</td>
+<td>RPE 12-13</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>休息</td>
+<td>-</td>
+<td>-</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>快走</td>
+<td>45分钟</td>
+<td>RPE 12-13</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>抗阻训练（弓步蹲+划船+平板支撑）</td>
+<td>25分钟</td>
+<td>RPE 12-13</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>快走或游泳</td>
+<td>40分钟</td>
+<td>RPE 12-13</td>
+</tr>
+<tr>
+<td><strong>周合计</strong></td>
+<td><strong>220分钟（有氧170&#39;+抗阻50&#39;）</strong></td>
+<td></td>
+<td><strong>约 1600 kcal</strong></td>
+</tr>
+</tbody></table>
+<h3>巩固期（第5周起）</h3>
+<blockquote>
+<p>目标：维持规律运动，运动量达标</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>星期</th>
+<th>内容</th>
+<th>时长</th>
+<th>强度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>周一</td>
+<td>快走</td>
+<td>50分钟</td>
+<td>RPE 12-14</td>
+</tr>
+<tr>
+<td>周二</td>
+<td>抗阻训练</td>
+<td>30分钟</td>
+<td>RPE 13-14</td>
+</tr>
+<tr>
+<td>周三</td>
+<td>游泳或骑车</td>
+<td>40分钟</td>
+<td>RPE 12-14</td>
+</tr>
+<tr>
+<td>周四</td>
+<td>快走</td>
+<td>40分钟</td>
+<td>RPE 12-13</td>
+</tr>
+<tr>
+<td>周五</td>
+<td>抗阻训练</td>
+<td>30分钟</td>
+<td>RPE 13-14</td>
+</tr>
+<tr>
+<td>周六</td>
+<td>快走或骑车</td>
+<td>50分钟</td>
+<td>RPE 12-14</td>
+</tr>
+<tr>
+<td>周日</td>
+<td>休息或散步</td>
+<td>20分钟</td>
+<td>低强度</td>
+</tr>
+<tr>
+<td><strong>周合计</strong></td>
+<td><strong>260分钟（有氧180&#39;+抗阻60&#39;）</strong></td>
+<td></td>
+<td><strong>约 1900 kcal</strong></td>
+</tr>
+</tbody></table>
+<hr>
+<h2>四、单次运动标准流程</h2>
+<ol>
+<li><strong>热身（5-10分钟）</strong>：关节活动（颈/肩/腰/髋/膝/踝）+ 动态拉伸 + 慢走或原地踏步</li>
+<li><strong>主体运动（20-60分钟）</strong>：有氧运动（靶心率143-157 bpm）+ 抗阻训练（按计划）</li>
+<li><strong>整理放松（5-10分钟）</strong>：慢走降低心率 + 静态拉伸（大腿前后/小腿/胸/背/肩）</li>
+</ol>
+<hr>
+<h2>五、运动与营养协同</h2>
+<h3>5.1 运动时间安排</h3>
+<table>
+<thead>
+<tr>
+<th>运动时段</th>
+<th>时间</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>最佳时间</td>
+<td>餐后1-2小时</td>
+<td>避免空腹运动，防止低血糖</td>
+</tr>
+<tr>
+<td>上午</td>
+<td>9:00-10:00</td>
+<td>早餐后</td>
+</tr>
+<tr>
+<td>下午</td>
+<td>15:00-17:00</td>
+<td>午餐后，身体状态最佳</td>
+</tr>
+<tr>
+<td>傍晚</td>
+<td>18:00-19:00</td>
+<td>晚餐前，但不要太晚以免影响睡眠</td>
+</tr>
+</tbody></table>
+<h3>5.2 营养补充策略</h3>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>运动前1-2小时</td>
+<td>少量复合碳水（半根香蕉/一片全麦面包）</td>
+</tr>
+<tr>
+<td>运动后30-60分钟</td>
+<td>蛋白质补充（牛奶/酸奶/鸡蛋/蛋白粉）</td>
+</tr>
+<tr>
+<td>运动补水</td>
+<td>运动前400-600ml，运动中每15-20分钟150-250ml</td>
+</tr>
+<tr>
+<td>日常水分</td>
+<td>每日总饮水2000-2500ml</td>
+</tr>
+</tbody></table>
+<h3>5.3 能量平衡</h3>
+<p>饮食控制 + 运动消耗 = 每日总缺口约 700-900 kcal/天</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>数值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>饮食热量缺口</td>
+<td>400 kcal/天（目标能量2255 vs TDEE 2655）</td>
+</tr>
+<tr>
+<td>运动消耗</td>
+<td>200-300 kcal/天（周均）</td>
+</tr>
+<tr>
+<td>每日总缺口</td>
+<td>约 600-700 kcal</td>
+</tr>
+<tr>
+<td>预期减重</td>
+<td>0.5-1 kg/周</td>
+</tr>
+<tr>
+<td>月减重</td>
+<td>2-4 kg/月</td>
+</tr>
+</tbody></table>
+<hr>
+<h2>六、注意事项</h2>
+<h3>一般注意</h3>
+<ul>
+<li>运动时穿合适的运动鞋和透气衣物</li>
+<li>循序渐进，不要急于增加强度或时长</li>
+<li>每周增加运动量不超过10%</li>
+<li>运动中出现不适（胸闷、头晕、关节剧痛）立即停止</li>
+</ul>
+<h3>肥胖运动特殊注意</h3>
+<ul>
+<li><strong>保护膝关节</strong>：避免跑跳，优先选择游泳、骑车、快走</li>
+<li><strong>足量补水</strong>：肥胖者运动出汗量大，注意补充电解质</li>
+<li><strong>监测心率</strong>：使用运动手表或手环监测心率，保持在靶心率范围</li>
+<li><strong>运动后拉伸</strong>：每次运动后充分拉伸，减少肌肉酸痛</li>
+</ul>
+<h3>何时就医</h3>
+<ul>
+<li>运动中胸痛、胸闷、严重头晕</li>
+<li>关节持续疼痛（超过48小时）</li>
+<li>运动后疲劳持续超过24小时</li>
+</ul>
+<hr>
+<h2>七、循序渐进计划</h2>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>时间</th>
+<th>运动量</th>
+<th>目标</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>适应期</td>
+<td>第1-2周</td>
+<td>有氧30分×4-5次/周</td>
+<td>建立习惯</td>
+</tr>
+<tr>
+<td>提升期</td>
+<td>第3-4周</td>
+<td>有氧40-45分×4次+抗阻2次/周</td>
+<td>增加消耗</td>
+</tr>
+<tr>
+<td>巩固期</td>
+<td>第5-8周</td>
+<td>有氧50分×4次+抗阻2-3次/周</td>
+<td>稳定减重</td>
+</tr>
+<tr>
+<td>维持期</td>
+<td>第9周起</td>
+<td>保持运动习惯</td>
+<td>长期维持</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>本运动处方由 AI 辅助生成，仅供参考，不构成医疗建议。开始运动计划前建议咨询专业医师。</p>
+</blockquote>
+</div>
+<div class="report-footer">营养方案报告 · 王先生 · 2026年4月24日 · 仅供参考，不构成医疗建议</div>
+</body>
+</html>

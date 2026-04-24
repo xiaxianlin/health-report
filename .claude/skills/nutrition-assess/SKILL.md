@@ -12,7 +12,7 @@ disable-model-invocation: true
 ## 输入
 
 - `$ARGUMENTS`：健康档案文件路径
-- 留空则读取 `results/<用户名>/健康档案.md`
+- 留空则读取 `/tmp/<用户名>/健康档案.md`
 
 ## 处理步骤
 
@@ -89,7 +89,7 @@ console.log('Macros:', calcMacroGrams(1620, 22, 53, 25));
 
 ### 步骤 8: 保存报告
 
-保存到 `results/<用户名>/营养评估.md`。完成后自动执行 `/data-transform <用户名>`。
+保存到 `/tmp/<用户名>/营养评估.md`。
 
 ## 注意事项
 

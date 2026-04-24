@@ -21,11 +21,12 @@ disable-model-invocation: true
 - 如果参数指定了用户名，使用该用户
 - 如果留空，使用 Bash 列出 `results/` 下所有不包含 `_` 的子目录（即工作目录），逐一处理每个用户
 
-### 步骤 2: 运行数据转换脚本
+### 步骤 2: 复制中间文件 + 运行转换
 
-用 Bash 执行：
+先用 Bash 复制 `/tmp/<用户名>/` 的 Markdown 文件到 `results/<用户名>/`，然后运行脚本：
 
 ```bash
+mkdir -p results/<用户名> && cp /tmp/<用户名>/*.md results/<用户名>/
 node scripts/data-transform.js <用户名>
 ```
 
@@ -37,7 +38,13 @@ node scripts/data-transform.js <用户名>
 5. 输出 `data.json`
 6. 执行 schema 验证
 
-### 步骤 3: 报告结果
+### 步骤 3: 清理中间产物
+
+```bash
+rm -rf /tmp/<用户名>/ results/<用户名>/
+```
+
+### 步骤 4: 报告结果
 
 读取生成的 `data.json`，向用户报告：
 - 患者姓名

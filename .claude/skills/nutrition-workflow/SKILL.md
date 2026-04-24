@@ -18,16 +18,13 @@ disable-model-invocation: true
 ### Phase 1: 信息收集
 
 **有文件** → Read 读取（PDF/图片），提取：基本信息、疾病诊断、异常指标、用药、过敏
-**无文件** → 分轮次引导用户输入：
-1. 性别/年龄/身高/体重/腰围/慢病/过敏
-2. 检查指标（血糖/血脂/肝肾功能）和用药
-3. 活动水平/体重目标/饮食偏好/烹饪条件
+**无文件** → 使用 `/collect-info` skill 通过对话逐轮采集信息
 
 ### Phase 2: 健康档案生成
 
 生成结构化健康档案，包含：基本信息、健康状况（诊断/异常/过敏/用药）、营养风险评估
 
-保存到 `results/<姓名>/健康档案.md`，**向用户展示并确认后继续**。
+保存到 `/tmp/<姓名>/健康档案.md`，**向用户展示并确认后继续**。
 
 ### Phase 3: 检索营养方案参考
 
@@ -41,7 +38,7 @@ disable-model-invocation: true
 3. 药物-营养交互检查
 4. 可用 `scripts/calculate-nutrition.js` 验证计算结果
 
-生成完整报告（能量/宏量营养素/微量营养素/饮食原则/推荐禁忌食物/三餐分配/参考来源），保存到 `results/<姓名>/营养评估.md`。**展示摘要确认后继续**。
+生成完整报告（能量/宏量营养素/微量营养素/饮食原则/推荐禁忌食物/三餐分配/参考来源），保存到 `/tmp/<姓名>/营养评估.md`。**展示摘要确认后继续**。
 
 ### Phase 4.5: 运动处方生成
 
@@ -49,7 +46,7 @@ disable-model-invocation: true
 生成运动处方：安全性评估 → 处方参数 → 运动明细 → 一周计划 → 运动与营养协同 → 注意事项 → 循序渐进计划
 强度/频率等参数可用 `scripts/exercise-data.js` 查表。
 
-保存到 `results/<姓名>/运动处方.md`。**展示摘要确认后继续**。
+保存到 `/tmp/<姓名>/运动处方.md`。**展示摘要确认后继续**。
 
 ### Phase 5: 检索菜谱参考
 
@@ -62,19 +59,25 @@ disable-model-invocation: true
 - 菜品不重复（一周）、核算校验（±1g/50kcal/±5%）
 - 可用 `scripts/calculate-nutrition.js` 的 `validateMealTotals`/`checkEnergyConsistency` 验证
 
-保存配餐方案（一月方案拆分为 `配餐方案_第1~4周.md`）。**展示并询问调整**。
+保存到 `/tmp/<姓名>/配餐方案_第N周.md`。**展示并询问调整**。
 
-### Phase 7: 数据转换
+### Phase 7: 数据转换 + 导出 + 清理
 
-执行 `/data-transform <姓名>` 生成结构化数据。
+所有阶段完成后统一执行：
+
+1. **复制到 results**: `cp /tmp/<姓名>/*.md results/<姓名>/`
+2. **数据转换**: `node scripts/data-transform.js <姓名>`
+3. **导出 PDF**: `node scripts/export-pdf.js <姓名>`
+4. **可视化报告**: `node scripts/visualize-report.js <姓名>`
+5. **清理中间产物**: `rm -rf /tmp/<姓名>/ results/<姓名>/`（保留 versioned 目录）
 
 ## Resume 功能
 
-根据已有文件的完整度判断中断位置：
+检查 `/tmp/<姓名>/` 下的已有文件判断中断位置：
 - 有健康档案无营养评估 → 从 Phase 3 继续
 - 有营养评估无运动处方 → 从 Phase 4.5 继续
 - 有运动处方无配餐 → 从 Phase 5 继续
-- 全部都有 → 展示摘要，询问调整内容
+- 全部都有 → 展示摘要，询问调整内容或直接进入 Phase 7
 
 ## 交互风格
 
