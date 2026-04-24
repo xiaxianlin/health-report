@@ -96,7 +96,11 @@
       "Bash(head -50 /Users/bytedance/projects/营养方案/web/data/*.json)",
       "mcp__ide__executeCode",
       "Bash(pip3 install:*)",
-      "Bash(grep -E \"^[^_]+$\")"
+      "Bash(grep -E \"^[^_]+$\")",
+      "Bash(git:*)",
+      "Bash(npx vitest *)",
+      "Bash(pdftotext /Users/bytedance/projects/03营养方案/results/张建国_2026-04-10/营养方案报告.pdf /tmp/report.txt)",
+      "Read(//System/Library/Fonts/**)"
     ]
   }
 }

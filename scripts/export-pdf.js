@@ -12,7 +12,7 @@ const CSS = `
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   font-size: 10pt;
   line-height: 1.7;
   color: #1a1a2e;
@@ -289,6 +289,7 @@ function wrapHtml(patientName, body) {
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
   <title>营养方案报告 - ${patientName}</title>
   <style>${CSS}</style>
 </head>
@@ -370,12 +371,14 @@ async function exportPatient(patientName) {
 
   try {
     const page = await browser.newPage();
-    await page.setContent(html, { waitUntil: 'networkidle' });
+    await page.setContent(html, { waitUntil: 'networkidle', timeout: 30000 });
+    // 等待 Google Fonts 加载
+    await page.waitForTimeout(2000);
     await page.pdf({
       path: pdfPath,
       format: 'A4',
       printBackground: true,
-      margin: { top: '0', right: '0', bottom: '0', left: '0' },
+      margin: { top: '18mm', right: '20mm', bottom: '18mm', left: '20mm' },
     });
     await browser.close();
 

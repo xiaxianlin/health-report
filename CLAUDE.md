@@ -63,8 +63,17 @@ results/                 # 患者方案输出
     可视化报告.html         # 可视化报告（由 visualize-report 生成）
 
 scripts/                 # 独立脚本
+  parse-markdown.js      # Markdown 解析器（data-transform 核心，可单独引用）
+  data-transform.js      # Markdown → JSON 转换（CLI 入口）
+  validate-schema.js     # data.json 结构校验
   export-pdf.js          # PDF 导出脚本
   visualize-report.js    # 可视化报告生成脚本
+  migrate-directories.js # 目录迁移脚本
+  __tests__/             # Vitest 测试（共 63 个）
+    parse-markdown.test.js        # 44 个 Parser 单元测试
+    validate-schema.test.js       # 11 个 Schema 校验测试
+    data-transform.integration.test.js  # 8 个集成测试
+    fixtures/            # 测试用 Markdown fixture 数据
 
 records/                 # 客户档案输入目录（按客户分子目录）
   <客户姓名>/              # 每个客户一个独立目录
@@ -91,14 +100,20 @@ JSON 数据结构定义见 `data.json`：
 
 ## Commands
 
-### 根目录（CLI 脚本）
+### npm scripts
 
 ```bash
 # 安装依赖
 npm install
 
+# 运行测试（54 个测试，覆盖 4 个解析器 + schema 校验）
+npm test
+
+# 持续测试模式
+npm run test:watch
+
 # 数据转换（Markdown → JSON，自动生成带日期目录）
-node scripts/data-transform.js <姓名>
+npm run transform -- <姓名>
 
 # PDF 导出（单个患者）
 node scripts/export-pdf.js <姓名>

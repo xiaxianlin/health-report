@@ -1,6 +1,18 @@
 {
+  "scripts": {
+    "transform": "node scripts/data-transform.js",
+    "export-pdf": "node scripts/export-pdf.js",
+    "report": "node scripts/visualize-report.js",
+    "validate": "node scripts/validate-schema.js",
+    "migrate": "node scripts/migrate-directories.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
   "dependencies": {
     "marked": "^15.0.12",
     "playwright": "^1.59.1"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
   }
 }
